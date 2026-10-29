@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Oak: your AI agent, on Robinhood Chain</title>
+<meta name="description" content="At launch, Oak will give an AI agent a wallet of its own and ready-made access to 25 projects on Robinhood Chain, with a preview before anything is signed. Coming soon.">
+<meta name="theme-color" content="#062F27">
+<link rel="canonical" href="https://oakagentkit.org/">
+<meta property="og:url" content="https://oakagentkit.org/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Oak Agent Kit">
+<meta property="og:title" content="Oak: your AI agent, on Robinhood Chain">
+<meta property="og:description" content="At launch, Oak will give an AI agent a wallet of its own and ready-made access to 25 projects on Robinhood Chain, with a preview before anything is signed. Coming soon.">
+<meta property="og:image" content="https://oakagentkit.org/03-og-card-1200x630.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The Oak mark in a carved-wood medallion beside a felt diorama of the giant Oak tree at dusk.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@OakAgentKit">
+<link rel="icon" type="image/svg+xml" href="a-avatar-32.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="apple-touch-icon" href="favicon-180x180.png">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="index.html" aria-label="Oak Agent Kit, home"><img src="a-lockup-dark.svg" width="857" height="208" alt="Oak Agent Kit"></a>
+    <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Open the menu">
+    <label class="nav-btn" for="nav-toggle">Menu</label>
+    <nav class="site-nav" aria-label="Main">
+      <ul>
+        <li><a href="how-it-works.html">How it works</a></li>
+        <li><a href="docs.html">Docs</a></li>
+        <li><a href="security.html">Security</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="privacy.html">Privacy</a></li>
+        <li class="nav-install"><a href="https://x.com/OakAgentKit">Follow on X</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<main id="main">
+<section class="hero" aria-labelledby="hero-title">
+  <picture class="hero-art">
+    <source media="(max-width: 700px)" srcset="01-home-hero-mobile-1080x1350.webp" width="1080" height="1350">
+    <img src="01-home-hero-2400x1350.webp" width="2400" height="1350" alt="A handcrafted oak-wood and wool-felt diorama of the giant Oak tree at dusk. A cloaked wooden agent holds a warm lantern on a root bridge while glowing lime roots branch across green moss." fetchpriority="high" decoding="async">
+  </picture>
+  <div class="wrap hero-inner">
+    <div class="hero-copy">
+      <p class="eyebrow">Open kit for AI agents</p>
+      <h1 id="hero-title">Your AI agent, on <span class="hero-nowrap">Robinhood Chain</span></h1>
+      <p class="hero-lede">At launch, Oak will give an AI agent a wallet of its own and ready-made access to 25 projects on Robinhood Chain, from <span class="proj">KyberSwap</span> and <span class="proj">Morpho Blue</span> to <span class="proj">Relay</span> and <span class="proj">hood.ag</span>. Ask in plain words, and see what will happen before anything is signed.</p>
+      <p class="soon-row"><span class="soon">Coming soon</span><a class="btn" href="https://x.com/OakAgentKit">Follow @OakAgentKit on X</a></p>
+      <div class="hero-works"><span class="hero-works-label">Works with</span><span class="home-chip agent">Claude Code</span><span class="home-chip agent">Codex</span><span class="home-chip agent">Gemini</span><span class="home-chip agent">Cursor</span><span class="home-chip agent">Grok</span><span class="home-chip">Any other agent with MCP (AI tool connector)</span></div>
+    </div>
+  </div>
+</section>
+<section class="block" id="what">
+  <div class="wrap">
+    <p class="eyebrow">What Oak is</p>
+    <h2>A wallet and a toolbox for your agent</h2>
+    <p class="sub">Each Robinhood Chain project has its own contracts, its own rules and its own ways to fail. At launch, Oak will connect 25 of them in one install, so you will not need to wire up 25 tools yourself.</p>
+    <div class="grid what-grid">
+      <div class="card"><h3>A wallet of its own</h3><p>The agent will get a wallet on your computer, separate from any wallet you already use. It can hold ETH, USDG (US dollar stablecoin) and other assets, and spend only what you send it.</p></div>
+      <div class="card"><h3>25 projects, one install</h3><p>Swaps, vaults, lending, bridging, prediction markets, names and more. Every project is a ready-made module with the same naming and the same amount format.</p></div>
+      <div class="card"><h3>A preview before every move</h3><p>Before anything is signed, Oak will simulate the transaction and show how the wallet would change, like reading the receipt before you pay.</p></div>
+    </div>
+  </div>
+</section>
+<section class="block alt" id="how">
+  <div class="wrap">
+    <p class="eyebrow">How it works</p>
+    <h2>Who does what</h2>
+    <p class="sub">This is how Oak will work at launch.</p>
+    <div class="home-flow">
+      <div class="home-node card"><p class="home-step">1</p><h3>Your computer</h3><p>Your agent and the Oak add-on run here, with the wallet. The agent previews every move and signs on your computer.</p></div>
+      <span class="home-arrow" aria-hidden="true"></span>
+      <div class="home-node card"><p class="home-step">2</p><h3>The Oak server</h3><p>It reads chain and project data and builds unsigned transactions. It never sees your key and never signs or sends anything.</p></div>
+      <span class="home-arrow" aria-hidden="true"></span>
+      <div class="home-node card"><p class="home-step">3</p><h3>Robinhood Chain</h3><p>The 25 projects live here. The agent's own wallet sends each transaction straight to the project. Oak never trades.</p></div>
+    </div>
+    <p class="btn-row"><a class="btn ghost" href="how-it-works.html">Read how it works</a></p>
+  </div>
+</section>
+<section class="block" id="ask">
+  <div class="wrap">
+    <p class="eyebrow">Ask in plain words</p>
+    <h2>From a request to a result</h2>
+    <div class="home-split home-split-wide">
+      <div class="prose home-steps">
+        <ol>
+          <li><strong>At launch, install Oak</strong> with one command.</li>
+          <li><strong>Create the wallet</strong> in your own terminal and write down the 24 recovery words.</li>
+          <li><strong>Fund it</strong> with what you want the agent to use, plus a little ETH to pay for gas (the network fee).</li>
+          <li><strong>Connect your agent</strong> and ask for what you want.</li>
+        </ol>
+      </div>
+      <div class="home-chat" role="group" aria-label="Example conversation">
+        <div class="home-msg home-msg-you"><span class="home-who">You</span><p>Swap half my USDG for ETH with the best route.</p></div>
+        <div class="home-msg home-msg-agent"><span class="home-who">Agent</span><p>Here is the plan. Nothing has been signed yet.</p></div>
+        <div class="home-preview">
+          <p class="home-preview-title">Preview</p>
+          <p>Approve exactly the amount to swap.</p>
+          <p>Swap on the route that pays out the most, with a minimum you can see.</p>
+          <p>Network fee (gas) in ETH, paid from the agent's wallet.</p>
+          <p>Signed on your computer.</p>
+        </div>
+        <div class="home-msg home-msg-agent"><span class="home-who">Agent</span><p>Say go and I will send it.</p></div>
+        <p class="home-caption">An illustration of the flow, not a live result.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="block alt" id="keys">
+  <div class="wrap home-split">
+    <figure class="art"><img src="02a-keys-stay-home-1600x1000.webp" width="1600" height="1000" alt="Inside a carved oak root hollow, a hooded olive-felt wooden agent tends a dovetailed oak lockbox on a miniature workbench. Soft lime light glows from the keyhole beside a wooden key." loading="lazy" decoding="async"></figure>
+    <div>
+      <p class="eyebrow">Self-custody</p>
+      <h2>Your keys stay home</h2>
+      <ul class="home-points">
+        <li>Your private key never leaves your computer. You create the wallet with <code>oak init</code> in your own terminal, never through the agent.</li>
+        <li>Oak cannot recover a lost key, by design. Write down the 24 recovery words.</li>
+      </ul>
+      <p class="btn-row"><a class="btn ghost" href="security.html">Security and trust</a></p>
+    </div>
+  </div>
+</section>
+<section class="block" id="projects">
+  <div class="wrap home-projects">
+    <div class="hp-head">
+      <p class="eyebrow">25 projects, one kit</p>
+      <h2>What your agent can use</h2>
+      <p class="sub">Six groups of Robinhood Chain projects, each with a ready-made module.</p>
+    </div>
+    <figure class="art home-map"><img src="02b-root-map-1600x1000.webp" width="1600" height="1000" alt="A top-down diorama map of a carved oak root hub. Glowing lime root channels cross green moss to a ring of small carved wooden workshops, mills, vaults and bridges." loading="lazy" decoding="async" class="home-map"></figure>
+    <div class="hp-list">
+      <ul class="home-glist">
+        <li><span class="home-count">8 projects</span><strong>Swap and Trade</strong><span class="home-names"><span class="proj">KyberSwap</span>, <span class="proj">Velora</span>, <span class="proj">Pons</span>, <span class="proj">pools.trade</span>, <span class="proj">Clanker</span>, <span class="proj">Hookr</span>, <span class="proj">TickerSpring</span>, <span class="proj">Uniswap liquidity</span></span><span>Compare swap routes, place limit orders, manage liquidity, launch and trade new coins.</span></li>
+        <li><span class="home-count">7 projects</span><strong>Vaults and Rewards</strong><span class="home-names"><span class="proj">Steakhouse</span>, <span class="proj">Spark</span>, <span class="proj">NetNet</span>, <span class="proj">Longbow</span>, <span class="proj">Grove</span>, <span class="proj">Beefy</span>, <span class="proj">Merkl</span></span><span>Deposit USDG or ETH into six yield vaults and claim campaign rewards.</span></li>
+        <li><span class="home-count">2 projects</span><strong>Borrow and Lend</strong><span class="home-names"><span class="proj">Morpho Blue</span>, <span class="proj">Priors</span></span><span>Supply collateral, borrow, repay and lend into credit pools.</span></li>
+        <li><span class="home-count">2 projects</span><strong>Move Money</strong><span class="home-names"><span class="proj">Relay</span>, <span class="proj">Orbio</span></span><span>Bridge into and out of Robinhood Chain and buy AI credits.</span></li>
+        <li><span class="home-count">3 projects</span><strong>Markets and Data</strong><span class="home-names"><span class="proj">Meridian</span>, <span class="proj">Lighter</span>, <span class="proj">HeyResearch</span></span><span>Trade prediction markets, and read funding rates (regular payments between traders betting up or down) and project research.</span></li>
+        <li><span class="home-count">3 projects</span><strong>Identity and Tools</strong><span class="home-names"><span class="proj">ERC-8004</span>, <span class="proj">hood.ag</span>, <span class="proj">HoodLock</span></span><span>Register an on-chain identity and a .hood name, lock assets and run airdrops.</span></li>
+      </ul>
+      <p class="btn-row"><a class="btn ghost" href="docs.html#modules">See what each group can do</a></p>
+    </div>
+  </div>
+</section>
+<section class="block alt" id="trust">
+  <div class="wrap">
+    <p class="eyebrow">Trust</p>
+    <h2>What to know before you start</h2>
+    <div class="grid home-trust home-trust-grid">
+      <div class="card"><h3>Open kit, closed server</h3><p>At launch the add-on, the shared core and the 25 module definitions are open source under the MIT licence. The hosted Oak server is a closed service.</p></div>
+      <div class="card"><h3>You decide what is signed</h3><p>At launch, Oak will show the result of every move first. It will add no spending limits of its own, so fund the wallet with an amount you are comfortable with.</p></div>
+      <div class="card"><h3>Independent</h3><p>Oak is not affiliated with Robinhood. It never promises returns, pools anyone's money or gives financial advice.</p></div>
+    </div>
+    <div class="home-cta">
+      <h2>Hear when Oak launches</h2>
+      <p>Oak is not released yet. @OakAgentKit on X will announce the launch.</p>
+      <p class="soon-row soon-center"><a class="btn" href="https://x.com/OakAgentKit">Follow on X</a></p>
+    </div>
+  </div>
+</section>
+</main>
+<footer class="foot">
+  <div class="wrap">
+    <p class="foot-notice">Coming soon. Oak is not released yet, so this site describes what it will do at launch.</p>
+    <div class="foot-links">
+      <div><h2>Explore</h2><ul><li><a href="how-it-works.html">How it works</a></li><li><a href="docs.html">Docs</a></li><li><a href="security.html">Security</a></li></ul></div>
+      <div><h2>About</h2><ul><li><a href="about.html">About</a></li><li><a href="privacy.html">Privacy</a></li></ul></div>
+      <div><h2>Follow</h2><ul><li><a href="https://x.com/OakAgentKit">@OakAgentKit on X</a></li></ul></div>
+    </div>
+    <p><strong>Not affiliated.</strong> Oak is independent and is not affiliated with Robinhood. It uses none of that company's logos, wordmarks or lookalike marks.</p>
+    <p><strong>Region notice.</strong> Availability of third-party projects and assets varies by jurisdiction. You are responsible for following the laws and terms where you live. Oak never promises returns.</p>
+    <p><strong>Names.</strong> Project and agent names belong to their owners and appear only to say what Oak works with. Oak is not affiliated with or endorsed by them, and shows no logos.</p>
+    <p class="fine">At launch the kit is open source under the MIT licence and the Oak server stays closed. Fonts: Manrope, SIL Open Font Licence 1.1.</p>
+  </div>
+</footer>
+</body>
+</html>

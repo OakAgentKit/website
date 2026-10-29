@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Security and trust: where your key lives | Oak Agent Kit</title>
+<meta name="description" content="Your private key never leaves your computer. Where it lives, what the Oak server can and cannot do, what Oak does not protect you from, and how to report a vulnerability.">
+<meta name="theme-color" content="#062F27">
+<link rel="canonical" href="https://oakagentkit.org/security.html">
+<meta property="og:url" content="https://oakagentkit.org/security.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Oak Agent Kit">
+<meta property="og:title" content="Security and trust: where your key lives | Oak Agent Kit">
+<meta property="og:description" content="Your private key never leaves your computer. Where it lives, what the Oak server can and cannot do, what Oak does not protect you from, and how to report a vulnerability.">
+<meta property="og:image" content="https://oakagentkit.org/03-og-card-1200x630.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The Oak mark in a carved-wood medallion beside a felt diorama of the giant Oak tree at dusk.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@OakAgentKit">
+<link rel="icon" type="image/svg+xml" href="a-avatar-32.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="apple-touch-icon" href="favicon-180x180.png">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="index.html" aria-label="Oak Agent Kit, home"><img src="a-lockup-dark.svg" width="857" height="208" alt="Oak Agent Kit"></a>
+    <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Open the menu">
+    <label class="nav-btn" for="nav-toggle">Menu</label>
+    <nav class="site-nav" aria-label="Main">
+      <ul>
+        <li><a href="how-it-works.html">How it works</a></li>
+        <li><a href="docs.html">Docs</a></li>
+        <li><a href="security.html" aria-current="page">Security</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="privacy.html">Privacy</a></li>
+        <li class="nav-install"><a href="https://x.com/OakAgentKit">Follow on X</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<main id="main">
+<section class="page-hero">
+  <div class="wrap has-art">
+    <div>
+      <p class="eyebrow">Security and trust</p>
+      <h1>Who holds what</h1>
+      <p class="lede">Your key never leaves your computer. This page says where it lives, what the server can do, and what Oak leaves to you.</p>
+      
+      <nav class="toc" aria-label="On this page"><ul><li><a href="#key">Where your key lives</a></li><li><a href="#server">What the Oak server does</a></li><li><a href="#limits">What Oak cannot protect you from</a></li><li><a href="#audits">Audits and releases</a></li><li><a href="#reporting">Report a vulnerability</a></li></ul></nav>
+    </div>
+    <figure class="art"><img src="02e-security-gatehouse-1600x1000.webp" width="1600" height="1000" alt="A sturdy hand-carved oak gatehouse tucked beneath massive oak roots, with a bolted wooden vault door, an emerald wool-felt roof, two warm lanterns and a glowing lime root path across the moss." fetchpriority="high"></figure>
+  </div>
+</section>
+<div class="page-body"><div class="wrap"><div class="prose wide"><section class="doc-part" id="key"><h2>Where your key lives</h2>
+<div class="how-narrow"><p>Oak is built so that your private key never leaves your computer. When you install the add-on, the wallet lives in <code>~/.oak/wallet.enc</code>.</p>
+<ul><li><strong>Created locally.</strong> <code>oak init</code> generates a 24-word recovery phrase on your machine and shows it once in your terminal. You confirm three random words before anything is saved.</li><li><strong>Encrypted at rest.</strong> The key is encrypted with AES-256-GCM. The directory is readable only by your operating-system user, and symlinks and hardlinks are rejected.</li><li><strong>Locked with your system keychain.</strong> The encryption key sits in macOS Keychain, Windows Credential Manager or the Linux Secret Service. Without a persistent keychain, you set a passphrase of at least 12 characters and type it in your terminal each time.</li><li><strong>Signed locally.</strong> Every transaction sequence is simulated first, checked for enough ETH to pay for gas (the network fee), and written to a local journal before it is sent. If the process stops midway, the next run reconciles it.</li><li><strong>Never recoverable by Oak.</strong> Oak cannot recover a lost key, by design. Keep the 24 recovery words safe.</li></ul>
+<h3>Why you run <code>oak init</code> yourself</h3>
+<p><code>oak init</code> and <code>oak export</code> refuse to run unless they are attached to a terminal. That check is not authentication, because an agent with shell access can open a pseudo-terminal. Setup is safe because you run both commands in your own terminal, never through the agent. That keeps recovery words and exported keys out of the agent's context, prompts, tool results and logs.</p></div></section>
+<section class="doc-part" id="server"><h2>What the Oak server does</h2>
+<div class="how-narrow"><p>The server reads chain data and project APIs, and builds unsigned transactions and previews. It never sees your key and never signs or sends a transaction. Swaps, deposits and every other move go straight from your wallet to the project.</p>
+<p>Both the local add-on and the server reject any tool argument that looks like a key or a recovery phrase, such as <code>private_key</code>, <code>mnemonic</code> or <code>seed_phrase</code>.</p></div></section>
+<section class="doc-part" id="limits"><h2>What Oak cannot protect you from</h2>
+<div class="how-narrow"><ul><li>Oak will add no safety checks, spending caps or allowlists. If you or your agent sign a harmful transaction after seeing its preview, Oak does not stop it. Fund the agent's wallet only with what you are willing to let it use.</li><li>A recipe you import from a third party is labelled <code>as-is, not reviewed by Oak</code>.</li><li>Running <code>oak init</code> or <code>oak export</code> through an agent removes the custody boundary described above.</li><li>Transactions on Robinhood Chain are public and permanent.</li></ul></div></section>
+<section class="doc-part" id="audits"><h2>Audits and releases</h2>
+<div class="how-narrow"><p>Oak is in pre-launch verification and has not been released. Independent audit reports are queued for the release gate and are not available yet. Release notes will be published with the first release.</p></div></section>
+<section class="doc-part" id="reporting"><h2>Report a vulnerability</h2>
+<div class="how-narrow"><p>Until launch, report vulnerabilities by email to <strong class="mail">support@oakagentkit.org</strong>. Please do not post vulnerabilities in public, including on X.</p>
+<p>In your report, name the affected part, give the steps to reproduce it and say which version you tested.</p>
+<p>Private reporting through GitHub opens with the public repository at launch. Once it opens, our process is to acknowledge a report within 48 hours and share a triage assessment within 7 days. Good-faith research on local forks or the testnet is welcome under safe harbor. For news, follow <a href="https://x.com/OakAgentKit">@OakAgentKit on X</a>.</p></div></section></div></div></div>
+</main>
+<footer class="foot">
+  <div class="wrap">
+    <p class="foot-notice">Coming soon. Oak is not released yet, so this site describes what it will do at launch.</p>
+    <div class="foot-links">
+      <div><h2>Explore</h2><ul><li><a href="how-it-works.html">How it works</a></li><li><a href="docs.html">Docs</a></li><li><a href="security.html">Security</a></li></ul></div>
+      <div><h2>About</h2><ul><li><a href="about.html">About</a></li><li><a href="privacy.html">Privacy</a></li></ul></div>
+      <div><h2>Follow</h2><ul><li><a href="https://x.com/OakAgentKit">@OakAgentKit on X</a></li></ul></div>
+    </div>
+    <p><strong>Not affiliated.</strong> Oak is independent and is not affiliated with Robinhood. It uses none of that company's logos, wordmarks or lookalike marks.</p>
+    <p><strong>Region notice.</strong> Availability of third-party projects and assets varies by jurisdiction. You are responsible for following the laws and terms where you live. Oak never promises returns.</p>
+    <p><strong>Names.</strong> Project and agent names belong to their owners and appear only to say what Oak works with. Oak is not affiliated with or endorsed by them, and shows no logos.</p>
+    <p class="fine">At launch the kit is open source under the MIT licence and the Oak server stays closed. Fonts: Manrope, SIL Open Font Licence 1.1.</p>
+  </div>
+</footer>
+</body>
+</html>

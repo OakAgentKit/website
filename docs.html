@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Oak docs: what an agent can do with 25 Robinhood Chain projects | Oak Agent Kit</title>
+<meta name="description" content="What your agent will be able to do with Oak: the conventions every tool follows, the 25 project modules in six groups, the command line, project recipes and custody rules for agents.">
+<meta name="theme-color" content="#062F27">
+<link rel="canonical" href="https://oakagentkit.org/docs.html">
+<meta property="og:url" content="https://oakagentkit.org/docs.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Oak Agent Kit">
+<meta property="og:title" content="Oak docs: what an agent can do with 25 Robinhood Chain projects | Oak Agent Kit">
+<meta property="og:description" content="What your agent will be able to do with Oak: the conventions every tool follows, the 25 project modules in six groups, the command line, project recipes and custody rules for agents.">
+<meta property="og:image" content="https://oakagentkit.org/03-og-card-1200x630.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The Oak mark in a carved-wood medallion beside a felt diorama of the giant Oak tree at dusk.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@OakAgentKit">
+<link rel="icon" type="image/svg+xml" href="a-avatar-32.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="apple-touch-icon" href="favicon-180x180.png">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="index.html" aria-label="Oak Agent Kit, home"><img src="a-lockup-dark.svg" width="857" height="208" alt="Oak Agent Kit"></a>
+    <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Open the menu">
+    <label class="nav-btn" for="nav-toggle">Menu</label>
+    <nav class="site-nav" aria-label="Main">
+      <ul>
+        <li><a href="how-it-works.html">How it works</a></li>
+        <li><a href="docs.html" aria-current="page">Docs</a></li>
+        <li><a href="security.html">Security</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="privacy.html">Privacy</a></li>
+        <li class="nav-install"><a href="https://x.com/OakAgentKit">Follow on X</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<main id="main">
+<section class="page-hero">
+  <div class="wrap has-art">
+    <div>
+      <p class="eyebrow">What your agent can do</p>
+      <h1>Docs</h1>
+      <p class="lede">A preview of what ships at launch.</p>
+      
+      <nav class="toc" aria-label="On this page"><ul><li><a href="#basics">Conventions</a></li><li><a href="#modules">Projects</a></li><li><a href="#cli">Command line</a></li><li><a href="#recipes">Recipes</a></li><li><a href="#for-agents">For AI agents</a></li></ul></nav>
+    </div>
+    <figure class="art"><img src="02b-root-map-1600x1000.webp" width="1600" height="1000" alt="A top-down diorama map of a carved oak root hub. Glowing lime root channels cross green moss to a ring of small carved wooden workshops, mills, vaults and bridges." fetchpriority="high"></figure>
+  </div>
+</section>
+<div class="page-body"><div class="wrap"><div class="prose wide docs-page"><section class="doc-part" id="basics"><h2>Conventions</h2>
+<div class="docs-narrow"><p>The tool reference publishes with the release. At launch, these rules will hold for every tool.</p>
+<ul><li>Project tools are named <code>&lt;module&gt;_&lt;verb&gt;</code>: the project, then the action.</li><li>Amounts are decimal strings in the asset's smallest unit, never floating-point numbers.</li><li>Every result names the asset address, symbol, chain ID and decimals.</li><li>Before signing, the add-on will simulate (test-run) the transaction sequence (<code>eth_simulateV1</code>) and show the resulting balance changes.</li><li>Errors come back as plain sentences that say what to fix.</li><li>A set of basic tools covers the common jobs across every project: look up a verified asset by name, symbol or address, read balances and dollar values, get a quote that compares two routes, preview, swap, read the wallet's history, and list its open positions.</li></ul></div></section>
+<section class="doc-part" id="modules"><h2>25 project modules</h2>
+<div class="docs-narrow"><p>Each group below lists what the agent will be able to do at launch, with a prompt you could try. USDG (US dollar stablecoin) appears in several of them.</p></div>
+<h3>Swap and Trade</h3>
+<p class="docs-count">8 projects</p>
+<p class="docs-names"><span class="proj">KyberSwap</span>, <span class="proj">Velora</span>, <span class="proj">Pons</span>, <span class="proj">pools.trade</span>, <span class="proj">Clanker</span>, <span class="proj">Hookr</span>, <span class="proj">TickerSpring</span>, <span class="proj">Uniswap liquidity</span></p>
+<div class="docs-prompt"><p class="docs-prompt-label">Example prompt</p><p class="docs-prompt-text">Swap 50 dollars of ETH to USDG with the best route, and show me the preview before anything is signed.</p></div>
+<ul><li>Compare routes from <span class="proj">KyberSwap</span> and <span class="proj">Velora</span> by net output, and refuse any swap that would pay out less than the quoted minimum.</li><li>Launch a coin on a <span class="proj">Pons</span> bonding curve (a formula that sets the cost as people buy and sell), buy and sell it, and graduate it to a liquidity pool.</li><li>Launch and trade coins through <span class="proj">pools.trade</span> and <span class="proj">Clanker</span>.</li><li>Create, cancel and claim limit orders through <span class="proj">Hookr</span> and <span class="proj">TickerSpring</span>.</li><li>Add, collect and remove liquidity positions with <span class="proj">Uniswap liquidity</span>.</li></ul>
+<h3>Vaults and Rewards</h3>
+<p class="docs-count">7 projects</p>
+<p class="docs-names"><span class="proj">Steakhouse</span>, <span class="proj">Spark</span>, <span class="proj">NetNet</span>, <span class="proj">Longbow</span>, <span class="proj">Grove</span>, <span class="proj">Beefy</span>, <span class="proj">Merkl</span></p>
+<div class="docs-prompt"><p class="docs-prompt-label">Example prompt</p><p class="docs-prompt-text">List the vaults I can deposit into and tell me what I hold in each.</p></div>
+<ul><li>Deposit into and withdraw from <span class="proj">Steakhouse</span>, <span class="proj">Spark</span>, <span class="proj">NetNet</span>, <span class="proj">Longbow</span>, <span class="proj">Grove</span> and <span class="proj">Beefy</span>, including USDG and ETH vaults.</li><li>See what the wallet holds in each vault.</li><li>Find reward campaigns and claim what the wallet has earned through <span class="proj">Merkl</span>.</li></ul>
+<h3>Borrow and Lend</h3>
+<p class="docs-count">2 projects</p>
+<p class="docs-names"><span class="proj">Morpho Blue</span>, <span class="proj">Priors</span></p>
+<div class="docs-prompt"><p class="docs-prompt-label">Example prompt</p><p class="docs-prompt-text">Show my lending position: what I have supplied and what I have borrowed.</p></div>
+<ul><li>Supply and withdraw collateral, borrow, repay, and check the position on <span class="proj">Morpho Blue</span>.</li><li>Lend into and withdraw from <span class="proj">Priors</span> credit pools, and borrow and repay on funded credit lines for agents that have an on-chain identity.</li></ul>
+<h3>Move Money</h3>
+<p class="docs-count">2 projects</p>
+<p class="docs-names"><span class="proj">Relay</span>, <span class="proj">Orbio</span></p>
+<div class="docs-prompt"><p class="docs-prompt-label">Example prompt</p><p class="docs-prompt-text">Bring 0.05 ETH over from another chain and tell me when it arrives.</p></div>
+<ul><li>Bridge into and out of Robinhood Chain with <span class="proj">Relay</span>, with live status tracking.</li><li>Buy AI credits and check the balance with <span class="proj">Orbio</span>.</li></ul>
+<h3>Markets and Data</h3>
+<p class="docs-count">3 projects</p>
+<p class="docs-names"><span class="proj">Meridian</span>, <span class="proj">Lighter</span>, <span class="proj">HeyResearch</span></p>
+<div class="docs-prompt"><p class="docs-prompt-label">Example prompt</p><p class="docs-prompt-text">Browse open prediction markets and show me the perpetual funding rates.</p></div>
+<ul><li>Browse <span class="proj">Meridian</span> prediction markets, check positions, buy and sell, then settle and redeem.</li><li>Read perpetual funding rates (regular payments between traders betting up or down) from <span class="proj">Lighter</span>. This module is read-only.</li><li>Read project research and chain activity from <span class="proj">HeyResearch</span>. This module is read-only.</li></ul>
+<h3>Identity and Tools</h3>
+<p class="docs-count">3 projects</p>
+<p class="docs-names"><span class="proj">ERC-8004</span>, <span class="proj">hood.ag</span>, <span class="proj">HoodLock</span></p>
+<div class="docs-prompt"><p class="docs-prompt-label">Example prompt</p><p class="docs-prompt-text">Register a .hood name for my agent and set it as the name shown for its address.</p></div>
+<ul><li>Register an on-chain identity for the agent with <span class="proj">ERC-8004</span> and update its details.</li><li>Register a .hood name with <span class="proj">hood.ag</span>, set it as the name shown for the address, and look names up.</li><li>Lock coins and liquidity positions, create airdrops and claim them with <span class="proj">HoodLock</span>.</li></ul></section>
+<section class="doc-part" id="cli"><h2>Command line</h2>
+<div class="docs-narrow"><p>The main commands, all run on your computer:</p></div>
+<div class="table-wrap"><table class="md-table"><thead><tr><th scope="col">Command</th><th scope="col">What it does</th></tr></thead><tbody><tr><td data-label="Command"><code>oak init</code></td><td data-label="What it does">Creates the wallet. Run it in your own terminal only.</td></tr><tr><td data-label="Command"><code>oak address</code></td><td data-label="What it does">Shows the agent's wallet address.</td></tr><tr><td data-label="Command"><code>oak export</code></td><td data-label="What it does">Exports the private key. Run it in your own terminal only.</td></tr><tr><td data-label="Command"><code>oak mcp</code></td><td data-label="What it does">Starts the MCP (AI tool connector) server that your agent connects to.</td></tr><tr><td data-label="Command"><code>oak call &lt;tool&gt; &lt;json&gt;</code></td><td data-label="What it does">Calls one tool directly from the command line.</td></tr><tr><td data-label="Command"><code>oak register</code></td><td data-label="What it does">Registers the agent's on-chain identity.</td></tr><tr><td data-label="Command"><code>oak recipes add &lt;package-or-path&gt;</code></td><td data-label="What it does">Imports a project recipe. Also: <code>remove</code> and <code>list</code>.</td></tr><tr><td data-label="Command"><code>oak config set &lt;key&gt; &lt;value&gt;</code></td><td data-label="What it does">Sets an endpoint or an address.</td></tr></tbody></table></div></section>
+<section class="doc-part" id="recipes"><h2>Project recipes</h2>
+<div class="docs-narrow"><p>A project team can publish an opt-in recipe that adds its own read and action definitions. A recipe is data only, so no third-party code runs. Each is limited to 64 KiB per file, 4 MiB per archive and 100 entries, and labelled <code>as-is, not reviewed by Oak</code>. You import one yourself with <code>oak recipes add</code>.</p></div></section>
+<section class="doc-part" id="for-agents"><h2>For AI agents</h2>
+<div class="docs-narrow"><p class="docs-agents"><strong>Works with:</strong> <span class="home-chip agent">Claude Code</span> <span class="home-chip agent">Codex</span> <span class="home-chip agent">Gemini</span> <span class="home-chip agent">Cursor</span> <span class="home-chip agent">Grok</span> <span class="docs-agents-more">and any other MCP client that can run a tool server on your computer.</span></p>
+<p>An operating guide for agents, <code>AGENTS.md</code>, and a plain-text summary, <code>llms.txt</code>, ship with the kit. Their custody rules are short:</p>
+<ul><li>Never run <code>oak init</code> or <code>oak export</code> inside an agent tool call. The human owner runs both in their own terminal.</li><li>Never ask the user for a private key, seed phrase or passphrase. Oak will reject any tool argument that contains one.</li><li>All signing happens locally in the add-on.</li><li>Always read the preview before signing.</li></ul></div></section></div></div></div>
+</main>
+<footer class="foot">
+  <div class="wrap">
+    <p class="foot-notice">Coming soon. Oak is not released yet, so this site describes what it will do at launch.</p>
+    <div class="foot-links">
+      <div><h2>Explore</h2><ul><li><a href="how-it-works.html">How it works</a></li><li><a href="docs.html">Docs</a></li><li><a href="security.html">Security</a></li></ul></div>
+      <div><h2>About</h2><ul><li><a href="about.html">About</a></li><li><a href="privacy.html">Privacy</a></li></ul></div>
+      <div><h2>Follow</h2><ul><li><a href="https://x.com/OakAgentKit">@OakAgentKit on X</a></li></ul></div>
+    </div>
+    <p><strong>Not affiliated.</strong> Oak is independent and is not affiliated with Robinhood. It uses none of that company's logos, wordmarks or lookalike marks.</p>
+    <p><strong>Region notice.</strong> Availability of third-party projects and assets varies by jurisdiction. You are responsible for following the laws and terms where you live. Oak never promises returns.</p>
+    <p><strong>Names.</strong> Project and agent names belong to their owners and appear only to say what Oak works with. Oak is not affiliated with or endorsed by them, and shows no logos.</p>
+    <p class="fine">At launch the kit is open source under the MIT licence and the Oak server stays closed. Fonts: Manrope, SIL Open Font Licence 1.1.</p>
+  </div>
+</footer>
+</body>
+</html>
