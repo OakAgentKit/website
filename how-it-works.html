@@ -73,11 +73,11 @@
 <div class="how-narrow">
 <ol class="how-steps">
 <li><strong>At launch, install Oak</strong> with one command on the computer where your agent runs.</li>
-<li><strong>Create the wallet.</strong> Run <code>oak init</code> in your own terminal, write down the 24 recovery words, and confirm a three-word backup check.</li>
+<li><strong>Create the wallet and set up identity.</strong> Run <code>oak init</code> in your own terminal, write down the 24 recovery words, and confirm a three-word backup check. Then run <code>oak setup</code> to link an existing ERC-8004 agent ID with an owner signature (no ETH needed) or register a new agent ID on-chain.</li>
 <li><strong>Fund the address.</strong> Send what you want the agent to use, plus a little ETH to pay for gas (the network fee).</li>
-<li><strong>Connect your agent</strong> to <code>oak mcp</code>, which runs on your computer, and ask for what you want.</li>
+<li><strong>Connect your agent</strong> to <code>oak mcp</code>, which runs on your computer, and ask for what you want. Read tools work any time; run <code>oak identity unlink</code> any time to unlink without gas.</li>
 </ol>
-<p>To buy a coin, the agent will look up the verified asset, ask for a quote that compares two routes, preview the result, and then swap. A quote will be good for 60 seconds, and signing will happen on your computer.</p>
+<p>To buy a coin, the agent will look up the verified asset, ask for a quote that compares routes across KyberSwap, Velora and Pons launch curves, preview the result, and then swap with an exact approval. A quote will be good for 60 seconds, and signing will happen on your computer.</p>
 </div><figure class="how-chat">
   <div class="how-msg how-you"><p class="how-who">You</p><p>Put 100 dollars of stablecoin into a yield vault.</p></div>
   <div class="how-msg how-agent">
