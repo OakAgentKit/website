@@ -6,6 +6,8 @@
 <title>Security and trust: where your key lives and who holds what | Oak Agent Kit</title>
 <meta name="description" content="Your private key never leaves your computer. Read exactly who holds which key, the full authority table, the audit and release gates, and how to report a vulnerability.">
 <meta name="theme-color" content="#062F27">
+<link rel="canonical" href="https://oakagentkit.org/security.html">
+<meta property="og:url" content="https://oakagentkit.org/security.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Oak Agent Kit">
 <meta property="og:title" content="Security and trust: where your key lives and who holds what | Oak Agent Kit">
@@ -18,9 +20,8 @@
 <link rel="icon" type="image/svg+xml" href="a-avatar-32.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
 <link rel="apple-touch-icon" href="favicon-180x180.png">
+<link rel="preload" href="Manrope.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="styles.css">
-<link rel="canonical" href="https://oakagentkit.org/security.html">
-<meta property="og:url" content="https://oakagentkit.org/security.html">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -28,7 +29,7 @@
 <div class="scene-header-inner">
  <a class="scene-brand" href="index.html" aria-label="Oak Agent Kit, home">
 <img src="oak-medallion.webp" width="48" height="48" alt="">
-<span>Oak Agent Kit<small>Robinhood Chain · MCP</small>
+<span>Oak Agent Kit<small>Robinhood Chain</small>
 </span>
 </a>
  <nav class="desktop-nav" aria-label="Main">
@@ -94,7 +95,7 @@
 </nav>
 </details>
  </div>
-<p class="release-notice">Coming soon · Oak is not released yet.</p>
+<p class="release-notice">Public access coming soon · Packages available now.</p>
 </header>
 <main id="main">
 <section class="scene-hero scene-security" aria-labelledby="hero-title">
@@ -112,10 +113,12 @@
 <div class="page-body">
 <div class="wrap">
 <div class="prose wide">
+<p>Oak has no third-party audit. Your wallet stays on your computer; you review what it is about to do. The details below explain custody, authority and limits.</p>
+<p>Default human confirmation describes the prepared 0.1.1 release candidate. Published 0.1.0 packages predate this change; update at launch before using actions.</p>
 <section class="doc-part" id="disclosures">
 <h2>Disclosures</h2>
 <details class="reference-detail">
-<summary>Read this section</summary>
+<summary>Read details</summary>
 <ul>
 <li>Oak is access only. It adds no safety checks, spending caps, or allowlists of its own: you and your agent inspect the preview and decide what to sign. Oak never promises returns, pools user money, or gives financial advice.</li>
 <li>
@@ -128,7 +131,7 @@
 <section class="doc-part" id="key">
 <h2>Where your key lives</h2>
 <details class="reference-detail">
-<summary>Read this section</summary>
+<summary>Read details</summary>
 <p>The treasury and contract admin is the single-owner wallet <code>0x856bb126188bDB5e425D3ac9D59E9ffBD12e6ECf</code>. One owner key can spend treasury funds, redirect future subscription payments, replace the price signer and retire subscriptions. There is no second-signature requirement. Key compromise exposes these powers; key loss can make treasury funds and administration inaccessible. It cannot spend user wallet balances. Safe support is an optional deployment profile, not the launch setup.</p>
 <p>Oak is built so that <strong>your private key never leaves your computer</strong> and <strong>the Oak server never sees your key and never signs or sends a transaction</strong>: <strong>your swaps and deposits go straight from your wallet to the project, and subscription payments go to the burner (<code>OakBurner</code>) and the single-owner treasury wallet</strong>.</p>
 <hr>
@@ -136,11 +139,11 @@
 <p>When you install <code>@oakagentkit/addon</code>, the wallet is created and stored locally in <code>~/.oak/wallet.enc</code> (mode <code>0600</code> inside a <code>0700</code> directory owned by your OS user; symlinks and hardlinks are rejected):</p>
 <ul>
 <li>
-<strong>Generation (<code>oak init</code>):</strong> Generates a 256-bit (24-word) BIP-39 recovery phrase locally, displays it once on your terminal, and requires you to confirm three randomly chosen words before persisting <code>~/.oak/wallet.enc</code>. After deriving the secp256k1 key, the mnemonic and key buffers are zeroed in memory (<code>hdKey.wipePrivateData()</code>, <code>Buffer.fill(0)</code>). <strong>Oak cannot recover a lost key</strong>, by design.</li>
+<strong>Optional legacy generation (<code>oak init</code>):</strong> Generates a 256-bit (24-word) BIP-39 recovery phrase locally, displays it once on your terminal, and requires you to confirm three randomly chosen words before persisting <code>~/.oak/wallet.enc</code>. After deriving the secp256k1 key, the mnemonic and key buffers are zeroed in memory (<code>hdKey.wipePrivateData()</code>, <code>Buffer.fill(0)</code>). <strong>Oak cannot recover a lost key</strong>, by design.</li>
 <li>
 <strong>Encryption at rest:</strong> The 32-byte private key is encrypted with <code>AES-256-GCM</code> using authenticated envelope metadata (<code>AAD</code> binds version <code>1</code>, cipher <code>aes-256-gcm</code>, and storage descriptor).</li>
 <li>
-<strong>OS Keychain preferred, <code>scrypt</code> fallback:</strong>
+<strong>OS Keychain preferred; automatic file fallback, legacy <code>scrypt</code>:</strong>
 <ul>
 <li>By default, a random 32-byte data encryption key is stored in your persistent OS keychain via <code>@napi-rs/keyring</code> (macOS Keychain, Windows Credential Manager, or Linux persistent Secret Service).</li>
 <li>If a persistent OS keychain is unavailable, <code>oak init</code> requires a passphrase of at least 12 characters and derives the 32-byte data key using <code>scrypt</code> (<code>N = 131072</code>, <code>r = 8</code>, <code>p = 1</code>, 32-byte random salt). Without a persistent keychain, unlocking the wallet requires entering the passphrase in your terminal each time.</li>
@@ -162,6 +165,7 @@
 <ul>
 <li>
 <code>loadSigner()</code> exposes only frozen closures (<code>signMessage</code>, <code>signTransaction</code>, <code>signTypedData</code>) and wipes the raw key buffer immediately after constructing the account.</li>
+<li>Server-built transactions now pass local swap validators or requested-input outflow checks using the local simulation trace. Before each signature, default <code>confirm ask</code> uses MCP form elicitation to ask the human about the exact unsigned transaction hash, transfers, approvals, value, destinations and gas. Missing elicitation refuses signing; only the owner-terminal <code>oak config set confirm auto</code> command disables prompts, reversible with <code>oak config set confirm ask</code>. Auto mode retains guards. See <a href="https://github.com/OakAgentKit/oak/blob/main/docs/security.md">the enforced checks and limits</a>.</li>
 <li>Every transaction sequence is serialized under an atomic per-wallet directory lock (<code>~/.oak/&lt;address&gt;.lock</code>), simulated first (<code>preview</code>, reusing a fresh same-block preview within 12 seconds when identical), checked for sufficient ETH (<code>value + gas * maxFeePerGas</code> with 25% gas headroom), written to <code>~/.oak/&lt;address&gt;.pending.json</code> before broadcast, and reconciled on the next run if interrupted.</li>
 </ul>
 </li>
@@ -208,12 +212,18 @@
 <p>For the complete party-by-party permissions matrix, see <a href="security.html#authority">
 <code>docs/trust/authority.md</code>
 </a>.</p>
+<h3 id="automatic-wallet-creation-and-optional-backups">Automatic Wallet Creation and Optional Backups</h3>
+<p>Oak creates a wallet automatically when <code>oak mcp</code>, <code>oak address</code>, or another wallet command first runs. There are no recovery-word challenges or passphrase prompts. The agent calls <code>account</code>, relays the public address and selected network, asks you to fund it with a little ETH for gas and USDG, then calls <code>balances</code> again after you fund it.</p>
+<p>The private key stays local in <code>~/.oak/wallet.enc</code> (AES-256-GCM, <code>0600</code>, inside <code>~/.oak</code> at <code>0700</code>). A random encryption key is stored in macOS Keychain, Linux persistent Secret Service, or Windows Credential Manager when available. Otherwise Oak saves a random file key in the same owner-only directory (<code>wallet-key-&lt;id&gt;</code>, <code>0600</code>). This fallback relies on your OS account and filesystem permissions: someone who can read both files can unlock the wallet. No passphrase is requested. Keep only the funds your agent needs.</p>
+<p>Later runs reuse the wallet. A corrupt wallet or unavailable existing keychain never creates a replacement. Existing keychain and passphrase wallets keep their format; legacy passphrase wallets still need terminal unlock and cannot run piped MCP.</p>
+<p>Backups are optional. When you hold more than pocket change, run <code>oak export</code> <strong>in your own terminal, never through the agent</strong> and keep the exported key offline. <code>oak backup</code> prints guidance without unlocking or exporting anything. Automatic wallets have no recovery phrase. <code>oak init --recover</code> accepts an exported private key or a legacy 24-word phrase, hidden in your terminal; <code>--replace</code> preserves the previous encrypted wallet. Oak cannot recover a lost key.</p>
+<p>Key data flows from local cryptographic generation to authenticated local storage, then to frozen signing closures in the add-on. Only the public address, signing results and public transaction data cross into MCP/HTTP; raw keys and storage keys are not tool results. Wallets persist until the owner manages their files. Recovery replacement retains old encrypted bytes and the required keychain entry or file key; Oak performs no automatic wallet deletion or key rotation. File fallback encryption does not protect against a reader of the whole Oak directory.</p>
 </details>
 </section>
 <section class="doc-part" id="authority">
 <h2>Keys and authority</h2>
 <details class="reference-detail">
-<summary>Read this section</summary>
+<summary>Read details</summary>
 <p>The treasury and contract admin is the single-owner wallet <code>0x856bb126188bDB5e425D3ac9D59E9ffBD12e6ECf</code>. One owner key can spend treasury funds, redirect future subscription payments, replace the price signer and retire subscriptions. There is no second-signature requirement. Key compromise exposes these powers; key loss can make treasury funds and administration inaccessible. It cannot spend user wallet balances. Safe support is an optional deployment profile, not the launch setup.</p>
 <p>This table describes who controls Oak, what each party can do, and what a compromised key could affect.</p>
 <p>
@@ -303,7 +313,7 @@
 <section class="doc-part" id="audits">
 <h2>Audits and release gates</h2>
 <details class="reference-detail">
-<summary>Read this section</summary>
+<summary>Read details</summary>
 <p>This directory holds the security review reports and release-gate evidence for Oak's open-source kit (<code>packages/addon</code>, <code>packages/core</code>) and smart contracts (<code>packages/contracts</code>).</p>
 <h3 id="release-gate-status">Release Gate Status</h3>
 <p>This repository includes unit, fuzz, and recorded-fixture verification for the public kit (<code>0.0.0</code>). Unit tests and recorded fixtures do not by themselves prove live network behavior or external venue settlement; independent review and live verification are tracked across the seven release gates below.</p>
@@ -401,8 +411,11 @@
 <section class="doc-part" id="releases">
 <h2>Releases</h2>
 <details class="reference-detail">
-<summary>Read this section</summary>
+<summary>Read details</summary>
 <p>This page records public releases of the Oak open-source kit (<code>@oakagentkit/addon</code>, <code>@oakagentkit/core</code>, and <code>@oakagentkit/contracts</code>). Every version entry lists changes using standard changelog categories (<code>[Added]</code>, <code>[Changed]</code>, <code>[Fixed]</code>, <code>[Removed]</code>, <code>[Deprecated]</code>, <code>[Security]</code>).</p>
+<h3 id="0-1-1-release-candidate-2026-10-30">0.1.1 release candidate — 2026-10-30</h3>
+<p>Prepared for operator publication; no 0.1.1 registry release is claimed here. Default MCP action confirmation and terminal renewal/cancellation prompts let users review before local signing. Local transaction guards validate exact approvals, destinations and post-state allowances, then re-simulate before signing. Finality defaults to 30 confirmations, confirmation validity is 300 seconds, identity registration resumes, and action results lead with status and hashes. Priors/HEY behavior, small-swap rounding, Velora fee handling and quotes without reference prices are corrected. Automatic wallet creation shipped in 0.1.0 already. See the public CHANGELOG for the full user-facing and technical list.</p>
+<p>The CLI lists 102 mainnet tools without imported recipes (16 on testnet). The example bridge lists 100 because its subscription callbacks are disabled. Hosted actions remain team-only; local discovery does not grant action access. Strangers can read <code>find_token</code>; private actions receive a server allow-list denial.</p>
 <h3 id="release-table">Release Table</h3>
 <div class="table-wrap">
 <table class="md-table">
@@ -450,7 +463,7 @@
 <section class="doc-part" id="reporting">
 <h2>Report a vulnerability</h2>
 <details class="reference-detail">
-<summary>Read this section</summary>
+<summary>Reporting instructions</summary>
 <p>Oak is an access kit for Robinhood Chain (<code>4663</code>, <code>0x1237</code>) and Robinhood Chain Testnet (<code>46630</code>, <code>0xb626</code>). This repository publishes Oak's documentation, runnable examples, declarative recipe schema, and on-chain smart contracts. The CLI and MCP add-on (<code>@oakagentkit/addon</code>) and core module definitions (<code>@oakagentkit/core</code>) are distributed as built npm packages, and the hosted Oak service runs as a private service.</p>
 <p>Oak is independent and is not affiliated with Robinhood.</p>
 <hr>
@@ -595,10 +608,10 @@
 </ul>
 </nav>
 </div>
- <p>Pre-launch. Oak and $OAK are not released yet. Holding $OAK buys access and nothing else.</p>
+ <p>Pre-launch. Packages are published. Hosted actions open with the token and subscription launch; until then, actions are limited to the Oak team. Read calls such as find_token remain available. Holding $OAK buys access and nothing else.</p>
  <p>Independent software, not affiliated with Robinhood. Not financial advice. Oak never promises returns.</p>
  <p>Region notice: project and asset availability varies by jurisdiction. You are responsible for local compliance.</p>
- <p class="fine">MIT open kit; closed Oak server. Manrope is self-hosted under the SIL Open Font Licence.</p>
+ <p class="fine">Docs, examples and contracts are MIT. The compiled npm packages are Free-to-Use, No Copying; their source and the hosted Oak service are private. Manrope is self-hosted under the SIL Open Font Licence.</p>
 </footer>
 </body>
 </html>

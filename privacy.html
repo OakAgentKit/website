@@ -6,6 +6,8 @@
 <title>Privacy policy: what stays on your computer and what the server sees | Oak Agent Kit</title>
 <meta name="description" content="Plain-language privacy policy: what Oak keeps on your computer, what the Oak server sees, what RPCs and ecosystem project services see, retention, and how to ask questions.">
 <meta name="theme-color" content="#062F27">
+<link rel="canonical" href="https://oakagentkit.org/privacy.html">
+<meta property="og:url" content="https://oakagentkit.org/privacy.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Oak Agent Kit">
 <meta property="og:title" content="Privacy policy: what stays on your computer and what the server sees | Oak Agent Kit">
@@ -18,9 +20,8 @@
 <link rel="icon" type="image/svg+xml" href="a-avatar-32.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
 <link rel="apple-touch-icon" href="favicon-180x180.png">
+<link rel="preload" href="Manrope.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="styles.css">
-<link rel="canonical" href="https://oakagentkit.org/privacy.html">
-<meta property="og:url" content="https://oakagentkit.org/privacy.html">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -28,7 +29,7 @@
 <div class="scene-header-inner">
  <a class="scene-brand" href="index.html" aria-label="Oak Agent Kit, home">
 <img src="oak-medallion.webp" width="48" height="48" alt="">
-<span>Oak Agent Kit<small>Robinhood Chain · MCP</small>
+<span>Oak Agent Kit<small>Robinhood Chain</small>
 </span>
 </a>
  <nav class="desktop-nav" aria-label="Main">
@@ -94,7 +95,7 @@
 </nav>
 </details>
  </div>
-<p class="release-notice">Coming soon · Oak is not released yet.</p>
+<p class="release-notice">Public access coming soon · Packages available now.</p>
 </header>
 <main id="main">
 <section class="scene-hero scene-privacy" aria-labelledby="hero-title">
@@ -112,7 +113,7 @@
 <div class="page-body" id="policy">
 <div class="wrap">
 <div class="prose wide">
-<p>This page explains in plain words what data stays on your computer, what the Oak server sees, what your RPC and ecosystem project services see, how long data is kept, and how to ask questions. The local add-on is open source; the hosted service has the data practices described below.</p>
+<p>This page explains in plain words what data stays on your computer, what the Oak server sees, what your RPC and ecosystem project services see, how long data is kept, and how to ask questions. The compiled add-on and hosted service have private source; their data practices are described below.</p>
 <hr>
 <h2 id="zero-website-trackers">1. Zero Website Trackers</h2>
 <details class="reference-detail">
@@ -147,11 +148,12 @@
 <td data-label="What It Holds">Your wallet's 32-byte secp256k1 private key encrypted with <code>AES-256-GCM</code> (<code>iv</code>, <code>tag</code>, <code>ciphertext</code>, and storage metadata).</td>
 </tr>
 <tr>
-<td data-label="Local Store">OS Keychain (or passphrase <code>scrypt</code>)</td>
+<td data-label="Local Store">OS Keychain, owner-only file key, or legacy passphrase <code>scrypt</code>
+</td>
 <td data-label="Code Reference">
 <code>packages/addon/src/wallet.ts</code>
 </td>
-<td data-label="What It Holds">A random 32-byte data encryption key stored in macOS Keychain, Windows Credential Manager, or Linux persistent Secret Service (<code>@napi-rs/keyring</code>, service <code>&quot;Oak wallet data key&quot;</code>), or derived on demand in memory via <code>scrypt</code> (<code>N=131072, r=8, p=1</code>) from your terminal passphrase.</td>
+<td data-label="What It Holds">A random 32-byte data encryption key stored in macOS Keychain, Windows Credential Manager, or Linux persistent Secret Service (<code>@napi-rs/keyring</code>, service <code>&quot;Oak wallet data key&quot;</code>), stored in a <code>0600</code> <code>~/.oak/wallet-key-&lt;id&gt;</code> file for automatic fallback wallets, or derived on demand in memory via <code>scrypt</code> (<code>N=131072, r=8, p=1</code>) from your terminal passphrase.</td>
 </tr>
 <tr>
 <td data-label="Local Store">
@@ -420,6 +422,7 @@
 <code>SECURITY.md</code>
 </a>.</li>
 </ul>
+<p>Automatic wallets have no mnemonic and require no passphrase. File fallback keys persist beside the encrypted wallet until managed by the owner; readers of both files can unlock the wallet. Export/recovery are optional owner-terminal commands, and existing wallets are never silently migrated.</p>
 </details>
 </div>
 </div>
@@ -466,10 +469,10 @@
 </ul>
 </nav>
 </div>
- <p>Pre-launch. Oak and $OAK are not released yet. Holding $OAK buys access and nothing else.</p>
+ <p>Pre-launch. Packages are published. Hosted actions open with the token and subscription launch; until then, actions are limited to the Oak team. Read calls such as find_token remain available. Holding $OAK buys access and nothing else.</p>
  <p>Independent software, not affiliated with Robinhood. Not financial advice. Oak never promises returns.</p>
  <p>Region notice: project and asset availability varies by jurisdiction. You are responsible for local compliance.</p>
- <p class="fine">MIT open kit; closed Oak server. Manrope is self-hosted under the SIL Open Font Licence.</p>
+ <p class="fine">Docs, examples and contracts are MIT. The compiled npm packages are Free-to-Use, No Copying; their source and the hosted Oak service are private. Manrope is self-hosted under the SIL Open Font Licence.</p>
 </footer>
 </body>
 </html>

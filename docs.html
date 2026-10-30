@@ -6,6 +6,8 @@
 <title>Oak docs: tool reference for 9 basic tools and 25 modules</title>
 <meta name="description" content="The Oak tool reference: amount conventions, the basic tools, every Robinhood Chain project module with its tool names, the command line, project recipes and notes for AI agents.">
 <meta name="theme-color" content="#062F27">
+<link rel="canonical" href="https://oakagentkit.org/docs.html">
+<meta property="og:url" content="https://oakagentkit.org/docs.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Oak Agent Kit">
 <meta property="og:title" content="Oak docs: tool reference for 9 basic tools and 25 modules">
@@ -18,9 +20,8 @@
 <link rel="icon" type="image/svg+xml" href="a-avatar-32.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
 <link rel="apple-touch-icon" href="favicon-180x180.png">
+<link rel="preload" href="Manrope.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="styles.css">
-<link rel="canonical" href="https://oakagentkit.org/docs.html">
-<meta property="og:url" content="https://oakagentkit.org/docs.html">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -28,7 +29,7 @@
 <div class="scene-header-inner">
  <a class="scene-brand" href="index.html" aria-label="Oak Agent Kit, home">
 <img src="oak-medallion.webp" width="48" height="48" alt="">
-<span>Oak Agent Kit<small>Robinhood Chain · MCP</small>
+<span>Oak Agent Kit<small>Robinhood Chain</small>
 </span>
 </a>
  <nav class="desktop-nav" aria-label="Main">
@@ -94,7 +95,7 @@
 </nav>
 </details>
  </div>
-<p class="release-notice">Coming soon · Oak is not released yet.</p>
+<p class="release-notice">Public access coming soon · Packages available now.</p>
 </header>
 <main id="main">
 <section class="scene-hero scene-docs" aria-labelledby="hero-title">
@@ -196,10 +197,11 @@
 </p>
 <p>Mainnet: 4663. Testnet: basic tools and ERC-8004 identity only.</p>
 </details>
+<p class="release-note">Packages are published. Hosted actions open with the token and subscription launch; until then, actions are limited to the Oak team. Read calls such as find_token remain available.</p>
 <section class="doc-part" id="basics">
 <h2>Basics</h2>
 <details class="reference-detail">
-<summary>Read this section</summary>
+<summary>Read details</summary>
 <div class="docs-narrow">
 <p>Every amount crosses JSON boundaries as a decimal base-unit string (never a float). Every tool output identifies the token address, symbol, chain ID, and decimals. Non-read requests use request-bound sessions (<code>X-Oak-Session</code> plus a single-use <code>X-Oak-Request</code> signature signed by an ephemeral in-memory <code>sessionKey</code>). Before signing any transaction sequence, the add-on requests a <code>preview</code> (<code>eth_simulateV1</code> with <code>traceTransfers: true</code>), reuses a matching preview from the same block within 12 seconds so <code>swap</code> does not re-simulate twice, builds exact token approvals only (never unlimited), and displays the simulated token deltas.</p>
 </div>
@@ -310,7 +312,7 @@
 <section class="doc-part" id="modules">
 <h2>25 project modules</h2>
 <details class="reference-detail">
-<summary>Read this section</summary>
+<summary>Browse projects and tools</summary>
 <h3>Swap and Trade</h3>
 <div class="docs-prompt">
 <p class="docs-prompt-label">Example prompt</p>
@@ -600,7 +602,7 @@
 <section class="doc-part" id="cli">
 <h2>Command line</h2>
 <details class="reference-detail">
-<summary>Read this section</summary>
+<summary>Read details</summary>
 <div class="docs-narrow">
 <pre tabindex="0" role="region" aria-label="Command example" class="code-block">
 <code data-lang="text">oak init
@@ -609,6 +611,7 @@ oak identity unlink [--owner &lt;linkId&gt;]
 oak address
 oak status
 oak export
+oak backup
 oak subscribe --plan &lt;holder|nohold&gt;
 oak renew
 oak cancel
@@ -638,7 +641,7 @@ oak call &lt;tool&gt; &lt;json&gt;</code>
 <section class="doc-part" id="recipes">
 <h2>Project recipes</h2>
 <details class="reference-detail">
-<summary>Read this section</summary>
+<summary>Read details</summary>
 <div class="docs-narrow">
 <p>Ecosystem builders can publish declarative JSON recipes (<code>oak-recipe/v1</code>) validated against <a href="https://github.com/OakAgentKit/oak/blob/main/packages/addon/schema/recipe.schema.json">packages/addon/schema/recipe.schema.json</a>. Each recipe names one contract on chain <code>4663</code>, one ABI function item, typed inputs, and <code>kind: &quot;read&quot; | &quot;tx&quot;</code>. The add-on's importer (<code>oak recipes add</code>) is strictly data-only: it streams tarballs with a 4 MiB / 100-entry cap, ignores non-recipe files without writing or executing them, copies only <code>package/recipes/&lt;name&gt;.recipe.json</code> (max 64 KiB each) where <code>project</code> matches <code>package/package.json</code>'s <code>oakProject</code>, and never executes third-party code. Recipes are opt-in by name (<code>&lt;project&gt;.&lt;name&gt;</code>) and labelled <strong>
 <code>as-is, not reviewed by Oak</code>
@@ -649,13 +652,13 @@ oak call &lt;tool&gt; &lt;json&gt;</code>
 <section class="doc-part" id="for-agents">
 <h2>For AI agents</h2>
 <details class="reference-detail">
-<summary>Read this section</summary>
+<summary>Read details</summary>
 <div class="docs-narrow">
 <p>AI agents should start with <a href="https://github.com/OakAgentKit/oak/blob/main/AGENTS.md">AGENTS.md</a>, the operating guide that lists every tool, convention and custody rule. A plain-text summary for agents is in <a href="https://github.com/OakAgentKit/oak/blob/main/llms.txt">llms.txt</a>.</p>
 <h3>Hard Custody Boundaries for Agents</h3>
 <ol>
 <li>
-<strong>Never run <code>oak init</code> or <code>oak export</code> inside an agent tool call.</strong> Both commands must be run by the human owner <strong>in your own terminal, never through the agent</strong>. Even if an agent can allocate a PTY, the security boundary is human execution so recovery words and private keys never enter agent context, prompts, or logs. Your private key <strong>never leaves your computer</strong>, and Oak <strong>cannot recover a lost key</strong>.</li>
+<strong>Wallet creation is automatic on first MCP/CLI wallet use.</strong> Call <code>account</code>, relay the public address/network, ask the user to fund ETH and USDG, then re-check <code>balances</code>. Backups are optional: <code>oak backup</code> gives guidance. <strong>Never run <code>oak init</code> or <code>oak export</code> inside an agent tool call.</strong> Both commands must be run by the human owner <strong>in your own terminal, never through the agent</strong>. Even if an agent can allocate a PTY, the security boundary is human execution so recovery words and private keys never enter agent context, prompts, or logs. Your private key <strong>never leaves your computer</strong>, and Oak <strong>cannot recover a lost key</strong>.</li>
 <li>
 <strong>Never ask the user for a private key, seed phrase, passphrase, or raw owner key.</strong> Both the local bridge (<code>packages/addon/src/bridge.ts</code>) and the Oak server reject any JSON argument containing <code>private_key</code>, <code>secret_key</code>, <code>wallet_key</code>, <code>mnemonic</code>, <code>seed</code>, <code>seed_phrase</code>, or <code>recovery_phrase</code>. When linking an external owner's ERC-8004 agent ID (<code>oak setup link &lt;agentId&gt;</code>) or revoking by owner (<code>oak identity unlink --owner &lt;linkId&gt;</code>), the owner signs the EIP-712 <code>OakIdentityLink</code> challenge in their own terminal (<code>Owner signing requires your terminal. Run oak setup link &lt;agentId&gt; or oak identity unlink --owner &lt;linkId&gt; there.</code>).</li>
 <li>
@@ -711,10 +714,10 @@ oak call &lt;tool&gt; &lt;json&gt;</code>
 </ul>
 </nav>
 </div>
- <p>Pre-launch. Oak and $OAK are not released yet. Holding $OAK buys access and nothing else.</p>
+ <p>Pre-launch. Packages are published. Hosted actions open with the token and subscription launch; until then, actions are limited to the Oak team. Read calls such as find_token remain available. Holding $OAK buys access and nothing else.</p>
  <p>Independent software, not affiliated with Robinhood. Not financial advice. Oak never promises returns.</p>
  <p>Region notice: project and asset availability varies by jurisdiction. You are responsible for local compliance.</p>
- <p class="fine">MIT open kit; closed Oak server. Manrope is self-hosted under the SIL Open Font Licence.</p>
+ <p class="fine">Docs, examples and contracts are MIT. The compiled npm packages are Free-to-Use, No Copying; their source and the hosted Oak service are private. Manrope is self-hosted under the SIL Open Font Licence.</p>
 </footer>
 </body>
 </html>

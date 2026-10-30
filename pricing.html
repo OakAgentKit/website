@@ -4,12 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Oak pricing: two plans, zero per-call fees</title>
-<meta name="description" content="Compare the Oak holder and no-hold subscriptions, the entry curve and launch phases. Oak and the $OAK token are not released yet.">
+<meta name="description" content="What Oak costs and when hosted access opens: compare holder and no-hold subscriptions, network fees and the token launch phases.">
 <meta name="theme-color" content="#062F27">
+<link rel="canonical" href="https://oakagentkit.org/pricing.html">
+<meta property="og:url" content="https://oakagentkit.org/pricing.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Oak Agent Kit">
 <meta property="og:title" content="Oak pricing: two plans, zero per-call fees">
-<meta property="og:description" content="Compare the Oak holder and no-hold subscriptions, the entry curve and launch phases. Oak and the $OAK token are not released yet.">
+<meta property="og:description" content="What Oak costs and when hosted access opens: compare holder and no-hold subscriptions, network fees and the token launch phases.">
 <meta property="og:image" content="https://oakagentkit.org/03-og-card-1200x630.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -18,9 +20,8 @@
 <link rel="icon" type="image/svg+xml" href="a-avatar-32.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
 <link rel="apple-touch-icon" href="favicon-180x180.png">
+<link rel="preload" href="Manrope.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="styles.css">
-<link rel="canonical" href="https://oakagentkit.org/pricing.html">
-<meta property="og:url" content="https://oakagentkit.org/pricing.html">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -28,7 +29,7 @@
 <div class="scene-header-inner">
  <a class="scene-brand" href="index.html" aria-label="Oak Agent Kit, home">
 <img src="oak-medallion.webp" width="48" height="48" alt="">
-<span>Oak Agent Kit<small>Robinhood Chain · MCP</small>
+<span>Oak Agent Kit<small>Robinhood Chain</small>
 </span>
 </a>
  <nav class="desktop-nav" aria-label="Main">
@@ -94,7 +95,7 @@
 </nav>
 </details>
  </div>
-<p class="release-notice">Coming soon · Oak is not released yet.</p>
+<p class="release-notice">Public access coming soon · Packages available now.</p>
 </header>
 <main id="main">
 <section class="scene-hero scene-pricing" aria-labelledby="hero-title">
@@ -104,11 +105,16 @@
  <img src="scene-pricing-desktop.webp" width="1440" height="810" alt="" fetchpriority="high" decoding="async">
  </picture>
  <div class="scene-intro">
-<p>Zero per-call fees. 0% Oak swap fees.</p>
+<p>What it costs and when it opens.</p>
 <a class="scene-button" href="pricing.html#plans">Compare plans<span aria-hidden="true"> ↗</span>
 </a>
 </div>
  </section>
+<section class="quiet-section">
+<h2>What it costs and when it opens</h2>
+<p>Packages are published. Hosted actions open with the token and subscription launch; until then, actions are limited to the Oak team. Read calls such as find_token remain available.</p>
+<p>USDG is a dollar-denominated token used to pay the subscription. The entry price sets how much $OAK the holder plan requires, or the extra charge for no-hold. It is not the price of one token.</p>
+</section>
 <div class="root-thread">
 <section class="story-stage copy-right pricing-plans" id="plans">
 <picture aria-hidden="true">
@@ -204,21 +210,22 @@
 <h2>Access follows the launch.</h2>
 <dl class="phase-list">
 <div>
-<dt>Curve</dt>
+<dt>Curve · launch</dt>
 <dd>On the Pons curve, only the no-hold plan is open at 12.333333 USDG; the holder plan is closed.</dd>
 </div>
 <div>
-<dt>Warmup</dt>
-<dd>After graduation, both plans wait for 30 minutes of pool history.</dd>
+<dt>Warmup · wait</dt>
+<dd>When the token moves from its launch curve into a trading pool (graduation), both plans wait for 30 minutes of pool history.</dd>
 </div>
 <div>
-<dt>Ready</dt>
+<dt>Ready · both plans</dt>
 <dd>Once the pool meets the history, depth and trade-count thresholds, the holder plan is open.</dd>
 </div>
 </dl>
 </section>
  <section class="quiet-section">
-<h2>Paid on-chain.</h2>
+<h2>Payments and renewals</h2>
+<p>While Oak is running, an active subscription renews when three days or fewer remain, using available USDG and local signing. Confirm the recurring cost before subscribing.</p>
 <p>25% goes to the burn contract and 75% goes to the single-owner treasury wallet. Prepay is capped at 90 days ahead; cancelling ends access immediately and forfeits paid days.</p>
 <p class="fine">Zero per-call fees and 0% on swaps; project fees and network gas still apply.</p>
 </section>
@@ -264,10 +271,10 @@
 </ul>
 </nav>
 </div>
- <p>Pre-launch. Oak and $OAK are not released yet. Holding $OAK buys access and nothing else.</p>
+ <p>Pre-launch. Packages are published. Hosted actions open with the token and subscription launch; until then, actions are limited to the Oak team. Read calls such as find_token remain available. Holding $OAK buys access and nothing else.</p>
  <p>Independent software, not affiliated with Robinhood. Not financial advice. Oak never promises returns.</p>
  <p>Region notice: project and asset availability varies by jurisdiction. You are responsible for local compliance.</p>
- <p class="fine">MIT open kit; closed Oak server. Manrope is self-hosted under the SIL Open Font Licence.</p>
+ <p class="fine">Docs, examples and contracts are MIT. The compiled npm packages are Free-to-Use, No Copying; their source and the hosted Oak service are private. Manrope is self-hosted under the SIL Open Font Licence.</p>
 </footer>
 </body>
 </html>

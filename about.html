@@ -6,6 +6,8 @@
 <title>About Oak: one MCP for the whole chain | Oak Agent Kit</title>
 <meta name="description" content="Why Oak exists, the four principles it is built on, what is open source and what is a closed service, and where to find the official links.">
 <meta name="theme-color" content="#062F27">
+<link rel="canonical" href="https://oakagentkit.org/about.html">
+<meta property="og:url" content="https://oakagentkit.org/about.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Oak Agent Kit">
 <meta property="og:title" content="About Oak: one MCP for the whole chain | Oak Agent Kit">
@@ -18,9 +20,8 @@
 <link rel="icon" type="image/svg+xml" href="a-avatar-32.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
 <link rel="apple-touch-icon" href="favicon-180x180.png">
+<link rel="preload" href="Manrope.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="styles.css">
-<link rel="canonical" href="https://oakagentkit.org/about.html">
-<meta property="og:url" content="https://oakagentkit.org/about.html">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -28,7 +29,7 @@
 <div class="scene-header-inner">
  <a class="scene-brand" href="index.html" aria-label="Oak Agent Kit, home">
 <img src="oak-medallion.webp" width="48" height="48" alt="">
-<span>Oak Agent Kit<small>Robinhood Chain · MCP</small>
+<span>Oak Agent Kit<small>Robinhood Chain</small>
 </span>
 </a>
  <nav class="desktop-nav" aria-label="Main">
@@ -94,7 +95,7 @@
 </nav>
 </details>
  </div>
-<p class="release-notice">Coming soon · Oak is not released yet.</p>
+<p class="release-notice">Public access coming soon · Packages available now.</p>
 </header>
 <main id="main">
 <section class="scene-hero scene-about" aria-labelledby="hero-title">
@@ -112,23 +113,24 @@
 <div class="page-body">
 <div class="wrap">
 <div class="prose">
+<p>Oak simplifies access to Robinhood Chain for people and builders. Connect one assistant to the projects, tools and information you want to use.</p>
 <section class="doc-part" id="why">
 <h2>What Oak Is, and Why</h2>
 <details class="reference-detail">
-<summary>Read this section</summary>
+<summary>Read details</summary>
 <p>Every project on <strong>Robinhood Chain</strong> (chain ID <code>4663</code>) has its own contracts, its own API or subgraph, its own decimal and approval rules, and its own failure modes. Nobody wants to install and maintain 25 separate MCP servers or give 25 tools access to a wallet.</p>
 <p>
 <strong>One MCP for the whole chain.</strong> Oak is one downloadable tool (<code>@oakagentkit/addon</code>) that connects an AI agent (Claude Code, Codex, Gemini, Cursor, or Grok) to <strong>25 ecosystem projects</strong> behind one local wallet, one <code>&lt;module&gt;_&lt;verb&gt;</code> naming convention, one decimal base-unit amount format, pre-sign simulation previews (<code>eth_simulateV1</code>), and plain-sentence error messages.</p>
 <p>Oak is built around four principles:</p>
 <ol>
 <li>
-<strong>Your keys stay on your computer.</strong> You run <code>oak init</code> <strong>in your own terminal, never through the agent</strong>. Your private key <strong>never leaves your computer</strong>, and <strong>Oak cannot recover a lost key</strong>. The Oak server <strong>never sees your key and never signs or sends a transaction</strong>: <strong>your swaps and deposits go straight from your wallet to the project, and subscription payments go to the burner (<code>OakBurner</code>) and the single-owner treasury wallet</strong>.</li>
+<strong>Your keys stay on your computer.</strong> The local add-on creates the wallet automatically on first use; optional recovery and export stay in your own terminal. Your private key <strong>never leaves your computer</strong>, and <strong>Oak cannot recover a lost key</strong>. The Oak server <strong>never sees your key and never signs or sends a transaction</strong>: <strong>your swaps and deposits go straight from your wallet to the project, and subscription payments go to the burner (<code>OakBurner</code>) and the single-owner treasury wallet</strong>.</li>
 <li>
 <strong>Normalised modules, not thin wrappers.</strong> Each project module absorbs protocol-specific quirks (Uniswap v4 <code>Permit2</code> expirations, Meridian multi-turn WebSocket RFQ auctions and USDe collateral swaps, TickerSpring unopened-market <code>startingPrice</code> bundles, Clanker MEV-window fee syncs, HoodLock proof lookups, and Merkl cumulative claim construction) so the agent interacts with clean, uniform verbs.</li>
 <li>
 <strong>Access only, no hidden middlemen.</strong> Oak charges a flat monthly subscription in USDG (<code>9 USDG per 30 days</code> on the holder plan, or <code>9 USDG plus one sixth of the entry price</code> on the no-hold plan, with a <code>12.333333 USDG</code> floor) and takes <strong>0%</strong> of your trades or protocol interactions. Oak <strong>adds no safety checks</strong>, spending caps, or allowlists; you and your agent review every preview before signing.</li>
 <li>
-<strong>Open kit, closed service.</strong> The local add-on (<code>packages/addon</code>), shared core and all 25 module definitions (<code>packages/core</code>), and smart contracts (<code>packages/contracts</code>) are open source under the <strong>MIT</strong> license. The hosted Oak server (<code>packages/server</code>, which reads chain and project APIs, verifies ERC-8004 identities and subscription access, and runs the price-note issuer in the same process) is a <strong>closed service</strong>.</li>
+<strong>Public docs and contracts.</strong> Docs, examples and contracts are MIT. The compiled npm packages are Free-to-Use, No Copying; their source and the hosted Oak service are private.</li>
 </ol>
 <hr>
 </details>
@@ -136,7 +138,7 @@
 <section class="doc-part" id="links">
 <h2>Official Links and Disclosures</h2>
 <details class="reference-detail">
-<summary>Read this section</summary>
+<summary>Read details</summary>
 <ul>
 <li>
 <strong>X (Twitter):</strong> <a href="https://x.com/OakAgentKit">@OakAgentKit</a>
@@ -163,11 +165,11 @@
 <section class="doc-part" id="treasury">
 <h2>Treasury authority</h2>
 <details class="reference-detail">
-<summary>Read this section</summary>
+<summary>Read details</summary>
 <p>The treasury and contract admin is the single-owner wallet <code>0x856bb126188bDB5e425D3ac9D59E9ffBD12e6ECf</code>. One owner key can spend treasury funds, redirect future subscription payments, replace the price signer and retire subscriptions. There is no second-signature requirement. Key compromise exposes these powers; key loss can make treasury funds and administration inaccessible. It cannot spend user wallet balances. Safe support is an optional deployment profile, not the launch setup.</p>
 </details>
 </section>
-<p class="note">Looking for the 25 projects? See the <a href="docs.html#modules">tool reference</a>. Want the four steps? See <a href="how-it-works.html">How it works</a>.</p>
+<p class="note">Looking for the 25 projects? See the <a href="docs.html#modules">tool reference</a>. Want the simple walkthrough? See <a href="how-it-works.html">How it works</a>.</p>
 </div>
 </div>
 </div>
@@ -213,10 +215,10 @@
 </ul>
 </nav>
 </div>
- <p>Pre-launch. Oak and $OAK are not released yet. Holding $OAK buys access and nothing else.</p>
+ <p>Pre-launch. Packages are published. Hosted actions open with the token and subscription launch; until then, actions are limited to the Oak team. Read calls such as find_token remain available. Holding $OAK buys access and nothing else.</p>
  <p>Independent software, not affiliated with Robinhood. Not financial advice. Oak never promises returns.</p>
  <p>Region notice: project and asset availability varies by jurisdiction. You are responsible for local compliance.</p>
- <p class="fine">MIT open kit; closed Oak server. Manrope is self-hosted under the SIL Open Font Licence.</p>
+ <p class="fine">Docs, examples and contracts are MIT. The compiled npm packages are Free-to-Use, No Copying; their source and the hosted Oak service are private. Manrope is self-hosted under the SIL Open Font Licence.</p>
 </footer>
 </body>
 </html>

@@ -3,13 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Oak: giving AI agents access to the on-chain economy</title>
-<meta name="description" content="Oak is one install that gives your AI agent a wallet of its own and a complete module for each of 25 projects on Robinhood Chain, with a preview before anything is signed.">
+<title>Oak: Robinhood Chain apps through your AI assistant</title>
+<meta name="description" content="Connect your AI assistant to 25 Robinhood Chain projects with Oak. Install the MCP now; hosted access opens with the token and subscription launch.">
 <meta name="theme-color" content="#062F27">
+<link rel="canonical" href="https://oakagentkit.org/">
+<meta property="og:url" content="https://oakagentkit.org/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Oak Agent Kit">
-<meta property="og:title" content="Oak: giving AI agents access to the on-chain economy">
-<meta property="og:description" content="Oak is one install that gives your AI agent a wallet of its own and a complete module for each of 25 projects on Robinhood Chain, with a preview before anything is signed.">
+<meta property="og:title" content="Oak: Robinhood Chain apps through your AI assistant">
+<meta property="og:description" content="Connect your AI assistant to 25 Robinhood Chain projects with Oak. Install the MCP now; hosted access opens with the token and subscription launch.">
 <meta property="og:image" content="https://oakagentkit.org/03-og-card-1200x630.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -18,9 +20,8 @@
 <link rel="icon" type="image/svg+xml" href="a-avatar-32.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
 <link rel="apple-touch-icon" href="favicon-180x180.png">
+<link rel="preload" href="Manrope.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="styles.css">
-<link rel="canonical" href="https://oakagentkit.org/">
-<meta property="og:url" content="https://oakagentkit.org/">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -28,7 +29,7 @@
 <div class="scene-header-inner">
  <a class="scene-brand" href="index.html" aria-label="Oak Agent Kit, home">
 <img src="oak-medallion.webp" width="48" height="48" alt="">
-<span>Oak Agent Kit<small>Robinhood Chain · MCP</small>
+<span>Oak Agent Kit<small>Robinhood Chain</small>
 </span>
 </a>
  <nav class="desktop-nav" aria-label="Main">
@@ -94,7 +95,7 @@
 </nav>
 </details>
  </div>
-<p class="release-notice">Coming soon · Oak is not released yet.</p>
+<p class="release-notice">Public access coming soon · Packages available now.</p>
 </header>
 <main id="main">
 <section class="scene-hero scene-home" aria-labelledby="hero-title">
@@ -104,45 +105,43 @@
  <img src="scene-home-desktop.webp" width="1440" height="810" alt="" fetchpriority="high" decoding="async">
  </picture>
  <div class="scene-intro">
-<p>One local wallet. 25 projects. Preview every move.</p>
-<a class="scene-button" href="how-it-works.html">See how it works<span aria-hidden="true"> ↗</span>
+<p>Use Robinhood Chain’s apps through your AI assistant, with one simple connection.</p>
+<a class="scene-button" href="setup.html">Get Oak<span aria-hidden="true"> ↗</span>
 </a>
 </div>
  </section>
-<div class="root-thread">
- <section class="story-stage copy-right" id="keys">
-<picture aria-hidden="true">
-<source media="(max-width: 700px)" srcset="stage-keys-phone.webp" width="780" height="780">
-<img src="stage-keys.webp" width="1440" height="966" alt="" loading="lazy" decoding="async">
-</picture>
-<div class="stage-copy">
-<p class="chapter">01 · Self-custody</p>
-<h2>Your keys stay home.</h2>
-<p>Create your wallet in your own terminal, never through the agent. Your private key never leaves your computer.</p>
-</div>
+<section class="quiet-section" id="steps">
+<p class="chapter">Your first three steps</p>
+<h2>Connect. Ask. Review.</h2>
+ <ol class="simple-steps">
+ <li id="keys">
+<h3>Connect Oak</h3>
+<p>Install once and connect your assistant. A wallet is created automatically on first use and stays on your computer.</p>
+</li>
+ <li>
+<h3>Ask in your own words</h3>
+<p>Start with “Show my balances.” At launch, fund the wallet to use paid actions.</p>
+</li>
+ <li id="preview">
+<h3>Review before it acts</h3>
+<p>At launch, inspect the preview and confirm by default before local signing. Approvals match the exact amount, never unlimited.</p>
+</li>
+ </ol>
 </section>
- <section class="story-stage copy-left" id="preview">
-<picture aria-hidden="true">
-<source media="(max-width: 700px)" srcset="stage-preview-phone.webp" width="780" height="780">
-<img src="stage-preview.webp" width="1440" height="966" alt="" loading="lazy" decoding="async">
-</picture>
-<div class="stage-copy">
-<p class="chapter">02 · Before you sign</p>
-<h2>Every move is previewed.</h2>
-<p>Inspect the simulated balance changes before signing locally. Approvals match the exact amount, never unlimited.</p>
-<a class="text-link" href="how-it-works.html">How it works ↗</a>
-</div>
-</section>
- <section class="story-stage copy-left" id="projects">
-<picture aria-hidden="true">
-<source media="(max-width: 700px)" srcset="stage-projects-phone.webp" width="780" height="780">
-<img src="stage-projects.webp" width="1440" height="966" alt="" loading="lazy" decoding="async">
-</picture>
-<div class="stage-copy">
-<p class="chapter">03 · The ecosystem</p>
-<h2>25 projects, one kit.</h2>
-<p>Swaps, vaults, lending, bridges and identity share one tool format. Zero per-call fees and 0% on swaps.</p>
-<details class="project-directory">
+ <section class="quiet-section builder-section" id="projects">
+<p class="chapter">For builders</p>
+<h2>One MCP for the whole chain.</h2>
+ <p>MCP (Model Context Protocol) is a connection for AI tools. One local connection gives your agent 25 projects and 102 tools on Robinhood Chain: project information, balances, swaps, bridges, lending and identity.</p>
+ <p>Connect Claude Code, Codex, Gemini, Cursor or another compatible host. Build your own workflows and experiment with autonomous agents. Pons token launches and curve buys are one example among the project tools.</p>
+ <pre tabindex="0" role="region" aria-label="Install Oak">
+<code>npm install -g @oakagentkit/addon</code>
+</pre>
+ <p>Requires Node.js 22 LTS (22.12 or later within version 22). The add-on includes <code>@oakagentkit/core</code>; both packages are published.</p>
+ <p>Packages are published. Hosted actions open with the token and subscription launch; until then, actions are limited to the Oak team. Read calls such as find_token remain available.</p>
+ <p>
+<a class="text-link" href="setup.html#connect">Connect your agent ↗</a> <a class="text-link" href="docs.html#modules">Browse every tool ↗</a>
+</p>
+ <details class="project-directory">
 <summary>All 25 projects and supported agents</summary>
 <ul class="project-names">
 <li>
@@ -226,25 +225,30 @@
 </p>
 <p>Mainnet: 4663. Testnet: basic tools and ERC-8004 identity only.</p>
 </details>
-</div>
+ <p class="fine">Docs, examples and contracts are MIT. The compiled npm packages are Free-to-Use, No Copying; their source and the hosted Oak service are private.</p>
 </section>
- <section class="story-stage copy-right" id="pricing">
-<picture aria-hidden="true">
-<source media="(max-width: 700px)" srcset="stage-trust-phone.webp" width="780" height="780">
-<img src="stage-trust.webp" width="1440" height="966" alt="" loading="lazy" decoding="async">
-</picture>
-<div class="stage-copy">
-<p class="chapter">04 · Flat monthly access</p>
-<h2>A plan for your wallet.</h2>
-<p>9 USDG per 30 days with the required $OAK holding and a one-time 5% sign-up burn. No-hold starts at 12.33 USDG per 30 days at the $20 entry floor.</p>
-<a class="text-link" href="pricing.html">See pricing and launch phases ↗</a>
-</div>
+ <section class="quiet-section" id="plain-english">
+<p class="chapter">In plain English</p>
+<h2>One connection. More things to ask.</h2>
+ <p>An AI agent is an assistant that uses tools. Oak connects it to apps on Robinhood Chain, so you can ask it to check balances, compare a swap or use a project without wiring up each app yourself.</p>
+ <figure class="village-story">
+<img src="oak-village.webp" width="1280" height="720" loading="lazy" decoding="async" alt="A small hooded guide beside a felt oak tree, with glowing roots reaching wooden houses and a bridge.">
+<figcaption>The tree is Oak. Its roots are the tools. The little houses are the projects your assistant can reach.</figcaption>
+</figure>
+ <p>At launch, actions are previewed, you confirm by default, and your wallet signs on your computer. A preview shows expected changes; actual outcomes can differ.</p>
 </section>
- </div>
-<section class="quiet-section">
-<h2>One MCP for the whole chain.</h2>
-<p>Open kit under MIT, with a closed Oak server. Oak cannot recover a lost key.</p>
-<a class="text-link" href="security.html">Read the custody boundaries ↗</a>
+ <section class="quiet-section" id="pricing">
+<p class="chapter">What it costs and when it opens</p>
+<h2>Install now. Hosted access at launch.</h2>
+ <p>Packages are published. Hosted actions open with the token and subscription launch; until then, actions are limited to the Oak team. Read calls such as find_token remain available.</p>
+ <p>At launch, no-hold starts at <strong>12.333333 USDG per 30 days</strong> at the $20 entry floor. The holder plan is <strong>9 USDG per 30 days</strong>, with a required $OAK holding and a one-time 5% sign-up burn; it opens after graduation and warmup.</p>
+ <p>USDG is a dollar-denominated token. Network and project fees are additional. Holding $OAK buys access and nothing else.</p>
+ <a class="text-link" href="pricing.html">Compare plans and launch phases ↗</a>
+</section>
+ <section class="quiet-section" id="custody">
+<h2>Your wallet stays with you.</h2>
+ <p>Your private key never leaves your computer. Oak cannot recover a lost key. Backups are optional; use <code>oak backup</code> for guidance. Run <code>oak init</code> or <code>oak export</code> only in your own terminal, never through the agent.</p>
+ <a class="text-link" href="security.html">Read the custody boundaries ↗</a>
 </section>
 </main>
 <footer class="scene-footer">
@@ -288,10 +292,10 @@
 </ul>
 </nav>
 </div>
- <p>Pre-launch. Oak and $OAK are not released yet. Holding $OAK buys access and nothing else.</p>
+ <p>Pre-launch. Packages are published. Hosted actions open with the token and subscription launch; until then, actions are limited to the Oak team. Read calls such as find_token remain available. Holding $OAK buys access and nothing else.</p>
  <p>Independent software, not affiliated with Robinhood. Not financial advice. Oak never promises returns.</p>
  <p>Region notice: project and asset availability varies by jurisdiction. You are responsible for local compliance.</p>
- <p class="fine">MIT open kit; closed Oak server. Manrope is self-hosted under the SIL Open Font Licence.</p>
+ <p class="fine">Docs, examples and contracts are MIT. The compiled npm packages are Free-to-Use, No Copying; their source and the hosted Oak service are private. Manrope is self-hosted under the SIL Open Font Licence.</p>
 </footer>
 </body>
 </html>

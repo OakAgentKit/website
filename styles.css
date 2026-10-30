@@ -5,7 +5,7 @@
    details, tables and the prose style for pages rendered from Markdown. */
 @font-face {
   font-family: "Manrope";
-  src: url("Manrope.ttf") format("truetype");
+  src: url("Manrope.woff2") format("woff2"), url("Manrope.ttf") format("truetype");
   font-weight: 200 800;
   font-display: swap;
 }
@@ -584,3 +584,61 @@ summary { cursor:pointer; min-height:44px; padding:12px 0; color:var(--oak); }
 }
 
 pre:focus-visible { outline:3px solid var(--lime); outline-offset:4px; }
+
+/* Plain-language flow: existing forest, oak and serif tokens, no new visual system. */
+:root { color-scheme: dark; }
+.scene-intro { max-width: 520px; }
+.scene-home .scene-intro p { font-size: clamp(22px,2.35vw,34px); line-height:1.35; }
+.release-notice { font-size:12px; letter-spacing:.025em; padding-block:9px; }
+.desktop-nav a { font-size:14px; }
+.scene-button { min-height:48px; }
+.simple-steps { list-style:none; counter-reset:steps; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:40px; padding:0; margin:40px 0 0; }
+.simple-steps li { counter-increment:steps; padding-top:22px; border-top:1px solid #e2aa5b55; }
+.simple-steps li::before { content:'0' counter(steps); display:block; margin-bottom:16px; color:var(--oak); font-size:14px; }
+.simple-steps h3 { font-size:26px; color:var(--paper); }
+.simple-steps p { color:var(--muted); }
+.builder-section { border-block:1px solid #e2aa5b26; }
+.builder-section pre { padding:20px; background:var(--moss); overflow:auto; max-width:700px; }
+.builder-section .text-link + .text-link { margin-left:24px; }
+.project-directory { font-size:14px; max-width:760px; }
+.setup-guide { max-width:850px!important; margin:auto; }
+.setup-contents { display:flex; flex-wrap:wrap; gap:8px 24px; margin-top:28px; }
+.setup-contents a { padding:8px 0; }
+.setup-guide pre { white-space:pre-wrap; overflow-wrap:anywhere; }
+.agent-prompt { margin:20px 0; padding:20px 24px; background:var(--moss); border-left:3px solid var(--oak); }
+.agent-prompt p { margin:0; }
+.client-configs { border-top:1px solid #e2aa5b26; }
+.client-configs details { border-bottom:1px solid #e2aa5b26; }
+.client-configs summary { font-size:17px; }
+.scene-footer p,.fine { font-size:13px; }
+.scene-footer nav a { font-size:14px; min-height:44px; }
+@media(max-width:700px) {
+ .scene-home .scene-intro { top:5%; width:88%; max-width:350px; }
+ .scene-home .scene-intro p { font-size:22px; line-height:1.35; max-width:320px; }
+ .simple-steps { grid-template-columns:1fr; gap:14px; margin-top:28px; }
+ .simple-steps li { padding-top:18px; }
+ .simple-steps li::before { float:left; margin:5px 16px 0 0; }
+ .simple-steps h3 { font-size:25px; }
+ .quiet-section p,.stage-copy>p:not(.chapter),.prose { font-size:16px; }
+ .scene-button { font-size:14px; }
+ .chapter { font-size:11px; }
+ .page-body .wrap { width:100%; padding-inline:7%; }
+ .builder-section .text-link + .text-link { margin-left:0; display:block; }
+ .scene-footer p { font-size:12px; }
+ .agent-prompt { padding:18px; }
+}
+.village-story { margin:30px 0; max-width:800px; }
+.village-story img { width:100%; height:auto; border-radius:4px; }
+.village-story figcaption { margin-top:14px; color:var(--muted); font-size:14px; max-width:65ch; }
+/* Keep long technical references opt-in and focused without shrinking their type. */
+.reference-detail>summary { font-size:16px; }
+@media(max-width:700px) {
+ .scene-intro { max-width:325px; width:86%; }
+ .scene-setup .scene-intro p { max-width:260px; }
+ .village-story figcaption { font-size:14px; }
+}
+/* Mobile text stays on forest even where the photograph contains lighter leaves. */
+@media(max-width:700px) {
+ .scene-home::after { content:''; position:absolute; pointer-events:none; z-index:0; inset:0 0 58%; background:linear-gradient(90deg,#062f27b8,#062f2730); }
+ .scene-home .scene-intro { z-index:1; }
+}
