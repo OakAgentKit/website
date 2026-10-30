@@ -28,9 +28,8 @@
 <header class="scene-header">
 <div class="scene-header-inner">
  <a class="scene-brand" href="index.html" aria-label="Oak Agent Kit, home">
-<img src="oak-medallion.webp" width="48" height="48" alt="">
-<span>Oak Agent Kit<small>Robinhood Chain</small>
-</span>
+<img src="oak-medallion.webp" width="36" height="36" alt="">
+<span>Oak Agent Kit</span>
 </a>
  <nav class="desktop-nav" aria-label="Main">
 <ul>
@@ -47,22 +46,12 @@
 <a href="security.html">Security</a>
 </li>
 <li>
-<a href="about.html">About</a>
-</li>
-<li>
 <a href="setup.html" aria-current="page">Set up</a>
-</li>
-<li>
-<a href="token.html">Token</a>
-</li>
-<li>
-<a href="privacy.html">Privacy</a>
 </li>
 </ul>
 </nav>
- <details class="mobile-nav">
-<summary>Menu</summary>
-<nav aria-label="Main mobile">
+ <button class="menu-button" type="button" popovertarget="site-menu">Menu</button>
+ <nav class="menu-panel" id="site-menu" popover aria-label="Main mobile">
 <ul>
 <li>
 <a href="how-it-works.html">How it works</a>
@@ -77,37 +66,26 @@
 <a href="security.html">Security</a>
 </li>
 <li>
-<a href="about.html">About</a>
-</li>
-<li>
 <a href="setup.html" aria-current="page">Set up</a>
-</li>
-<li>
-<a href="token.html">Token</a>
-</li>
-<li>
-<a href="privacy.html">Privacy</a>
-</li>
-<li>
-<a href="https://x.com/OakAgentKit">Follow on X</a>
 </li>
 </ul>
 </nav>
-</details>
  </div>
-<p class="release-notice">Public access coming soon · Packages available now.</p>
 </header>
 <main id="main">
+<div class="scene-opening">
 <section class="scene-hero scene-setup" aria-labelledby="hero-title">
  <h1 id="hero-title" class="sr-only">Set up</h1>
  <picture class="scene-picture" aria-hidden="true">
  <source media="(max-width: 700px)" srcset="scene-setup-phone.webp" width="780" height="975">
  <img src="scene-setup-desktop.webp" width="1440" height="810" alt="" fetchpriority="high" decoding="async">
  </picture>
- <div class="scene-intro">
-<p>Install once. Connect your assistant. Your wallet creates itself.</p>
-<a class="scene-button" href="setup.html#install">Prepare for launch<span aria-hidden="true"> ↗</span>
+ <div class="hero-actions">
+<a class="glass-pill" href="setup.html#install">Prepare for launch<svg class="pill-arrow" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true" focusable="false">
+<path d="M3.5 8.5l5-5M4.5 3.5h4v4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
 </a>
+<p class="hero-status">Install once. Connect your assistant. Your wallet creates itself.</p>
 </div>
  </section>
 <div class="page-body">
@@ -435,11 +413,13 @@ args = [&quot;mcp&quot;]</code>
  </div>
 </div>
 </div>
+</div>
 </main>
 <footer class="scene-footer">
+<div class="scene-footer-inner">
 <div class="scene-footer-top">
 <a class="scene-brand" href="index.html">
-<img src="oak-medallion.webp" width="40" height="40" alt="" loading="lazy">
+<img src="oak-medallion.webp" width="36" height="36" alt="" loading="lazy">
 <span>Oak Agent Kit</span>
 </a>
 <nav aria-label="Footer">
@@ -477,10 +457,12 @@ args = [&quot;mcp&quot;]</code>
 </ul>
 </nav>
 </div>
+ <p class="footer-status">Public access coming soon · Packages available now.</p>
  <p>Pre-launch. Packages are published. Hosted actions open with the token and subscription launch; until then, actions are limited to the Oak team. Read calls such as find_token remain available. Holding $OAK buys access and nothing else.</p>
  <p>Independent software, not affiliated with Robinhood. Not financial advice. Oak never promises returns.</p>
  <p>Region notice: project and asset availability varies by jurisdiction. You are responsible for local compliance.</p>
  <p class="fine">Docs, examples and contracts are MIT. The compiled npm packages are Free-to-Use, No Copying; their source and the hosted Oak service are private. Manrope is self-hosted under the SIL Open Font Licence.</p>
+</div>
 </footer>
 </body>
 </html>

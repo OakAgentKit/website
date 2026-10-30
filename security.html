@@ -28,9 +28,8 @@
 <header class="scene-header">
 <div class="scene-header-inner">
  <a class="scene-brand" href="index.html" aria-label="Oak Agent Kit, home">
-<img src="oak-medallion.webp" width="48" height="48" alt="">
-<span>Oak Agent Kit<small>Robinhood Chain</small>
-</span>
+<img src="oak-medallion.webp" width="36" height="36" alt="">
+<span>Oak Agent Kit</span>
 </a>
  <nav class="desktop-nav" aria-label="Main">
 <ul>
@@ -47,22 +46,12 @@
 <a href="security.html" aria-current="page">Security</a>
 </li>
 <li>
-<a href="about.html">About</a>
-</li>
-<li>
 <a href="setup.html">Set up</a>
-</li>
-<li>
-<a href="token.html">Token</a>
-</li>
-<li>
-<a href="privacy.html">Privacy</a>
 </li>
 </ul>
 </nav>
- <details class="mobile-nav">
-<summary>Menu</summary>
-<nav aria-label="Main mobile">
+ <button class="menu-button" type="button" popovertarget="site-menu">Menu</button>
+ <nav class="menu-panel" id="site-menu" popover aria-label="Main mobile">
 <ul>
 <li>
 <a href="how-it-works.html">How it works</a>
@@ -77,37 +66,26 @@
 <a href="security.html" aria-current="page">Security</a>
 </li>
 <li>
-<a href="about.html">About</a>
-</li>
-<li>
 <a href="setup.html">Set up</a>
-</li>
-<li>
-<a href="token.html">Token</a>
-</li>
-<li>
-<a href="privacy.html">Privacy</a>
-</li>
-<li>
-<a href="https://x.com/OakAgentKit">Follow on X</a>
 </li>
 </ul>
 </nav>
-</details>
  </div>
-<p class="release-notice">Public access coming soon · Packages available now.</p>
 </header>
 <main id="main">
+<div class="scene-opening">
 <section class="scene-hero scene-security" aria-labelledby="hero-title">
  <h1 id="hero-title" class="sr-only">Security</h1>
  <picture class="scene-picture" aria-hidden="true">
  <source media="(max-width: 700px)" srcset="scene-security-phone.webp" width="780" height="975">
  <img src="scene-security-desktop.webp" width="1440" height="810" alt="" fetchpriority="high" decoding="async">
  </picture>
- <div class="scene-intro">
-<p>Your keys stay on your computer.</p>
-<a class="scene-button" href="security.html#key">Understand custody<span aria-hidden="true"> ↗</span>
+ <div class="hero-actions">
+<a class="glass-pill" href="security.html#key">Understand custody<svg class="pill-arrow" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true" focusable="false">
+<path d="M3.5 8.5l5-5M4.5 3.5h4v4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
 </a>
+<p class="hero-status">Your keys stay on your computer.</p>
 </div>
  </section>
 <div class="page-body">
@@ -120,7 +98,7 @@
 <details class="reference-detail">
 <summary>Read details</summary>
 <ul>
-<li>Oak is access only. It adds no safety checks, spending caps, or allowlists of its own: you and your agent inspect the preview and decide what to sign. Oak never promises returns, pools user money, or gives financial advice.</li>
+<li>Oak is access only. It uses exact approvals. Oak previews and simulates every action. Its local guard refuses unexpected token movements or approvals before anything is signed. By default you approve each transaction. Oak sets no spending caps or allowlists and does not judge whether a trade is wise. You and your agent inspect the terms and decide what to sign. Oak never promises returns, pools user money, or gives financial advice.</li>
 <li>
 <strong>Not affiliated.</strong> Oak is independent and is not affiliated with Robinhood.</li>
 <li>
@@ -535,7 +513,7 @@
 <h4 id="out-of-scope">Out of Scope</h4>
 <ul>
 <li>
-<strong>User or agent signing choices:</strong> Signing a losing, illiquid, or malicious transaction after receiving its simulation preview, or importing and running an unreviewed third-party recipe (<code>as-is, not reviewed by Oak</code>). Oak adds no spending caps, allowlists, or financial safety checks.</li>
+<strong>User or agent signing choices:</strong> Signing a losing, illiquid, or malicious transaction after receiving its simulation preview, or importing and running an unreviewed third-party recipe (<code>as-is, not reviewed by Oak</code>). Oak previews and simulates every action. Its local guard refuses unexpected token movements or approvals before anything is signed. By default you approve each transaction. Oak sets no spending caps or allowlists and does not judge whether a trade is wise.</li>
 <li>
 <strong>Automatic subscription renewals:</strong> Automatic local signing and broadcast of subscription renewals when <code>&lt;= 3 days</code> remain (<code>oak renew</code> and the background check while <code>oak mcp</code> is running), which is documented behavior until cancelled with <code>oak cancel</code>.</li>
 <li>
@@ -566,11 +544,13 @@
 </div>
 </div>
 </div>
+</div>
 </main>
 <footer class="scene-footer">
+<div class="scene-footer-inner">
 <div class="scene-footer-top">
 <a class="scene-brand" href="index.html">
-<img src="oak-medallion.webp" width="40" height="40" alt="" loading="lazy">
+<img src="oak-medallion.webp" width="36" height="36" alt="" loading="lazy">
 <span>Oak Agent Kit</span>
 </a>
 <nav aria-label="Footer">
@@ -608,10 +588,12 @@
 </ul>
 </nav>
 </div>
+ <p class="footer-status">Public access coming soon · Packages available now.</p>
  <p>Pre-launch. Packages are published. Hosted actions open with the token and subscription launch; until then, actions are limited to the Oak team. Read calls such as find_token remain available. Holding $OAK buys access and nothing else.</p>
  <p>Independent software, not affiliated with Robinhood. Not financial advice. Oak never promises returns.</p>
  <p>Region notice: project and asset availability varies by jurisdiction. You are responsible for local compliance.</p>
  <p class="fine">Docs, examples and contracts are MIT. The compiled npm packages are Free-to-Use, No Copying; their source and the hosted Oak service are private. Manrope is self-hosted under the SIL Open Font Licence.</p>
+</div>
 </footer>
 </body>
 </html>
