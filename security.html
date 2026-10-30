@@ -3,88 +3,602 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Security and trust: where your key lives | Oak Agent Kit</title>
-<meta name="description" content="Your private key never leaves your computer. Where it lives, what the Oak server can and cannot do, what Oak does not protect you from, and how to report a vulnerability.">
+<title>Security and trust: where your key lives and who holds what | Oak Agent Kit</title>
+<meta name="description" content="Your private key never leaves your computer. Read exactly who holds which key, the full authority table, the audit and release gates, and how to report a vulnerability.">
 <meta name="theme-color" content="#062F27">
-<link rel="canonical" href="https://oakagentkit.org/security.html">
-<meta property="og:url" content="https://oakagentkit.org/security.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Oak Agent Kit">
-<meta property="og:title" content="Security and trust: where your key lives | Oak Agent Kit">
-<meta property="og:description" content="Your private key never leaves your computer. Where it lives, what the Oak server can and cannot do, what Oak does not protect you from, and how to report a vulnerability.">
+<meta property="og:title" content="Security and trust: where your key lives and who holds what | Oak Agent Kit">
+<meta property="og:description" content="Your private key never leaves your computer. Read exactly who holds which key, the full authority table, the audit and release gates, and how to report a vulnerability.">
 <meta property="og:image" content="https://oakagentkit.org/03-og-card-1200x630.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="The Oak mark in a carved-wood medallion beside a felt diorama of the giant Oak tree at dusk.">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@OakAgentKit">
 <link rel="icon" type="image/svg+xml" href="a-avatar-32.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
 <link rel="apple-touch-icon" href="favicon-180x180.png">
 <link rel="stylesheet" href="styles.css">
+<link rel="canonical" href="https://oakagentkit.org/security.html">
+<meta property="og:url" content="https://oakagentkit.org/security.html">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
-<header class="top">
-  <div class="wrap top-row">
-    <a class="brand" href="index.html" aria-label="Oak Agent Kit, home"><img src="a-lockup-dark.svg" width="857" height="208" alt="Oak Agent Kit"></a>
-    <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Open the menu">
-    <label class="nav-btn" for="nav-toggle">Menu</label>
-    <nav class="site-nav" aria-label="Main">
-      <ul>
-        <li><a href="how-it-works.html">How it works</a></li>
-        <li><a href="docs.html">Docs</a></li>
-        <li><a href="security.html" aria-current="page">Security</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="privacy.html">Privacy</a></li>
-        <li class="nav-install"><a href="https://x.com/OakAgentKit">Follow on X</a></li>
-      </ul>
-    </nav>
-  </div>
+<header class="scene-header">
+<div class="scene-header-inner">
+ <a class="scene-brand" href="index.html" aria-label="Oak Agent Kit, home">
+<img src="oak-medallion.webp" width="48" height="48" alt="">
+<span>Oak Agent Kit<small>Robinhood Chain · MCP</small>
+</span>
+</a>
+ <nav class="desktop-nav" aria-label="Main">
+<ul>
+<li>
+<a href="how-it-works.html">How it works</a>
+</li>
+<li>
+<a href="pricing.html">Pricing</a>
+</li>
+<li>
+<a href="docs.html">Docs</a>
+</li>
+<li>
+<a href="security.html" aria-current="page">Security</a>
+</li>
+<li>
+<a href="about.html">About</a>
+</li>
+<li>
+<a href="setup.html">Set up</a>
+</li>
+<li>
+<a href="token.html">Token</a>
+</li>
+<li>
+<a href="privacy.html">Privacy</a>
+</li>
+</ul>
+</nav>
+ <details class="mobile-nav">
+<summary>Menu</summary>
+<nav aria-label="Main mobile">
+<ul>
+<li>
+<a href="how-it-works.html">How it works</a>
+</li>
+<li>
+<a href="pricing.html">Pricing</a>
+</li>
+<li>
+<a href="docs.html">Docs</a>
+</li>
+<li>
+<a href="security.html" aria-current="page">Security</a>
+</li>
+<li>
+<a href="about.html">About</a>
+</li>
+<li>
+<a href="setup.html">Set up</a>
+</li>
+<li>
+<a href="token.html">Token</a>
+</li>
+<li>
+<a href="privacy.html">Privacy</a>
+</li>
+<li>
+<a href="https://x.com/OakAgentKit">Follow on X</a>
+</li>
+</ul>
+</nav>
+</details>
+ </div>
+<p class="release-notice">Coming soon · Oak is not released yet.</p>
 </header>
 <main id="main">
-<section class="page-hero">
-  <div class="wrap has-art">
-    <div>
-      <p class="eyebrow">Security and trust</p>
-      <h1>Who holds what</h1>
-      <p class="lede">Your key never leaves your computer. This page says where it lives, what the server can do, and what Oak leaves to you.</p>
-      
-      <nav class="toc" aria-label="On this page"><ul><li><a href="#key">Where your key lives</a></li><li><a href="#server">What the Oak server does</a></li><li><a href="#limits">What Oak cannot protect you from</a></li><li><a href="#audits">Audits and releases</a></li><li><a href="#reporting">Report a vulnerability</a></li></ul></nav>
-    </div>
-    <figure class="art"><img src="02e-security-gatehouse-1600x1000.webp" width="1600" height="1000" alt="A sturdy hand-carved oak gatehouse tucked beneath massive oak roots, with a bolted wooden vault door, an emerald wool-felt roof, two warm lanterns and a glowing lime root path across the moss." fetchpriority="high"></figure>
-  </div>
+<section class="scene-hero scene-security" aria-labelledby="hero-title">
+ <h1 id="hero-title" class="sr-only">Security</h1>
+ <picture class="scene-picture" aria-hidden="true">
+ <source media="(max-width: 700px)" srcset="scene-security-phone.webp" width="780" height="975">
+ <img src="scene-security-desktop.webp" width="1440" height="810" alt="" fetchpriority="high" decoding="async">
+ </picture>
+ <div class="scene-intro">
+<p>Your keys stay on your computer.</p>
+<a class="scene-button" href="security.html#key">Understand custody<span aria-hidden="true"> ↗</span>
+</a>
+</div>
+ </section>
+<div class="page-body">
+<div class="wrap">
+<div class="prose wide">
+<section class="doc-part" id="disclosures">
+<h2>Disclosures</h2>
+<details class="reference-detail">
+<summary>Read this section</summary>
+<ul>
+<li>Oak is access only. It adds no safety checks, spending caps, or allowlists of its own: you and your agent inspect the preview and decide what to sign. Oak never promises returns, pools user money, or gives financial advice.</li>
+<li>
+<strong>Not affiliated.</strong> Oak is independent and is not affiliated with Robinhood.</li>
+<li>
+<strong>Region notice.</strong> Oak displays a region notice by default. Availability of third-party protocols and assets varies by jurisdiction; you are responsible for complying with the laws and platform terms where you live.</li>
+</ul>
+</details>
 </section>
-<div class="page-body"><div class="wrap"><div class="prose wide"><section class="doc-part" id="key"><h2>Where your key lives</h2>
-<div class="how-narrow"><p>Oak is built so that your private key never leaves your computer. When you install the add-on, the wallet lives in <code>~/.oak/wallet.enc</code>.</p>
-<ul><li><strong>Created locally.</strong> <code>oak init</code> generates a 24-word recovery phrase on your machine and shows it once in your terminal. You confirm three random words before anything is saved.</li><li><strong>Encrypted at rest.</strong> The key is encrypted with AES-256-GCM. The directory is readable only by your operating-system user, and symlinks and hardlinks are rejected.</li><li><strong>Locked with your system keychain.</strong> The encryption key sits in macOS Keychain, Windows Credential Manager or the Linux Secret Service. Without a persistent keychain, you set a passphrase of at least 12 characters and type it in your terminal each time.</li><li><strong>Signed locally.</strong> Every transaction sequence is simulated first, checked for enough ETH to pay for gas (the network fee), and written to a local journal before it is sent. If the process stops midway, the next run reconciles it.</li><li><strong>Never recoverable by Oak.</strong> Oak cannot recover a lost key, by design. Keep the 24 recovery words safe.</li></ul>
-<h3>Why you run <code>oak init</code> yourself</h3>
-<p><code>oak init</code> and <code>oak export</code> refuse to run unless they are attached to a terminal. That check is not authentication, because an agent with shell access can open a pseudo-terminal. Setup is safe because you run both commands in your own terminal, never through the agent. That keeps recovery words and exported keys out of the agent's context, prompts, tool results and logs.</p></div></section>
-<section class="doc-part" id="server"><h2>What the Oak server does</h2>
-<div class="how-narrow"><p>The server reads chain data and project APIs, and builds unsigned transactions and previews. It never sees your key and never signs or sends a transaction. Swaps, deposits and every other move go straight from your wallet to the project.</p>
-<p>Both the local add-on and the server reject any tool argument that looks like a key or a recovery phrase, such as <code>private_key</code>, <code>mnemonic</code> or <code>seed_phrase</code>.</p></div></section>
-<section class="doc-part" id="limits"><h2>What Oak cannot protect you from</h2>
-<div class="how-narrow"><ul><li>Oak will add no safety checks, spending caps or allowlists. If you or your agent sign a harmful transaction after seeing its preview, Oak does not stop it. Fund the agent's wallet only with what you are willing to let it use.</li><li>A recipe you import from a third party is labelled <code>as-is, not reviewed by Oak</code>.</li><li>Running <code>oak init</code> or <code>oak export</code> through an agent removes the custody boundary described above.</li><li>Transactions on Robinhood Chain are public and permanent.</li></ul></div></section>
-<section class="doc-part" id="audits"><h2>Audits and releases</h2>
-<div class="how-narrow"><p>Oak is in pre-launch verification and has not been released. Independent audit reports are queued for the release gate and are not available yet. Release notes will be published with the first release.</p></div></section>
-<section class="doc-part" id="reporting"><h2>Report a vulnerability</h2>
-<div class="how-narrow"><p>Until launch, report vulnerabilities by email to <strong class="mail">support@oakagentkit.org</strong>. Please do not post vulnerabilities in public, including on X.</p>
-<p>In your report, name the affected part, give the steps to reproduce it and say which version you tested.</p>
-<p>Private reporting through GitHub opens with the public repository at launch. Once it opens, our process is to acknowledge a report within 48 hours and share a triage assessment within 7 days. Good-faith research on local forks or the testnet is welcome under safe harbor. For news, follow <a href="https://x.com/OakAgentKit">@OakAgentKit on X</a>.</p></div></section></div></div></div>
+<section class="doc-part" id="key">
+<h2>Where your key lives</h2>
+<details class="reference-detail">
+<summary>Read this section</summary>
+<p>The treasury and contract admin is the single-owner wallet <code>0x856bb126188bDB5e425D3ac9D59E9ffBD12e6ECf</code>. One owner key can spend treasury funds, redirect future subscription payments, replace the price signer and retire subscriptions. There is no second-signature requirement. Key compromise exposes these powers; key loss can make treasury funds and administration inaccessible. It cannot spend user wallet balances. Safe support is an optional deployment profile, not the launch setup.</p>
+<p>Oak is built so that <strong>your private key never leaves your computer</strong> and <strong>the Oak server never sees your key and never signs or sends a transaction</strong>: <strong>your swaps and deposits go straight from your wallet to the project, and subscription payments go to the burner (<code>OakBurner</code>) and the single-owner treasury wallet</strong>.</p>
+<hr>
+<h3 id="the-agent-wallet-on-your-computer">1. The Agent Wallet on Your Computer</h3>
+<p>When you install <code>@oakagentkit/addon</code>, the wallet is created and stored locally in <code>~/.oak/wallet.enc</code> (mode <code>0600</code> inside a <code>0700</code> directory owned by your OS user; symlinks and hardlinks are rejected):</p>
+<ul>
+<li>
+<strong>Generation (<code>oak init</code>):</strong> Generates a 256-bit (24-word) BIP-39 recovery phrase locally, displays it once on your terminal, and requires you to confirm three randomly chosen words before persisting <code>~/.oak/wallet.enc</code>. After deriving the secp256k1 key, the mnemonic and key buffers are zeroed in memory (<code>hdKey.wipePrivateData()</code>, <code>Buffer.fill(0)</code>). <strong>Oak cannot recover a lost key</strong>, by design.</li>
+<li>
+<strong>Encryption at rest:</strong> The 32-byte private key is encrypted with <code>AES-256-GCM</code> using authenticated envelope metadata (<code>AAD</code> binds version <code>1</code>, cipher <code>aes-256-gcm</code>, and storage descriptor).</li>
+<li>
+<strong>OS Keychain preferred, <code>scrypt</code> fallback:</strong>
+<ul>
+<li>By default, a random 32-byte data encryption key is stored in your persistent OS keychain via <code>@napi-rs/keyring</code> (macOS Keychain, Windows Credential Manager, or Linux persistent Secret Service).</li>
+<li>If a persistent OS keychain is unavailable, <code>oak init</code> requires a passphrase of at least 12 characters and derives the 32-byte data key using <code>scrypt</code> (<code>N = 131072</code>, <code>r = 8</code>, <code>p = 1</code>, 32-byte random salt). Without a persistent keychain, unlocking the wallet requires entering the passphrase in your terminal each time.</li>
+</ul>
+</li>
+<li>
+<strong>Owner-run terminal boundary (why PTY checks alone are not authentication):</strong> <code>oak init</code> and <code>oak export</code> check <code>process.stdin.isTTY === true &amp;&amp; process.stdout.isTTY === true</code> and refuse to run otherwise (<code>run this in your own terminal, not through the agent</code>). However, a local AI agent with shell access can allocate a pseudo-terminal (<code>PTY</code>). <strong>Setup is trusted because you run <code>oak init</code> and <code>oak export</code> in your own terminal, never through the agent</strong>, not because a TTY check exists. Running them in your own terminal keeps recovery words and exported private keys out of the AI's context window, prompts, tool results, and logs.</li>
+<li>
+<strong>ERC-8004 identity linking and request-bound sessions (<code>packages/addon/src/identity.ts</code>, <code>session.ts</code>):</strong>
+<ul>
+<li>Before running action tools, your agent wallet sets up an ERC-8004 identity on <code>IdentityRegistry</code> (<code>0x8004A169FB4a3325136EB29fA0ceB6D2e539a432</code>) via <code>oak setup</code> (or MCP tool <code>oak_setup</code>). You can mint a new agent ID (<code>oak setup register</code>, which costs gas) or link an existing agent ID (<code>oak setup link &lt;agentId&gt;</code>, which needs no ETH).</li>
+<li>When linking an external owner's agent ID (<code>oak setup link &lt;agentId&gt;</code>) or revoking a link as the owner (<code>oak identity unlink --owner &lt;linkId&gt;</code>), your terminal prints the EIP-712 <code>OakIdentityLink</code> typed data and prompts you with hidden input to paste only the owner's signature. The owner's private key is never asked for, and the signature is verified once by the server against current <code>ownerOf(agentId)</code> and never stored in <code>~/.oak/config.json</code> or in the server's link store.</li>
+<li>If the ERC-8004 NFT is transferred or burned, or if you run <code>oak identity unlink</code> (or MCP tool <code>oak_identity_unlink</code>), linked action access ends immediately and the add-on clears the saved <code>identity</code> from <code>~/.oak/config.json</code>. If the identity status check fails because of an RPC or server outage, the add-on keeps your saved <code>identity</code> locally, pauses actions, and asks you to try again while read tools stay open.</li>
+<li>Every session token (<code>X-Oak-Session</code>, 15-minute life) is signed by your local agent wallet and binds the verified <code>{ chainId, registry, agentId, linkId? }</code> tuple plus an ephemeral secp256k1 <code>sessionKey</code> kept only in add-on memory. Every non-read request (every action tool call and identity <code>challenge</code>, <code>link</code>, or <code>unlink</code>) also carries <code>X-Oak-Request</code>, a 60-second single-use signature by <code>sessionKey</code> over the session hash, HTTP method, path, and SHA-256 request body hash. The server atomically consumes the request nonce before executing.</li>
+</ul>
+</li>
+<li>
+<strong>Local signing and journal (<code>packages/addon/src/sender.ts</code>, <code>journal.ts</code>):</strong>
+<ul>
+<li>
+<code>loadSigner()</code> exposes only frozen closures (<code>signMessage</code>, <code>signTransaction</code>, <code>signTypedData</code>) and wipes the raw key buffer immediately after constructing the account.</li>
+<li>Every transaction sequence is serialized under an atomic per-wallet directory lock (<code>~/.oak/&lt;address&gt;.lock</code>), simulated first (<code>preview</code>, reusing a fresh same-block preview within 12 seconds when identical), checked for sufficient ETH (<code>value + gas * maxFeePerGas</code> with 25% gas headroom), written to <code>~/.oak/&lt;address&gt;.pending.json</code> before broadcast, and reconciled on the next run if interrupted.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="the-one-always-on-key-price-signer">2. The One Always-On Key: Price Signer</h3>
+<p>Across all of Oak, there is <strong>one always-on key</strong>: the <strong>price signer</strong> held by the Oak hosted service.</p>
+<ul>
+<li>
+<strong>Sign-only, no funds, no admin:</strong> The price signer is <strong>sign-only</strong>, <strong>holds no ETH</strong>, <strong>never sends a transaction</strong>, and is <strong>separate from the treasury owner key</strong>.</li>
+<li>
+<strong>Hosted custody:</strong> The price-signing key has read-only service permissions (<code>0400</code>). Only the hosted service and its host administrator can read it. The note issuer runs in the <strong>same process</strong> as the Oak server. It is separate from your local wallet key.</li>
+<li>
+<strong>What it signs:</strong> It signs a <strong>signed 30-minute <code>$OAK</code> price note</strong> (<code>PriceNote { wallet, oakPerEthE18, timestamp, nonce }</code>) with a <strong>5-minute life</strong> (<code>300</code> seconds) and a single-use 32-byte nonce, bound by EIP-712 domain (<code>OakPriceNote</code>, version <code>1</code>, chain <code>4663</code>) to one wallet (<code>msg.sender</code>, or <code>address(0)</code> for the burner) and one consuming contract (<code>OakSubscription</code> or <code>OakBurner</code>).</li>
+<li>
+<strong>On-chain ETH/USD and the 50% guard:</strong> The price signer never sets a USD price on its own. <strong>ETH/USD is read on-chain</strong> by <code>OakOracle</code> from the <strong>30-minute average</strong> (<code>observe([1800, 0])</code>) of the <strong>ETH/USDG pool</strong> (<code>0x52e65B17fB6E5BA00Ed806f37Afcd2DaA50271Ca</code>), and Oak <strong>assumes USDG trades at a dollar</strong>. <code>OakOracle</code> enforces a <strong>50% guard</strong>, accepting a note only when <code>oakPerEthE18</code> is <strong>within 50% of the live pool price</strong> (<code>spot / 2 &lt;= note &lt;= spot * 3 / 2</code>, read from Uniswap v4 <code>PoolManager.extsload</code> slot 6).</li>
+<li>
+<strong>Rotation and pause:</strong> The single-owner <strong>treasury wallet can replace the price signer</strong> on <code>OakOracle</code> via <code>setPriceSigner</code>, and setting the <strong>zero address pauses pricing</strong> immediately across both <code>OakSubscription</code> and <code>OakBurner</code>. Notes signed by the old key are rejected from the next block. Holder renewals take no note and never call the oracle, so existing holders keep working during any signer pause or rotation.</li>
+</ul>
+<h4 id="stolen-signer-exposure-and-remaining-risks">Stolen-signer exposure and remaining risks</h4>
+<ul>
+<li>
+<strong>Sign-up pricing band:</strong> Because of the 50% guard, a dishonest or <strong>stolen</strong> price signer alone can price new holder sign-ups and no-hold sign-ups or renewals at <strong>0.5x to 1.5x</strong> of the spot-implied token count (moving the implied <code>$OAK</code> USD price between 2/3x and 2x while keeping the USD entry price inside the $20 to $300 curve). Existing subscription records never change.</li>
+<li>
+<strong>Burner chunk exposure:</strong> Each permissionless <code>buyAndBurn</code> chunk is capped at <code>0.5%</code> of live pool liquidity and accepts at least <code>note * 100 / 102</code>. A bad note inside the 50% guard can make a chunk accept as little as <code>49%</code> (<code>0.49</code> times) of spot-fair <code>$OAK</code>, losing up to about half the burner's USDG balance chunk by chunk (or in a single call if an attacker supplies just-in-time v4 liquidity to lift the <code>0.5%</code> liquidity cap) until the treasury wallet rotates the signer.</li>
+<li>
+<strong>Spot movement and compounding:</strong> At graduation depth (<code>4.2 ETH</code> locked), moving the live v4 spot price costs about <code>$482</code> of capital for a 10% move and <code>$7,236</code> for a 3x move (recorded zero-arbitrage round-trip scenarios). Anyone can pay to push the spot more than 50% away from the 30-minute average so honest notes fail closed and sign-ups briefly stall; a stolen signer combined with a spot move compounds because the guard is relative to spot.</li>
+<li>
+<strong>ETH/USDG average:</strong> The sustained manipulation cost of holding the ETH/USDG pool's 30-minute average away from real ETH is unmeasured; this residual is accepted because arbitrage tracks real ETH.</li>
+</ul>
+<hr>
+<h3 id="creator-fees-the-single-owner-treasury-wallet-and-the-burner-sweep-rule">3. Creator Fees, the Single-Owner Treasury Wallet, and the Burner Sweep Rule</h3>
+<ul>
+<li>
+<strong>25% / 75% subscription split:</strong> Every subscription payment splits in the same transaction: <strong>25% goes to the burn</strong> contract (<code>OakBurner</code>) and <strong>75% goes to the single-owner treasury wallet</strong>.</li>
+<li>
+<strong>All 1.7% creator fees go to the single-owner treasury wallet:</strong> <code>$OAK</code> is a standard Pons V2 coin paired with native ETH. Every trade pays 2% total: <code>0.3%</code> to Pons and <strong>1.7%</strong> creator fee (<code>0.7%</code> creator share + <code>1%</code> creator tax, venue buybacks off). All <strong>1.7%</strong> goes to the <strong>single-owner treasury wallet</strong>, which is the Pons creator-fee recipient and claims positive balances from the Pons fee escrow (<code>0xd3AFEB2a57f70eF218Aa82451c51B2fb0416Ac9e</code>) via owner-signed transactions. <strong>Holding $OAK buys access and nothing else.</strong>
+</li>
+<li>
+<strong>Pons keeper dependency and external timelock:</strong> On graduated v4 pools, <strong>token-side fees</strong> reach the fee escrow only after <strong>Pons's own conversion keeper</strong> converts them (<code>sweepPoolFees</code> reverts <code>InternalSwapRequiresOperator()</code> while launch-token-side fees are pending), so token-side fees may be pending at any time. In addition, the external <strong>Pons owner</strong> (<code>0x263ed295dAFaE1d9AAdD6E56c4B6F9f38eE019Dd</code>) can propose replacing a token's creator-fee recipient subject to a <strong>3-day</strong> public timelock that Oak cannot cancel.</li>
+<li>
+<strong>Exact burner sweep rule:</strong> The single-owner treasury wallet can sweep stuck USDG from <code>OakBurner</code> to the single-owner treasury wallet only after a <strong>90-day timer</strong> that it starts with a public on-chain transaction (<code>armSweep</code>, which requires a positive balance and records <code>armedAt</code> and <code>armedBalance</code>). <strong>Any successful burn cancels</strong> (<code>disarms</code>) the timer, proving the funds were not stuck. Calling <code>sweepStuck()</code> after 90 days moves <strong>at most the balance recorded when</strong> the timer was armed (<code>min(balance, armedBalance)</code>), so any USDG deposited after arming requires a fresh 90-day timer.</li>
+</ul>
+<p>For the complete party-by-party permissions matrix, see <a href="security.html#authority">
+<code>docs/trust/authority.md</code>
+</a>.</p>
+</details>
+</section>
+<section class="doc-part" id="authority">
+<h2>Keys and authority</h2>
+<details class="reference-detail">
+<summary>Read this section</summary>
+<p>The treasury and contract admin is the single-owner wallet <code>0x856bb126188bDB5e425D3ac9D59E9ffBD12e6ECf</code>. One owner key can spend treasury funds, redirect future subscription payments, replace the price signer and retire subscriptions. There is no second-signature requirement. Key compromise exposes these powers; key loss can make treasury funds and administration inaccessible. It cannot spend user wallet balances. Safe support is an optional deployment profile, not the launch setup.</p>
+<p>This table describes who controls Oak, what each party can do, and what a compromised key could affect.</p>
+<p>
+<strong>The only service-held signing key is the sign-only price signer; the operator separately holds the treasury owner key.</strong> Calls that anyone may make are listed on their own row so that privileged and permissionless actions are never confused. One external party, the Pons owner, has a documented power over Oak's creator fees and is listed so the table stays complete.</p>
+<div class="table-wrap">
+<table class="md-table stack">
+<thead>
+<tr>
+<th scope="col">Party</th>
+<th scope="col">Holds</th>
+<th scope="col">Can</th>
+<th scope="col">Cannot</th>
+<th scope="col">Worst case if compromised</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td data-label="Party">One operator owner key</td>
+<td data-label="Holds">the single-owner treasury wallet key, held by the operator</td>
+<td data-label="Can">act alone as treasury and admin</td>
+<td data-label="Cannot">spend user wallet balances</td>
+<td data-label="Worst case if compromised">one compromised key controls treasury funds and all listed admin powers</td>
+</tr>
+<tr>
+<td data-label="Party">The single-owner treasury wallet (admin, treasury and Pons creator-fee recipient)</td>
+<td data-label="Holds">treasury ETH and USDG already paid to it; subscription payments split on the way in; the $OAK creator fees it has claimed</td>
+<td data-label="Can">subscription: <code>setPayees</code>, <code>retire</code>, <code>setGrandfatherRoot</code>; oracle: <code>setPriceSigner</code> (any address, including one it controls, which lets it sign notes inside the same 50% guard; zero pauses pricing); burner: <code>armSweep</code>, <code>sweepStuck</code>; Pons, as the current creator-fee recipient: send the recipient-side sweeps and the escrow <code>claim()</code> for $OAK's creator fees, and <code>transferCreatorFeeRecipient(oak, anyAddress)</code> (only the current recipient can transfer it). Redirect all future subscription payments via <code>setPayees</code> to any address</td>
+<td data-label="Cannot">change wallet paid time or counts; spend wallet balances; reverse payments already made; act for a wallet; re-point the pools, factory or token the oracle reads; widen the 50% guard or the 5-minute note life</td>
+<td data-label="Worst case if compromised">one owner key controls treasury funds, future subscription payout destinations and the creator-fee recipient. Owner-as-signer can misprice sign-ups and burner chunks inside the same 0.5x to 1.5x band as a stolen signer (next row). Stuck burner USDG can be swept after its 90-day armed timer. Nothing in a wallet's record or balance</td>
+</tr>
+<tr>
+<td data-label="Party">Price signer (the one online key, sign-only, held by the Oak server's note issuer)</td>
+<td data-label="Holds">one price-signing key, readable only by the hosted service and its host administrator; separate from the treasury owner key; holds no ETH and never sends a transaction</td>
+<td data-label="Can">sign price notes: a 30-minute OAK-per-ETH average bound to one wallet (or <code>address(0)</code> for the burner), one consuming contract, chain 4663 and version 1, with a nonce and a 5-minute life. A consumer accepts a note only inside <code>[spot/2, spot*3/2]</code> of the live pool read, unexpired, unused and for the bound wallet. This is its only privilege</td>
+<td data-label="Cannot">send a transaction; move any funds; change paid time, counts or records; set a USD value (ETH/USD is read on-chain); replace itself; widen the guard; administer any contract</td>
+<td data-label="Worst case if compromised">until the treasury wallet replaces it: every holder sign-up and every no-hold sign-up or renewal in that time can be priced at 0.5x to 1.5x of the spot-implied count (the USD entry price stays inside $20 to $300; existing records never change); each permissionless <code>buyAndBurn</code> chunk (at most 0.5% of pool liquidity) can be made to accept as little as 0.49x of the spot-fair $OAK, the oracle reads live pool liquidity, so just-in-time liquidity can lift the 0.5% chunk cap enough to spend the burner's entire USDG balance in one call. With a stolen-signer note, that call can lose about half the burner's value: the same potential loss as repeated malicious chunks, reached sooner; a stolen key compounds with a spot move, because the guard is relative to spot. Refusing to sign only delays sign-ups; holder renewals never need a note</td>
+</tr>
+<tr>
+<td data-label="Party">Anyone (no privileged key needed)</td>
+<td data-label="Holds">their own transaction gas</td>
+<td data-label="Can">
+<code>buyAndBurn()</code> with a valid burner note fetched from the open note endpoint, <code>sweepToTreasury()</code>, Pons <code>createGraduatedPool(token)</code>, the escrow's <code>claim()</code> for their own balance only</td>
+<td data-label="Cannot">make a consumer accept a note outside the guard; claim or move another address's creator fees; administer any contract</td>
+<td data-label="Worst case if compromised">can move the v4 spot using about $482 of capital for a 10% move at graduation depth in recorded zero-arbitrage measurements, which rejects honest notes while it lasts and compounds with a stolen signer. No funds of anyone else</td>
+</tr>
+<tr>
+<td data-label="Party">Oak hosted service</td>
+<td data-label="Holds">the price-signer key file, sign-only (its own row); no wallet key and no NFT owner key</td>
+<td data-label="Can">read the chain and the projects' APIs, verify ERC-8004 identities and owner-signed link challenges, build unsigned transactions and previews, issue signed price notes</td>
+<td data-label="Cannot">sign or send a transaction; forge an owner link signature; make a consumer accept a note outside the guard</td>
+<td data-label="Worst case if compromised">withhold or falsify responses, identity status or notes; a compromised server is a compromised signer (its row); holder renewals and cancel need no server</td>
+</tr>
+<tr>
+<td data-label="Party">Agent wallets</td>
+<td data-label="Holds">their own key, on the owner's machine (plus an ephemeral in-memory <code>sessionKey</code> for <code>X-Oak-Request</code>)</td>
+<td data-label="Can">their own funds; register or link an ERC-8004 identity and self-unlink; subscribe, renew, cancel; every module action they sign; recipes they enabled</td>
+<td data-label="Cannot">control another wallet or administer Oak; link an agent ID they do not own without the current owner's signature; use another wallet's note</td>
+<td data-label="Worst case if compromised">that wallet's funds and permissions</td>
+</tr>
+<tr>
+<td data-label="Party">Pons launch wallet (operator)</td>
+<td data-label="Holds">nothing after it transfers the recipient: only the current creator-fee recipient can call <code>transferCreatorFeeRecipient</code>
+</td>
+<td data-label="Can">at launch, name itself recipient and then transfer the recipient to the single-owner treasury wallet; nothing afterwards</td>
+<td data-label="Cannot">anything on Oak's contracts; re-pointing creator fees once the treasury wallet is the recipient</td>
+<td data-label="Worst case if compromised">before the transfer: keep or redirect creator fees; never money already inside Oak's contracts or the treasury wallet</td>
+</tr>
+<tr>
+<td data-label="Party">Pons owner (external, outside Oak; <code>0x263ed295dAFaE1d9AAdD6E56c4B6F9f38eE019Dd</code> in the recorded deployment)</td>
+<td data-label="Holds">its own key, outside Oak's control</td>
+<td data-label="Can">propose a new creator-fee recipient for $OAK (<code>setCreatorFeeRecipient</code>); after a 3-day public timelock anyone may execute it, and Oak cannot cancel it</td>
+<td data-label="Cannot">anything inside Oak's contracts; money already claimed by the treasury wallet</td>
+<td data-label="Worst case if compromised">redirect all future creator fees away from the treasury wallet 3 days after a public proposal; nothing already inside Oak's contracts or the treasury wallet</td>
+</tr>
+<tr>
+<td data-label="Party">Deployer key</td>
+<td data-label="Holds">nothing after deploy (constructors take the treasury wallet and the first price signer; no <code>owner</code> retained)</td>
+<td data-label="Can">deploy</td>
+<td data-label="Cannot">administer deployed contracts afterwards</td>
+<td data-label="Worst case if compromised">deployment-time configuration before deployment review; no retained post-deploy authority</td>
+</tr>
+</tbody>
+</table>
+</div>
+</details>
+</section>
+<section class="doc-part" id="audits">
+<h2>Audits and release gates</h2>
+<details class="reference-detail">
+<summary>Read this section</summary>
+<p>This directory holds the security review reports and release-gate evidence for Oak's open-source kit (<code>packages/addon</code>, <code>packages/core</code>) and smart contracts (<code>packages/contracts</code>).</p>
+<h3 id="release-gate-status">Release Gate Status</h3>
+<p>This repository includes unit, fuzz, and recorded-fixture verification for the public kit (<code>0.0.0</code>). Unit tests and recorded fixtures do not by themselves prove live network behavior or external venue settlement; independent review and live verification are tracked across the seven release gates below.</p>
+<div class="table-wrap">
+<table class="md-table">
+<thead>
+<tr>
+<th scope="col">Gate</th>
+<th scope="col">Scope</th>
+<th scope="col">Expected Evidence Path</th>
+<th scope="col">Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td data-label="Gate">1. Smart contracts</td>
+<td data-label="Scope">
+<code>OakOracle</code>, <code>OakSubscription</code>, <code>OakBurner</code> unit, fuzz, shared rounding vectors (<code>packages/contracts/test/vectors.json</code>), USDG two-check authorization (<code>authorizationState == false</code> and exact balance delta), 50% spot guard, lineage/retire/grandfather, and 90-day burner sweep timer</td>
+<td data-label="Expected Evidence Path">
+<code>docs/trust/audits/&lt;contract&gt;-&lt;review&gt;.md</code>
+</td>
+<td data-label="Status">Unit &amp; fuzz suite implemented (<code>packages/contracts/test/</code>); independent audit reports queued for release</td>
+</tr>
+<tr>
+<td data-label="Gate">2. Custody, identity &amp; recipes</td>
+<td data-label="Scope">Local wallet encryption (<code>~/.oak/wallet.enc</code>), owner-run terminal boundary, ERC-8004 identity registration/linking (<code>oak setup</code>) and request-bound sessions (<code>X-Oak-Session</code> + single-use <code>X-Oak-Request</code>), data-only recipe importer (<code>oak-recipe/v1</code>), and single sign-only server price-signer keyfile (<code>0400</code>)</td>
+<td data-label="Expected Evidence Path">
+<code>docs/trust/audits/addon-keys.md</code>, <code>docs/trust/audits/signer-key.md</code>
+</td>
+<td data-label="Status">Structural &amp; unit tests implemented (<code>packages/addon/test/</code>); formal custody review queued</td>
+</tr>
+<tr>
+<td data-label="Gate">3. Public export sweep</td>
+<td data-label="Scope">Clean manifest export (<code>PUBLIC_EXPORT.json</code>), secret scan across files and git history, exclusion of private server code</td>
+<td data-label="Expected Evidence Path">
+<code>docs/trust/audits/export-sweep.md</code>
+</td>
+<td data-label="Status">Export and secret-scan controls implemented; release review queued</td>
+</tr>
+<tr>
+<td data-label="Gate">4. Open codebase review</td>
+<td data-label="Scope">Full review of <code>packages/addon</code>, <code>packages/core</code>, <code>packages/contracts</code>, and all 25 ecosystem modules</td>
+<td data-label="Expected Evidence Path">
+<code>docs/trust/audits/export-review.md</code>
+</td>
+<td data-label="Status">Queued for release review</td>
+</tr>
+<tr>
+<td data-label="Gate">5. Testnet &amp; fork E2E</td>
+<td data-label="Scope">Own-contract E2E on Robinhood Chain Testnet (<code>46630</code>) with official test USDG (<code>0x7E955252E15c84f5768B83c41a71F9eba181802F</code>); all 25 ecosystem modules on recent mainnet (<code>4663</code>) forks from fresh codeless wallets (<code>--accounts 0</code>)</td>
+<td data-label="Expected Evidence Path">
+<code>docs/trust/audits/testnet-e2e.md</code>, <code>docs/trust/audits/modules-fork.md</code>
+</td>
+<td data-label="Status">Protocol fixtures verified in <code>packages/core/test/</code>; integrated E2E reports queued for release</td>
+</tr>
+<tr>
+<td data-label="Gate">6. External-effect canaries</td>
+<td data-label="Scope">Minimal live checks only where off-chain services cannot be proven on a fork (Relay inbound/outbound fulfillment, Meridian RFQ buy/sell, Orbio credit activation)</td>
+<td data-label="Expected Evidence Path">
+<code>docs/trust/audits/live-test/</code>
+</td>
+<td data-label="Status">Live external venue checks run separately before release</td>
+</tr>
+<tr>
+<td data-label="Gate">7. Wording &amp; authority</td>
+<td data-label="Scope">Public <code>docs/trust/authority.md</code> authority table, non-affiliation with Robinhood, region notice, Merkl/HeyResearch attributions, and absence of promise language</td>
+<td data-label="Expected Evidence Path">
+<code>docs/trust/audits/wording.md</code>
+</td>
+<td data-label="Status">Verified against <code>docs/trust/authority.md</code> and wording rules; <code>docs/trust/audits/wording.md</code> queued for release</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="recorded-protocol-chain-fixtures">Recorded Protocol &amp; Chain Fixtures</h3>
+<p>Measured chain, oracle, and per-project fixtures used by the contracts and the 25 modules live in the repository test suites:</p>
+<ul>
+<li>
+<code>packages/contracts/test/vectors.json</code> — Shared entry-price curve, holder count, sign-up burn, and 25/75 USDG payment-split vectors verified across Solidity (<code>OakPricing.sol</code>) and TypeScript (<code>packages/core/src/pricing.ts</code>).</li>
+<li>
+<code>packages/core/src/addresses.ts</code> — Pinned Robinhood Chain (<code>4663</code>) and Testnet (<code>46630</code>) contract addresses, token metadata, and recorded call descriptors (<code>RECORDED_CALLS</code>) across all 25 modules.</li>
+<li>
+<code>packages/core/test/modules/</code> — Recorded protocol response shapes and transaction-building fixtures for KyberSwap, Velora, Steakhouse, Spark, NetNet, Longbow, Grove, Beefy, Pons, Orbio, HoodLock, Merkl, Relay, Lighter, ERC-8004, hood.ag, HeyResearch, Priors, Morpho Blue, Uniswap, Meridian, Hookr, TickerSpring, Clanker, and pools.trade.</li>
+<li>
+<a href="security.html#key">
+<code>docs/trust/where-your-key-lives.md</code>
+</a> — Custody boundaries, terminal-only wallet commands, sign-only price-signer boundary, and 90-day burner sweep timer.</li>
+<li>
+<a href="security.html#authority">
+<code>docs/trust/authority.md</code>
+</a> — Complete keys and authority table for every Oak party and contract.</li>
+</ul>
+</details>
+</section>
+<section class="doc-part" id="releases">
+<h2>Releases</h2>
+<details class="reference-detail">
+<summary>Read this section</summary>
+<p>This page records public releases of the Oak open-source kit (<code>@oakagentkit/addon</code>, <code>@oakagentkit/core</code>, and <code>@oakagentkit/contracts</code>). Every version entry lists changes using standard changelog categories (<code>[Added]</code>, <code>[Changed]</code>, <code>[Fixed]</code>, <code>[Removed]</code>, <code>[Deprecated]</code>, <code>[Security]</code>).</p>
+<h3 id="release-table">Release Table</h3>
+<div class="table-wrap">
+<table class="md-table">
+<thead>
+<tr>
+<th scope="col">Version</th>
+<th scope="col">Date</th>
+<th scope="col">Status</th>
+<th scope="col">Highlights</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td data-label="Version">
+<code>0.0.0</code>
+</td>
+<td data-label="Date">2026-10-29</td>
+<td data-label="Status">Pre-launch workspace</td>
+<td data-label="Highlights">Complete monorepo implementation of <code>@oakagentkit/addon</code>, <code>@oakagentkit/core</code> (basics + 25 ecosystem modules), <code>@oakagentkit/contracts</code> (<code>OakOracle</code>, <code>OakSubscription</code>, <code>OakBurner</code>), ERC-8004 identity setup (<code>oak setup</code>, gasless owner link, and <code>oak identity unlink</code>), request-bound sessions (<code>X-Oak-Session</code> + single-use <code>X-Oak-Request</code>), and public trust documentation; build from source until <code>1.0.0</code> is published.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+<h3 id="0-0-0">
+<code>0.0.0</code> (Pre-Launch Workspace, 2026-10-29)</h3>
+<ul>
+<li>
+<strong>[Added]</strong> ERC-8004 identity setup as step one (<code>oak setup</code>, <code>oak setup register [--no-tag]</code>, <code>oak setup link &lt;agentId&gt;</code>, and MCP tool <code>oak_setup</code>) and gasless unlinking (<code>oak identity unlink</code>, <code>oak identity unlink --owner &lt;linkId&gt;</code>, and MCP tool <code>oak_identity_unlink</code>). Linking an existing agent ID uses a single-use EIP-712 <code>OakIdentityLink</code> owner challenge without requiring ETH; NFT transfer, burn, or unlink revokes action access and clears local identity config, while RPC or server outages preserve the saved local identity and keep read tools open.</li>
+<li>
+<strong>[Added]</strong> Explicit network selection (<code>OAK_NETWORK=mainnet</code> default for chain <code>4663</code>, <code>OAK_NETWORK=testnet</code> opt-in for chain <code>46630</code>) with fail-closed validation when environment variables or RPC endpoints disagree with <code>~/.oak/config.json</code>.</li>
+<li>
+<strong>[Added]</strong> Local wallet custody (<code>packages/addon/src/wallet.ts</code>), per-wallet lock and transaction journal (<code>journal.ts</code>), sequential <code>eth_simulateV1</code> gas estimation and same-block preview reuse within 12 seconds (<code>sender.ts</code>, <code>bridge.ts</code>), request-bound session authentication (<code>X-Oak-Session</code> plus single-use <code>X-Oak-Request</code> signed by an ephemeral in-memory <code>sessionKey</code> in <code>session.ts</code>), CLI (<code>cli.ts</code>), and MCP stdio bridge (<code>bridge.ts</code>).</li>
+<li>
+<strong>[Added]</strong> Data-only declarative recipe engine (<code>packages/addon/src/recipes.ts</code>, <code>schema/recipe.schema.json</code>) supporting <code>oak-recipe/v1</code> with bounded tarball streaming (4 MiB / 100 entries, 64 KiB per recipe) and zero third-party code execution.</li>
+<li>
+<strong>[Added]</strong> Nine basic tools (<code>find_token</code> with verified symbol and contract lookup, <code>balances</code> via one-call <code>Multicall3.aggregate3</code>, <code>price</code>, <code>quote</code> across KyberSwap, Velora, and Pons launch curves with verified symbols and a 2% price-impact warning, <code>swap</code> with exact approvals only, <code>preview</code>, <code>history</code>, <code>positions</code> across all modules in one call, <code>account</code>) and <strong>25 ecosystem project modules</strong> in <code>@oakagentkit/core</code>: KyberSwap, Velora, Steakhouse, Spark, NetNet, Longbow, Grove, Beefy, Pons, Orbio, HoodLock, Merkl, Relay, Lighter, ERC-8004, hood.ag, HeyResearch, Priors, Morpho Blue, Uniswap liquidity, Meridian, Hookr, TickerSpring, Clanker, and pools.trade.</li>
+<li>
+<strong>[Added]</strong> Non-proxy Solidity contracts (<code>OakOracle.sol</code>, <code>OakSubscription.sol</code>, <code>OakBurner.sol</code>) implementing the holder plan (9 USDG per 30 days; hold the entry-price count <code>N</code> of <code>$OAK</code>, 5% of <code>N</code> burns at sign-up, and <code>N - burn</code> is tracked as <code>signupOakCount</code>), no-hold plan (9 USDG plus one sixth of the entry price per 30 days, 12.333333 USDG floor), 25% burn / 75% single-owner treasury wallet split, USDG EIP-3009 one-signature payment with nonce and balance-delta checks, 30-minute signed <code>$OAK</code> price-note verification with a 50% live-spot guard, source-bound grandfather Merkle migration (<code>OakGrandfather/v1</code>), and the 90-day armed burner sweep timer.</li>
+<li>
+<strong>[Security]</strong> Enforced request-bound single-use <code>X-Oak-Request</code> signatures on all non-read requests, fresh canonical-block <code>ownerOf(agentId)</code> and transfer-log checks on every action tool call, removal of all always-on keys except the single sign-only price-signer keyfile (<code>0400</code>, held by the hosted service), root ESLint bans on <code>eval</code>/<code>new Function</code>/<code>vm</code>/<code>child_process</code> in <code>packages/addon</code>, and owner-terminal (<code>isTTY</code>) execution for <code>oak init</code>, <code>oak export</code>, and terminal owner link signing.</li>
+</ul>
+</details>
+</section>
+<section class="doc-part" id="reporting">
+<h2>Report a vulnerability</h2>
+<details class="reference-detail">
+<summary>Read this section</summary>
+<p>Oak is an access kit for Robinhood Chain (<code>4663</code>, <code>0x1237</code>) and Robinhood Chain Testnet (<code>46630</code>, <code>0xb626</code>). This repository publishes Oak's documentation, runnable examples, declarative recipe schema, and on-chain smart contracts. The CLI and MCP add-on (<code>@oakagentkit/addon</code>) and core module definitions (<code>@oakagentkit/core</code>) are distributed as built npm packages, and the hosted Oak service runs as a private service.</p>
+<p>Oak is independent and is not affiliated with Robinhood.</p>
+<hr>
+<h3 id="reporting-a-vulnerability">Reporting a Vulnerability</h3>
+<p>Do not report security vulnerabilities in public GitHub issues, pull requests, discussions, or social channels.</p>
+<ol>
+<li>
+<strong>Primary channel — GitHub Private Vulnerability Reporting:</strong> Submit a private advisory at: <a href="https://github.com/OakAgentKit/oak/security/advisories/new">https://github.com/OakAgentKit/oak/security/advisories/new</a>
+</li>
+<li>
+<strong>Email fallback:</strong> If GitHub private vulnerability reporting is unavailable or does not fit your report, email <strong>support@oakagentkit.org</strong>.</li>
+</ol>
+<h4 id="what-to-include">What to Include</h4>
+<ul>
+<li>
+<strong>Affected target:</strong> Specify whether the issue affects the published npm packages (<code>@oakagentkit/addon</code>, <code>@oakagentkit/core</code>), the smart contracts in <a href="https://github.com/OakAgentKit/oak/blob/main/packages/contracts">
+<code>packages/contracts/</code>
+</a> (<code>OakOracle.sol</code>, <code>OakSubscription.sol</code>, <code>OakBurner.sol</code>, or their libraries), or the hosted Oak service.</li>
+<li>
+<strong>Version and environment:</strong> Include the exact npm package version, commit SHA, or deployed contract address and chain ID (<code>4663</code> or <code>46630</code>).</li>
+<li>
+<strong>Reproduction:</strong> Provide minimal, self-contained reproduction steps or a standalone Foundry test (<code>forge test</code>) conducted against a local fork or testnet (<code>46630</code>).</li>
+<li>
+<strong>Impact:</strong> Explain how the issue violates the custody, authority, or pricing bounds documented in <a href="https://github.com/OakAgentKit/oak/blob/main/THREAT_MODEL.md">
+<code>THREAT_MODEL.md</code>
+</a>, <a href="security.html#authority">
+<code>docs/trust/authority.md</code>
+</a>, and <a href="security.html#key">
+<code>docs/trust/where-your-key-lives.md</code>
+</a>.</li>
+</ul>
+<h4 id="what-not-to-post-publicly">What Not to Post Publicly</h4>
+<ul>
+<li>Never post vulnerability descriptions, exploit proofs-of-concept, or unpatched findings in public issues, pull requests, or community channels before a fix is released and coordinated.</li>
+<li>Never include private keys, 24-word recovery phrases, passphrases, session signatures, RPC URLs containing API keys, or personal information in any report, issue, or pull request.</li>
+</ul>
+<hr>
+<h3 id="scope">Scope</h3>
+<h4 id="in-scope">In Scope</h4>
+<ul>
+<li>
+<strong>Published npm packages (<code>@oakagentkit/addon</code>, <code>@oakagentkit/core</code>):</strong>
+<ul>
+<li>
+<strong>Local wallet custody and signing:</strong> Any flaw that leaks private keys, recovery phrases, passphrases, or session credentials to prompts, tool outputs, logs, or network endpoints, or that bypasses <code>eth_simulateV1</code> transaction previews, chain-ID verification, exact-amount ERC-20 approvals, or the 12-second prepared-transaction signing window.</li>
+<li>
+<strong>Declarative recipe handling (<code>oak-recipe/v1</code>):</strong> Any path that executes third-party code during <code>oak recipes add</code> or recipe execution, escapes <code>~/.oak/recipes/</code>, follows symbolic or hard links, or bypasses the 64 KiB file, 4 MiB decompressed archive, or 100-entry limits enforced with <a href="https://github.com/OakAgentKit/oak/blob/main/packages/addon/schema/recipe.schema.json">
+<code>packages/addon/schema/recipe.schema.json</code>
+</a>.</li>
+<li>
+<strong>Continuation and untrusted-input validation:</strong> Any bypass of domain, wallet, stage, deadline, or hash verification during multi-turn EIP-712 RFQ continuations (<code>meridian_buy</code>, <code>meridian_sell</code>), or failure to strip control and format characters from untrusted external token metadata.</li>
+</ul>
+</li>
+<li>
+<strong>Smart contracts (<a href="https://github.com/OakAgentKit/oak/blob/main/packages/contracts">
+<code>packages/contracts/</code>
+</a>):</strong>
+<ul>
+<li>Any bypass of caller-bound USDG EIP-3009 authorization verification (<code>from == msg.sender</code>, unused <code>authorizationState</code>, and exact balance delta), caller-bound price-note verification (<code>n.wallet == msg.sender</code>), the 50% live-spot guard (<code>[spot / 2, spot * 3 / 2]</code>), single-use note nonces, lineage record resolution, grandfather Merkle verification (<code>OakMerkle.sol</code>), or the 90-day armed burner sweep timer (<code>armSweep</code> and <code>sweepStuck</code> in <code>OakBurner.sol</code>).</li>
+</ul>
+</li>
+<li>
+<strong>Hosted Oak service:</strong>
+<ul>
+<li>Authentication or replay-protection bypass on wallet sessions or single-use request signatures, entitlement bypass allowing action tools without a verified ERC-8004 identity and active subscription, or price-note issuance outside the documented 30-minute window, warmup, and guard rules.</li>
+</ul>
+</li>
+</ul>
+<h4 id="out-of-scope">Out of Scope</h4>
+<ul>
+<li>
+<strong>User or agent signing choices:</strong> Signing a losing, illiquid, or malicious transaction after receiving its simulation preview, or importing and running an unreviewed third-party recipe (<code>as-is, not reviewed by Oak</code>). Oak adds no spending caps, allowlists, or financial safety checks.</li>
+<li>
+<strong>Automatic subscription renewals:</strong> Automatic local signing and broadcast of subscription renewals when <code>&lt;= 3 days</code> remain (<code>oak renew</code> and the background check while <code>oak mcp</code> is running), which is documented behavior until cancelled with <code>oak cancel</code>.</li>
+<li>
+<strong>Running terminal-only commands through an agent:</strong> Invoking <code>oak init</code>, <code>oak export</code>, or terminal owner-link signing through an AI agent or shell tool that allocates a pseudo-terminal (<code>PTY</code>) rather than directly in the owner's terminal.</li>
+<li>
+<strong>Documented authority and economic residuals:</strong> The single-owner treasury and admin model (<code>0x856bb126188bDB5e425D3ac9D59E9ffBD12e6ECf</code>), the <code>0.5x</code> to <code>1.5x</code> stolen-signer pricing band, the <code>0.49x</code> burner chunk floor and just-in-time liquidity cap interaction, spot manipulation costs on thin pools, and the external Pons owner's 3-day timelock on creator-fee recipients (<code>0x263ed295dAFaE1d9AAdD6E56c4B6F9f38eE019Dd</code>), as documented in <a href="security.html#authority">
+<code>docs/trust/authority.md</code>
+</a> and <a href="https://github.com/OakAgentKit/oak/blob/main/THREAT_MODEL.md">
+<code>THREAT_MODEL.md</code>
+</a>.</li>
+<li>
+<strong>Third-party infrastructure and protocols:</strong> Bugs or outages in the 25 third-party ecosystem protocols, external APIs, RPC providers, or the user's operating system and hardware.</li>
+<li>
+<strong>Disruptive testing:</strong> Denial-of-service attacks, rate-limit exhaustion against live services, spam, or social engineering.</li>
+</ul>
+<hr>
+<h3 id="response-expectations-and-bounty-policy">Response Expectations and Bounty Policy</h3>
+<ul>
+<li>
+<strong>Modest response targets:</strong> We review reports on a best-effort basis, aim to acknowledge receipt within a few business days, and follow up with a triage assessment once we reproduce the behavior.</li>
+<li>
+<strong>Remediation and disclosure:</strong> Fix timelines depend on complexity and whether remediation requires an npm package update, a hosted service change, or retiring a subscription contract in favor of a successor. We ask reporters to keep findings private until a fix or mitigation is available, and we credit reporters upon coordinated disclosure if desired.</li>
+<li>
+<strong>No bug bounty:</strong> Oak does not operate a paid bug bounty program and does not offer or promise financial rewards for vulnerability reports.</li>
+</ul>
+</details>
+</section>
+</div>
+</div>
+</div>
 </main>
-<footer class="foot">
-  <div class="wrap">
-    <p class="foot-notice">Coming soon. Oak is not released yet, so this site describes what it will do at launch.</p>
-    <div class="foot-links">
-      <div><h2>Explore</h2><ul><li><a href="how-it-works.html">How it works</a></li><li><a href="docs.html">Docs</a></li><li><a href="security.html">Security</a></li></ul></div>
-      <div><h2>About</h2><ul><li><a href="about.html">About</a></li><li><a href="privacy.html">Privacy</a></li></ul></div>
-      <div><h2>Follow</h2><ul><li><a href="https://x.com/OakAgentKit">@OakAgentKit on X</a></li></ul></div>
-    </div>
-    <p><strong>Not affiliated.</strong> Oak is independent and is not affiliated with Robinhood. It uses none of that company's logos, wordmarks or lookalike marks.</p>
-    <p><strong>Region notice.</strong> Availability of third-party projects and assets varies by jurisdiction. You are responsible for following the laws and terms where you live. Oak never promises returns.</p>
-    <p><strong>Names.</strong> Project and agent names belong to their owners and appear only to say what Oak works with. Oak is not affiliated with or endorsed by them, and shows no logos.</p>
-    <p class="fine">At launch the kit is open source under the MIT licence and the Oak server stays closed. Fonts: Manrope, SIL Open Font Licence 1.1.</p>
-  </div>
+<footer class="scene-footer">
+<div class="scene-footer-top">
+<a class="scene-brand" href="index.html">
+<img src="oak-medallion.webp" width="40" height="40" alt="" loading="lazy">
+<span>Oak Agent Kit</span>
+</a>
+<nav aria-label="Footer">
+<ul>
+<li>
+<a href="how-it-works.html">How it works</a>
+</li>
+<li>
+<a href="pricing.html">Pricing</a>
+</li>
+<li>
+<a href="docs.html">Docs</a>
+</li>
+<li>
+<a href="security.html">Security</a>
+</li>
+<li>
+<a href="about.html">About</a>
+</li>
+<li>
+<a href="setup.html">Set up</a>
+</li>
+<li>
+<a href="token.html">Token</a>
+</li>
+<li>
+<a href="privacy.html">Privacy</a>
+</li>
+<li>
+<a href="https://github.com/OakAgentKit/oak">GitHub</a>
+</li>
+<li>
+<a href="https://x.com/OakAgentKit">@OakAgentKit on X</a>
+</li>
+</ul>
+</nav>
+</div>
+ <p>Pre-launch. Oak and $OAK are not released yet. Holding $OAK buys access and nothing else.</p>
+ <p>Independent software, not affiliated with Robinhood. Not financial advice. Oak never promises returns.</p>
+ <p>Region notice: project and asset availability varies by jurisdiction. You are responsible for local compliance.</p>
+ <p class="fine">MIT open kit; closed Oak server. Manrope is self-hosted under the SIL Open Font Licence.</p>
 </footer>
 </body>
 </html>

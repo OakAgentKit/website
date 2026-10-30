@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>$OAK token and subscription pricing | Oak Agent Kit</title>
+<meta name="description" content="What $OAK is, the 9 USDG holder plan and the no-hold plan, the entry-price curve, the 25/75 payment split and how the price is read. Holding $OAK buys access and nothing else.">
+<meta name="theme-color" content="#062F27">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Oak Agent Kit">
+<meta property="og:title" content="$OAK token and subscription pricing | Oak Agent Kit">
+<meta property="og:description" content="What $OAK is, the 9 USDG holder plan and the no-hold plan, the entry-price curve, the 25/75 payment split and how the price is read. Holding $OAK buys access and nothing else.">
+<meta property="og:image" content="https://oakagentkit.org/03-og-card-1200x630.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The Oak mark in a carved-wood medallion beside a felt diorama of the giant Oak tree at dusk.">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/svg+xml" href="a-avatar-32.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="apple-touch-icon" href="favicon-180x180.png">
+<link rel="stylesheet" href="styles.css">
+<link rel="canonical" href="https://oakagentkit.org/token.html">
+<meta property="og:url" content="https://oakagentkit.org/token.html">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="scene-header">
+<div class="scene-header-inner">
+ <a class="scene-brand" href="index.html" aria-label="Oak Agent Kit, home">
+<img src="oak-medallion.webp" width="48" height="48" alt="">
+<span>Oak Agent Kit<small>Robinhood Chain · MCP</small>
+</span>
+</a>
+ <nav class="desktop-nav" aria-label="Main">
+<ul>
+<li>
+<a href="how-it-works.html">How it works</a>
+</li>
+<li>
+<a href="pricing.html">Pricing</a>
+</li>
+<li>
+<a href="docs.html">Docs</a>
+</li>
+<li>
+<a href="security.html">Security</a>
+</li>
+<li>
+<a href="about.html">About</a>
+</li>
+<li>
+<a href="setup.html">Set up</a>
+</li>
+<li>
+<a href="token.html" aria-current="page">Token</a>
+</li>
+<li>
+<a href="privacy.html">Privacy</a>
+</li>
+</ul>
+</nav>
+ <details class="mobile-nav">
+<summary>Menu</summary>
+<nav aria-label="Main mobile">
+<ul>
+<li>
+<a href="how-it-works.html">How it works</a>
+</li>
+<li>
+<a href="pricing.html">Pricing</a>
+</li>
+<li>
+<a href="docs.html">Docs</a>
+</li>
+<li>
+<a href="security.html">Security</a>
+</li>
+<li>
+<a href="about.html">About</a>
+</li>
+<li>
+<a href="setup.html">Set up</a>
+</li>
+<li>
+<a href="token.html" aria-current="page">Token</a>
+</li>
+<li>
+<a href="privacy.html">Privacy</a>
+</li>
+<li>
+<a href="https://x.com/OakAgentKit">Follow on X</a>
+</li>
+</ul>
+</nav>
+</details>
+ </div>
+<p class="release-notice">Coming soon · Oak is not released yet.</p>
+</header>
+<main id="main">
+<section class="scene-hero scene-token" aria-labelledby="hero-title">
+ <h1 id="hero-title" class="sr-only">$OAK</h1>
+ <picture class="scene-picture" aria-hidden="true">
+ <source media="(max-width: 700px)" srcset="scene-token-phone.webp" width="780" height="975">
+ <img src="scene-token-desktop.webp" width="1440" height="810" alt="" fetchpriority="high" decoding="async">
+ </picture>
+ <div class="scene-intro">
+<p>Holding $OAK buys access and nothing else.</p>
+<a class="scene-button" href="token.html#token-details">Read token details<span aria-hidden="true"> ↗</span>
+</a>
+</div>
+ </section>
+<div class="page-body" id="token-details">
+<div class="wrap">
+<div class="prose">
+<p>The treasury and contract admin is the single-owner wallet <code>0x856bb126188bDB5e425D3ac9D59E9ffBD12e6ECf</code>. One owner key can spend treasury funds, redirect future subscription payments, replace the price signer and retire subscriptions. There is no second-signature requirement. Key compromise exposes these powers; key loss can make treasury funds and administration inaccessible. It cannot spend user wallet balances. Safe support is an optional deployment profile, not the launch setup.</p>
+<p>
+<strong>Holding <code>$OAK</code> buys access and nothing else.</strong> Oak never promises returns, never pays holders from protocol fees, and never distributes fee payouts or rewards to token holders.</p>
+<p>Oak is not affiliated with Robinhood. Oak shows a region notice by default.</p>
+<hr>
+<h2 id="oak-token-facts">1. <code>$OAK</code> Token Facts</h2>
+<ul>
+<li>
+<strong>Name:</strong> Oak</li>
+<li>
+<strong>Ticker:</strong> <code>$OAK</code>
+</li>
+<li>
+<strong>Chain:</strong> Robinhood Chain (<code>4663</code>, <code>0x1237</code>)</li>
+<li>
+<strong>Decimals:</strong> <code>18</code> (<code>OAK_DECIMALS = 18</code>)</li>
+<li>
+<strong>Launch venue &amp; pair:</strong> Standard Pons V2 coin paired with <strong>native ETH</strong> (bonding curve, graduating at <code>4.2 ETH</code> into a locked Uniswap v4 pool).</li>
+<li>
+<strong>Supply rule:</strong> Net supply is <code>totalSupply()</code>. Both the 5% holder sign-up burn (<code>burnFrom</code>) and <code>OakBurner</code> (<code>burn</code>) execute true token burns that permanently reduce <code>totalSupply()</code>. Tokens sent to dead addresses do not reduce <code>totalSupply()</code>, and liquidity locked by Pons at graduation remains part of <code>totalSupply()</code>.</li>
+</ul>
+<div data-slot="token-address">
+<h3 id="canonical-oak-contract-address">Canonical <code>$OAK</code> Contract Address</h3>
+<p>
+<strong>Not yet published (pre-launch).</strong> The one official <code>$OAK</code> contract address will be published in this slot and announced on <a href="https://x.com/OakAgentKit">@OakAgentKit</a> at launch. Trust no other address.</p>
+<p>
+<strong>Known ticker clash:</strong> Other small, <strong>dormant</strong> tokens named <code>OAK</code> already exist on Robinhood Chain — for example <code>0x38fE199550E677Fa9caC196495460dfF97BCe28F</code>. They are unrelated to Oak. Always verify the exact contract address posted here and on <code>@OakAgentKit</code>.</p>
+</div>
+<hr>
+<h2 id="subscription-plans-and-the-entry-curve">2. Subscription Plans and the Entry Curve</h2>
+<p>Oak charges zero per-call fees and 0% on your swaps and module actions. Access to action tools is paid on a 30-day cycle in <strong>USDG</strong> (<code>0x5fc5360d0400a0fd4f2af552add042d716f1d168</code>, 6 decimals).</p>
+<h3 id="two-ways-to-subscribe">Two ways to subscribe</h3>
+<ol>
+<li>
+<strong>Holder plan — 9 USDG per 30 days (<code>9_000_000</code> base units):</strong>
+<ul>
+<li>When you join, the subscription contract computes the rounded-up <code>$OAK</code> entry amount <code>N</code> worth the current entry price, <strong>burns 5%</strong> of <code>N</code> (<code>burn = ceil(N * 5 / 100)</code>) from that holding in the same transaction, and stores the remaining post-burn balance <code>N - burn</code> as your <code>signupOakCount</code>. That recorded <code>signupOakCount</code> never changes while you remain subscribed.</li>
+<li>
+<strong>Access check, not a coin lock:</strong> <code>$OAK</code> is a standard Pons coin and is never locked inside a contract. You keep access while your wallet's <code>$OAK</code> balance is at least your post-burn <code>signupOakCount</code> (checked fresh on every action tool call). Any <code>$OAK</code> above <code>signupOakCount</code> is free to trade at any time; if your balance dips below <code>signupOakCount</code>, action tools pause until you buy back.</li>
+<li>
+<strong>One-time 5% sign-up burn and exact burn approval (<code>subscribe.ts</code>):</strong> Joining the holder plan (including rejoining after <code>oak cancel</code>) has a <strong>sign-up burn</strong> that <strong>burns 5%</strong> of the entry amount <code>N</code> (<code>ceil(N * 5 / 100)</code>) in the same transaction via <code>burnFrom(wallet, burnAmount)</code> and records <code>signupOakCount = N - burnAmount</code>. You need only <code>N</code> <code>$OAK</code> in your wallet at sign-up: for example, at an entry amount of <strong>20,000</strong> <code>$OAK</code>, you hold <strong>20,000</strong> <code>$OAK</code>, <strong>1,000</strong> <code>$OAK</code> burns at sign-up, and <strong>19,000</strong> <code>$OAK</code> is tracked as your <code>signupOakCount</code>. In <code>packages/addon/src/subscribe.ts</code>, the add-on reads <code>[count, burn]</code> from <code>quoteHolder(note, sig)</code>, sets <code>maxCount = ceilPercent(count)</code> (<code>(count * 101n + 99n) / 100n</code>, at most 1% above the quoted <code>count</code>) to bound <code>subscribeWithAuthorization(maxCount, note, sig, auth)</code>, and approves the <strong>exact quoted <code>burn</code>
+</strong> (<code>approval(this.deployment.oak, contract, burn.toString(), this.deployment.chainId)</code>), never unlimited.</li>
+<li>
+<strong>Holder renewals:</strong> Cost <strong>9 USDG per 30 days</strong>, burn zero <code>$OAK</code>, and take no price note (so oracle or note-issuer outages never block existing holders from renewing).</li>
+</ul>
+</li>
+<li>
+<strong>No-hold plan — 9 USDG plus one sixth of the entry price per 30 days:</strong>
+<ul>
+<li>Requires zero <code>$OAK</code> and burns nothing.</li>
+<li>Re-priced at every 30-day renewal from the current entry curve. At the $20 floor entry price, the no-hold plan costs <strong>12.333333 USDG</strong> (<code>12_333_333</code> base units) per 30 days.</li>
+</ul>
+</li>
+</ol>
+<h3 id="shared-subscription-rules">Shared subscription rules</h3>
+<ul>
+<li>
+<strong>Billing window and prepay cap:</strong> <code>paidUntil = max(now, paidUntil) + 30 days</code>. Prepaying is capped at <strong>90 days ahead</strong> (renewal opens when <code>&lt;= 3 days</code> remain).</li>
+<li>
+<strong>Cancel (<code>oak cancel</code>):</strong> Callable at any time (even when lapsed or after a contract is retired). Cancelling sets <code>plan = none</code>, clears <code>signupOakCount</code>, <strong>ends access at once</strong>, and <strong>forfeits</strong> any remaining paid days. Rejoining later is a fresh sign-up at that day's price and count. Switching between holder and no-hold plans is done via <code>oak cancel</code> followed by <code>oak subscribe</code>.</li>
+<li>
+<strong>One-signature USDG payment with two checks:</strong> Holder payments use EIP-3009 <code>receiveWithAuthorization</code> on USDG (<code>Global Dollar</code>, version <code>1</code>, chain <code>4663</code>), requiring (1) <code>from == msg.sender</code>, (2) <code>USDG.authorizationState(from, nonce) == false</code> before the call, and (3) the contract's USDG balance to increase by the exact price across the call (preventing replayed or cancelled authorizations from settling as a no-op). Because the no-hold price moves with the on-chain ETH/USD average and net supply, the no-hold plan uses exact <code>approve(maxPrice)</code> + <code>transferFrom</code> of the contract-computed price.</li>
+</ul>
+<h3 id="entry-price-table-by-oak-market-cap">Entry price table by <code>$OAK</code> market cap</h3>
+<p>The entry price is a continuous piecewise-linear curve across five market-cap bands:</p>
+<div class="table-wrap">
+<table class="md-table curve">
+<thead>
+<tr>
+<th scope="col">$OAK market cap</th>
+<th scope="col">Entry amount (hold this much $OAK before the sign-up burn)</th>
+<th scope="col">No-hold plan, per 30 days</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td data-label="$OAK market cap">under $100k</td>
+<td data-label="Entry amount (hold this much $OAK before the sign-up burn)">$20 flat</td>
+<td data-label="No-hold plan, per 30 days">$12.33</td>
+</tr>
+<tr>
+<td data-label="$OAK market cap">$100k to $500k</td>
+<td data-label="Entry amount (hold this much $OAK before the sign-up burn)">rises in a straight line $20 to $75</td>
+<td data-label="No-hold plan, per 30 days">$12.33 to $21.50</td>
+</tr>
+<tr>
+<td data-label="$OAK market cap">$500k to $1M</td>
+<td data-label="Entry amount (hold this much $OAK before the sign-up burn)">rises in a straight line $75 to $100</td>
+<td data-label="No-hold plan, per 30 days">$21.50 to $25.67</td>
+</tr>
+<tr>
+<td data-label="$OAK market cap">$1M to $10M</td>
+<td data-label="Entry amount (hold this much $OAK before the sign-up burn)">rises in a straight line $100 to $300</td>
+<td data-label="No-hold plan, per 30 days">$25.67 to $59</td>
+</tr>
+<tr>
+<td data-label="$OAK market cap">over $10M</td>
+<td data-label="Entry amount (hold this much $OAK before the sign-up burn)">$300 flat (top)</td>
+<td data-label="No-hold plan, per 30 days">$59</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li>Market cap = <code>totalSupply()</code> × <code>$OAK</code> USD price.</li>
+<li>
+<code>&quot;USD&quot;</code> is the USDG quote of the on-chain ETH/USDG pool; Oak <strong>assumes USDG trades at a dollar</strong>.</li>
+</ul>
+<hr>
+<h2 id="launch-phases-and-price-source">3. Launch Phases and Price Source</h2>
+<h3 id="launch-phases">Launch phases</h3>
+<ol>
+<li>
+<strong>Curve (<code>phase != 2</code> on Pons factory):</strong> <code>$OAK</code> is still on its bonding curve. Only the <strong>no-hold plan</strong> is open at the flat floor of <strong>12.333333 USDG</strong>, with no price note required, and the <strong>holder plan is closed</strong> (<code>HolderClosed()</code>).</li>
+<li>
+<strong>Warmup (first 30 minutes after graduation):</strong> <code>$OAK</code> has graduated into its Uniswap v4 pool (<code>phase == 2</code>), but the pool has less than 30 minutes (<code>1,800</code> seconds) of trade history. The note issuer refuses to sign (<code>history_too_thin</code>), and <strong>both plans wait</strong> (the curve floor is never used after graduation).</li>
+<li>
+<strong>Ready (graduated and <code>&gt;= 30</code> minutes old):</strong> The note issuer signs price notes, the <strong>holder plan is open</strong>, and no-hold sign-ups and renewals follow the oracle. In <code>Ready</code>, if the oracle or price note fails, sign-ups and no-hold renewals fail closed and revert without consuming a nonce.</li>
+</ol>
+<h3 id="two-leg-price-calculation-and-the-50-guard">Two-leg price calculation and the 50% guard</h3>
+<ul>
+<li>
+<strong>OAK/ETH leg (signed note):</strong> Because Pons V2 graduated pools use a fixed Uniswap v4 hook that records no on-chain TWAP observations, the Oak server's note issuer computes the ETH-volume-weighted mean of per-trade <code>oakPerEthE18</code> over <code>[now - 1800s, now)</code>, floor-rounded, and signs a <strong>signed 30-minute <code>$OAK</code> price note</strong> (<code>PriceNote { wallet, oakPerEthE18, timestamp, nonce }</code>). Each note has a <strong>5-minute life</strong> (<code>300</code> seconds), works once, and is bound to one wallet and one consuming contract. The issuer refuses to sign if the pool is younger than <code>1,800</code> seconds, has fewer than <code>10</code> trades in the window, has under <code>$5,000</code> two-sided depth, or lies outside the guard band.</li>
+<li>
+<strong>ETH/USD leg (on-chain):</strong> <strong>ETH/USD is read on-chain</strong> by <code>OakOracle.ethUsdE18()</code> from the <strong>30-minute average</strong> (<code>observe([1800, 0])</code>) of the <strong>ETH/USDG pool</strong> (<code>0x52e65B17fB6E5BA00Ed806f37Afcd2DaA50271Ca</code>).</li>
+<li>
+<strong>50% guard:</strong> <code>OakOracle</code> enforces a <strong>50% guard</strong>, rejecting any note whose <code>oakPerEthE18</code> is not <strong>within 50% of the live pool price</strong> (<code>spot / 2 &lt;= note &lt;= spot * 3 / 2</code>, read live from <code>PoolManager.extsload</code> slot 6).</li>
+<li>
+<strong>Signer boundary:</strong> The price signer is the <strong>one always-on key</strong> in Oak: it is <strong>sign-only</strong>, <strong>holds no ETH</strong>, and is <strong>separate from the treasury owner key</strong>. The <strong>Treasury owner can replace the price signer</strong> (<code>setPriceSigner</code>), and setting the <strong>zero address pauses pricing</strong>. A dishonest or <strong>stolen</strong> signer alone is bounded to <strong>0.5x to 1.5x</strong> of the spot-implied holder count.</li>
+</ul>
+<hr>
+<h2 id="the-25-75-split-and-oakburner">4. The 25% / 75% Split and <code>OakBurner</code>
+</h2>
+<p>Every subscription payment splits in the same transaction on the full amount:</p>
+<ul>
+<li>
+<strong>25% goes to the burn</strong> contract (<code>OakBurner</code>: <code>burn = amount / 4</code>, e.g., <code>2.25 USDG</code> out of <code>9 USDG</code>).</li>
+<li>
+<strong>75% goes to the single-owner treasury wallet</strong> (<code>treasury = amount - burn</code>, e.g., <code>6.75 USDG</code> out of <code>9 USDG</code>).</li>
+<li>
+<code>OakSubscription</code> retains zero balance; a permissionless <code>sweepToTreasury()</code> forwards any USDG sent to it by mistake.</li>
+</ul>
+<h3 id="how-oakburner-works">How <code>OakBurner</code> works</h3>
+<ul>
+<li>Anyone can call permissionless <code>buyAndBurn(usdgIn, note, sig)</code> with a valid burner price note (<code>wallet = address(0)</code>, <code>for: &quot;burner&quot;</code>) fetched from <code>POST /v1/price-note</code>.</li>
+<li>Each chunk spends at most <strong>0.5% of live pool liquidity</strong> along the fixed route <code>USDG -&gt; ETH -&gt; $OAK</code> and requires <code>minOakOut</code> at a price limit of at most <code>note * 1.02</code> (never the live spot price).</li>
+<li>Purchased <code>$OAK</code> is destroyed in the same transaction via <code>burn(uint256)</code>, reducing <code>totalSupply()</code>.</li>
+<li>
+<strong>Armed 90-day sweep timer:</strong> The single-owner treasury wallet can sweep stuck USDG from <code>OakBurner</code> to the treasury only after a <strong>90-day timer</strong> started by a public transaction (<code>armSweep</code>, which records <code>armedAt</code> and <code>armedBalance</code>). <strong>Any successful burn cancels</strong> the timer. Calling <code>sweepStuck()</code> after 90 days moves <strong>at most the balance recorded when</strong> the timer was armed (<code>min(balance, armedBalance)</code>), so later deposits require a fresh 90-day timer.</li>
+</ul>
+<hr>
+<h2 id="oak-trading-fees-to-the-single-owner-treasury-wallet">5. <code>$OAK</code> Trading Fees to the Single-Owner Treasury Wallet</h2>
+<ul>
+<li>Every <code>$OAK</code> trade on Pons V2 pays a <code>2%</code> fee: <code>0.3%</code> to Pons and <strong>1.7%</strong> creator fee (<code>0.7%</code> standard creator share + <code>1%</code> creator tax set at launch; venue buybacks are off).</li>
+<li>All <strong>1.7%</strong> goes to the <strong>single-owner treasury wallet</strong>, which is the Pons creator-fee recipient and claims positive ETH balances from the Pons fee escrow (<code>0xd3AFEB2a57f70eF218Aa82451c51B2fb0416Ac9e</code>) by owner-signed transaction.</li>
+<li>
+<strong>Pons keeper dependency:</strong> On graduated pools, launch-<strong>token-side fees</strong> reach the fee escrow only after <strong>Pons's own conversion keeper</strong> converts them to ETH (until then, <code>sweepPoolFees</code> reverts <code>InternalSwapRequiresOperator()</code>, so the treasury wallet skips the hook sweep and claims already-credited escrow balances).</li>
+<li>
+<strong>External Pons owner override:</strong> The external <strong>Pons owner</strong> (<code>0x263ed295dAFaE1d9AAdD6E56c4B6F9f38eE019Dd</code>) can propose replacing the creator-fee recipient subject to a <strong>3-day</strong> public timelock that Oak cannot cancel.</li>
+</ul>
+<hr>
+<h2 id="contract-lineage-and-source-bound-grandfathering">6. Contract Lineage and Source-Bound Grandfathering</h2>
+<p>Oak contracts are non-upgradeable. If <code>OakSubscription</code> ever needs a fix:</p>
+<ol>
+<li>The treasury wallet flips the one-way <code>retire()</code> switch on the old contract (stopping new sign-ups and renewals while preserving reads and <code>cancel()</code>) and deploys a successor whose immutable <code>previous()</code> points to the retired contract.</li>
+<li>
+<strong>One record per wallet across the lineage:</strong> A wallet's authoritative record is on the newest contract in the lineage where <code>hasRecord(wallet)</code> is <code>true</code>.</li>
+<li>
+<strong>Grandfather Merkle tree (<code>OakGrandfather/v1</code>):</strong> The treasury wallet posts a one-time grandfather root (default deadline: <code>120 days</code>) built from finalized history, binding each eligible holder's <code>(wallet, signupOakCount, sourceContract)</code> using the wallet's recorded post-burn <code>signupOakCount</code> (for example, <code>19,000</code> after a <code>20,000</code> entry and <code>1,000</code> burn). When renewal is due, <code>oak renew</code> calls <code>subscribeGrandfatheredWithAuthorization</code> on the successor, carrying over live remaining paid time (<code>paidUntil = max(now, source.paidUntil) + 30 days</code>, within the 90-day cap) at that recorded <code>signupOakCount</code> with <strong>zero <code>$OAK</code> burn</strong> and no price note.</li>
+</ol>
+</div>
+</div>
+</div>
+</main>
+<footer class="scene-footer">
+<div class="scene-footer-top">
+<a class="scene-brand" href="index.html">
+<img src="oak-medallion.webp" width="40" height="40" alt="" loading="lazy">
+<span>Oak Agent Kit</span>
+</a>
+<nav aria-label="Footer">
+<ul>
+<li>
+<a href="how-it-works.html">How it works</a>
+</li>
+<li>
+<a href="pricing.html">Pricing</a>
+</li>
+<li>
+<a href="docs.html">Docs</a>
+</li>
+<li>
+<a href="security.html">Security</a>
+</li>
+<li>
+<a href="about.html">About</a>
+</li>
+<li>
+<a href="setup.html">Set up</a>
+</li>
+<li>
+<a href="token.html">Token</a>
+</li>
+<li>
+<a href="privacy.html">Privacy</a>
+</li>
+<li>
+<a href="https://github.com/OakAgentKit/oak">GitHub</a>
+</li>
+<li>
+<a href="https://x.com/OakAgentKit">@OakAgentKit on X</a>
+</li>
+</ul>
+</nav>
+</div>
+ <p>Pre-launch. Oak and $OAK are not released yet. Holding $OAK buys access and nothing else.</p>
+ <p>Independent software, not affiliated with Robinhood. Not financial advice. Oak never promises returns.</p>
+ <p>Region notice: project and asset availability varies by jurisdiction. You are responsible for local compliance.</p>
+ <p class="fine">MIT open kit; closed Oak server. Manrope is self-hosted under the SIL Open Font Licence.</p>
+</footer>
+</body>
+</html>

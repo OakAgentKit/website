@@ -2,8 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://oakagentkit.org/</loc></url>
   <url><loc>https://oakagentkit.org/how-it-works.html</loc></url>
+  <url><loc>https://oakagentkit.org/setup.html</loc></url>
   <url><loc>https://oakagentkit.org/docs.html</loc></url>
+  <url><loc>https://oakagentkit.org/token.html</loc></url>
   <url><loc>https://oakagentkit.org/security.html</loc></url>
   <url><loc>https://oakagentkit.org/about.html</loc></url>
   <url><loc>https://oakagentkit.org/privacy.html</loc></url>
+  <url><loc>https://oakagentkit.org/pricing.html</loc></url>
 </urlset>

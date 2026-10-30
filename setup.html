@@ -1,0 +1,631 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Set up Oak: install, create your wallet, connect your agent</title>
+<meta name="description" content="Install Oak with one command, create the wallet in your own terminal, connect Claude Code, Codex, Gemini, Cursor or Grok, fund the address and subscribe.">
+<meta name="theme-color" content="#062F27">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Oak Agent Kit">
+<meta property="og:title" content="Set up Oak: install, create your wallet, connect your agent">
+<meta property="og:description" content="Install Oak with one command, create the wallet in your own terminal, connect Claude Code, Codex, Gemini, Cursor or Grok, fund the address and subscribe.">
+<meta property="og:image" content="https://oakagentkit.org/03-og-card-1200x630.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The Oak mark in a carved-wood medallion beside a felt diorama of the giant Oak tree at dusk.">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/svg+xml" href="a-avatar-32.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="apple-touch-icon" href="favicon-180x180.png">
+<link rel="stylesheet" href="styles.css">
+<link rel="canonical" href="https://oakagentkit.org/setup.html">
+<meta property="og:url" content="https://oakagentkit.org/setup.html">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="scene-header">
+<div class="scene-header-inner">
+ <a class="scene-brand" href="index.html" aria-label="Oak Agent Kit, home">
+<img src="oak-medallion.webp" width="48" height="48" alt="">
+<span>Oak Agent Kit<small>Robinhood Chain · MCP</small>
+</span>
+</a>
+ <nav class="desktop-nav" aria-label="Main">
+<ul>
+<li>
+<a href="how-it-works.html">How it works</a>
+</li>
+<li>
+<a href="pricing.html">Pricing</a>
+</li>
+<li>
+<a href="docs.html">Docs</a>
+</li>
+<li>
+<a href="security.html">Security</a>
+</li>
+<li>
+<a href="about.html">About</a>
+</li>
+<li>
+<a href="setup.html" aria-current="page">Set up</a>
+</li>
+<li>
+<a href="token.html">Token</a>
+</li>
+<li>
+<a href="privacy.html">Privacy</a>
+</li>
+</ul>
+</nav>
+ <details class="mobile-nav">
+<summary>Menu</summary>
+<nav aria-label="Main mobile">
+<ul>
+<li>
+<a href="how-it-works.html">How it works</a>
+</li>
+<li>
+<a href="pricing.html">Pricing</a>
+</li>
+<li>
+<a href="docs.html">Docs</a>
+</li>
+<li>
+<a href="security.html">Security</a>
+</li>
+<li>
+<a href="about.html">About</a>
+</li>
+<li>
+<a href="setup.html" aria-current="page">Set up</a>
+</li>
+<li>
+<a href="token.html">Token</a>
+</li>
+<li>
+<a href="privacy.html">Privacy</a>
+</li>
+<li>
+<a href="https://x.com/OakAgentKit">Follow on X</a>
+</li>
+</ul>
+</nav>
+</details>
+ </div>
+<p class="release-notice">Coming soon · Oak is not released yet.</p>
+</header>
+<main id="main">
+<section class="scene-hero scene-setup" aria-labelledby="hero-title">
+ <h1 id="hero-title" class="sr-only">Set up</h1>
+ <picture class="scene-picture" aria-hidden="true">
+ <source media="(max-width: 700px)" srcset="scene-setup-phone.webp" width="780" height="975">
+ <img src="scene-setup-desktop.webp" width="1440" height="810" alt="" fetchpriority="high" decoding="async">
+ </picture>
+ <div class="scene-intro">
+<p>A local wallet for your agent, at launch.</p>
+<a class="scene-button" href="setup.html#install">Prepare for launch<span aria-hidden="true"> ↗</span>
+</a>
+</div>
+ </section>
+<div class="page-body">
+<div class="wrap">
+<div class="prose">
+<p>Oak is <strong>one MCP for the whole chain</strong>: one install gives your AI agent a local wallet and complete modules for <strong>25 ecosystem projects</strong> on <strong>Robinhood Chain</strong> (chain ID <code>4663</code>, <code>0x1237</code>).</p>
+<hr>
+<section class="doc-part" id="install">
+<h2>1. Install with One Command</h2>
+<details class="reference-detail">
+<summary>Read this section</summary>
+<p>Requires <strong>Node.js 22 LTS</strong> (<code>&gt;=22.12.0 &lt;23</code>). Install the add-on globally from npm at release (or build from the workspace below during pre-launch) with:</p>
+<div data-slot="install">
+<p>
+<strong>Pre-launch (<code>0.0.0</code>) now:</strong> Installation instructions will be published at launch.</p>
+</blockquote>
+<hr>
+</details>
+</section>
+<section class="doc-part" id="wallet">
+<h2>2. Create Your Wallet (<code>oak init</code>)</h2>
+<details class="reference-detail">
+<summary>Read this section</summary>
+<p>Run <code>oak init</code> <strong>in your own terminal, never through the agent</strong>:</p>
+<pre tabindex="0" role="region" aria-label="Command example" class="code-block">
+<code data-lang="bash">oak init</code>
+</pre>
+<p>What happens during <code>oak init</code>:</p>
+<ol>
+<li>Oak checks that <code>stdin</code> and <code>stdout</code> are attached to a terminal (<code>isTTY</code>). Remember that setup is trusted because you run it in your own terminal, not because a terminal exists (an agent with shell access can allocate a PTY). Running <code>oak init</code> yourself keeps your recovery phrase out of the AI's prompt, tool outputs, and logs.</li>
+<li>Oak generates a 24-word recovery phrase locally and prints it once. Write the words down offline.</li>
+<li>Oak prompts you (with hidden input) to confirm three randomly selected words from your phrase.</li>
+<li>Oak prints the default <strong>region notice</strong> and <strong>not affiliated with Robinhood</strong> disclosure, encrypts the private key with <code>AES-256-GCM</code> into <code>~/.oak/wallet.enc</code> (mode <code>0600</code> in <code>~/.oak</code> mode <code>0700</code>), and stores the 32-byte encryption key in your OS keychain (macOS Keychain, Windows Credential Manager, or Linux persistent Secret Service).</li>
+<li>If a persistent OS keychain is unavailable, Oak prompts you to set a passphrase (at least 12 characters) and derives the encryption key with <code>scrypt</code> (<code>N=131072, r=8, p=1</code>). With passphrase storage, unlocking requires your terminal each time.</li>
+</ol>
+<p>Your private key <strong>never leaves your computer</strong>, and <strong>Oak cannot recover a lost key</strong>.</p>
+<hr>
+</details>
+</section>
+<section class="doc-part" id="configure">
+<h2>3. Choose Network and Configure Chain Settings</h2>
+<details class="reference-detail">
+<summary>Read this section</summary>
+<p>Store your configuration in <code>~/.oak/config.json</code> (mode <code>0600</code>) using <code>oak config set &lt;key&gt; &lt;value&gt;</code> or pass matching environment variables.</p>
+<p>Oak targets <strong>Robinhood Chain mainnet</strong> (<code>OAK_NETWORK=mainnet</code>, chain ID <code>4663</code>, <code>0x1237</code>) by default. To test Oak's own contracts and ERC-8004 identity on <strong>Robinhood Chain Testnet</strong> (<code>46630</code>, <code>0xb626</code>), opt in explicitly with <code>OAK_NETWORK=testnet</code> and <code>OAK_CHAIN_ID=46630</code>:</p>
+<pre tabindex="0" role="region" aria-label="Command example" class="code-block">
+<code data-lang="bash"># Mainnet (default: OAK_NETWORK=mainnet, chain ID 4663)
+oak config set OAK_NETWORK mainnet
+oak config set OAK_CHAIN_ID 4663
+oak config set OAK_SERVER_URL https://api.oakagentkit.org  # optional mainnet override
+oak config set OAK_RPC_URL &lt;your-keyed-robinhood-chain-4663-rpc-url&gt;
+oak config set OAK_SUBSCRIPTION_ADDRESS &lt;subscription-contract-address&gt;
+oak config set OAK_USDG_ADDRESS 0x5fc5360d0400a0fd4f2af552add042d716f1d168
+oak config set OAK_TOKEN_ADDRESS &lt;canonical-oak-token-address&gt;
+oak config set OAK_ORACLE_ADDRESS &lt;oracle-contract-address&gt;
+oak config set OAK_ETH_USDG_POOL_ADDRESS 0x52e65B17fB6E5BA00Ed806f37Afcd2DaA50271Ca</code>
+</pre>
+<p>For <strong>Robinhood Chain Testnet (<code>46630</code>)</strong> opt-in:</p>
+<p>Use a matching testnet Oak server and testnet contract addresses for every required setting above. The four commands below alone are not a complete deployment configuration. Testnet exposes basic tools and ERC-8004 identity tools; swap routes and the other ecosystem modules are not configured there.</p>
+<pre tabindex="0" role="region" aria-label="Command example" class="code-block">
+<code data-lang="bash">oak config set OAK_NETWORK testnet
+oak config set OAK_CHAIN_ID 46630
+oak config set OAK_RPC_URL &lt;your-robinhood-chain-testnet-46630-rpc-url&gt;
+oak config set OAK_USDG_ADDRESS 0x7E955252E15c84f5768B83c41a71F9eba181802F</code>
+</pre>
+<p>Network safety rules enforced at startup:</p>
+<ul>
+<li>If <code>OAK_NETWORK</code>, <code>OAK_CHAIN_ID</code>, or any deployment address environment variable disagrees with <code>~/.oak/config.json</code>, Oak refuses to start (<code>OAK_NETWORK disagrees with the local config; set the network in the config explicitly.</code>).</li>
+<li>Do not mix mainnet (<code>4663</code>) and testnet (<code>46630</code>) RPCs or pin a mainnet contract address in a testnet config (<code>Set OAK_NETWORK to mainnet (4663) or testnet (46630).</code> and <code>Set OAK_CHAIN_ID to &lt;selectedChainId&gt; in the local deployment config.</code>).</li>
+</ul>
+<p>Optional settings:</p>
+<ul>
+<li>
+<code>OAK_RPC_URL_&lt;chainId&gt;</code>: RPC endpoint for an inbound Relay origin chain (for example, <code>OAK_RPC_URL_8453</code> for Base or <code>OAK_RPC_URL_42161</code> for Arbitrum when calling <code>relay_bridge_in</code>).</li>
+<li>
+<code>OAK_RETIRED_SUBSCRIPTION_ADDRESSES</code>: Comma-separated retired subscription contract addresses, newest first.</li>
+<li>
+<code>OAK_FINALITY</code>: Confirmation mode (<code>finalized</code> by default, <code>safe</code>, or a positive integer block count).</li>
+<li>
+<code>profile</code>: JSON string for ERC-8004 agent identity registration (<code>oak setup register</code> or <code>oak register</code>).</li>
+<li>
+<code>grandfather</code>: JSON string containing the <code>OakGrandfather/v1</code> Merkle tree when migrating from a retired subscription contract.</li>
+</ul>
+<p>Wallet private keys and mnemonics are rejected by <code>oak config set</code>.</p>
+<hr>
+</details>
+</section>
+<section class="doc-part" id="connect">
+<h2>4. Connect Your AI Agent (MCP Snippets)</h2>
+<details class="reference-detail">
+<summary>Read this section</summary>
+<p>Every supported agent connects to Oak over <code>stdio</code> by running <code>oak mcp</code>. On startup and once every hour, <code>oak mcp</code> reconciles any pending local journal entries, verifies your ERC-8004 identity status, and checks whether your subscription renewal is due. Read tools work immediately; action tools require a verified ERC-8004 identity and an active subscription.</p>
+<div class="tabs" id="agent-tabs">
+<input type="radio" name="agent" id="agent-0" checked aria-label="Claude Code">
+<input type="radio" name="agent" id="agent-1"  aria-label="Codex">
+<input type="radio" name="agent" id="agent-2"  aria-label="Gemini">
+<input type="radio" name="agent" id="agent-3"  aria-label="Cursor">
+<input type="radio" name="agent" id="agent-4"  aria-label="Grok and Other MCP Clients">
+<div class="tab-bar" role="presentation">
+<label for="agent-0">Claude Code</label>
+<label for="agent-1">Codex</label>
+<label for="agent-2">Gemini</label>
+<label for="agent-3">Cursor</label>
+<label for="agent-4">Grok</label>
+</div>
+<div class="tab-panels">
+<div class="tab-panel">
+<h3>Claude Code</h3>
+<pre tabindex="0" role="region" aria-label="Command example" class="code-block">
+<code>claude mcp add oak -- oak mcp</code>
+</pre>
+</div>
+<div class="tab-panel">
+<h3>Codex</h3>
+<p>Add to <code>~/.codex/config.toml</code>:</p>
+<pre tabindex="0" role="region" aria-label="Command example" class="code-block">
+<code>[mcp_servers.oak]
+command = &quot;oak&quot;
+args = [&quot;mcp&quot;]</code>
+</pre>
+</div>
+<div class="tab-panel">
+<h3>Gemini</h3>
+<p>Add to <code>~/.gemini/settings.json</code>:</p>
+<pre tabindex="0" role="region" aria-label="Command example" class="code-block">
+<code>{
+  &quot;mcpServers&quot;: {
+    &quot;oak&quot;: {
+      &quot;command&quot;: &quot;oak&quot;,
+      &quot;args&quot;: [&quot;mcp&quot;]
+    }
+  }
+}</code>
+</pre>
+</div>
+<div class="tab-panel">
+<h3>Cursor</h3>
+<p>Add to <code>.cursor/mcp.json</code>:</p>
+<pre tabindex="0" role="region" aria-label="Command example" class="code-block">
+<code>{
+  &quot;mcpServers&quot;: {
+    &quot;oak&quot;: {
+      &quot;command&quot;: &quot;oak&quot;,
+      &quot;args&quot;: [&quot;mcp&quot;]
+    }
+  }
+}</code>
+</pre>
+</div>
+<div class="tab-panel">
+<h3>Grok and Other MCP Clients</h3>
+<p>Configure any stdio MCP client with:</p>
+<pre tabindex="0" role="region" aria-label="Command example" class="code-block">
+<code>command: oak
+args: mcp</code>
+</pre>
+</div>
+</div>
+</div>
+</details>
+</section>
+<section class="doc-part" id="fund">
+<h2>5. Set Up Identity, Fund the Wallet, and Subscribe</h2>
+<details class="reference-detail">
+<summary>Read this section</summary>
+<h3 id="step-1-set-up-your-erc-8004-identity">Step 1: Set up your ERC-8004 identity (<code>oak setup</code>)</h3>
+<p>Every action tool requires a verified ERC-8004 agent identity on the pinned <code>IdentityRegistry</code> (<code>0x8004A169FB4a3325136EB29fA0ceB6D2e539a432</code>) plus an active subscription. Read tools (<code>find_token</code>, <code>balances</code>, <code>price</code>, <code>quote</code>, <code>preview</code>, <code>history</code>, <code>positions</code>, <code>account</code>, and module reads) stay open without an identity or subscription.</p>
+<p>Before registering a new identity, run <code>oak address</code> and send ETH for gas on your configured network. Linking an existing identity needs no ETH. Replace the example profile's name, description, and image URL with your own before registering.</p>
+<p>Run <code>oak setup</code> in your terminal (or call the local MCP tool <code>oak_setup</code>):</p>
+<pre tabindex="0" role="region" aria-label="Command example" class="code-block">
+<code data-lang="bash"># Interactive prompt in your terminal:
+# &quot;Identity first: type register (public registration, needs ETH), or link &lt;agentId&gt; (owner signature, no ETH):&quot;
+oak setup
+
+# Option A: Link an existing ERC-8004 agent ID (no ETH needed, no on-chain transaction)
+oak setup link &lt;agentId&gt;
+
+# Option B: Register a new ERC-8004 agent ID on-chain (needs ETH for gas)
+oak config set profile '{&quot;type&quot;:&quot;https://eips.ethereum.org/EIPS/eip-8004#registration-v1&quot;,&quot;name&quot;:&quot;my-agent&quot;,&quot;description&quot;:&quot;My Oak agent&quot;,&quot;image&quot;:&quot;https://example.com/my-agent.png&quot;,&quot;services&quot;:[],&quot;x402Support&quot;:false,&quot;active&quot;:true,&quot;registrations&quot;:[]}'
+oak setup register
+# Pass --no-tag to omit the default oak.registrar marker:
+oak setup register --no-tag</code>
+</pre>
+<ul>
+<li>
+<strong>How <code>oak setup link &lt;agentId&gt;</code> works (gasless):</strong> If your agent wallet does not own <code>&lt;agentId&gt;</code> directly, <code>oak setup link &lt;agentId&gt;</code> prints a single-use 5-minute EIP-712 <code>OakIdentityLink</code> challenge (<code>audience: &quot;oak-identity-link/v1&quot;</code>) in your terminal and prompts with hidden input for the current NFT owner's signature. Never paste a private key or recovery words. The server checks <code>ownerOf(agentId)</code> at a canonical block, stores the verified link (<code>linkId</code>), and never stores the raw signature. If the agent wallet itself already owns <code>&lt;agentId&gt;</code>, it signs locally without prompting.</li>
+<li>
+<strong>How <code>oak setup register</code> works (on-chain):</strong> Mints a new ERC-8004 identity NFT to your agent wallet on <code>IdentityRegistry</code>, verifies ownership with the server, and saves <code>{ chainId, registry, agentId }</code> in <code>~/.oak/config.json</code>.</li>
+</ul>
+<h3 id="step-2-fund-the-agent-wallet-and-subscribe">Step 2: Fund the agent wallet and subscribe</h3>
+<p>Print your agent's wallet address:</p>
+<pre tabindex="0" role="region" aria-label="Command example" class="code-block">
+<code data-lang="bash">oak address</code>
+</pre>
+<p>Send funds directly to that address on <strong>your configured network</strong>: Robinhood Chain mainnet (<code>4663</code>), or testnet (<code>46630</code>) if selected:</p>
+<ol>
+<li>
+<strong>ETH</strong> for network gas fees (required for on-chain registration, subscribing, and trading; not required for <code>oak setup link &lt;agentId&gt;</code>).</li>
+<li>
+<strong>USDG</strong> (<code>0x5fc5360d0400a0fd4f2af552add042d716f1d168</code> on mainnet, <code>0x7E955252E15c84f5768B83c41a71F9eba181802F</code> on testnet <code>46630</code>, 6 decimals) for your monthly subscription and any swaps, vault deposits, or orders.</li>
+<li>
+<strong>
+<code>$OAK</code>
+</strong> (18 decimals) if you choose the <strong>holder plan</strong>: you need only the entry-price count <code>N</code> at sign-up. Joining has a one-time <strong>sign-up burn</strong> that <strong>burns 5%</strong> of <code>N</code> (<code>ceil(N * 5 / 100)</code>) from that holding and records the remaining <code>N - burn</code> as your tracked <code>signupOakCount</code> (for example, hold <strong>20,000</strong> <code>$OAK</code> at sign-up, <strong>1,000</strong> <code>$OAK</code> burns, and <strong>19,000</strong> <code>$OAK</code> is tracked while subscribed). In <code>packages/addon/src/subscribe.ts</code>, the add-on reads <code>[count, burn]</code> from <code>quoteHolder</code>, passes <code>maxCount = ceilPercent(count)</code> (at most 1% above <code>count</code>) to <code>subscribeWithAuthorization</code>, and approves the exact quoted <code>burn</code> (<code>approval(this.deployment.oak, contract, burn.toString(), this.deployment.chainId)</code>), never unlimited.</li>
+</ol>
+<p>Then subscribe from your terminal:</p>
+<pre tabindex="0" role="region" aria-label="Command example" class="code-block">
+<code data-lang="bash"># Holder plan: 9 USDG per 30 days; hold N $OAK, 5% burns at sign-up, N - burn tracked
+oak subscribe --plan holder
+
+# No-hold plan: 9 USDG + (entry price / 6) per 30 days (12.333333 USDG floor), no $OAK required
+oak subscribe --plan nohold</code>
+</pre>
+<hr>
+</details>
+</section>
+<section class="doc-part" id="first-commands">
+<h2>6. First Read, First Action, and Unlinking</h2>
+<details class="reference-detail">
+<summary>Read this section</summary>
+<h3 id="first-reads-and-buying-a-token">First reads and buying a token (<code>find_token</code> → <code>quote</code> → <code>preview</code> → <code>swap</code>)</h3>
+<p>The TSLA swap example below is for mainnet (<code>4663</code>); testnet has no configured swap routes.</p>
+<pre tabindex="0" role="region" aria-label="Command example" class="code-block">
+<code data-lang="bash"># First read: check subscription status, $OAK held vs required, launch phase, and no-hold price
+oak status
+
+# One-call portfolio reads: balances batches token reads via Multicall3; positions queries all 25 modules in one call
+oak call balances '{}'
+oak call positions '{}'
+
+# First action: buy a token in four steps (find_token -&gt; quote -&gt; preview -&gt; swap)
+# 1. Discover or verify a token by name, symbol, or address on chain 4663
+oak call find_token '{&quot;query&quot;:&quot;TSLA&quot;}'
+
+# 2. Get a 60-second swap quote across KyberSwap, Velora, and Pons launch curves using verified symbols
+#    (ETH, USDG, WETH, USDe, OAK, or official stock tickers) or a verified token address.
+#    Quotes warn when price impact exceeds 2% against fresh reference prices.
+oak call quote '{&quot;from&quot;:&quot;USDG&quot;,&quot;to&quot;:&quot;TSLA&quot;,&quot;amountIn&quot;:&quot;10000000&quot;,&quot;slippageBps&quot;:50}'
+
+# 3. Preview an unsigned transaction sequence via eth_simulateV1
+#    (swap reuses a matching preview from the same block within 12 seconds so it does not re-simulate twice)
+oak call preview '{&quot;txs&quot;:[...]}'
+
+# 4. Execute the swap by quoteId (builds exact approvals only, never unlimited; signs locally and broadcasts)
+oak call swap '{&quot;quoteId&quot;:&quot;&lt;quoteId&gt;&quot;}'
+
+# Manage opt-in declarative project recipes (data-only, as-is)
+oak recipes add &lt;npm-pkg-or-local-path&gt;
+oak recipes list
+oak recipes remove &lt;project&gt;</code>
+</pre>
+<h3 id="unlinking-transfers-and-outages">Unlinking, transfers, and outages</h3>
+<pre tabindex="0" role="region" aria-label="Command example" class="code-block">
+<code data-lang="bash"># Unlink from the linked agent wallet (gasless; clears local identity, pauses actions, keeps reads open)
+oak identity unlink
+
+# Or revoke a link as the current NFT owner by linkId (prompts for owner EIP-712 unlink signature in terminal)
+oak identity unlink --owner &lt;linkId&gt;</code>
+</pre>
+<ul>
+<li>
+<strong>Unlink (<code>oak identity unlink</code> or MCP tool <code>oak_identity_unlink</code>):</strong> Immediately revokes the link in the server store and removes <code>identity</code> from <code>~/.oak/config.json</code>. Read tools remain available; action tools pause until you run <code>oak setup</code> again.</li>
+<li>
+<strong>NFT transfer or burn:</strong> On every action tool call, the server verifies <code>ownerOf(agentId)</code> and checks for any <code>Transfer</code> log since <code>linkedBlock</code> at a canonical block. If the ERC-8004 NFT was transferred or burned, linked action access ends immediately, the add-on clears the local <code>identity</code> config, and reads stay open.</li>
+<li>
+<strong>Server or RPC outage:</strong> If identity verification cannot reach the chain or server (<code>Identity status is unavailable. Please try again. Reads remain available; actions are paused.</code>), the add-on keeps your saved <code>identity</code> in <code>~/.oak/config.json</code> and asks you to try again once the service recovers. Read tools stay open.</li>
+</ul>
+<hr>
+</details>
+</section>
+<section class="doc-part" id="troubleshooting">
+<h2>7. Troubleshooting and Recovery Table</h2>
+<details class="reference-detail">
+<summary>Read this section</summary>
+<p>Every error message in Oak is a plain sentence naming the state and the exact command to fix it:</p>
+<div class="table-wrap">
+<table class="md-table">
+<thead>
+<tr>
+<th scope="col">State / Message</th>
+<th scope="col">Cause</th>
+<th scope="col">Exact Action to Fix</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td data-label="State / Message">
+<code>run this in your own terminal, not through the agent</code>
+</td>
+<td data-label="Cause">
+<code>oak init</code> or <code>oak export</code> was invoked without an interactive TTY.</td>
+<td data-label="Exact Action to Fix">Run <code>oak init</code> or <code>oak export</code> directly in your own system terminal.</td>
+</tr>
+<tr>
+<td data-label="State / Message">
+<code>Run oak setup to register or link an ERC-8004 identity first. Reads remain available; actions are paused.</code> / <code>Verify or link an ERC-8004 identity with oak setup. Reads remain available, actions paused.</code>
+</td>
+<td data-label="Cause">An action tool was called before setting up an ERC-8004 identity (<code>identity.ts</code> and the Oak server).</td>
+<td data-label="Exact Action to Fix">Run <code>oak setup link &lt;agentId&gt;</code> (no ETH) or <code>oak setup register</code> (needs ETH), or call <code>oak_setup</code>.</td>
+</tr>
+<tr>
+<td data-label="State / Message">
+<code>Identity changed, expired or link revoked. Run oak setup link &lt;agentId&gt; with the current owner to verify or link it again. Reads remain available; actions are paused.</code>
+</td>
+<td data-label="Cause">The linked ERC-8004 NFT was transferred or burned, or the link was revoked (<code>identity.ts</code>). Local <code>identity</code> config was cleared.</td>
+<td data-label="Exact Action to Fix">Run <code>oak setup link &lt;agentId&gt;</code> with a fresh signature from the current NFT owner, or register a new agent ID with <code>oak setup register</code>.</td>
+</tr>
+<tr>
+<td data-label="State / Message">
+<code>Identity status is unavailable. Please try again. Reads remain available; actions are paused.</code>
+</td>
+<td data-label="Cause">The server or RPC could not verify identity status during an outage (<code>identity.ts</code>). Saved local <code>identity</code> is preserved.</td>
+<td data-label="Exact Action to Fix">Keep your config as-is and retry the action once the RPC or server is reachable; read tools continue to work.</td>
+</tr>
+<tr>
+<td data-label="State / Message">
+<code>This wallet does not own that agent ID. Ask the current owner to sign the link in oak setup link &lt;agentId&gt;.</code> / <code>Owner signature does not match the current agent owner. Ask the current owner to sign with oak setup link &lt;agentId&gt;.</code>
+</td>
+<td data-label="Cause">Direct verification was attempted for an <code>agentId</code> owned by another wallet, or the pasted signature was not from <code>ownerOf(agentId)</code>.</td>
+<td data-label="Exact Action to Fix">Run <code>oak setup link &lt;agentId&gt;</code> in your terminal and sign the EIP-712 challenge with the wallet that currently owns <code>&lt;agentId&gt;</code>.</td>
+</tr>
+<tr>
+<td data-label="State / Message">
+<code>The identity challenge expired. Run oak setup link &lt;agentId&gt; again for a fresh owner signature.</code>
+</td>
+<td data-label="Cause">More than 5 minutes passed before submitting the owner's EIP-712 signature, or the challenge nonce was already consumed.</td>
+<td data-label="Exact Action to Fix">Run <code>oak setup link &lt;agentId&gt;</code> again and paste the fresh signature within 5 minutes.</td>
+</tr>
+<tr>
+<td data-label="State / Message">
+<code>Wrong identity network or registry. Set OAK_NETWORK and OAK_CHAIN_ID to match the owner’s agent, then run oak setup again.</code>
+</td>
+<td data-label="Cause">The identity registry or chain ID does not match the configured network (<code>4663</code> mainnet vs <code>46630</code> testnet).</td>
+<td data-label="Exact Action to Fix">Align <code>OAK_NETWORK</code> and <code>OAK_CHAIN_ID</code> in <code>~/.oak/config.json</code>, then run <code>oak setup</code>.</td>
+</tr>
+<tr>
+<td data-label="State / Message">
+<code>OAK_NETWORK disagrees with the local config; set the network in the config explicitly.</code> / <code>Set OAK_NETWORK to mainnet (4663) or testnet (46630).</code>
+</td>
+<td data-label="Cause">Environment variables and <code>~/.oak/config.json</code> specify different networks (<code>mainnet</code> vs <code>testnet</code>), or <code>OAK_NETWORK</code> has an invalid value.</td>
+<td data-label="Exact Action to Fix">Set <code>OAK_NETWORK</code>, <code>OAK_CHAIN_ID</code>, and <code>OAK_RPC_URL</code> to the same network (<code>4663</code> or <code>46630</code>) in <code>~/.oak/config.json</code>.</td>
+</tr>
+<tr>
+<td data-label="State / Message">
+<code>needs ETH for network fees: send ETH to &lt;address&gt; on chain &lt;chainId&gt;.</code> / <code>Needs ETH for network fees: send ETH to &lt;address&gt; on chain &lt;chainId&gt;.</code>
+</td>
+<td data-label="Cause">Wallet ETH balance cannot cover <code>value + gas * maxFeePerGas</code> (including 25% gas headroom) in <code>sender.ts</code>, or is <code>0</code> in <code>subscribe.ts</code>.</td>
+<td data-label="Exact Action to Fix">Send native ETH on the named chain to <code>&lt;address&gt;</code> (<code>oak address</code>) and retry.</td>
+</tr>
+<tr>
+<td data-label="State / Message">
+<code>No active subscription. Use oak subscribe --plan nohold; only the no-hold plan at 12.333333 USDG per 30 days is open.</code>
+</td>
+<td data-label="Cause">Action tool called while <code>plan == &quot;none&quot;</code> during <code>curve</code> (checked by the Oak server).</td>
+<td data-label="Exact Action to Fix">Run <code>oak subscribe --plan nohold</code>.</td>
+</tr>
+<tr>
+<td data-label="State / Message">
+<code>No active subscription. The pool is warming up; both plans wait for 30 minutes of history before oak subscribe.</code>
+</td>
+<td data-label="Cause">Action tool called while <code>plan == &quot;none&quot;</code> during <code>warmup</code> (checked by the Oak server).</td>
+<td data-label="Exact Action to Fix">Wait until the pool has 30 minutes of history, then run <code>oak subscribe</code>.</td>
+</tr>
+<tr>
+<td data-label="State / Message">
+<code>No active subscription. Use oak subscribe --plan holder or oak subscribe --plan nohold and top up USDG for the subscription.</code>
+</td>
+<td data-label="Cause">Action tool called while <code>plan == &quot;none&quot;</code> during <code>ready</code> (checked by the Oak server).</td>
+<td data-label="Exact Action to Fix">Top up USDG (and <code>$OAK</code> if joining holder) and run <code>oak subscribe --plan holder</code> or <code>oak subscribe --plan nohold</code>.</td>
+</tr>
+<tr>
+<td data-label="State / Message">
+<code>No subscription. Use oak subscribe --plan holder or oak subscribe --plan nohold.</code>
+</td>
+<td data-label="Cause">
+<code>oak renew</code> / <code>ensureSubscribed</code> called when the wallet has no subscription record (<code>renew.ts</code>).</td>
+<td data-label="Exact Action to Fix">Run <code>oak subscribe --plan holder</code> or <code>oak subscribe --plan nohold</code>.</td>
+</tr>
+<tr>
+<td data-label="State / Message">
+<code>Holder plan is closed during the curve; use oak subscribe --plan nohold.</code>
+</td>
+<td data-label="Cause">
+<code>$OAK</code> is in the <code>curve</code> phase (<code>phase != 2</code> on Pons) when running <code>oak subscribe --plan holder</code>.</td>
+<td data-label="Exact Action to Fix">Join with <code>oak subscribe --plan nohold</code> at the <code>12.333333 USDG</code> floor, or wait until <code>$OAK</code> graduates and completes warmup.</td>
+</tr>
+<tr>
+<td data-label="State / Message">
+<code>Price warmup: wait until the pool has 30 minutes of history, then retry.</code>
+</td>
+<td data-label="Cause">
+<code>$OAK</code> graduated (<code>phase == 2</code>), but the v4 pool is under 30 minutes old (<code>history_too_thin</code>).</td>
+<td data-label="Exact Action to Fix">Wait until the pool is 30 minutes old; <strong>both plans wait</strong> during warmup and sign nothing.</td>
+</tr>
+<tr>
+<td data-label="State / Message">
+<code>Subscription is paid; renewal is not due.</code>
+</td>
+<td data-label="Cause">More than 3 days remain before <code>paidUntil</code> and access checks pass (<code>renew.ts</code>).</td>
+<td data-label="Exact Action to Fix">No action needed; renewal opens when <code>&lt;= 3 days</code> remain (prepaying is capped at <strong>90 days ahead</strong>).</td>
+</tr>
+<tr>
+<td data-label="State / Message">
+<code>subscription ended &lt;date&gt;; keep the agent running to renew or run oak renew</code>
+</td>
+<td data-label="Cause">
+<code>paidUntil</code> is in the past (checked by the Oak server). Read tools still work; action tools are paused.</td>
+<td data-label="Exact Action to Fix">Top up USDG (and ETH for gas) if needed, then run <code>oak renew</code> or start <code>oak mcp</code>.</td>
+</tr>
+<tr>
+<td data-label="State / Message">
+<code>hold at least &lt;N&gt; $OAK (you hold &lt;M&gt;)</code> / <code>Buy back &lt;count&gt; OAK base units (token &lt;oak&gt;, decimals 18) to restore access.</code> / <code>Needs &lt;oakRequired&gt; OAK base units (token &lt;oak&gt;, decimals 18). Buy back OAK and retry.</code>
+</td>
+<td data-label="Cause">Holder-plan wallet's <code>$OAK</code> balance is below its tracked <code>signupOakCount</code> (the Oak server, <code>renew.ts</code>) or below the required count at sign-up/migration (<code>subscribe.ts</code>).</td>
+<td data-label="Exact Action to Fix">Buy back <code>$OAK</code> to at least the required count; for an active subscription, access resumes immediately on the next call with no new fee.</td>
+</tr>
+<tr>
+<td data-label="State / Message">
+<code>Renewal/payment needs &lt;amount&gt; USDG base units (token &lt;usdg&gt;, decimals 6). Top up and run oak renew; tools are paused until payment succeeds.</code>
+</td>
+<td data-label="Cause">Wallet USDG balance is below the subscription or renewal price (<code>subscribe.ts</code>).</td>
+<td data-label="Exact Action to Fix">Send USDG (<code>0x5fc5360d0400a0fd4f2af552add042d716f1d168</code>, 6 decimals) to your wallet and run <code>oak renew</code> (or <code>oak subscribe</code>).</td>
+</tr>
+<tr>
+<td data-label="State / Message">
+<code>your paid days carry over with <code>oak renew</code> when it is due</code>
+</td>
+<td data-label="Cause">Wallet is an active holder on a retired subscription contract and is listed in the grandfather Merkle tree, but tried to run <code>oak subscribe</code> (<code>subscribe.ts</code>).</td>
+<td data-label="Exact Action to Fix">Do not run <code>oak subscribe</code> (which would forfeit old paid days). Wait until <code>&lt;= 3 days</code> remain and run <code>oak renew</code> to migrate at your recorded post-burn count with zero burn.</td>
+</tr>
+<tr>
+<td data-label="State / Message">
+<code>Wallet journal is unresolved; wait for the pending transaction before a new action.</code>
+</td>
+<td data-label="Cause">A previously signed transaction in <code>~/.oak/&lt;address&gt;.pending.json</code> has not yet been confirmed or reconciled (<code>sender.ts</code>).</td>
+<td data-label="Exact Action to Fix">Run <code>oak renew</code> (or start <code>oak mcp</code>), which reconciles or fee-bumps the identical call at the same nonce before starting a new action.</td>
+</tr>
+<tr>
+<td data-label="State / Message">
+<code>Wallet journal is unreadable or invalid; resolve it before a new action.</code>
+</td>
+<td data-label="Cause">
+<code>~/.oak/&lt;address&gt;.pending.json</code> or <code>.cleared.json</code> failed integrity, ownership, mode (<code>0600</code>), or signature validation (<code>journal.ts</code>).</td>
+<td data-label="Exact Action to Fix">Inspect <code>~/.oak/</code> permissions (<code>0700</code> directory, <code>0600</code> files owned by your user) and resolve the corrupted journal file after verifying on-chain nonces.</td>
+</tr>
+<tr>
+<td data-label="State / Message">
+<code>Payment failed or remains pending; tools are paused. Run oak renew to reconcile the wallet journal before another payment.</code>
+</td>
+<td data-label="Cause">A subscription payment threw a sender exception leaving the journal to be checked (<code>subscribe.ts</code>).</td>
+<td data-label="Exact Action to Fix">Run <code>oak renew</code> to reconcile the wallet journal before attempting another payment.</td>
+</tr>
+<tr>
+<td data-label="State / Message">
+<code>Already subscribed; use oak renew, or oak cancel before switching plans.</code>
+</td>
+<td data-label="Cause">
+<code>oak subscribe</code> was called while the wallet already has an active plan on the current contract (<code>subscribe.ts</code>).</td>
+<td data-label="Exact Action to Fix">Use <code>oak renew</code> to extend the current plan, or run <code>oak cancel</code> (which ends access immediately and forfeits remaining paid days) before running <code>oak subscribe --plan &lt;holder|nohold&gt;</code>.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Run <code>oak init --recover</code> in your own terminal to restore your 24-word backup on a new computer. To replace an existing wallet, use <code>oak init --recover --replace</code>; Oak preserves an encrypted backup and asks you to confirm the recovered address. Never enter recovery words in an agent chat, arguments, environment variables or MCP tools.</p>
+<p>For stdio MCP, Oak needs an accessible persistent OS keychain (Linux: Secret Service in the same unlocked user/D-Bus session as the MCP client). A passphrase-only wallet currently supports interactive CLI commands in your own terminal; it cannot start <code>oak mcp</code> through a pipe. Do not send the passphrase through MCP or store it in argv/environment variables. To enable MCP for an existing fallback wallet, first configure a persistent keychain, then restore with <code>oak init --recover --replace</code> yourself in your terminal and confirm the address. Keep the old encrypted backup and recovery words offline.</p>
+<p>Mainnet uses <code>https://api.oakagentkit.org</code> by default. Override it with <code>oak config set OAK_SERVER_URL &lt;https-url&gt;</code> or <code>OAK_SERVER_URL</code>; testnet requires an explicit matching service URL. Configure the published deployment addresses and your RPC before starting MCP.</p>
+<p>Transactions reported as “awaiting finality” keep their signed journal evidence until final. New actions wait for reconciliation; a removed receipt is recovered at the same nonce, or an expired call has its nonce replaced with a zero-value self-transfer. Do not delete journal files to force a retry. If a sequence stops after approval, the error lists token, spender, base-unit amount and chain. The next action previews and revokes the remaining allowance before new work; keep ETH available for cleanup. You can also call <code>approve(spender, 0)</code> on that token in your own wallet on the named chain.</p>
+<p>Price notes require an ETH/USD pool observation no older than 30 minutes and a current 30-minute OAK trade window. Missing, future-dated or stale sources refuse note issuance with a retry explanation; an old Uniswap observation extrapolated by <code>observe(0)</code> does not qualify.</p>
+</details>
+</section>
+</div>
+</div>
+</div>
+</main>
+<footer class="scene-footer">
+<div class="scene-footer-top">
+<a class="scene-brand" href="index.html">
+<img src="oak-medallion.webp" width="40" height="40" alt="" loading="lazy">
+<span>Oak Agent Kit</span>
+</a>
+<nav aria-label="Footer">
+<ul>
+<li>
+<a href="how-it-works.html">How it works</a>
+</li>
+<li>
+<a href="pricing.html">Pricing</a>
+</li>
+<li>
+<a href="docs.html">Docs</a>
+</li>
+<li>
+<a href="security.html">Security</a>
+</li>
+<li>
+<a href="about.html">About</a>
+</li>
+<li>
+<a href="setup.html">Set up</a>
+</li>
+<li>
+<a href="token.html">Token</a>
+</li>
+<li>
+<a href="privacy.html">Privacy</a>
+</li>
+<li>
+<a href="https://github.com/OakAgentKit/oak">GitHub</a>
+</li>
+<li>
+<a href="https://x.com/OakAgentKit">@OakAgentKit on X</a>
+</li>
+</ul>
+</nav>
+</div>
+ <p>Pre-launch. Oak and $OAK are not released yet. Holding $OAK buys access and nothing else.</p>
+ <p>Independent software, not affiliated with Robinhood. Not financial advice. Oak never promises returns.</p>
+ <p>Region notice: project and asset availability varies by jurisdiction. You are responsible for local compliance.</p>
+ <p class="fine">MIT open kit; closed Oak server. Manrope is self-hosted under the SIL Open Font Licence.</p>
+</footer>
+</body>
+</html>

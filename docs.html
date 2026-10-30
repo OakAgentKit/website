@@ -3,116 +3,718 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Oak docs: what an agent can do with 25 Robinhood Chain projects | Oak Agent Kit</title>
-<meta name="description" content="What your agent will be able to do with Oak: the conventions every tool follows, the 25 project modules in six groups, the command line, project recipes and custody rules for agents.">
+<title>Oak docs: tool reference for 9 basic tools and 25 modules</title>
+<meta name="description" content="The Oak tool reference: amount conventions, the basic tools, every Robinhood Chain project module with its tool names, the command line, project recipes and notes for AI agents.">
 <meta name="theme-color" content="#062F27">
-<link rel="canonical" href="https://oakagentkit.org/docs.html">
-<meta property="og:url" content="https://oakagentkit.org/docs.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Oak Agent Kit">
-<meta property="og:title" content="Oak docs: what an agent can do with 25 Robinhood Chain projects | Oak Agent Kit">
-<meta property="og:description" content="What your agent will be able to do with Oak: the conventions every tool follows, the 25 project modules in six groups, the command line, project recipes and custody rules for agents.">
+<meta property="og:title" content="Oak docs: tool reference for 9 basic tools and 25 modules">
+<meta property="og:description" content="The Oak tool reference: amount conventions, the basic tools, every Robinhood Chain project module with its tool names, the command line, project recipes and notes for AI agents.">
 <meta property="og:image" content="https://oakagentkit.org/03-og-card-1200x630.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="The Oak mark in a carved-wood medallion beside a felt diorama of the giant Oak tree at dusk.">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@OakAgentKit">
 <link rel="icon" type="image/svg+xml" href="a-avatar-32.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
 <link rel="apple-touch-icon" href="favicon-180x180.png">
 <link rel="stylesheet" href="styles.css">
+<link rel="canonical" href="https://oakagentkit.org/docs.html">
+<meta property="og:url" content="https://oakagentkit.org/docs.html">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
-<header class="top">
-  <div class="wrap top-row">
-    <a class="brand" href="index.html" aria-label="Oak Agent Kit, home"><img src="a-lockup-dark.svg" width="857" height="208" alt="Oak Agent Kit"></a>
-    <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Open the menu">
-    <label class="nav-btn" for="nav-toggle">Menu</label>
-    <nav class="site-nav" aria-label="Main">
-      <ul>
-        <li><a href="how-it-works.html">How it works</a></li>
-        <li><a href="docs.html" aria-current="page">Docs</a></li>
-        <li><a href="security.html">Security</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="privacy.html">Privacy</a></li>
-        <li class="nav-install"><a href="https://x.com/OakAgentKit">Follow on X</a></li>
-      </ul>
-    </nav>
-  </div>
+<header class="scene-header">
+<div class="scene-header-inner">
+ <a class="scene-brand" href="index.html" aria-label="Oak Agent Kit, home">
+<img src="oak-medallion.webp" width="48" height="48" alt="">
+<span>Oak Agent Kit<small>Robinhood Chain · MCP</small>
+</span>
+</a>
+ <nav class="desktop-nav" aria-label="Main">
+<ul>
+<li>
+<a href="how-it-works.html">How it works</a>
+</li>
+<li>
+<a href="pricing.html">Pricing</a>
+</li>
+<li>
+<a href="docs.html" aria-current="page">Docs</a>
+</li>
+<li>
+<a href="security.html">Security</a>
+</li>
+<li>
+<a href="about.html">About</a>
+</li>
+<li>
+<a href="setup.html">Set up</a>
+</li>
+<li>
+<a href="token.html">Token</a>
+</li>
+<li>
+<a href="privacy.html">Privacy</a>
+</li>
+</ul>
+</nav>
+ <details class="mobile-nav">
+<summary>Menu</summary>
+<nav aria-label="Main mobile">
+<ul>
+<li>
+<a href="how-it-works.html">How it works</a>
+</li>
+<li>
+<a href="pricing.html">Pricing</a>
+</li>
+<li>
+<a href="docs.html" aria-current="page">Docs</a>
+</li>
+<li>
+<a href="security.html">Security</a>
+</li>
+<li>
+<a href="about.html">About</a>
+</li>
+<li>
+<a href="setup.html">Set up</a>
+</li>
+<li>
+<a href="token.html">Token</a>
+</li>
+<li>
+<a href="privacy.html">Privacy</a>
+</li>
+<li>
+<a href="https://x.com/OakAgentKit">Follow on X</a>
+</li>
+</ul>
+</nav>
+</details>
+ </div>
+<p class="release-notice">Coming soon · Oak is not released yet.</p>
 </header>
 <main id="main">
-<section class="page-hero">
-  <div class="wrap has-art">
-    <div>
-      <p class="eyebrow">What your agent can do</p>
-      <h1>Docs</h1>
-      <p class="lede">A preview of what ships at launch.</p>
-      
-      <nav class="toc" aria-label="On this page"><ul><li><a href="#basics">Conventions</a></li><li><a href="#modules">Projects</a></li><li><a href="#cli">Command line</a></li><li><a href="#recipes">Recipes</a></li><li><a href="#for-agents">For AI agents</a></li></ul></nav>
-    </div>
-    <figure class="art"><img src="02b-root-map-1600x1000.webp" width="1600" height="1000" alt="A top-down diorama map of a carved oak root hub. Glowing lime root channels cross green moss to a ring of small carved wooden workshops, mills, vaults and bridges." fetchpriority="high"></figure>
-  </div>
+<section class="scene-hero scene-docs" aria-labelledby="hero-title">
+ <h1 id="hero-title" class="sr-only">Docs</h1>
+ <picture class="scene-picture" aria-hidden="true">
+ <source media="(max-width: 700px)" srcset="scene-docs-phone.webp" width="780" height="975">
+ <img src="scene-docs-desktop.webp" width="1440" height="810" alt="" fetchpriority="high" decoding="async">
+ </picture>
+ <div class="scene-intro">
+<p>Every tool, in one place.</p>
+<a class="scene-button" href="docs.html#modules">Explore the tools<span aria-hidden="true"> ↗</span>
+</a>
+</div>
+ </section>
+<div class="page-body">
+<div class="wrap">
+<div class="prose wide docs-page">
+<details class="project-directory">
+<summary>All 25 projects and supported agents</summary>
+<ul class="project-names">
+<li>
+<span class="proj">KyberSwap</span>
+</li>
+<li>
+<span class="proj">Velora</span>
+</li>
+<li>
+<span class="proj">Steakhouse</span>
+</li>
+<li>
+<span class="proj">Spark</span>
+</li>
+<li>
+<span class="proj">NetNet</span>
+</li>
+<li>
+<span class="proj">Longbow</span>
+</li>
+<li>
+<span class="proj">Grove</span>
+</li>
+<li>
+<span class="proj">Beefy</span>
+</li>
+<li>
+<span class="proj">Pons</span>
+</li>
+<li>
+<span class="proj">Orbio</span>
+</li>
+<li>
+<span class="proj">HoodLock</span>
+</li>
+<li>
+<span class="proj">Merkl</span>
+</li>
+<li>
+<span class="proj">Relay</span>
+</li>
+<li>
+<span class="proj">Lighter</span>
+</li>
+<li>
+<span class="proj">ERC-8004</span>
+</li>
+<li>
+<span class="proj">hood.ag</span>
+</li>
+<li>
+<span class="proj">HeyResearch</span>
+</li>
+<li>
+<span class="proj">Priors</span>
+</li>
+<li>
+<span class="proj">Morpho Blue</span>
+</li>
+<li>
+<span class="proj">Uniswap liquidity</span>
+</li>
+<li>
+<span class="proj">Meridian</span>
+</li>
+<li>
+<span class="proj">Hookr</span>
+</li>
+<li>
+<span class="proj">TickerSpring</span>
+</li>
+<li>
+<span class="proj">Clanker</span>
+</li>
+<li>
+<span class="proj">pools.trade</span>
+</li>
+</ul>
+<p class="agent-names">
+<span class="agent">Claude Code</span> · <span class="agent">Codex</span> · <span class="agent">Gemini</span> · <span class="agent">Cursor</span> · <span class="agent">Grok</span>
+</p>
+<p>Mainnet: 4663. Testnet: basic tools and ERC-8004 identity only.</p>
+</details>
+<section class="doc-part" id="basics">
+<h2>Basics</h2>
+<details class="reference-detail">
+<summary>Read this section</summary>
+<div class="docs-narrow">
+<p>Every amount crosses JSON boundaries as a decimal base-unit string (never a float). Every tool output identifies the token address, symbol, chain ID, and decimals. Non-read requests use request-bound sessions (<code>X-Oak-Session</code> plus a single-use <code>X-Oak-Request</code> signature signed by an ephemeral in-memory <code>sessionKey</code>). Before signing any transaction sequence, the add-on requests a <code>preview</code> (<code>eth_simulateV1</code> with <code>traceTransfers: true</code>), reuses a matching preview from the same block within 12 seconds so <code>swap</code> does not re-simulate twice, builds exact token approvals only (never unlimited), and displays the simulated token deltas.</p>
+</div>
+<div class="table-wrap">
+<table class="md-table">
+<thead>
+<tr>
+<th scope="col">Tool</th>
+<th scope="col">Kind</th>
+<th scope="col">What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td data-label="Tool">
+<code>find_token</code>
+</td>
+<td data-label="Kind">Read</td>
+<td data-label="What it does">Verified token discovery by name, symbol, or address across fixed tokens (<code>ETH</code>, <code>USDG</code>, <code>WETH</code>, <code>USDe</code>, <code>$OAK</code>), official stock tokens, Clanker, and Pons (Pons and <code>pools.trade</code> require an address).</td>
+</tr>
+<tr>
+<td data-label="Tool">
+<code>balances</code>
+</td>
+<td data-label="Kind">Read</td>
+<td data-label="What it does">One-call <code>Multicall3.aggregate3</code> read of native ETH, USDG, WETH, USDe, <code>$OAK</code>, and official stock tokens from the official list.</td>
+</tr>
+<tr>
+<td data-label="Tool">
+<code>price</code>
+</td>
+<td data-label="Kind">Read</td>
+<td data-label="What it does">USD price (18-decimal base units) with a <code>stale</code> flag.</td>
+</tr>
+<tr>
+<td data-label="Tool">
+<code>quote</code>
+</td>
+<td data-label="Kind">Read</td>
+<td data-label="What it does">Compares KyberSwap, Velora, and Pons launch-curve routes by net output, warns when price impact exceeds 2% against reference prices, and issues a 60-second <code>quoteId</code>; <code>from</code> and <code>to</code> accept token addresses or verified symbols (<code>ETH</code>, <code>USDG</code>, <code>WETH</code>, <code>USDe</code>, <code>OAK</code>, and official stock tickers).</td>
+</tr>
+<tr>
+<td data-label="Tool">
+<code>swap</code>
+</td>
+<td data-label="Kind">Action</td>
+<td data-label="What it does">Builds exact-approval (never unlimited) and swap transactions for a <code>quoteId</code>, preserving <code>minAmountOut</code> and reusing a fresh same-block preview within 12 seconds.</td>
+</tr>
+<tr>
+<td data-label="Tool">
+<code>preview</code>
+</td>
+<td data-label="Kind">Read</td>
+<td data-label="What it does">Simulates an <code>UnsignedTx[]</code> sequence via <code>eth_simulateV1</code> and reports token balance deltas.</td>
+</tr>
+<tr>
+<td data-label="Tool">
+<code>history</code>
+</td>
+<td data-label="Kind">Read</td>
+<td data-label="What it does">Decoded subscription and ERC-20/module event history for the wallet.</td>
+</tr>
+<tr>
+<td data-label="Tool">
+<code>positions</code>
+</td>
+<td data-label="Kind">Read</td>
+<td data-label="What it does">One-call aggregated active positions across all 25 ecosystem modules.</td>
+</tr>
+<tr>
+<td data-label="Tool">
+<code>account</code>
+</td>
+<td data-label="Kind">Read</td>
+<td data-label="What it does">Subscription status on the wallet's authoritative lineage contract.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="docs-narrow">
+<h3 id="buy-a-token">Buy a token (<code>find_token</code> → <code>quote</code> → <code>preview</code> → <code>swap</code>)</h3>
+<p>This swap example is for mainnet (<code>4663</code>). Testnet exposes basic tools and ERC-8004 identity tools; swap routes and the other ecosystem modules are not configured there.</p>
+<ol>
+<li>
+<strong>Find the token (<code>find_token</code>):</strong> Look up a token by name, symbol, or contract address on chain <code>4663</code> to confirm its verified address and <code>decimals</code>:<pre tabindex="0" role="region" aria-label="Command example" class="code-block">
+<code data-lang="bash">oak call find_token '{&quot;query&quot;:&quot;TSLA&quot;}'</code>
+</pre>
+</li>
+<li>
+<strong>Quote the route (<code>quote</code>):</strong> Pass verified symbols (<code>ETH</code>, <code>USDG</code>, <code>WETH</code>, <code>USDe</code>, <code>OAK</code>, or an official stock ticker such as <code>TSLA</code>) or a verified token <code>address</code> from <code>find_token</code>, with <code>amountIn</code> in input token base units (<code>&quot;10000000&quot;</code> = <code>10 USDG</code> with 6 decimals):<pre tabindex="0" role="region" aria-label="Command example" class="code-block">
+<code data-lang="bash">oak call quote '{&quot;from&quot;:&quot;USDG&quot;,&quot;to&quot;:&quot;TSLA&quot;,&quot;amountIn&quot;:&quot;10000000&quot;,&quot;slippageBps&quot;:50}'</code>
+</pre>
+</li>
+<li>
+<strong>Preview the simulation (<code>preview</code>):</strong> Simulate an unsigned transaction sequence via <code>eth_simulateV1</code> to inspect exact token balance deltas (when you call <code>swap</code>, the local bridge also runs <code>preview</code> automatically before signing and sending):<pre tabindex="0" role="region" aria-label="Command example" class="code-block">
+<code data-lang="bash">oak call preview '{&quot;txs&quot;:[...]}'</code>
+</pre>
+</li>
+<li>
+<strong>Execute the swap (<code>swap</code>):</strong> Build, preview, sign locally, and broadcast the quoted swap using its 60-second <code>quoteId</code>:<pre tabindex="0" role="region" aria-label="Command example" class="code-block">
+<code data-lang="bash">oak call swap '{&quot;quoteId&quot;:&quot;&lt;quoteId&gt;&quot;}'</code>
+</pre>
+</li>
+</ol>
+</div>
+</details>
 </section>
-<div class="page-body"><div class="wrap"><div class="prose wide docs-page"><section class="doc-part" id="basics"><h2>Conventions</h2>
-<div class="docs-narrow"><p>The tool reference publishes with the release. At launch, these rules will hold for every tool.</p>
-<ul><li>Project tools are named <code>&lt;module&gt;_&lt;verb&gt;</code>: the project, then the action.</li><li>Amounts are decimal strings in the asset's smallest unit, never floating-point numbers.</li><li>Every result names the asset address, symbol, chain ID and decimals.</li><li>Before signing, the add-on will simulate (test-run) the transaction sequence (<code>eth_simulateV1</code>), reuse a matching same-block preview within 12 seconds, and build exact approvals only.</li><li>Errors come back as plain sentences that say what to fix.</li><li>A set of basic tools covers the common jobs across every project: look up a verified asset by name, symbol or address, read all balances in one call, get a quote across KyberSwap, Velora and Pons launch curves (using verified symbols or addresses), preview, swap, read the wallet's history, and list its open positions across every module in one call.</li></ul></div></section>
-<section class="doc-part" id="modules"><h2>25 project modules</h2>
-<div class="docs-narrow"><p>Each group below lists what the agent will be able to do at launch, with a prompt you could try. USDG (US dollar stablecoin) appears in several of them.</p></div>
+<section class="doc-part" id="modules">
+<h2>25 project modules</h2>
+<details class="reference-detail">
+<summary>Read this section</summary>
 <h3>Swap and Trade</h3>
-<p class="docs-count">8 projects</p>
-<p class="docs-names"><span class="proj">KyberSwap</span>, <span class="proj">Velora</span>, <span class="proj">Pons</span>, <span class="proj">pools.trade</span>, <span class="proj">Clanker</span>, <span class="proj">Hookr</span>, <span class="proj">TickerSpring</span>, <span class="proj">Uniswap liquidity</span></p>
-<div class="docs-prompt"><p class="docs-prompt-label">Example prompt</p><p class="docs-prompt-text">Swap 50 dollars of ETH to USDG with the best route, and show me the preview before anything is signed.</p></div>
-<ul><li>Compare routes from <span class="proj">KyberSwap</span> and <span class="proj">Velora</span> by net output, and refuse any swap that would pay out less than the quoted minimum.</li><li>Launch a coin on a <span class="proj">Pons</span> bonding curve (a formula that sets the cost as people buy and sell), buy and sell it, and graduate it to a liquidity pool.</li><li>Launch and trade coins through <span class="proj">pools.trade</span> and <span class="proj">Clanker</span>.</li><li>Create, cancel and claim limit orders through <span class="proj">Hookr</span> and <span class="proj">TickerSpring</span>.</li><li>Add, collect and remove liquidity positions with <span class="proj">Uniswap liquidity</span>.</li></ul>
+<div class="docs-prompt">
+<p class="docs-prompt-label">Example prompt</p>
+<p class="docs-prompt-text">Swap 50 USDG for ETH with the best route, and show me the preview before anything is signed.</p>
+</div>
+<div class="grid docs-mods">
+<article class="docs-mod">
+<h4>KyberSwap</h4>
+<div class="docs-chips">
+<code>kyberswap_quote</code>
+<code>kyberswap_swap</code>
+</div>
+<p>Route quoting and swap building; generic <code>quote</code>/<code>swap</code> compares KyberSwap, Velora, and Pons launch curves and enforces <code>minAmountOut</code>.</p>
+</article>
+<article class="docs-mod">
+<h4>Velora</h4>
+<div class="docs-chips">
+<code>velora_quote</code>
+<code>velora_swap</code>
+</div>
+<p>Route quoting and swap building with net output comparison and venue fee disclosure.</p>
+</article>
+<article class="docs-mod">
+<h4>Pons</h4>
+<div class="docs-chips">
+<code>pons_browse</code>
+<code>pons_status</code>
+<code>pons_launch_options</code>
+<code>pons_launch</code>
+<code>pons_transfer_creator_fee_recipient</code>
+<code>pons_set_buyback</code>
+<code>pons_buy</code>
+<code>pons_sell</code>
+<code>pons_graduate</code>
+<code>pons_claim</code>
+</div>
+<p>Complete bonding-curve and graduated Uniswap v4 token lifecycle (<code>pons_browse</code>, <code>pons_status</code>, <code>pons_launch_options</code>, <code>pons_launch</code>, <code>pons_transfer_creator_fee_recipient</code>, <code>pons_set_buyback</code>, <code>pons_buy</code>, <code>pons_sell</code>, <code>pons_graduate</code>, <code>pons_claim</code>), plus curve quotes in generic <code>quote</code>/<code>swap</code>.</p>
+</article>
+<article class="docs-mod">
+<h4>pools.trade</h4>
+<div class="docs-chips">
+<code>poolstrade_launch</code>
+<code>poolstrade_buy</code>
+<code>poolstrade_sell</code>
+<code>poolstrade_collect</code>
+<code>poolstrade_claim</code>
+</div>
+<p>Atomic Instant Launch (<code>poolstrade_launch</code> with explicit permanent <code>creatorFees</code>), v4 swaps (<code>poolstrade_buy</code>, <code>poolstrade_sell</code>), and fee collection/claims (<code>poolstrade_collect</code>, <code>poolstrade_claim</code>).</p>
+</article>
+<article class="docs-mod">
+<h4>Clanker</h4>
+<div class="docs-chips">
+<code>clanker_launch</code>
+<code>clanker_claim</code>
+<code>clanker_browse</code>
+</div>
+<p>Clanker v4 token launch (<code>clanker_launch</code>), MEV-aware fee locker claims (<code>clanker_claim</code>), and indexer search (<code>clanker_browse</code>).</p>
+</article>
+<article class="docs-mod">
+<h4>Hookr</h4>
+<div class="docs-chips">
+<code>hookr_create</code>
+<code>hookr_cancel</code>
+<code>hookr_fill</code>
+<code>hookr_claim_bounty</code>
+</div>
+<p>Sidecar limit orders on <code>HookrLimitOrders</code> (<code>hookr_create</code>, <code>hookr_cancel</code>, <code>hookr_fill</code>, <code>hookr_claim_bounty</code>).</p>
+</article>
+<article class="docs-mod">
+<h4>TickerSpring</h4>
+<div class="docs-chips">
+<code>tickerspring_create</code>
+<code>tickerspring_cancel</code>
+<code>tickerspring_claim</code>
+<code>tickerspring_orders</code>
+</div>
+<p>Agent REST API limit and market-opening orders (<code>tickerspring_create</code>, <code>tickerspring_cancel</code>, <code>tickerspring_claim</code>, <code>tickerspring_orders</code>).</p>
+</article>
+<article class="docs-mod">
+<h4>Uniswap liquidity</h4>
+<div class="docs-chips">
+<code>uniswap_add</code>
+<code>uniswap_collect</code>
+<code>uniswap_remove</code>
+<code>uniswap_list_positions</code>
+</div>
+<p>Uniswap v3 (<code>NonfungiblePositionManager</code>) and v4 (<code>PositionManager</code> + <code>Permit2</code>) liquidity management (<code>uniswap_add</code>, <code>uniswap_collect</code>, <code>uniswap_remove</code>, <code>uniswap_list_positions</code>).</p>
+</article>
+</div>
 <h3>Vaults and Rewards</h3>
-<p class="docs-count">7 projects</p>
-<p class="docs-names"><span class="proj">Steakhouse</span>, <span class="proj">Spark</span>, <span class="proj">NetNet</span>, <span class="proj">Longbow</span>, <span class="proj">Grove</span>, <span class="proj">Beefy</span>, <span class="proj">Merkl</span></p>
-<div class="docs-prompt"><p class="docs-prompt-label">Example prompt</p><p class="docs-prompt-text">List the vaults I can deposit into and tell me what I hold in each.</p></div>
-<ul><li>Deposit into and withdraw from <span class="proj">Steakhouse</span>, <span class="proj">Spark</span>, <span class="proj">NetNet</span>, <span class="proj">Longbow</span>, <span class="proj">Grove</span> and <span class="proj">Beefy</span>, including USDG and ETH vaults.</li><li>See what the wallet holds in each vault.</li><li>Find reward campaigns and claim what the wallet has earned through <span class="proj">Merkl</span>.</li></ul>
+<div class="docs-prompt">
+<p class="docs-prompt-label">Example prompt</p>
+<p class="docs-prompt-text">List the USDG vaults on Steakhouse and Spark, and tell me what I hold in each.</p>
+</div>
+<div class="grid docs-mods">
+<article class="docs-mod">
+<h4>Steakhouse</h4>
+<div class="docs-chips">
+<code>steakhouse_list</code>
+<code>steakhouse_deposit</code>
+<code>steakhouse_withdraw</code>
+</div>
+<p>Measured USDG ERC-4626 vault (<code>steakhouse_list</code>, <code>steakhouse_deposit</code>, <code>steakhouse_withdraw</code>).</p>
+</article>
+<article class="docs-mod">
+<h4>Spark</h4>
+<div class="docs-chips">
+<code>spark_list</code>
+<code>spark_deposit</code>
+<code>spark_withdraw</code>
+</div>
+<p>Measured spUSDG ERC-4626 vault (<code>spark_list</code>, <code>spark_deposit</code>, <code>spark_withdraw</code>).</p>
+</article>
+<article class="docs-mod">
+<h4>NetNet</h4>
+<div class="docs-chips">
+<code>netnet_list</code>
+<code>netnet_deposit</code>
+<code>netnet_withdraw</code>
+</div>
+<p>Measured nnUSDG ERC-4626 vault (<code>netnet_list</code>, <code>netnet_deposit</code>, <code>netnet_withdraw</code>).</p>
+</article>
+<article class="docs-mod">
+<h4>Longbow</h4>
+<div class="docs-chips">
+<code>longbow_list</code>
+<code>longbow_deposit</code>
+<code>longbow_withdraw</code>
+</div>
+<p>Core and Frontier USDG and ETH/WETH ERC-4626 vaults (<code>longbow_list</code>, <code>longbow_deposit</code>, <code>longbow_withdraw</code>).</p>
+</article>
+<article class="docs-mod">
+<h4>Grove</h4>
+<div class="docs-chips">
+<code>grove_list</code>
+<code>grove_deposit</code>
+<code>grove_withdraw</code>
+</div>
+<p>Grove x Steakhouse USDG public ERC-4626 vault (<code>grove_list</code>, <code>grove_deposit</code>, <code>grove_withdraw</code>).</p>
+</article>
+<article class="docs-mod">
+<h4>Beefy</h4>
+<div class="docs-chips">
+<code>beefy_list</code>
+<code>beefy_deposit</code>
+<code>beefy_withdraw</code>
+</div>
+<p>UP–WETH vault adapter (<code>beefy_list</code>, <code>beefy_deposit</code>, <code>beefy_withdraw</code>).</p>
+</article>
+<article class="docs-mod">
+<h4>Merkl</h4>
+<div class="docs-chips">
+<code>merkl_rewards</code>
+<code>merkl_claim</code>
+</div>
+<p>Campaign reward discovery and Distributor claims (<code>merkl_rewards</code>, <code>merkl_claim</code>). Powered by Merkl — <a href="https://app.merkl.xyz">https://app.merkl.xyz</a>
+</p>
+</article>
+</div>
 <h3>Borrow and Lend</h3>
-<p class="docs-count">2 projects</p>
-<p class="docs-names"><span class="proj">Morpho Blue</span>, <span class="proj">Priors</span></p>
-<div class="docs-prompt"><p class="docs-prompt-label">Example prompt</p><p class="docs-prompt-text">Show my lending position: what I have supplied and what I have borrowed.</p></div>
-<ul><li>Supply and withdraw collateral, borrow, repay, and check the position on <span class="proj">Morpho Blue</span>.</li><li>Lend into and withdraw from <span class="proj">Priors</span> credit pools, and borrow and repay on funded credit lines for agents that have an on-chain identity.</li></ul>
+<div class="docs-prompt">
+<p class="docs-prompt-label">Example prompt</p>
+<p class="docs-prompt-text">Show my Morpho Blue position: what I have supplied and what I have borrowed.</p>
+</div>
+<div class="grid docs-mods">
+<article class="docs-mod">
+<h4>Morpho Blue</h4>
+<div class="docs-chips">
+<code>morpho_supply_collateral</code>
+<code>morpho_withdraw_collateral</code>
+<code>morpho_borrow</code>
+<code>morpho_repay</code>
+<code>morpho_status</code>
+</div>
+<p>Collateral supply/withdrawal, borrowing, repayment, and position status (<code>morpho_supply_collateral</code>, <code>morpho_withdraw_collateral</code>, <code>morpho_borrow</code>, <code>morpho_repay</code>, <code>morpho_status</code>).</p>
+</article>
+<article class="docs-mod">
+<h4>Priors</h4>
+<div class="docs-chips">
+<code>priors_lend</code>
+<code>priors_withdraw</code>
+<code>priors_borrow</code>
+<code>priors_repay</code>
+<code>priors_status</code>
+</div>
+<p>
+<code>CreditPoolV2</code> lending and withdrawal for all wallets, plus borrowing and repayment for funded ERC-8004 credit lines (<code>priors_lend</code>, <code>priors_withdraw</code>, <code>priors_borrow</code>, <code>priors_repay</code>, <code>priors_status</code>).</p>
+</article>
+</div>
 <h3>Move Money</h3>
-<p class="docs-count">2 projects</p>
-<p class="docs-names"><span class="proj">Relay</span>, <span class="proj">Orbio</span></p>
-<div class="docs-prompt"><p class="docs-prompt-label">Example prompt</p><p class="docs-prompt-text">Bring 0.05 ETH over from another chain and tell me when it arrives.</p></div>
-<ul><li>Bridge into and out of Robinhood Chain with <span class="proj">Relay</span>, with live status tracking.</li><li>Buy AI credits and check the balance with <span class="proj">Orbio</span>.</li></ul>
+<div class="docs-prompt">
+<p class="docs-prompt-label">Example prompt</p>
+<p class="docs-prompt-text">Bridge 0.05 ETH from Base into Robinhood Chain and tell me when it arrives.</p>
+</div>
+<div class="grid docs-mods">
+<article class="docs-mod">
+<h4>Relay</h4>
+<div class="docs-chips">
+<code>relay_bridge_in</code>
+<code>relay_bridge_out</code>
+<code>relay_status</code>
+</div>
+<p>Cross-chain bridging into and out of chain <code>4663</code> with live status tracking (<code>relay_bridge_in</code>, <code>relay_bridge_out</code>, <code>relay_status</code>).</p>
+</article>
+<article class="docs-mod">
+<h4>Orbio</h4>
+<div class="docs-chips">
+<code>orbio_buy_credit</code>
+<code>orbio_credit_status</code>
+</div>
+<p>AI credit purchases and balance checks (<code>orbio_buy_credit</code>, <code>orbio_credit_status</code>).</p>
+</article>
+</div>
 <h3>Markets and Data</h3>
-<p class="docs-count">3 projects</p>
-<p class="docs-names"><span class="proj">Meridian</span>, <span class="proj">Lighter</span>, <span class="proj">HeyResearch</span></p>
-<div class="docs-prompt"><p class="docs-prompt-label">Example prompt</p><p class="docs-prompt-text">Browse open prediction markets and show me the perpetual funding rates.</p></div>
-<ul><li>Browse <span class="proj">Meridian</span> prediction markets, check positions, buy and sell, then settle and redeem.</li><li>Read perpetual funding rates (regular payments between traders betting up or down) from <span class="proj">Lighter</span>. This module is read-only.</li><li>Read project research and chain activity from <span class="proj">HeyResearch</span>. This module is read-only.</li></ul>
+<div class="docs-prompt">
+<p class="docs-prompt-label">Example prompt</p>
+<p class="docs-prompt-text">Browse open Meridian prediction markets and show me the Lighter funding rates.</p>
+</div>
+<div class="grid docs-mods">
+<article class="docs-mod">
+<h4>Meridian</h4>
+<div class="docs-chips">
+<code>meridian_browse</code>
+<code>meridian_positions</code>
+<code>meridian_buy</code>
+<code>meridian_sell</code>
+<code>meridian_settle</code>
+<code>meridian_redeem</code>
+</div>
+<p>Prediction market browsing, positions, settlement/redemption, and multi-turn WebSocket RFQ auctions (<code>meridian_browse</code>, <code>meridian_positions</code>, <code>meridian_buy</code>, <code>meridian_sell</code>, <code>meridian_settle</code>, <code>meridian_redeem</code>).</p>
+</article>
+<article class="docs-mod">
+<h4>Lighter</h4>
+<div class="docs-chips">
+<code>lighter_funding</code>
+</div>
+<p>Read-only normalised perpetual funding rates (<code>lighter_funding</code>).</p>
+</article>
+<article class="docs-mod">
+<h4>HeyResearch</h4>
+<div class="docs-chips">
+<code>heyresearch_research_project</code>
+<code>heyresearch_chain_activity</code>
+</div>
+<p>Read-only project research and chain activity (<code>heyresearch_research_project</code>, <code>heyresearch_chain_activity</code>), preserving HeyResearch attribution links and status wording.</p>
+</article>
+</div>
 <h3>Identity and Tools</h3>
-<p class="docs-count">3 projects</p>
-<p class="docs-names"><span class="proj">ERC-8004</span>, <span class="proj">hood.ag</span>, <span class="proj">HoodLock</span></p>
-<div class="docs-prompt"><p class="docs-prompt-label">Example prompt</p><p class="docs-prompt-text">Register a .hood name for my agent and set it as the name shown for its address.</p></div>
-<ul><li>Register an on-chain identity for the agent with <span class="proj">ERC-8004</span> and update its details.</li><li>Register a .hood name with <span class="proj">hood.ag</span>, set it as the name shown for the address, and look names up.</li><li>Lock coins and liquidity positions, create airdrops and claim them with <span class="proj">HoodLock</span>.</li></ul></section>
-<section class="doc-part" id="cli"><h2>Command line</h2>
-<div class="docs-narrow"><p>The main commands, all run on your computer:</p></div>
-<div class="table-wrap"><table class="md-table"><thead><tr><th scope="col">Command</th><th scope="col">What it does</th></tr></thead><tbody><tr><td data-label="Command"><code>oak init</code></td><td data-label="What it does">Creates the wallet. Run it in your own terminal only.</td></tr><tr><td data-label="Command"><code>oak setup</code></td><td data-label="What it does">Sets up the agent's ERC-8004 identity: <code>oak setup link &lt;agentId&gt;</code> links an existing ID with an owner signature (no ETH needed), or <code>oak setup register</code> mints a new ID on-chain.</td></tr><tr><td data-label="Command"><code>oak identity unlink</code></td><td data-label="What it does">Removes a linked identity without gas (or <code>--owner &lt;linkId&gt;</code> with the owner's signature). Reads stay open; actions pause.</td></tr><tr><td data-label="Command"><code>oak address</code></td><td data-label="What it does">Shows the agent's wallet address.</td></tr><tr><td data-label="Command"><code>oak export</code></td><td data-label="What it does">Exports the private key. Run it in your own terminal only.</td></tr><tr><td data-label="Command"><code>oak mcp</code></td><td data-label="What it does">Starts the MCP (AI tool connector) server that your agent connects to.</td></tr><tr><td data-label="Command"><code>oak call &lt;tool&gt; &lt;json&gt;</code></td><td data-label="What it does">Calls one tool directly from the command line.</td></tr><tr><td data-label="Command"><code>oak register</code></td><td data-label="What it does">Registers or updates the agent's on-chain identity.</td></tr><tr><td data-label="Command"><code>oak recipes add &lt;package-or-path&gt;</code></td><td data-label="What it does">Imports a project recipe. Also: <code>remove</code> and <code>list</code>.</td></tr><tr><td data-label="Command"><code>oak config set &lt;key&gt; &lt;value&gt;</code></td><td data-label="What it does">Sets the network (mainnet 4663 by default, or testnet 46630 opt-in), an endpoint or an address.</td></tr></tbody></table></div></section>
-<section class="doc-part" id="recipes"><h2>Project recipes</h2>
-<div class="docs-narrow"><p>A project team can publish an opt-in recipe that adds its own read and action definitions. A recipe is data only, so no third-party code runs. Each is limited to 64 KiB per file, 4 MiB per archive and 100 entries, and labelled <code>as-is, not reviewed by Oak</code>. You import one yourself with <code>oak recipes add</code>.</p></div></section>
-<section class="doc-part" id="for-agents"><h2>For AI agents</h2>
-<div class="docs-narrow"><p class="docs-agents"><strong>Works with:</strong> <span class="home-chip agent">Claude Code</span> <span class="home-chip agent">Codex</span> <span class="home-chip agent">Gemini</span> <span class="home-chip agent">Cursor</span> <span class="home-chip agent">Grok</span> <span class="docs-agents-more">and any other MCP client that can run a tool server on your computer.</span></p>
-<p>An operating guide for agents, <code>AGENTS.md</code>, and a plain-text summary, <code>llms.txt</code>, ship with the kit. Their custody rules are short:</p>
-<ul><li>Never run <code>oak init</code> or <code>oak export</code> inside an agent tool call. The human owner runs both in their own terminal.</li><li>Never ask the user for a private key, seed phrase or passphrase. Oak will reject any tool argument that contains one.</li><li>All signing happens locally in the add-on.</li><li>Always read the preview before signing.</li></ul></div></section></div></div></div>
+<div class="docs-prompt">
+<p class="docs-prompt-label">Example prompt</p>
+<p class="docs-prompt-text">Register a .hood name for my agent and set it as the primary name.</p>
+</div>
+<div class="grid docs-mods">
+<article class="docs-mod">
+<h4>ERC-8004</h4>
+<div class="docs-chips">
+<code>erc8004_register</code>
+<code>erc8004_update</code>
+<code>erc8004_identity</code>
+</div>
+<p>On-chain agent identity registration, gasless owner linking (<code>oak setup</code>), unlinking (<code>oak identity unlink</code>), and metadata updates on <code>IdentityRegistry</code> (<code>erc8004_register</code>, <code>erc8004_update</code>, <code>erc8004_identity</code>), with the default <code>oak.registrar</code> marker.</p>
+</article>
+<article class="docs-mod">
+<h4>hood.ag</h4>
+<div class="docs-chips">
+<code>hoodag_register</code>
+<code>hoodag_resolve</code>
+<code>hoodag_name_info</code>
+</div>
+<p>
+<code>.hood</code> domain registration via USDG, reverse record configuration, and resolution (<code>hoodag_register</code>, <code>hoodag_resolve</code>, <code>hoodag_name_info</code>).</p>
+</article>
+<article class="docs-mod">
+<h4>HoodLock</h4>
+<div class="docs-chips">
+<code>hoodlock_lock</code>
+<code>hoodlock_burn</code>
+<code>hoodlock_airdrop_create</code>
+<code>hoodlock_airdrop_claim</code>
+<code>hoodlock_list_locks</code>
+</div>
+<p>Token, v2 LP, and v3 position locks, token burns, and airdrop create, airdrop claim, and airdrop recipient lists (<code>hoodlock_lock</code>, <code>hoodlock_burn</code>, <code>hoodlock_airdrop_create</code>, <code>hoodlock_airdrop_claim</code>, <code>hoodlock_list_locks</code>; omit <code>id</code> on <code>hoodlock_airdrop_claim</code> to query eligible airdrops).</p>
+</article>
+</div>
+</details>
+</section>
+<section class="doc-part" id="cli">
+<h2>Command line</h2>
+<details class="reference-detail">
+<summary>Read this section</summary>
+<div class="docs-narrow">
+<pre tabindex="0" role="region" aria-label="Command example" class="code-block">
+<code data-lang="text">oak init
+oak setup [register [--no-tag]|link &lt;agentId&gt;]
+oak identity unlink [--owner &lt;linkId&gt;]
+oak address
+oak status
+oak export
+oak subscribe --plan &lt;holder|nohold&gt;
+oak renew
+oak cancel
+oak register [--no-tag]
+oak recipes add &lt;pkg-or-path&gt;
+oak recipes remove &lt;project&gt;
+oak recipes list [project]
+oak config set &lt;key&gt; &lt;value&gt;
+oak mcp
+oak call &lt;tool&gt; &lt;json&gt;</code>
+</pre>
+<ul>
+<li>
+<code>oak init</code> and <code>oak export</code> require a direct owner terminal (<code>stdin.isTTY &amp;&amp; stdout.isTTY</code>).</li>
+<li>
+<code>oak setup</code> sets up the wallet's ERC-8004 identity: <code>oak setup link &lt;agentId&gt;</code> links an existing agent ID using a gasless owner EIP-712 signature in your terminal, and <code>oak setup register [--no-tag]</code> mints and verifies a new agent ID on-chain.</li>
+<li>
+<code>oak identity unlink</code> revokes the active identity link without gas (<code>--owner &lt;linkId&gt;</code> revokes by link ID using the current NFT owner's signature).</li>
+<li>
+<code>oak status</code> calls the <code>account</code> tool and outputs subscription state (<code>plan</code>, <code>contract</code>, <code>paidUntil</code>, <code>oakHeld</code>, <code>oakRequired</code>, <code>phase</code>, <code>holderOpen</code>, <code>noHoldPrice</code>, and optional <code>priceError</code>).</li>
+<li>
+<code>oak register</code> registers or updates the agent's ERC-8004 on-chain identity using the configured <code>profile</code> JSON (<code>oak config set profile '&lt;json&gt;'</code>), attaching the <code>oak.registrar</code> marker unless <code>--no-tag</code> is passed.</li>
+</ul>
+</div>
+</details>
+</section>
+<section class="doc-part" id="recipes">
+<h2>Project recipes</h2>
+<details class="reference-detail">
+<summary>Read this section</summary>
+<div class="docs-narrow">
+<p>Ecosystem builders can publish declarative JSON recipes (<code>oak-recipe/v1</code>) validated against <a href="https://github.com/OakAgentKit/oak/blob/main/packages/addon/schema/recipe.schema.json">packages/addon/schema/recipe.schema.json</a>. Each recipe names one contract on chain <code>4663</code>, one ABI function item, typed inputs, and <code>kind: &quot;read&quot; | &quot;tx&quot;</code>. The add-on's importer (<code>oak recipes add</code>) is strictly data-only: it streams tarballs with a 4 MiB / 100-entry cap, ignores non-recipe files without writing or executing them, copies only <code>package/recipes/&lt;name&gt;.recipe.json</code> (max 64 KiB each) where <code>project</code> matches <code>package/package.json</code>'s <code>oakProject</code>, and never executes third-party code. Recipes are opt-in by name (<code>&lt;project&gt;.&lt;name&gt;</code>) and labelled <strong>
+<code>as-is, not reviewed by Oak</code>
+</strong>.</p>
+</div>
+</details>
+</section>
+<section class="doc-part" id="for-agents">
+<h2>For AI agents</h2>
+<details class="reference-detail">
+<summary>Read this section</summary>
+<div class="docs-narrow">
+<p>AI agents should start with <a href="https://github.com/OakAgentKit/oak/blob/main/AGENTS.md">AGENTS.md</a>, the operating guide that lists every tool, convention and custody rule. A plain-text summary for agents is in <a href="https://github.com/OakAgentKit/oak/blob/main/llms.txt">llms.txt</a>.</p>
+<h3>Hard Custody Boundaries for Agents</h3>
+<ol>
+<li>
+<strong>Never run <code>oak init</code> or <code>oak export</code> inside an agent tool call.</strong> Both commands must be run by the human owner <strong>in your own terminal, never through the agent</strong>. Even if an agent can allocate a PTY, the security boundary is human execution so recovery words and private keys never enter agent context, prompts, or logs. Your private key <strong>never leaves your computer</strong>, and Oak <strong>cannot recover a lost key</strong>.</li>
+<li>
+<strong>Never ask the user for a private key, seed phrase, passphrase, or raw owner key.</strong> Both the local bridge (<code>packages/addon/src/bridge.ts</code>) and the Oak server reject any JSON argument containing <code>private_key</code>, <code>secret_key</code>, <code>wallet_key</code>, <code>mnemonic</code>, <code>seed</code>, <code>seed_phrase</code>, or <code>recovery_phrase</code>. When linking an external owner's ERC-8004 agent ID (<code>oak setup link &lt;agentId&gt;</code>) or revoking by owner (<code>oak identity unlink --owner &lt;linkId&gt;</code>), the owner signs the EIP-712 <code>OakIdentityLink</code> challenge in their own terminal (<code>Owner signing requires your terminal. Run oak setup link &lt;agentId&gt; or oak identity unlink --owner &lt;linkId&gt; there.</code>).</li>
+<li>
+<strong>All signing happens locally inside <code>@oakagentkit/addon</code>.</strong> The Oak server <strong>never sees your key</strong> and <strong>never signs or sends a transaction</strong>. <strong>Your swaps and deposits go straight from your wallet to the project; subscription payments go to the burner (<code>OakBurner</code>) and the single-owner treasury wallet.</strong> Non-read requests use a 15-minute wallet-signed <code>X-Oak-Session</code> plus a 60-second single-use <code>X-Oak-Request</code> signature from an ephemeral in-memory <code>sessionKey</code>.</li>
+<li>
+<strong>Always inspect the preview.</strong> Every transaction tool call runs <code>preview</code> (<code>eth_simulateV1</code> with <code>traceTransfers: true</code>) before signing and sending, and reuses a matching preview from the same block within 12 seconds so <code>swap</code> does not re-simulate twice. Built approvals are always exact (<code>amountIn</code>), never unlimited. Note that simulation transfers exclude gas and do not prove off-chain external settlement (such as Relay destination fills or Meridian RFQ relayer execution).</li>
+</ol>
+</div>
+</details>
+</section>
+</div>
+</div>
+</div>
 </main>
-<footer class="foot">
-  <div class="wrap">
-    <p class="foot-notice">Coming soon. Oak is not released yet, so this site describes what it will do at launch.</p>
-    <div class="foot-links">
-      <div><h2>Explore</h2><ul><li><a href="how-it-works.html">How it works</a></li><li><a href="docs.html">Docs</a></li><li><a href="security.html">Security</a></li></ul></div>
-      <div><h2>About</h2><ul><li><a href="about.html">About</a></li><li><a href="privacy.html">Privacy</a></li></ul></div>
-      <div><h2>Follow</h2><ul><li><a href="https://x.com/OakAgentKit">@OakAgentKit on X</a></li></ul></div>
-    </div>
-    <p><strong>Not affiliated.</strong> Oak is independent and is not affiliated with Robinhood. It uses none of that company's logos, wordmarks or lookalike marks.</p>
-    <p><strong>Region notice.</strong> Availability of third-party projects and assets varies by jurisdiction. You are responsible for following the laws and terms where you live. Oak never promises returns.</p>
-    <p><strong>Names.</strong> Project and agent names belong to their owners and appear only to say what Oak works with. Oak is not affiliated with or endorsed by them, and shows no logos.</p>
-    <p class="fine">At launch the kit is open source under the MIT licence and the Oak server stays closed. Fonts: Manrope, SIL Open Font Licence 1.1.</p>
-  </div>
+<footer class="scene-footer">
+<div class="scene-footer-top">
+<a class="scene-brand" href="index.html">
+<img src="oak-medallion.webp" width="40" height="40" alt="" loading="lazy">
+<span>Oak Agent Kit</span>
+</a>
+<nav aria-label="Footer">
+<ul>
+<li>
+<a href="how-it-works.html">How it works</a>
+</li>
+<li>
+<a href="pricing.html">Pricing</a>
+</li>
+<li>
+<a href="docs.html">Docs</a>
+</li>
+<li>
+<a href="security.html">Security</a>
+</li>
+<li>
+<a href="about.html">About</a>
+</li>
+<li>
+<a href="setup.html">Set up</a>
+</li>
+<li>
+<a href="token.html">Token</a>
+</li>
+<li>
+<a href="privacy.html">Privacy</a>
+</li>
+<li>
+<a href="https://github.com/OakAgentKit/oak">GitHub</a>
+</li>
+<li>
+<a href="https://x.com/OakAgentKit">@OakAgentKit on X</a>
+</li>
+</ul>
+</nav>
+</div>
+ <p>Pre-launch. Oak and $OAK are not released yet. Holding $OAK buys access and nothing else.</p>
+ <p>Independent software, not affiliated with Robinhood. Not financial advice. Oak never promises returns.</p>
+ <p>Region notice: project and asset availability varies by jurisdiction. You are responsible for local compliance.</p>
+ <p class="fine">MIT open kit; closed Oak server. Manrope is self-hosted under the SIL Open Font Licence.</p>
 </footer>
 </body>
 </html>

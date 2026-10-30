@@ -3,93 +3,473 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Privacy: what stays on your computer and what the server sees | Oak Agent Kit</title>
-<meta name="description" content="Plain-language privacy notes: what Oak will keep on your computer, what the Oak server will see, what network nodes (RPCs) and project services see, and how long data is kept.">
+<title>Privacy policy: what stays on your computer and what the server sees | Oak Agent Kit</title>
+<meta name="description" content="Plain-language privacy policy: what Oak keeps on your computer, what the Oak server sees, what RPCs and ecosystem project services see, retention, and how to ask questions.">
 <meta name="theme-color" content="#062F27">
-<link rel="canonical" href="https://oakagentkit.org/privacy.html">
-<meta property="og:url" content="https://oakagentkit.org/privacy.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Oak Agent Kit">
-<meta property="og:title" content="Privacy: what stays on your computer and what the server sees | Oak Agent Kit">
-<meta property="og:description" content="Plain-language privacy notes: what Oak will keep on your computer, what the Oak server will see, what network nodes (RPCs) and project services see, and how long data is kept.">
+<meta property="og:title" content="Privacy policy: what stays on your computer and what the server sees | Oak Agent Kit">
+<meta property="og:description" content="Plain-language privacy policy: what Oak keeps on your computer, what the Oak server sees, what RPCs and ecosystem project services see, retention, and how to ask questions.">
 <meta property="og:image" content="https://oakagentkit.org/03-og-card-1200x630.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="The Oak mark in a carved-wood medallion beside a felt diorama of the giant Oak tree at dusk.">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@OakAgentKit">
 <link rel="icon" type="image/svg+xml" href="a-avatar-32.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
 <link rel="apple-touch-icon" href="favicon-180x180.png">
 <link rel="stylesheet" href="styles.css">
+<link rel="canonical" href="https://oakagentkit.org/privacy.html">
+<meta property="og:url" content="https://oakagentkit.org/privacy.html">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
-<header class="top">
-  <div class="wrap top-row">
-    <a class="brand" href="index.html" aria-label="Oak Agent Kit, home"><img src="a-lockup-dark.svg" width="857" height="208" alt="Oak Agent Kit"></a>
-    <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Open the menu">
-    <label class="nav-btn" for="nav-toggle">Menu</label>
-    <nav class="site-nav" aria-label="Main">
-      <ul>
-        <li><a href="how-it-works.html">How it works</a></li>
-        <li><a href="docs.html">Docs</a></li>
-        <li><a href="security.html">Security</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="privacy.html" aria-current="page">Privacy</a></li>
-        <li class="nav-install"><a href="https://x.com/OakAgentKit">Follow on X</a></li>
-      </ul>
-    </nav>
-  </div>
+<header class="scene-header">
+<div class="scene-header-inner">
+ <a class="scene-brand" href="index.html" aria-label="Oak Agent Kit, home">
+<img src="oak-medallion.webp" width="48" height="48" alt="">
+<span>Oak Agent Kit<small>Robinhood Chain · MCP</small>
+</span>
+</a>
+ <nav class="desktop-nav" aria-label="Main">
+<ul>
+<li>
+<a href="how-it-works.html">How it works</a>
+</li>
+<li>
+<a href="pricing.html">Pricing</a>
+</li>
+<li>
+<a href="docs.html">Docs</a>
+</li>
+<li>
+<a href="security.html">Security</a>
+</li>
+<li>
+<a href="about.html">About</a>
+</li>
+<li>
+<a href="setup.html">Set up</a>
+</li>
+<li>
+<a href="token.html">Token</a>
+</li>
+<li>
+<a href="privacy.html" aria-current="page">Privacy</a>
+</li>
+</ul>
+</nav>
+ <details class="mobile-nav">
+<summary>Menu</summary>
+<nav aria-label="Main mobile">
+<ul>
+<li>
+<a href="how-it-works.html">How it works</a>
+</li>
+<li>
+<a href="pricing.html">Pricing</a>
+</li>
+<li>
+<a href="docs.html">Docs</a>
+</li>
+<li>
+<a href="security.html">Security</a>
+</li>
+<li>
+<a href="about.html">About</a>
+</li>
+<li>
+<a href="setup.html">Set up</a>
+</li>
+<li>
+<a href="token.html">Token</a>
+</li>
+<li>
+<a href="privacy.html" aria-current="page">Privacy</a>
+</li>
+<li>
+<a href="https://x.com/OakAgentKit">Follow on X</a>
+</li>
+</ul>
+</nav>
+</details>
+ </div>
+<p class="release-notice">Coming soon · Oak is not released yet.</p>
 </header>
 <main id="main">
-<section class="page-hero">
-  <div class="wrap">
-    <div>
-      <p class="eyebrow">Privacy</p>
-      <h1>Privacy</h1>
-      <p class="lede">What stays on your computer, and what each service can see.</p>
-      
-      <nav class="toc" aria-label="On this page"><ul><li><a href="#trackers">No trackers on this site</a></li><li><a href="#local">What stays on your computer</a></li><li><a href="#server">What the Oak server sees</a></li><li><a href="#third">What network nodes (RPCs) and project services see</a></li><li><a href="#retention">How long data is kept</a></li><li><a href="#questions">Questions</a></li></ul></nav>
-    </div>
-    
-  </div>
-</section>
-<div class="page-body"><div class="wrap"><div class="prose privacy-page"><section class="doc-part" id="trackers"><h2>No trackers on this site</h2>
-<p>These pages load only files hosted with them. They contain no scripts, analytics, cookies, tracking pixels, forms, frames or external asset loads.</p></section>
-<section class="doc-part" id="local"><h2>What stays on your computer</h2>
-<p>At launch, Oak will keep its state in <code>~/.oak/</code>. The directory will be readable only by your operating-system user (mode <code>0700</code>, files <code>0600</code>), and symlinks and hardlinks are rejected.</p>
-<div class="table-wrap"><table class="md-table"><thead><tr><th scope="col">Where</th><th scope="col">What it holds</th></tr></thead><tbody><tr><td data-label="Where"><code>~/.oak/wallet.enc</code></td><td data-label="What it holds">Your wallet's private key, encrypted with AES-256-GCM.</td></tr><tr><td data-label="Where">Your system keychain, or a passphrase</td><td data-label="What it holds">The key that opens the wallet. Stored in macOS Keychain, Windows Credential Manager or the Linux Secret Service, or derived in memory from your passphrase with scrypt.</td></tr><tr><td data-label="Where"><code>~/.oak/config.json</code></td><td data-label="What it holds">The endpoints and addresses you configured.</td></tr><tr><td data-label="Where"><code>~/.oak/&lt;address&gt;.pending.json</code> and <code>.cleared.json</code></td><td data-label="What it holds">A journal of transactions in flight, used to recover if a process stops.</td></tr><tr><td data-label="Where"><code>~/.oak/recipes/</code></td><td data-label="What it holds">Recipes you chose to import.</td></tr></tbody></table></div>
-<p>These never leave your computer: your 24 recovery words, your private key and your passphrase. The add-on and the server both reject any tool argument that contains one.</p></section>
-<section class="doc-part" id="server"><h2>What the Oak server sees</h2>
-<p>At launch, the server will receive:</p>
-<ul><li>Your wallet address and a short-lived session signature, valid for up to 15 minutes. The server checks it in memory and never logs it.</li>
-<li>The name of the tool and its arguments, such as an asset address and an amount you asked to quote.</li>
-<li>The connecting IP address on some open requests, used only to rate-limit them. Counters live in memory for 60 seconds.</li></ul>
-<p>The server never sees your private key and never signs or sends a transaction. It has no user account database, no email list and no telemetry.</p></section>
-<section class="doc-part" id="third"><h2>What network nodes (RPCs) and project services see</h2>
-<p>The network node (RPC endpoint) you configure can see the IP address making requests, the wallet address queried and any signed transaction you broadcast. Once a transaction is on Robinhood Chain, its sender, data and events are public and permanent.</p>
-<p>Some modules use a project's own web service. At launch, the Oak server will send that service the details it needs: asset addresses, amounts, the chain ID and, where the action needs it, your wallet address. The list of services for each module publishes with the docs at launch.</p></section>
-<section class="doc-part" id="retention"><h2>How long data is kept</h2>
-<ul><li><strong>On your computer:</strong> until you delete <code>~/.oak/</code>. Back up your recovery words or run <code>oak export</code> first, because Oak cannot recover a lost key.</li>
-<li><strong>On the server:</strong> session signatures are checked in memory and never written to disk. Rate-limit counters last 60 seconds. The state of a multi-step quote lives in memory only while it is active.</li>
-<li><strong>On the blockchain:</strong> transactions, balances, <code>.hood</code> names and on-chain agent identities are public ledger records that Oak cannot delete.</li></ul></section>
-<section class="doc-part" id="questions"><h2>Questions</h2>
-<p>For privacy or documentation questions, contact <a href="https://x.com/OakAgentKit">@OakAgentKit</a> on X. Do not post vulnerabilities in public. See <a href="security.html#reporting">how to report a vulnerability</a>.</p></section></div></div></div>
+<section class="scene-hero scene-privacy" aria-labelledby="hero-title">
+ <h1 id="hero-title" class="sr-only">Privacy</h1>
+ <picture class="scene-picture" aria-hidden="true">
+ <source media="(max-width: 700px)" srcset="scene-privacy-phone.webp" width="780" height="975">
+ <img src="scene-privacy-desktop.webp" width="1440" height="810" alt="" fetchpriority="high" decoding="async">
+ </picture>
+ <div class="scene-intro">
+<p>Your data, plainly explained.</p>
+<a class="scene-button" href="privacy.html#policy">Read the policy<span aria-hidden="true"> ↗</span>
+</a>
+</div>
+ </section>
+<div class="page-body" id="policy">
+<div class="wrap">
+<div class="prose wide">
+<p>This page explains in plain words what data stays on your computer, what the Oak server sees, what your RPC and ecosystem project services see, how long data is kept, and how to ask questions. The local add-on is open source; the hosted service has the data practices described below.</p>
+<hr>
+<h2 id="zero-website-trackers">1. Zero Website Trackers</h2>
+<details class="reference-detail">
+<summary>Read policy details</summary>
+<p>Oak's public documentation and static pages use self-hosted assets only:</p>
+<ul>
+<li>They contain <strong>no <code>&lt;script&gt;</code> tags</strong>, <strong>no analytics</strong>, <strong>no cookies</strong>, <strong>no tracking pixels</strong>, <strong>no <code>&lt;form&gt;</code> or <code>&lt;iframe&gt;</code> elements</strong>, and <strong>no external asset loads</strong>.</li>
+</ul>
+<hr>
+</details>
+<h2 id="what-the-add-on-keeps-locally-on-your-computer">2. What the Add-On Keeps Locally on Your Computer</h2>
+<details class="reference-detail">
+<summary>Read policy details</summary>
+<p>When you run <code>@oakagentkit/addon</code> on your machine, it stores state inside <code>~/.oak/</code> (directory mode <code>0700</code>, files mode <code>0600</code>, owned by your OS user; symlinks and hardlinks are rejected):</p>
+<div class="table-wrap">
+<table class="md-table">
+<thead>
+<tr>
+<th scope="col">Local Store</th>
+<th scope="col">Code Reference</th>
+<th scope="col">What It Holds</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td data-label="Local Store">
+<code>~/.oak/wallet.enc</code>
+</td>
+<td data-label="Code Reference">
+<code>packages/addon/src/wallet.ts</code>
+</td>
+<td data-label="What It Holds">Your wallet's 32-byte secp256k1 private key encrypted with <code>AES-256-GCM</code> (<code>iv</code>, <code>tag</code>, <code>ciphertext</code>, and storage metadata).</td>
+</tr>
+<tr>
+<td data-label="Local Store">OS Keychain (or passphrase <code>scrypt</code>)</td>
+<td data-label="Code Reference">
+<code>packages/addon/src/wallet.ts</code>
+</td>
+<td data-label="What It Holds">A random 32-byte data encryption key stored in macOS Keychain, Windows Credential Manager, or Linux persistent Secret Service (<code>@napi-rs/keyring</code>, service <code>&quot;Oak wallet data key&quot;</code>), or derived on demand in memory via <code>scrypt</code> (<code>N=131072, r=8, p=1</code>) from your terminal passphrase.</td>
+</tr>
+<tr>
+<td data-label="Local Store">
+<code>~/.oak/config.json</code>
+</td>
+<td data-label="Code Reference">
+<code>packages/addon/src/cli.ts</code>, <code>packages/addon/src/identity.ts</code>
+</td>
+<td data-label="What It Holds">Your configured network and URLs (<code>OAK_NETWORK</code>, <code>OAK_CHAIN_ID</code>, <code>OAK_SERVER_URL</code>, <code>OAK_RPC_URL</code>, <code>OAK_RPC_URL_&lt;chainId&gt;</code>), contract addresses (<code>OAK_SUBSCRIPTION_ADDRESS</code>, <code>OAK_RETIRED_SUBSCRIPTION_ADDRESSES</code>, <code>OAK_TOKEN_ADDRESS</code>, <code>OAK_USDG_ADDRESS</code>, <code>OAK_ORACLE_ADDRESS</code>, <code>OAK_ETH_USDG_POOL_ADDRESS</code>, <code>OAK_FINALITY</code>), optional ERC-8004 <code>identity</code> record (<code>chainId</code>, <code>registry</code>, <code>agentId</code>, and optional <code>linkId</code>), optional <code>profile</code> JSON, and optional <code>grandfather</code> Merkle tree JSON.</td>
+</tr>
+<tr>
+<td data-label="Local Store">
+<code>~/.oak/&lt;address&gt;.pending.json</code> &amp; <code>&lt;address&gt;.cleared.json</code>
+</td>
+<td data-label="Code Reference">
+<code>packages/addon/src/journal.ts</code>
+</td>
+<td data-label="What It Holds">Local transaction journal used to recover or fee-bump in-flight transactions if a process crashes. Holds <code>nonce</code>, <code>hash</code>, <code>rawTx</code> (in <code>.pending.json</code> only), <code>kind</code>, <code>sentAt</code>, <code>chainId</code>, <code>blockNumber</code>, and <code>clearedAt</code>/<code>reason</code>.</td>
+</tr>
+<tr>
+<td data-label="Local Store">
+<code>~/.oak/recipes/&lt;project&gt;/&lt;name&gt;.recipe.json</code>
+</td>
+<td data-label="Code Reference">
+<code>packages/addon/src/recipes.ts</code>
+</td>
+<td data-label="What It Holds">Declarative <code>oak-recipe/v1</code> JSON files you explicitly imported with <code>oak recipes add</code>.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+<strong>What never leaves your computer:</strong>
+</p>
+<ul>
+<li>Your 24 recovery words (displayed once on your terminal during <code>oak init</code> and wiped from memory).</li>
+<li>Your private key and passphrase (wiped from memory buffers with <code>.fill(0)</code> after unlocking or signing), and any external NFT owner key used to sign an <code>OakIdentityLink</code> challenge in your terminal during <code>oak setup link &lt;agentId&gt;</code> or <code>oak identity unlink --owner &lt;linkId&gt;</code>.</li>
+<li>Both the local bridge (<code>packages/addon/src/bridge.ts</code>) and the Oak server reject any tool argument containing <code>private_key</code>, <code>secret_key</code>, <code>wallet_key</code>, <code>mnemonic</code>, <code>seed</code>, <code>seed_phrase</code>, or <code>recovery_phrase</code>.</li>
+</ul>
+<hr>
+</details>
+<h2 id="what-the-oak-server-sees">3. What the Oak Server Sees</h2>
+<details class="reference-detail">
+<summary>Read policy details</summary>
+<p>When the add-on talks to your configured Oak service URL, the server receives only:</p>
+<ol>
+<li>
+<strong>Authenticated tool calls (<code>POST /v1/tools/:name</code>):</strong>
+<ul>
+<li>
+<strong>Your wallet address and session signature (<code>X-Oak-Session</code>):</strong> A base64url-encoded JSON payload <code>{&quot;expires&quot;:&lt;unix-seconds&gt;,&quot;wallet&quot;:&quot;&lt;EIP-55-address&gt;&quot;,&quot;sessionKey&quot;?:&quot;&lt;EIP-55-address&gt;&quot;,&quot;identity&quot;?:{&quot;chainId&quot;:&lt;id&gt;,&quot;registry&quot;:&quot;&lt;address&gt;&quot;,&quot;agentId&quot;:&quot;&lt;id&gt;&quot;,&quot;linkId&quot;?:&quot;0x...&quot;},&quot;nonce&quot;?:&quot;0x&lt;32-byte-hex&gt;&quot;}</code> (lifetime up to <code>900</code> seconds / 15 minutes) signed with EIP-191 by your wallet (<code>packages/addon/src/session.ts</code>).</li>
+<li>
+<strong>Single-use request signature (<code>X-Oak-Request</code>):</strong> Sent on non-read tool calls. A base64url-encoded JSON payload <code>{&quot;session&quot;:&quot;&lt;sha256-of-X-Oak-Session&gt;&quot;,&quot;method&quot;:&quot;POST&quot;,&quot;path&quot;:&quot;&lt;request-path&gt;&quot;,&quot;bodyHash&quot;:&quot;&lt;sha256-of-raw-body&gt;&quot;,&quot;nonce&quot;:&quot;0x&lt;32-byte-hex&gt;&quot;,&quot;expires&quot;:&lt;unix-seconds&gt;}</code> (lifetime up to <code>60</code> seconds, capped by session expiry) signed with EIP-191 by the ephemeral in-memory <code>sessionKey</code> bound inside <code>X-Oak-Session</code> (<code>packages/addon/src/session.ts</code>). Used to block replayed requests and enforce per-link and per-session request limits.</li>
+<li>
+<strong>The tool name and JSON arguments:</strong> For example, the token address and base-unit amount you asked to quote, preview, or build (<code>&lt;= 1 MiB</code>), or a locally signed EIP-712 RFQ approval during a <code>meridian_buy</code> / <code>meridian_sell</code> continuation.</li>
+</ul>
+</li>
+<li>
+<strong>ERC-8004 identity setup, status, and unlinking (<code>POST /v1/identity/challenge</code>, <code>/v1/identity/link</code>, <code>/v1/identity/status</code>, <code>/v1/identity/unlink</code>):</strong>
+<ul>
+<li>
+<strong>Session and request headers:</strong> <code>X-Oak-Session</code> on all four endpoints, plus <code>X-Oak-Request</code> (up to <code>60</code> seconds, single use) on <code>challenge</code>, <code>link</code>, and <code>unlink</code> (<code>packages/addon/src/identity.ts</code>).</li>
+<li>
+<strong>Identity tuple and owner challenge proof:</strong> The ERC-8004 identity fields (<code>chainId</code>, <code>registry</code>, <code>agentId</code>, and optional <code>linkId</code>), and on <code>link</code> or owner-initiated <code>unlink</code>, the single-use EIP-712 <code>OakIdentityLink</code> challenge (<code>300</code>-second window) and the NFT owner's signature (<code>signature</code>) proving ownership or revocation (<code>packages/core/src/identity-link.ts</code>).</li>
+<li>
+<strong>Client IP address for challenge rate limiting (<code>POST /v1/identity/challenge</code>):</strong> When <code>/v1/identity/challenge</code> is called without an already-verified active session, the server uses the client IP address (from the direct connection or the local reverse-proxy header <code>X-Oak-Client-IP</code>, with IPv6 addresses grouped by <code>/64</code> prefix) solely to enforce an in-memory rate limit of <code>10</code> challenges per <code>60</code> seconds per IP bucket (across up to <code>1,024</code> buckets in memory).</li>
+</ul>
+</li>
+<li>
+<strong>Open price-note requests (<code>POST /v1/price-note</code>):</strong>
+<ul>
+<li>
+<strong>Target and wallet:</strong> <code>{&quot;for&quot;:&quot;subscription&quot;,&quot;wallet&quot;:&quot;&lt;address&gt;&quot;}</code> or <code>{&quot;for&quot;:&quot;burner&quot;}</code> (with <code>X-Oak-Session</code> on <code>burner</code> requests to authenticate the caller's wallet).</li>
+<li>
+<strong>Peer IP address for rate limiting:</strong> The server uses the direct connection IP address, ignoring caller-supplied forwarded-IP headers, solely to enforce the 60-second in-memory rate limit (<code>10</code> requests/minute per IP, <code>120</code> requests/minute global).</li>
+</ul>
+</li>
+<li>
+<strong>Health checks (<code>GET /v1/health</code>):</strong> Responds with <code>{&quot;ok&quot;:true,&quot;data&quot;:{&quot;status&quot;:&quot;ok&quot;}}</code> when the service is healthy.</li>
+</ol>
+<p>The Oak server <strong>never sees your private key</strong>, <strong>never signs or sends a blockchain transaction</strong>, and <strong>has no user account database, email list, or telemetry SDK</strong>.</p>
+<hr>
+</details>
+<h2 id="what-chain-rpcs-and-ecosystem-project-services-see">4. What Chain RPCs and Ecosystem Project Services See</h2>
+<details class="reference-detail">
+<summary>Read policy details</summary>
+<h3 id="blockchain-rpcs">Blockchain RPCs (<code>OAK_RPC_URL</code> and <code>OAK_RPC_URL_&lt;chainId&gt;</code>)</h3>
+<ul>
+<li>
+<strong>Your local add-on</strong> connects directly to your configured RPC endpoint to read balances, nonces, gas fees, subscription state, and declarative read recipes, to run <code>eth_simulateV1</code> gas checks, and to broadcast your signed transactions (<code>eth_sendRawTransaction</code>).</li>
+<li>
+<strong>The Oak server</strong> connects to its configured RPC endpoint to read on-chain contract state, verify ERC-8004 agent NFT ownership (<code>ownerOf</code> on <code>IdentityRegistry</code> <code>0x8004A169FB4a3325136EB29fA0ceB6D2e539a432</code>), check subscription access (<code>hasRecord</code>, <code>plan</code>, <code>paidUntil</code>, <code>signupOakCount</code>, and <code>$OAK</code> balance), read <code>OakOracle</code>, and simulate <code>preview</code> calls.</li>
+<li>Any RPC provider you configure can see the IP address making those RPC requests, the wallet address queried, and any signed transaction broadcast through it. Once a transaction is broadcast to Robinhood Chain (<code>4663</code>) or a Relay origin chain, its sender, calldata, and events are <strong>public and permanent on the blockchain</strong>.</li>
+</ul>
+<h3 id="third-party-ecosystem-project-services">Third-Party Ecosystem Project Services</h3>
+<p>Many modules interact purely through RPC contract reads and calldata construction (such as Steakhouse, Spark, NetNet, Longbow, Grove, Beefy, Pons, Orbio, Priors, Morpho Blue, Uniswap liquidity, ERC-8004, hood.ag, Hookr, and pools.trade). When you invoke a module that uses a project's off-chain API, that project service receives the request parameters from the Oak server (or, for recipe imports, from your computer):</p>
+<div class="table-wrap">
+<table class="md-table">
+<thead>
+<tr>
+<th scope="col">Service</th>
+<th scope="col">When Contacted</th>
+<th scope="col">What It Receives</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td data-label="Service">
+<strong>KyberSwap API</strong> &amp; <strong>Velora API</strong>
+</td>
+<td data-label="When Contacted">
+<code>quote</code>, <code>swap</code>, <code>kyberswap_*</code>, <code>velora_*</code>
+</td>
+<td data-label="What It Receives">Token addresses, input amount, slippage, chain ID <code>4663</code>, and wallet address for route construction.</td>
+</tr>
+<tr>
+<td data-label="Service">
+<strong>HoodLock Proof API</strong>
+</td>
+<td data-label="When Contacted">
+<code>hoodlock_airdrop_claim</code>
+</td>
+<td data-label="What It Receives">Merkle claim contract/campaign identifier (or omitted <code>id</code> to query eligible airdrops) and wallet address to look up Merkle claim proofs. (<code>hoodlock_airdrop_create</code> outputs the airdrop recipient list to you locally by default rather than uploading it.)</td>
+</tr>
+<tr>
+<td data-label="Service">
+<strong>Merkl API</strong> (<code>api.merkl.xyz</code>)</td>
+<td data-label="When Contacted">
+<code>merkl_rewards</code>, <code>merkl_claim</code>
+</td>
+<td data-label="What It Receives">Wallet address and chain ID <code>4663</code> to fetch cumulative claimable reward proofs. Powered by Merkl — <a href="https://app.merkl.xyz">https://app.merkl.xyz</a>
+</td>
+</tr>
+<tr>
+<td data-label="Service">
+<strong>Relay API</strong> (<code>api.relay.link</code>)</td>
+<td data-label="When Contacted">
+<code>relay_bridge_in</code>, <code>relay_bridge_out</code>, <code>relay_status</code>
+</td>
+<td data-label="What It Receives">Origin/destination chain IDs, token addresses, amounts, wallet address, and request ID (authenticated using the service's Relay credential).</td>
+</tr>
+<tr>
+<td data-label="Service">
+<strong>Lighter REST API</strong>
+</td>
+<td data-label="When Contacted">
+<code>lighter_funding</code>
+</td>
+<td data-label="What It Receives">Read-only market query for funding rates (no wallet data required).</td>
+</tr>
+<tr>
+<td data-label="Service">
+<strong>HeyResearch REST API</strong>
+</td>
+<td data-label="When Contacted">
+<code>heyresearch_research_project</code>, <code>heyresearch_chain_activity</code>
+</td>
+<td data-label="What It Receives">Anonymous read-only project or chain activity query.</td>
+</tr>
+<tr>
+<td data-label="Service">
+<strong>Meridian Predict GraphQL &amp; WebSocket RFQ Relayer</strong>
+</td>
+<td data-label="When Contacted">
+<code>meridian_browse</code>, <code>meridian_positions</code>, <code>meridian_buy</code>, <code>meridian_sell</code>
+</td>
+<td data-label="What It Receives">Market/position queries, wallet address, and (for <code>meridian_buy</code> / <code>meridian_sell</code>) your locally signed EIP-712 <code>MintApproval</code> or <code>TradeApproval</code> message so the relayer can submit the fill.</td>
+</tr>
+<tr>
+<td data-label="Service">
+<strong>TickerSpring Agent API</strong> (<code>api.tickerspring.com</code>)</td>
+<td data-label="When Contacted">
+<code>tickerspring_create</code>, <code>tickerspring_cancel</code>, <code>tickerspring_claim</code>, <code>tickerspring_orders</code>
+</td>
+<td data-label="What It Receives">Wallet address (<code>owner</code>), token address, order side/price/amount, or order ID.</td>
+</tr>
+<tr>
+<td data-label="Service">
+<strong>Clanker Indexer</strong> (<code>clanker.world/api/tokens</code>)</td>
+<td data-label="When Contacted">
+<code>find_token</code>, <code>clanker_browse</code>, <code>positions</code> (Clanker)</td>
+<td data-label="What It Receives">Search query, pagination cursor, or deployer wallet address on chain <code>4663</code>.</td>
+</tr>
+<tr>
+<td data-label="Service">
+<strong>Official Stock-Token List</strong>
+</td>
+<td data-label="When Contacted">
+<code>balances</code>, <code>find_token</code>, <code>quote</code>
+</td>
+<td data-label="What It Receives">Read-only <code>GET</code> request for the list of official stock-token contract addresses and symbols on chain <code>4663</code> (<code>packages/core/src/tokens.ts</code>).</td>
+</tr>
+<tr>
+<td data-label="Service">
+<strong>npm Registry</strong> (<code>registry.npmjs.org</code>)</td>
+<td data-label="When Contacted">
+<code>oak recipes add &lt;npm-pkg&gt;</code> (run locally)</td>
+<td data-label="What It Receives">Direct HTTPS <code>GET</code> from your computer to fetch package metadata and the <code>.tgz</code> archive stream.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+</details>
+<h2 id="retention-and-deletion">5. Retention and Deletion</h2>
+<details class="reference-detail">
+<summary>Read policy details</summary>
+<ul>
+<li>
+<strong>On your computer (<code>~/.oak/</code>):</strong>
+<ul>
+<li>Kept on your disk until you delete <code>~/.oak/</code> or remove individual recipe projects with <code>oak recipes remove &lt;project&gt;</code>.</li>
+<li>The saved <code>identity</code> record in <code>~/.oak/config.json</code> (<code>chainId</code>, <code>registry</code>, <code>agentId</code>, and optional <code>linkId</code>) stays in your config while your ERC-8004 identity link is valid and is cleared automatically by the add-on when you run <code>oak identity unlink</code> or when the server reports that the identity was unlinked, revoked, transferred, or burned (it is kept across temporary RPC or server outages so a retry does not drop your link).</li>
+<li>Remember to back up your recovery words or run <code>oak export</code> before deleting <code>~/.oak/wallet.enc</code>, because Oak cannot recover a lost key.</li>
+</ul>
+</li>
+<li>
+<strong>On the Oak server:</strong>
+<ul>
+<li>
+<strong>ERC-8004 identity store (<code>/var/lib/oak/identity.json</code>, file mode <code>0600</code>):</strong>
+<ul>
+<li>
+<strong>Active and recently revoked links (<code>links</code>):</strong> Stores each verified link record (<code>id</code>, the <code>OakIdentityLink</code> payload with <code>chainId</code>, <code>registry</code>, <code>agentId</code>, <code>agentWallet</code>, <code>audience</code>, <code>challenge</code>, <code>issuedAt</code>, and <code>expiresAt</code>, plus <code>owner</code>, <code>proofHash</code>, <code>blockNumber</code>, <code>blockHash</code>, <code>consumedAt</code>, optional <code>checkedThrough</code>, and optional <code>revokedAt</code>; raw owner signatures are never stored). Active links are kept while the link remains active so the server can authorize the linked agent wallet without re-prompting the NFT owner; revoked or superseded links (<code>revokedAt</code>) are kept for <strong>
+<code>24</code> hours (<code>86,400</code> seconds)</strong> so a revoked link cannot be replayed or revived, and are then pruned on the next store cleanup.</li>
+<li>
+<strong>Request replay records (<code>requests</code>):</strong> Stores consumed single-use <code>X-Oak-Request</code> records (<code>key</code> digest of session and request nonce, <code>expires</code>, <code>wallet</code>, <code>linkId</code>, <code>session</code> SHA-256 hash of <code>X-Oak-Session</code>, and <code>usedAt</code> timestamp). Kept until the parent session expires (<strong>up to <code>900</code> seconds / 15 minutes</strong>) to block replayed <code>X-Oak-Request</code> headers and enforce per-link and per-session request limits (<code>4</code> concurrent sessions per link, <code>180</code> requests per session, <code>60</code> requests per <code>60</code> seconds), and then pruned.</li>
+<li>
+<strong>Consumed challenge proofs (<code>proofs</code>):</strong> Stores SHA-256 digests of consumed <code>OakIdentityLink</code> challenges (<code>chainId</code>, <code>registry</code>, <code>agentId</code>, <code>digest</code>, <code>expiresAt</code>, <code>purpose</code>, and optional <code>linkId</code>). Kept until the challenge window expires (<strong>
+<code>300</code> seconds / 5 minutes</strong>, capped at <code>32</code> link proofs per identity) so a signed owner challenge cannot be replayed, and then pruned.</li>
+</ul>
+</li>
+<li>
+<strong>Session headers (<code>X-Oak-Session</code>):</strong> Verified in memory; the raw header is never written to disk, and only its SHA-256 hash inside <code>identity.json</code> request records is kept for up to <strong>
+<code>900</code> seconds (15 minutes)</strong> until session expiry.</li>
+<li>
+<strong>In-memory rate-limit counters:</strong> Price-note per-IP and global timestamps (<code>10</code>/minute per IP, <code>120</code>/minute global) and <code>/v1/identity/challenge</code> per-IP buckets (<code>10</code> per <code>60</code> seconds per IP or IPv6 <code>/64</code> prefix across up to <code>1,024</code> buckets) are held in process memory only and expire after <strong>
+<code>60</code> seconds</strong>.</li>
+<li>
+<strong>Meridian RFQ continuation state:</strong> Held in process memory only while the short multi-turn auction handoff is active; discarded immediately when the exchange completes, expires, or disconnects.</li>
+<li>
+<strong>Issued price-note nonces (<code>/var/lib/oak/nonces.jsonl</code>, file mode <code>0600</code>):</strong> Random 32-byte hex nonces (<code>0x...</code>) are appended to disk and kept <strong>indefinitely</strong> for the lifetime of the deployment so the price-note issuer never reissues a nonce across restarts.</li>
+<li>
+<strong>Aggregate health metrics (<code>/var/lib/oak/metrics.json</code>, file mode <code>0600</code>):</strong> Rolling 5-minute aggregate counters (<code>requests</code>, <code>serverErrors</code>, <code>clientErrors</code>, process <code>rss</code> memory, and timestamp <code>at</code>) with no IPs, wallets, headers, or request bodies; overwritten every <strong>
+<code>60</code> seconds</strong> for local service health checks.</li>
+<li>
+<strong>Encrypted state backups (<code>/var/lib/oak/backups/</code>):</strong> Hourly encrypted off-host snapshots (<code>restic</code>) of <code>/var/lib/oak/identity.json</code> and <code>/var/lib/oak/nonces.jsonl</code> so active identity links and issued price-note nonces survive a host failure without resetting replay fences.</li>
+<li>
+<strong>System logs (<code>systemd-journald</code>, <code>/etc/systemd/journald.conf.d/oak.conf</code>):</strong> Operational service and reverse-proxy logs (capped at <code>100</code> MB on disk and <code>32</code> MB in runtime memory, with no HTTP request header or body access logs) are kept for at most <strong>
+<code>7</code> days (<code>MaxRetentionSec=7day</code>)</strong> for service troubleshooting and then rotated out automatically.</li>
+</ul>
+</li>
+<li>
+<strong>On the blockchain:</strong> Transactions, token balances, subscription records, <code>.hood</code> names, and ERC-8004 agent registrations on Robinhood Chain (<code>4663</code>) are permanent public ledger records and cannot be deleted by Oak.</li>
+</ul>
+<hr>
+</details>
+<h2 id="how-to-ask-questions">6. How to Ask Questions</h2>
+<details class="reference-detail">
+<summary>Read policy details</summary>
+<ul>
+<li>
+<strong>General privacy or documentation questions:</strong> Open an issue or discussion on the OakAgentKit GitHub repository (<code>https://github.com/OakAgentKit/oak</code>) or contact <a href="https://x.com/OakAgentKit">@OakAgentKit</a> on X.</li>
+<li>
+<strong>Security vulnerabilities:</strong> Do not post vulnerabilities publicly; use GitHub private vulnerability reporting at <code>https://github.com/OakAgentKit/oak/security/advisories/new</code> as described in <a href="security.html#reporting">
+<code>SECURITY.md</code>
+</a>.</li>
+</ul>
+</details>
+</div>
+</div>
+</div>
 </main>
-<footer class="foot">
-  <div class="wrap">
-    <p class="foot-notice">Coming soon. Oak is not released yet, so this site describes what it will do at launch.</p>
-    <div class="foot-links">
-      <div><h2>Explore</h2><ul><li><a href="how-it-works.html">How it works</a></li><li><a href="docs.html">Docs</a></li><li><a href="security.html">Security</a></li></ul></div>
-      <div><h2>About</h2><ul><li><a href="about.html">About</a></li><li><a href="privacy.html">Privacy</a></li></ul></div>
-      <div><h2>Follow</h2><ul><li><a href="https://x.com/OakAgentKit">@OakAgentKit on X</a></li></ul></div>
-    </div>
-    <p><strong>Not affiliated.</strong> Oak is independent and is not affiliated with Robinhood. It uses none of that company's logos, wordmarks or lookalike marks.</p>
-    <p><strong>Region notice.</strong> Availability of third-party projects and assets varies by jurisdiction. You are responsible for following the laws and terms where you live. Oak never promises returns.</p>
-    <p><strong>Names.</strong> Project and agent names belong to their owners and appear only to say what Oak works with. Oak is not affiliated with or endorsed by them, and shows no logos.</p>
-    <p class="fine">At launch the kit is open source under the MIT licence and the Oak server stays closed. Fonts: Manrope, SIL Open Font Licence 1.1.</p>
-  </div>
+<footer class="scene-footer">
+<div class="scene-footer-top">
+<a class="scene-brand" href="index.html">
+<img src="oak-medallion.webp" width="40" height="40" alt="" loading="lazy">
+<span>Oak Agent Kit</span>
+</a>
+<nav aria-label="Footer">
+<ul>
+<li>
+<a href="how-it-works.html">How it works</a>
+</li>
+<li>
+<a href="pricing.html">Pricing</a>
+</li>
+<li>
+<a href="docs.html">Docs</a>
+</li>
+<li>
+<a href="security.html">Security</a>
+</li>
+<li>
+<a href="about.html">About</a>
+</li>
+<li>
+<a href="setup.html">Set up</a>
+</li>
+<li>
+<a href="token.html">Token</a>
+</li>
+<li>
+<a href="privacy.html">Privacy</a>
+</li>
+<li>
+<a href="https://github.com/OakAgentKit/oak">GitHub</a>
+</li>
+<li>
+<a href="https://x.com/OakAgentKit">@OakAgentKit on X</a>
+</li>
+</ul>
+</nav>
+</div>
+ <p>Pre-launch. Oak and $OAK are not released yet. Holding $OAK buys access and nothing else.</p>
+ <p>Independent software, not affiliated with Robinhood. Not financial advice. Oak never promises returns.</p>
+ <p>Region notice: project and asset availability varies by jurisdiction. You are responsible for local compliance.</p>
+ <p class="fine">MIT open kit; closed Oak server. Manrope is self-hosted under the SIL Open Font Licence.</p>
 </footer>
 </body>
 </html>
