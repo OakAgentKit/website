@@ -28,8 +28,8 @@
 <header class="scene-header">
 <div class="scene-header-inner">
  <a class="scene-brand" href="index.html" aria-label="Oak Agent Kit, home">
-<img src="oak-medallion.webp" width="36" height="36" alt="">
-<span>Oak Agent Kit</span>
+<img class="brand-mark" src="oak-mark-44.webp" srcset="oak-mark-88.webp 2x, oak-mark-132.webp 3x" width="44" height="44" alt="">
+<img class="brand-word" src="oak-wordmark-1x.webp" srcset="oak-wordmark-2x.webp 2x, oak-wordmark-3x.webp 3x" width="164" height="26" alt="">
 </a>
  <nav class="desktop-nav" aria-label="Main">
 <ul>
@@ -457,7 +457,7 @@
 <h4 id="what-to-include">What to Include</h4>
 <ul>
 <li>
-<strong>Affected target:</strong> Specify whether the issue affects the published npm packages (<code>@oakagentkit/addon</code>, <code>@oakagentkit/core</code>), the smart contracts in <a href="https://github.com/OakAgentKit/oak/blob/main/packages/contracts">
+<strong>Affected target:</strong> Specify whether the issue affects the published npm packages (<code>@oakagentkit/addon</code>, <code>@oakagentkit/core</code>), the smart contracts in <a href="https://github.com/OakAgentKit/oak/blob/main/contracts">
 <code>packages/contracts/</code>
 </a> (<code>OakOracle.sol</code>, <code>OakSubscription.sol</code>, <code>OakBurner.sol</code>, or their libraries), or the hosted Oak service.</li>
 <li>
@@ -465,9 +465,7 @@
 <li>
 <strong>Reproduction:</strong> Provide minimal, self-contained reproduction steps or a standalone Foundry test (<code>forge test</code>) conducted against a local fork or testnet (<code>46630</code>).</li>
 <li>
-<strong>Impact:</strong> Explain how the issue violates the custody, authority, or pricing bounds documented in <a href="https://github.com/OakAgentKit/oak/blob/main/THREAT_MODEL.md">
-<code>THREAT_MODEL.md</code>
-</a>, <a href="security.html#authority">
+<strong>Impact:</strong> Explain how the issue violates the custody, authority, or pricing bounds documented in <code>THREAT_MODEL.md</code>, <a href="security.html#authority">
 <code>docs/trust/authority.md</code>
 </a>, and <a href="security.html#key">
 <code>docs/trust/where-your-key-lives.md</code>
@@ -488,15 +486,13 @@
 <li>
 <strong>Local wallet custody and signing:</strong> Any flaw that leaks private keys, recovery phrases, passphrases, or session credentials to prompts, tool outputs, logs, or network endpoints, or that bypasses <code>eth_simulateV1</code> transaction previews, chain-ID verification, exact-amount ERC-20 approvals, or the 12-second prepared-transaction signing window.</li>
 <li>
-<strong>Declarative recipe handling (<code>oak-recipe/v1</code>):</strong> Any path that executes third-party code during <code>oak recipes add</code> or recipe execution, escapes <code>~/.oak/recipes/</code>, follows symbolic or hard links, or bypasses the 64 KiB file, 4 MiB decompressed archive, or 100-entry limits enforced with <a href="https://github.com/OakAgentKit/oak/blob/main/packages/addon/schema/recipe.schema.json">
-<code>packages/addon/schema/recipe.schema.json</code>
-</a>.</li>
+<strong>Declarative recipe handling (<code>oak-recipe/v1</code>):</strong> Any path that executes third-party code during <code>oak recipes add</code> or recipe execution, escapes <code>~/.oak/recipes/</code>, follows symbolic or hard links, or bypasses the 64 KiB file, 4 MiB decompressed archive, or 100-entry limits enforced with <code>packages/addon/schema/recipe.schema.json</code>.</li>
 <li>
 <strong>Continuation and untrusted-input validation:</strong> Any bypass of domain, wallet, stage, deadline, or hash verification during multi-turn EIP-712 RFQ continuations (<code>meridian_buy</code>, <code>meridian_sell</code>), or failure to strip control and format characters from untrusted external token metadata.</li>
 </ul>
 </li>
 <li>
-<strong>Smart contracts (<a href="https://github.com/OakAgentKit/oak/blob/main/packages/contracts">
+<strong>Smart contracts (<a href="https://github.com/OakAgentKit/oak/blob/main/contracts">
 <code>packages/contracts/</code>
 </a>):</strong>
 <ul>
@@ -521,9 +517,7 @@
 <li>
 <strong>Documented authority and economic residuals:</strong> The single-owner treasury and admin model (<code>0x856bb126188bDB5e425D3ac9D59E9ffBD12e6ECf</code>), the <code>0.5x</code> to <code>1.5x</code> stolen-signer pricing band, the <code>0.49x</code> burner chunk floor and just-in-time liquidity cap interaction, spot manipulation costs on thin pools, and the external Pons owner's 3-day timelock on creator-fee recipients (<code>0x263ed295dAFaE1d9AAdD6E56c4B6F9f38eE019Dd</code>), as documented in <a href="security.html#authority">
 <code>docs/trust/authority.md</code>
-</a> and <a href="https://github.com/OakAgentKit/oak/blob/main/THREAT_MODEL.md">
-<code>THREAT_MODEL.md</code>
-</a>.</li>
+</a> and <code>THREAT_MODEL.md</code>.</li>
 <li>
 <strong>Third-party infrastructure and protocols:</strong> Bugs or outages in the 25 third-party ecosystem protocols, external APIs, RPC providers, or the user's operating system and hardware.</li>
 <li>
@@ -549,9 +543,9 @@
 <footer class="scene-footer">
 <div class="scene-footer-inner">
 <div class="scene-footer-top">
-<a class="scene-brand" href="index.html">
-<img src="oak-medallion.webp" width="36" height="36" alt="" loading="lazy">
-<span>Oak Agent Kit</span>
+<a class="scene-brand" href="index.html" aria-label="Oak Agent Kit, home">
+<img class="brand-mark" src="oak-mark-44.webp" srcset="oak-mark-88.webp 2x, oak-mark-132.webp 3x" width="44" height="44" alt="" loading="lazy">
+<img class="brand-word" src="oak-wordmark-1x.webp" srcset="oak-wordmark-2x.webp 2x, oak-wordmark-3x.webp 3x" width="164" height="26" alt="" loading="lazy">
 </a>
 <nav aria-label="Footer">
 <ul>

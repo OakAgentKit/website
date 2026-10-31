@@ -464,7 +464,9 @@ h3 { font-size: 24px; line-height: 30px; margin: 0 0 8px; }
 }
 .scene-header-inner { min-height: 62px; padding: 0 16px; display: flex; align-items: center; gap: 24px; }
 .scene-brand { display: inline-flex; align-items: center; gap: 12px; flex-shrink: 0; margin-right: auto; color: var(--paper); text-decoration: none; font-size: 16px; line-height: 20px; font-weight: 600; }
-.scene-brand img { display: block; width: 36px; height: 36px; border-radius: 50%; }
+.scene-brand img { display: block; }
+.scene-brand .brand-mark { width: 44px; height: 44px; border-radius: 50%; }
+.scene-brand .brand-word { width: 164px; height: 26px; }
 .scene-brand:hover { color: var(--paper); }
 .desktop-nav ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 16px; }
 .desktop-nav a { display: flex; align-items: center; min-height: 44px; color: var(--paper); font-size: 14px; line-height: 20px; font-weight: 600; text-decoration: none; transition: color 160ms var(--ease); }
@@ -618,6 +620,10 @@ h3 { font-size: 24px; line-height: 30px; margin: 0 0 8px; }
  .scene-hero .hero-actions { align-items: flex-start; text-align: left; translate: none; }
 }
 
+/* The 404 is a hero and a footer. On a tall screen the art reaches down toward the footer instead of leaving
+   empty ground under it (measured 130px at 768x900 before). */
+@media (min-width:701px) { .scene-hero.scene-404:last-child { min-height: max(56.25vw, calc(100vh - 340px)); } }
+
 /* ---------- Section 3: the two action families ---------- */
 .glass-pill {
  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
@@ -649,9 +655,9 @@ h3 { font-size: 24px; line-height: 30px; margin: 0 0 8px; }
 
 /* ---------- Section 6: grid, spacing and the sections below the scene ---------- */
 .quiet-section, .page-body .wrap, .scene-footer-inner { width: calc(100% - 2 * var(--gutter)); max-width: 1200px; margin-inline: auto; }
-.quiet-section { padding: 48px 0; }
+.quiet-section { padding: 40px 0; }
 .scene-hero + .quiet-section, .scene-hero + .page-body { padding-top: 64px; }
-.scene-opening > :last-child.quiet-section { padding-bottom: 96px; }
+.scene-opening > :last-child.quiet-section { padding-bottom: 64px; }
 .quiet-section > p, .quiet-section > figure + p, .prose p, .prose li, .stage-copy > p { max-width: 60ch; }
 .quiet-section h2, .stage-copy h2 { margin: 0 0 16px; }
 .section-intro { font-size: 18px; line-height: 28px; }
@@ -665,6 +671,33 @@ summary { cursor: pointer; min-height: 44px; padding: 12px 0; color: var(--oak);
 .simple-steps li::before { content: '0' counter(steps); display: block; margin-bottom: 16px; color: var(--oak); font-size: 14px; line-height: 20px; font-weight: 600; }
 .simple-steps h3 { color: var(--paper); }
 .simple-steps p { color: var(--muted); margin: 0; }
+/* Getting started: commands on the left, first prompts on the right; one click selects a block (no script). */
+.start-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px 48px; margin-top: 32px; }
+.start-col { min-width: 0; }
+.start-col > h3:not(:first-child) { margin-top: 32px; }
+.start-col pre { margin: 8px 0 16px; padding: 14px 20px; white-space: pre-wrap; overflow-wrap: anywhere; }
+.start-client { margin: 0; color: var(--muted); font-size: 14px; line-height: 20px; }
+.copyable { -webkit-user-select: all; user-select: all; cursor: pointer; }
+pre.copyable:hover, .copy-prompt:hover { border-color: rgba(195,245,107,.45); }
+.prompt-list { list-style: none; margin: 8px 0 16px; padding: 0; display: grid; gap: 8px; }
+.copy-prompt { margin: 0; padding: 12px 16px; border: 1px solid var(--hairline); border-radius: 12px; background: rgba(240,247,234,.035); color: var(--paper); font-size: 15px; line-height: 22px; max-width: 60ch; }
+.copy-hint { margin: 8px 0 0; color: var(--muted); font-size: 14px; line-height: 20px; }
+.copy-hint::before { content: ''; display: inline-block; width: 8px; height: 8px; margin-right: 8px; border-radius: 50%; background: var(--lime); vertical-align: 1px; }
+/* The closing band on Home: price and custody side by side, compact, no empty stretch before the footer. */
+.quiet-band { width: calc(100% - 2 * var(--gutter)); max-width: 1200px; margin: 16px auto 0; padding: 32px 0 56px; border-top: 1px solid var(--hairline); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 32px 48px; }
+.band-item h2 { font-size: 28px; line-height: 34px; margin: 0 0 12px; }
+.band-item p { max-width: 60ch; margin-bottom: 12px; }
+.band-item .text-link { margin-top: 4px; }
+/* Launch token page: the utility overview above the full mechanics. */
+.token-utility .utility-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin: 32px 0; }
+.utility-card { padding: 24px; border: 1px solid var(--hairline); border-radius: 16px; background: rgba(240,247,234,.035); }
+.utility-card p { margin-bottom: 8px; }
+.utility-card .rate-lines { margin-top: 8px; }
+.token-utility > h3 { margin-top: 40px; }
+.token-facts > div { grid-template-columns: 112px 1fr; padding: 16px 0; }
+.token-steps { padding-left: 20px; max-width: 70ch; }
+.token-steps li { margin-bottom: 12px; }
+.token-steps li::marker { color: var(--oak); font-weight: 600; }
 .builder-section pre { max-width: 700px; }
 .project-directory { margin-top: 24px; max-width: 760px; font-size: 14px; line-height: 20px; }
 .project-names { list-style: none; padding: 0; margin: 8px 0 16px; display: flex; flex-wrap: wrap; gap: 8px 16px; color: var(--paper); }
@@ -754,12 +787,12 @@ pre code, .code-block code { font-size: 14px; background: none; padding: 0; }
 .docs-prompt-text::before, .docs-prompt-text::after { color: var(--oak); }
 
 /* ---------- Footer: same ground, a hairline, the full link set and every notice ---------- */
-.scene-footer { padding: 48px 0 64px; border-top: 1px solid var(--hairline); background: var(--forest); }
-.scene-footer-top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 48px; margin-bottom: 24px; }
+.scene-footer { padding: 32px 0 40px; border-top: 1px solid var(--hairline); background: var(--forest); }
+.scene-footer-top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 48px; margin-bottom: 16px; }
 .scene-footer ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0 24px; }
 .scene-footer nav a { display: inline-flex; align-items: center; min-height: 44px; color: var(--paper); font-size: 14px; line-height: 20px; font-weight: 500; text-decoration: none; }
 .scene-footer nav a:hover { text-decoration: underline; text-underline-offset: 6px; color: var(--paper); }
-.scene-footer p { margin: 8px 0; max-width: 80ch; color: var(--muted); font-size: 14px; line-height: 20px; }
+.scene-footer p { margin: 4px 0; max-width: 80ch; color: var(--muted); font-size: 13px; line-height: 19px; }
 .scene-footer .footer-status { color: var(--paper); font-weight: 600; }
 
 /* ---------- Section 7: motion. Stable art; only 160ms surface transitions. ---------- */
@@ -803,23 +836,34 @@ pre code, .code-block code { font-size: 14px; background: none; padding: 0; }
  .md-table:not(.curve) td::before, .md-table.stack td::before { color: var(--oak); font-size: 14px; line-height: 20px; font-weight: 600; letter-spacing: 0; text-transform: none; }
  .md-table:not(.curve) td:first-child, .md-table.stack td:first-child { color: var(--paper); font-size: 16px; border-bottom: 1px solid var(--hairline); }
  .md-table.curve th, .md-table.curve td { padding: 8px; font-size: 14px; }
- .scene-footer { padding: 32px 0 48px; }
- .scene-footer-top { flex-direction: column; align-items: flex-start; gap: 16px; }
+ .scene-footer { padding: 24px 0 32px; }
+ .scene-footer-top { flex-direction: column; align-items: flex-start; gap: 4px; }
+ .scene-footer nav ul { display: grid; grid-template-columns: repeat(3, minmax(0, max-content)); gap: 0 20px; }
+ .scene-footer nav a { min-height: 40px; }
+ .scene-brand .brand-mark { width: 40px; height: 40px; }
+ .scene-brand .brand-word { width: 151px; height: 24px; }
+ .start-grid, .quiet-band, .token-utility .utility-grid { grid-template-columns: minmax(0, 1fr); }
+ .quiet-band { gap: 24px; padding: 24px 0 40px; }
+ .band-item h2 { font-size: 24px; line-height: 30px; }
+ .start-col pre { padding: 12px 16px; }
 }
 
 /* Extended plates (lib/plates.mjs): the hero keeps the original plate's geometry, and the outpainted floor
    continues behind the page's first sections. Home was the proof of concept; every page wrapped in
    .scene-opening.is-extended now takes the same treatment. The art reaches forest at its foot, and further
    reading height continues that exact ground colour. The wrapper is at least as tall as the plate, so a short
-   page (the 404) shows the whole continuation instead of cutting it mid-floor. */
-.scene-opening.is-extended { position: relative; isolation: isolate; overflow: clip; background: var(--forest); aspect-ratio: var(--plate-desktop); }
+   page (the 404) shows the whole continuation instead of cutting it mid-floor.
+   The floor is a min-height from the viewport width, not aspect-ratio: WebKit (every iOS browser) kept an
+   aspect-ratio box with overflow: clip at the plate's height and cut the content, so iPhones saw the first
+   step of Home and then the footer. 100vw is the art's width, or a scrollbar wider, so the floor never cuts it. */
+.scene-opening.is-extended { position: relative; isolation: isolate; overflow: clip; background: var(--forest); min-height: calc(100vw / (var(--plate-desktop))); }
 .is-extended > .scene-hero { position: relative; background: transparent; min-height: calc(56.25 * var(--u)); }
 .is-extended .scene-picture { position: absolute; inset: 0 0 auto; z-index: -1; }
 .is-extended .scene-picture img { -webkit-mask-image: none; mask-image: none; }
 .is-extended .scene-picture::after { content: none; }
 .is-extended > :not(.scene-hero) { isolation: isolate; }
 @media (max-width:700px) {
- .scene-opening.is-extended { aspect-ratio: var(--plate-phone); }
+ .scene-opening.is-extended { min-height: calc(100vw / (var(--plate-phone))); }
  .is-extended > .scene-hero { min-height: calc(125 * var(--u)); background: transparent; }
  .is-extended > .scene-hero::before { content: none; }
 }

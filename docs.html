@@ -28,8 +28,8 @@
 <header class="scene-header is-sticky">
 <div class="scene-header-inner">
  <a class="scene-brand" href="index.html" aria-label="Oak Agent Kit, home">
-<img src="oak-medallion.webp" width="36" height="36" alt="">
-<span>Oak Agent Kit</span>
+<img class="brand-mark" src="oak-mark-44.webp" srcset="oak-mark-88.webp 2x, oak-mark-132.webp 3x" width="44" height="44" alt="">
+<img class="brand-word" src="oak-wordmark-1x.webp" srcset="oak-wordmark-2x.webp 2x, oak-wordmark-3x.webp 3x" width="164" height="26" alt="">
 </a>
  <nav class="desktop-nav" aria-label="Main">
 <ul>
@@ -265,23 +265,19 @@
 <ol>
 <li>
 <strong>Find the token (<code>find_token</code>):</strong> Look up a token by name, symbol, or contract address on chain <code>4663</code> to confirm its verified address and <code>decimals</code>:<pre tabindex="0" role="region" aria-label="Command example" class="code-block">
-<code data-lang="bash">oak call find_token '{&quot;query&quot;:&quot;TSLA&quot;}'</code>
-</pre>
+<code data-lang="bash">oak call find_token '{&quot;query&quot;:&quot;TSLA&quot;}'</code></pre>
 </li>
 <li>
 <strong>Quote the route (<code>quote</code>):</strong> Pass verified symbols (<code>ETH</code>, <code>USDG</code>, <code>WETH</code>, <code>USDe</code>, <code>OAK</code>, or an official stock ticker such as <code>TSLA</code>) or a verified token <code>address</code> from <code>find_token</code>, with <code>amountIn</code> in input token base units (<code>&quot;10000000&quot;</code> = <code>10 USDG</code> with 6 decimals):<pre tabindex="0" role="region" aria-label="Command example" class="code-block">
-<code data-lang="bash">oak call quote '{&quot;from&quot;:&quot;USDG&quot;,&quot;to&quot;:&quot;TSLA&quot;,&quot;amountIn&quot;:&quot;10000000&quot;,&quot;slippageBps&quot;:50}'</code>
-</pre>
+<code data-lang="bash">oak call quote '{&quot;from&quot;:&quot;USDG&quot;,&quot;to&quot;:&quot;TSLA&quot;,&quot;amountIn&quot;:&quot;10000000&quot;,&quot;slippageBps&quot;:50}'</code></pre>
 </li>
 <li>
 <strong>Preview the simulation (<code>preview</code>):</strong> Simulate an unsigned transaction sequence via <code>eth_simulateV1</code> to inspect exact token balance deltas (when you call <code>swap</code>, the local bridge also runs <code>preview</code> automatically before signing and sending):<pre tabindex="0" role="region" aria-label="Command example" class="code-block">
-<code data-lang="bash">oak call preview '{&quot;txs&quot;:[...]}'</code>
-</pre>
+<code data-lang="bash">oak call preview '{&quot;txs&quot;:[...]}'</code></pre>
 </li>
 <li>
 <strong>Execute the swap (<code>swap</code>):</strong> Build, preview, sign locally, and broadcast the quoted swap using its 60-second <code>quoteId</code>:<pre tabindex="0" role="region" aria-label="Command example" class="code-block">
-<code data-lang="bash">oak call swap '{&quot;quoteId&quot;:&quot;&lt;quoteId&gt;&quot;}'</code>
-</pre>
+<code data-lang="bash">oak call swap '{&quot;quoteId&quot;:&quot;&lt;quoteId&gt;&quot;}'</code></pre>
 </li>
 </ol>
 </div>
@@ -599,8 +595,7 @@ oak recipes remove &lt;project&gt;
 oak recipes list [project]
 oak config set &lt;key&gt; &lt;value&gt;
 oak mcp
-oak call &lt;tool&gt; &lt;json&gt;</code>
-</pre>
+oak call &lt;tool&gt; &lt;json&gt;</code></pre>
 <ul>
 <li>
 <code>oak init</code> and <code>oak export</code> require a direct owner terminal (<code>stdin.isTTY &amp;&amp; stdout.isTTY</code>).</li>
@@ -621,7 +616,7 @@ oak call &lt;tool&gt; &lt;json&gt;</code>
 <details class="reference-detail">
 <summary>Read details</summary>
 <div class="docs-narrow">
-<p>Ecosystem builders can publish declarative JSON recipes (<code>oak-recipe/v1</code>) validated against <a href="https://github.com/OakAgentKit/oak/blob/main/packages/addon/schema/recipe.schema.json">packages/addon/schema/recipe.schema.json</a>. Each recipe names one contract on chain <code>4663</code>, one ABI function item, typed inputs, and <code>kind: &quot;read&quot; | &quot;tx&quot;</code>. The add-on's importer (<code>oak recipes add</code>) is strictly data-only: it streams tarballs with a 4 MiB / 100-entry cap, ignores non-recipe files without writing or executing them, copies only <code>package/recipes/&lt;name&gt;.recipe.json</code> (max 64 KiB each) where <code>project</code> matches <code>package/package.json</code>'s <code>oakProject</code>, and never executes third-party code. Recipes are opt-in by name (<code>&lt;project&gt;.&lt;name&gt;</code>) and labelled <strong>
+<p>Ecosystem builders can publish declarative JSON recipes (<code>oak-recipe/v1</code>) validated against packages/addon/schema/recipe.schema.json. Each recipe names one contract on chain <code>4663</code>, one ABI function item, typed inputs, and <code>kind: &quot;read&quot; | &quot;tx&quot;</code>. The add-on's importer (<code>oak recipes add</code>) is strictly data-only: it streams tarballs with a 4 MiB / 100-entry cap, ignores non-recipe files without writing or executing them, copies only <code>package/recipes/&lt;name&gt;.recipe.json</code> (max 64 KiB each) where <code>project</code> matches <code>package/package.json</code>'s <code>oakProject</code>, and never executes third-party code. Recipes are opt-in by name (<code>&lt;project&gt;.&lt;name&gt;</code>) and labelled <strong>
 <code>as-is, not reviewed by Oak</code>
 </strong>.</p>
 </div>
@@ -632,7 +627,7 @@ oak call &lt;tool&gt; &lt;json&gt;</code>
 <details class="reference-detail">
 <summary>Read details</summary>
 <div class="docs-narrow">
-<p>AI agents should start with <a href="https://github.com/OakAgentKit/oak/blob/main/AGENTS.md">AGENTS.md</a>, the operating guide that lists every tool, convention and custody rule. A plain-text summary for agents is in <a href="https://github.com/OakAgentKit/oak/blob/main/llms.txt">llms.txt</a>.</p>
+<p>AI agents should start with <code>AGENTS.md</code>, the operating guide that lists every tool, convention and custody rule. A plain-text summary for agents is in <code>llms.txt</code>.</p>
 <h3>Hard Custody Boundaries for Agents</h3>
 <ol>
 <li>
@@ -655,9 +650,9 @@ oak call &lt;tool&gt; &lt;json&gt;</code>
 <footer class="scene-footer">
 <div class="scene-footer-inner">
 <div class="scene-footer-top">
-<a class="scene-brand" href="index.html">
-<img src="oak-medallion.webp" width="36" height="36" alt="" loading="lazy">
-<span>Oak Agent Kit</span>
+<a class="scene-brand" href="index.html" aria-label="Oak Agent Kit, home">
+<img class="brand-mark" src="oak-mark-44.webp" srcset="oak-mark-88.webp 2x, oak-mark-132.webp 3x" width="44" height="44" alt="" loading="lazy">
+<img class="brand-word" src="oak-wordmark-1x.webp" srcset="oak-wordmark-2x.webp 2x, oak-wordmark-3x.webp 3x" width="164" height="26" alt="" loading="lazy">
 </a>
 <nav aria-label="Footer">
 <ul>
