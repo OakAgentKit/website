@@ -557,6 +557,8 @@ h3 { font-size: 24px; line-height: 30px; margin: 0 0 8px; }
 .scene-home { --tl: 3.0556; --tb: 47.7778; }
 .scene-how-it-works { --tl: 21.5278; --tb: 48.0556; }
 .scene-pricing { --tl: 4.5139; --tb: 49.1667; }
+/* Roadmap geometry: r3/hero/title-envelope.json; x=(42-3)/1440, fade anchor=(744-8)/1440, calm=(64,290)/1440; menu-safe y=80+16. */
+.scene-roadmap { --tl: 2.7083; --tb: 51.1111; --px: 4.4444; --py: 20.1389; --pyo: 0px; --cw: min(316px, calc(100vw - 40px)); }
 .scene-security { --tl: 4.7222; --tb: 51.1806; }
 .scene-about { --tl: 4.7222; --tb: 49.7222; }
 .scene-setup { --tl: 4.7222; --tb: 53.2639; }
@@ -589,6 +591,8 @@ h3 { font-size: 24px; line-height: 30px; margin: 0 0 8px; }
  .scene-home { --ground: 47,61,12; }
  .scene-how-it-works { --ground: 59,59,14; }
  .scene-pricing { --ground: 66,63,15; }
+ /* r3/hero/title-envelope.json: phone x=(12-3)/780, fade anchor=(924-8)/780; calm (90,160)-(390,260) fits the pill alone, so the intro uses the shared below-title policy. */
+ .scene-roadmap { --tl: 1.1538; --tb: 117.4359; --ground: 7,47,39; --px: var(--tl); --py: var(--tb); --pyo: 24px; --cw: initial; }
  .scene-home { --tl: 0; --tb: 123.0769; }
  .scene-how-it-works { --tl: 7.8205; --tb: 121.7949; }
  .scene-pricing { --tl: 9.2308; --tb: 110.2564; }
@@ -869,3 +873,40 @@ pre code, .code-block code { font-size: 14px; background: none; padding: 0; }
  .is-extended > .scene-hero { min-height: calc(125 * var(--u)); background: transparent; }
  .is-extended > .scene-hero::before { content: none; }
 }
+
+/* Roadmap uses Pricing's story-stage composition; its three-item lists need ordinary list rhythm. */
+.roadmap-items {
+ margin: 0;
+ padding-left: 20px;
+ font-size: 16px;
+ line-height: 26px;
+}
+.roadmap-items li {
+ padding-left: 4px;
+ overflow-wrap: anywhere;
+}
+.roadmap-items li + li { margin-top: 12px; }
+.roadmap-items li::marker { color: var(--oak); }
+/* Exact roadmap plate focal point from the art handoff; Pricing's four plates have different subjects. */
+.roadmap-stages .story-stage { --focus: 50% 65%; }
+/* Oak chapter ink can dip below 4.5:1 on these plates; paper uses their measured calm-column contrast. */
+.roadmap-stages .chapter { color: var(--paper); }
+/* Completion needs a visible symbol as well as the spoken label; Pricing has no completed list. */
+.roadmap-items:has(.roadmap-check) {
+ list-style: none;
+ padding-left: 26px;
+}
+.roadmap-items:has(.roadmap-check) li { position: relative; }
+.roadmap-check {
+ position: absolute;
+ left: -26px;
+ color: var(--lime);
+ font-weight: 700;
+}
+/* Keep the native bullet fallback when :has is unavailable; the check still carries completion. */
+@supports not selector(:has(*)) {
+ .roadmap-check { position: static; margin-right: 8px; }
+}
+/* No heights or phone layout override: long copy grows the shared stage and stacks below its square plate. */
+/* No copy backing, border, corner radius or card surface is introduced here. */
+/* Hero title, caption, action, menu and footer all inherit the shared scene system. */
