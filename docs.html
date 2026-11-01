@@ -176,6 +176,7 @@
 <p>Mainnet: 4663. Testnet: basic tools and ERC-8004 identity only.</p>
 </details>
 <p class="release-note">Packages are published. Hosted actions open with the token and subscription launch; until then, actions are limited to the Oak team. Read calls such as find_token remain available.</p>
+<p class="docs-narrow">Your agent's tool list shows the everyday tools. For anything not listed, it calls <code>find_tool</code> with what it wants to do, then <code>run_tool</code> with the tool's name and arguments. Tools run this way get the same access checks, local guard, preview and confirmation as a direct call.</p>
 <section class="doc-part" id="basics">
 <h2>Basics</h2>
 <details class="reference-detail">
@@ -198,7 +199,7 @@
 <code>find_token</code>
 </td>
 <td data-label="Kind">Read</td>
-<td data-label="What it does">Verified token discovery by name, symbol, or address across fixed tokens (<code>ETH</code>, <code>USDG</code>, <code>WETH</code>, <code>USDe</code>, <code>$OAK</code>), official stock tokens, Clanker, and Pons (Pons and <code>pools.trade</code> require an address).</td>
+<td data-label="What it does">Verified token discovery by name, symbol, or address across fixed tokens (<code>ETH</code>, <code>USDG</code>, <code>WETH</code>, <code>USDe</code>, <code>$OAK</code>), official stock tokens, Clanker, and Pons (Pons and <code>pools.trade</code> require an address here; search Pons by name, symbol or address with <code>pons_browse {&quot;query&quot;: &quot;...&quot;}</code>).</td>
 </tr>
 <tr>
 <td data-label="Tool">
@@ -280,6 +281,21 @@
 <code data-lang="bash">oak call swap '{&quot;quoteId&quot;:&quot;&lt;quoteId&gt;&quot;}'</code></pre>
 </li>
 </ol>
+<h3 id="find-any-other-tool">Find any other tool (<code>find_tool</code>, <code>run_tool</code>)</h3>
+<p>
+<code>tools/list</code> shows the everyday tools, such as status, swap, buy and sell, deposit and withdraw, and borrow and repay. Every other tool stays reachable by name. For anything not listed, call <code>find_tool</code> with what you want to do, then <code>run_tool</code> with the tool name and arguments.</p>
+<ul>
+<li>
+<code>find_tool</code> searches every Oak tool, listed or not, by what you want to do, a project name or an exact tool name (<code>query</code>, with optional <code>program</code> and <code>limit</code>). It runs locally and only reads. Each match shows its name, project, whether it is a read or an action, whether <code>tools/list</code> shows it, a one-line description and its required inputs; an exact tool name also gives the full input schema.</li>
+<li>
+<code>run_tool</code> runs any Oak tool by name through the same code path as a direct call, so the access gate, local guard, preview, exact approvals and human confirmation are unchanged. Reads still need no identity or subscription. Put the tool's inputs inside <code>arguments</code>.</li>
+<li>An AI client that remembers &quot;always allow&quot; for <code>run_tool</code> lets it request every Oak tool. The local signing contract still requires human confirmation for value-bearing off-chain signatures. New lending actions, Hookr prepared actions, Relay vault exits and TickerSpring order accounting also require a person in auto mode.</li>
+</ul>
+<pre tabindex="0" role="region" aria-label="Command example" class="code-block">
+<code data-lang="bash">oak call find_tool '{&quot;query&quot;:&quot;show my wallet history&quot;}'
+oak call run_tool '{&quot;name&quot;:&quot;history&quot;,&quot;arguments&quot;:{&quot;limit&quot;:5}}'</code></pre>
+<p>Wave-3 integration installs the shared read gates, local transaction reconstruction and RFQ wallet lock. Meridian Predict buys are enabled; the bridge owns every continuation and signature, so never supply either manually. Meridian perps public reads and guarded deposit/finalize transactions are available, but perps signatures remain disabled pending their signing-contract expiry policy and registered local submission path. A deposit alone does not enable trading in Oak.</p>
+<p>Hookr supports locally reconstructed fungible-token actions and current compounder actions. NFT/6909 grant-dependent routes remain blocked pending transfer tracing and approval journals. Signed referral registration remains blocked pending a declared relayed-signature policy; unsigned referral and other supported actions remain available. Collection-wide approvals and ERC-1155 custody are refused. Use <code>hookr_contracts</code> to fetch the exact schema before an action. Historical playbooks that say shared integration is pending should be read with these current limits.</p>
 </div>
 </details>
 </section>
@@ -299,15 +315,24 @@
 <code>kyberswap_quote</code>
 <code>kyberswap_swap</code>
 </div>
-<p>Route quoting and swap building; generic <code>quote</code>/<code>swap</code> compares KyberSwap, Velora, and Pons launch curves and enforces <code>minAmountOut</code>.</p>
+<p>Route quoting, with optional source and route-shape controls, and swap building; generic <code>quote</code>/<code>swap</code> compares KyberSwap, Velora, and Pons launch curves and enforces <code>minAmountOut</code>.</p>
 </article>
 <article class="docs-mod">
 <h4>Velora</h4>
 <div class="docs-chips">
 <code>velora_quote</code>
 <code>velora_swap</code>
+<code>velora_delta_token_support</code>
+<code>velora_delta_orders</code>
+<code>velora_delta_order</code>
+<code>velora_delta_bridge_routes</code>
+<code>velora_delta_bridge_protocols</code>
+<code>velora_delta_strategies</code>
+<code>velora_fee_balance</code>
+<code>velora_claim_fees</code>
+<code>velora_unwrap_deth</code>
 </div>
-<p>Route quoting and swap building with net output comparison and venue fee disclosure.</p>
+<p>Route quoting and swap building with net output comparison and venue fee disclosure, plus Delta order, bridge and strategy reads, partner fee claims and dETH unwrap (<code>velora_quote</code>, <code>velora_swap</code>, <code>velora_delta_orders</code>, <code>velora_fee_balance</code>, <code>velora_claim_fees</code>, <code>velora_unwrap_deth</code>).</p>
 </article>
 <article class="docs-mod">
 <h4>Pons</h4>
@@ -322,8 +347,16 @@
 <code>pons_sell</code>
 <code>pons_graduate</code>
 <code>pons_claim</code>
+<code>pons_holders</code>
+<code>pons_holdings</code>
+<code>pons_trending</code>
+<code>pons_analytics</code>
+<code>pons_activity</code>
+<code>pons_launch_info</code>
+<code>pons_trades</code>
+<code>pons_profile</code>
 </div>
-<p>Complete bonding-curve and graduated Uniswap v4 token lifecycle (<code>pons_browse</code>, <code>pons_status</code>, <code>pons_launch_options</code>, <code>pons_launch</code>, <code>pons_transfer_creator_fee_recipient</code>, <code>pons_set_buyback</code>, <code>pons_buy</code>, <code>pons_sell</code>, <code>pons_graduate</code>, <code>pons_claim</code>), plus curve quotes in generic <code>quote</code>/<code>swap</code>.</p>
+<p>Complete bonding-curve and graduated Uniswap v4 token lifecycle (<code>pons_browse</code>, <code>pons_status</code>, <code>pons_launch_options</code>, <code>pons_launch</code>, <code>pons_transfer_creator_fee_recipient</code>, <code>pons_set_buyback</code>, <code>pons_buy</code>, <code>pons_sell</code>, <code>pons_graduate</code>, <code>pons_claim</code>), index-backed reads of holders, holdings, trending launches, profiles, activity, analytics and curve trades (<code>pons_holders</code>, <code>pons_holdings</code>, <code>pons_trending</code>, <code>pons_trades</code>), plus curve quotes in generic <code>quote</code>/<code>swap</code>.</p>
 </article>
 <article class="docs-mod">
 <h4>pools.trade</h4>
@@ -333,8 +366,16 @@
 <code>poolstrade_sell</code>
 <code>poolstrade_collect</code>
 <code>poolstrade_claim</code>
+<code>poolstrade_browse</code>
+<code>poolstrade_balance</code>
+<code>poolstrade_status</code>
+<code>poolstrade_launch_options</code>
+<code>poolstrade_fee_transfer</code>
+<code>poolstrade_fee_approve</code>
+<code>poolstrade_transfer</code>
+<code>poolstrade_collect_many</code>
 </div>
-<p>Atomic Instant Launch (<code>poolstrade_launch</code> with explicit permanent <code>creatorFees</code>), v4 swaps (<code>poolstrade_buy</code>, <code>poolstrade_sell</code>), and fee collection/claims (<code>poolstrade_collect</code>, <code>poolstrade_claim</code>).</p>
+<p>Atomic Instant Launch (<code>poolstrade_launch</code> with explicit permanent <code>creatorFees</code>), v4 swaps (<code>poolstrade_buy</code>, <code>poolstrade_sell</code>), fee collection/claims (<code>poolstrade_collect</code>, <code>poolstrade_claim</code>), and launch browsing, status, fee-position and token transfers (<code>poolstrade_browse</code>, <code>poolstrade_status</code>, <code>poolstrade_fee_transfer</code>, <code>poolstrade_transfer</code>, <code>poolstrade_collect_many</code>).</p>
 </article>
 <article class="docs-mod">
 <h4>Clanker</h4>
@@ -342,8 +383,22 @@
 <code>clanker_launch</code>
 <code>clanker_claim</code>
 <code>clanker_browse</code>
+<code>clanker_status</code>
+<code>clanker_update_reward</code>
+<code>clanker_update_token</code>
+<code>clanker_airdrop_proofs</code>
+<code>clanker_vault_status</code>
+<code>clanker_vault_claim</code>
+<code>clanker_vault_update_admin</code>
+<code>clanker_airdrop_tree</code>
+<code>clanker_airdrop_status</code>
+<code>clanker_airdrop_claim</code>
+<code>clanker_airdrop_manage</code>
+<code>clanker_protocol_admin</code>
+<code>clanker_store_fees</code>
+<code>clanker_claim_for</code>
 </div>
-<p>Clanker v4 token launch (<code>clanker_launch</code>), MEV-aware fee locker claims (<code>clanker_claim</code>), and indexer search (<code>clanker_browse</code>).</p>
+<p>Clanker v4 token launch (<code>clanker_launch</code>), MEV-aware fee locker claims (<code>clanker_claim</code>), and indexer search (<code>clanker_browse</code>), plus token status, reward and token administration, vault and airdrop claims, and protocol-role tools (<code>clanker_status</code>, <code>clanker_update_reward</code>, <code>clanker_vault_claim</code>, <code>clanker_airdrop_claim</code>, <code>clanker_protocol_admin</code>).</p>
 </article>
 <article class="docs-mod">
 <h4>Hookr</h4>
@@ -352,8 +407,16 @@
 <code>hookr_cancel</code>
 <code>hookr_fill</code>
 <code>hookr_claim_bounty</code>
+<code>hookr_relay</code>
+<code>hookr_open_orders</code>
+<code>hookr_orders</code>
+<code>hookr_order</code>
+<code>hookr_pools</code>
+<code>hookr_pool</code>
+<code>hookr_quote</code>
+<code>hookr_relay_receipt</code>
 </div>
-<p>Sidecar limit orders on <code>HookrLimitOrders</code> (<code>hookr_create</code>, <code>hookr_cancel</code>, <code>hookr_fill</code>, <code>hookr_claim_bounty</code>).</p>
+<p>Sidecar limit orders on <code>HookrLimitOrders</code> (<code>hookr_create</code>, <code>hookr_cancel</code>, <code>hookr_fill</code>, <code>hookr_claim_bounty</code>), pool, quote and order reads (<code>hookr_open_orders</code>, <code>hookr_orders</code>, <code>hookr_order</code>, <code>hookr_pools</code>, <code>hookr_pool</code>, <code>hookr_quote</code>), and relaying a trader-signed swap through the Hookr forwarder (<code>hookr_relay</code>, <code>hookr_relay_receipt</code>).</p>
 </article>
 <article class="docs-mod">
 <h4>TickerSpring</h4>
@@ -362,8 +425,32 @@
 <code>tickerspring_cancel</code>
 <code>tickerspring_claim</code>
 <code>tickerspring_orders</code>
+<code>tickerspring_products</code>
+<code>tickerspring_tokens</code>
+<code>tickerspring_vaults</code>
+<code>tickerspring_baskets</code>
+<code>tickerspring_order_exit_preview</code>
+<code>tickerspring_account</code>
+<code>tickerspring_activity</code>
+<code>tickerspring_report_card</code>
+<code>tickerspring_plan</code>
+<code>tickerspring_swap_quote</code>
+<code>tickerspring_candles</code>
+<code>tickerspring_basket_plan</code>
+<code>tickerspring_tx_status</code>
+<code>tickerspring_spring_orders</code>
+<code>tickerspring_capabilities</code>
+<code>tickerspring_grid</code>
+<code>tickerspring_ladder_strategy</code>
+<code>tickerspring_ladder</code>
+<code>tickerspring_basket_make</code>
+<code>tickerspring_vault_deposit</code>
+<code>tickerspring_vault_cancel_deposit</code>
+<code>tickerspring_vault_withdraw</code>
+<code>tickerspring_basket_buy</code>
+<code>tickerspring_basket_sell</code>
 </div>
-<p>Agent REST API limit and market-opening orders (<code>tickerspring_create</code>, <code>tickerspring_cancel</code>, <code>tickerspring_claim</code>, <code>tickerspring_orders</code>).</p>
+<p>Agent REST API limit and market-opening orders (<code>tickerspring_create</code>, <code>tickerspring_cancel</code>, <code>tickerspring_claim</code>, <code>tickerspring_orders</code>), vault deposit requests with direct exits (<code>tickerspring_vault_deposit</code>, <code>tickerspring_vault_cancel_deposit</code>, <code>tickerspring_vault_withdraw</code>), BasketZap buys and sells and Maker baskets (<code>tickerspring_basket_buy</code>, <code>tickerspring_basket_sell</code>, <code>tickerspring_basket_make</code>), repeating grids, ladder strategies and independent ladders (<code>tickerspring_grid</code>, <code>tickerspring_ladder_strategy</code>, <code>tickerspring_ladder</code>), and account, planning and discovery reads (<code>tickerspring_products</code>, <code>tickerspring_tokens</code>, <code>tickerspring_vaults</code>, <code>tickerspring_baskets</code>, <code>tickerspring_order_exit_preview</code>, <code>tickerspring_account</code>, <code>tickerspring_activity</code>, <code>tickerspring_report_card</code>, <code>tickerspring_plan</code>, <code>tickerspring_swap_quote</code>, <code>tickerspring_candles</code>, <code>tickerspring_basket_plan</code>, <code>tickerspring_tx_status</code>, <code>tickerspring_spring_orders</code>, <code>tickerspring_capabilities</code>).</p>
 </article>
 <article class="docs-mod">
 <h4>Uniswap liquidity</h4>
@@ -372,8 +459,10 @@
 <code>uniswap_collect</code>
 <code>uniswap_remove</code>
 <code>uniswap_list_positions</code>
+<code>uniswap_create_pool</code>
+<code>uniswap_pools</code>
 </div>
-<p>Uniswap v3 (<code>NonfungiblePositionManager</code>) and v4 (<code>PositionManager</code> + <code>Permit2</code>) liquidity management (<code>uniswap_add</code>, <code>uniswap_collect</code>, <code>uniswap_remove</code>, <code>uniswap_list_positions</code>).</p>
+<p>Uniswap v3 (<code>NonfungiblePositionManager</code>) and v4 (<code>PositionManager</code> + <code>Permit2</code>) liquidity management (<code>uniswap_add</code>, <code>uniswap_collect</code>, <code>uniswap_remove</code>, <code>uniswap_list_positions</code>), plus pool discovery and pool creation at a stated starting price (<code>uniswap_pools</code>, <code>uniswap_create_pool</code>).</p>
 </article>
 </div>
 <h3>Vaults and Rewards</h3>
@@ -388,8 +477,13 @@
 <code>steakhouse_list</code>
 <code>steakhouse_deposit</code>
 <code>steakhouse_withdraw</code>
+<code>steakhouse_details</code>
+<code>steakhouse_analytics</code>
+<code>steakhouse_manage</code>
+<code>steakhouse_mint</code>
+<code>steakhouse_redeem</code>
 </div>
-<p>Measured USDG ERC-4626 vault (<code>steakhouse_list</code>, <code>steakhouse_deposit</code>, <code>steakhouse_withdraw</code>).</p>
+<p>Measured USDG ERC-4626 vault (<code>steakhouse_list</code>, <code>steakhouse_deposit</code>, <code>steakhouse_withdraw</code>), plus exact-share mint and redeem, details and analytics reads, and role-gated management (<code>steakhouse_mint</code>, <code>steakhouse_redeem</code>, <code>steakhouse_details</code>, <code>steakhouse_analytics</code>, <code>steakhouse_manage</code>).</p>
 </article>
 <article class="docs-mod">
 <h4>Spark</h4>
@@ -397,8 +491,15 @@
 <code>spark_list</code>
 <code>spark_deposit</code>
 <code>spark_withdraw</code>
+<code>spark_details</code>
+<code>spark_roles</code>
+<code>spark_manage</code>
+<code>spark_mint</code>
+<code>spark_redeem</code>
+<code>spark_deposit_referral</code>
+<code>spark_return_liquidity</code>
 </div>
-<p>Measured spUSDG ERC-4626 vault (<code>spark_list</code>, <code>spark_deposit</code>, <code>spark_withdraw</code>).</p>
+<p>Measured spUSDG ERC-4626 vault (<code>spark_list</code>, <code>spark_deposit</code>, <code>spark_withdraw</code>), plus exact-share mint and redeem, referral-labelled deposits, details and role reads, role-gated management and returning liquidity (<code>spark_mint</code>, <code>spark_redeem</code>, <code>spark_deposit_referral</code>, <code>spark_details</code>, <code>spark_roles</code>, <code>spark_manage</code>, <code>spark_return_liquidity</code>).</p>
 </article>
 <article class="docs-mod">
 <h4>NetNet</h4>
@@ -406,8 +507,12 @@
 <code>netnet_list</code>
 <code>netnet_deposit</code>
 <code>netnet_withdraw</code>
+<code>netnet_stake</code>
+<code>netnet_wrap</code>
+<code>netnet_unwrap</code>
+<code>netnet_unstake</code>
 </div>
-<p>Measured nnUSDG ERC-4626 vault (<code>netnet_list</code>, <code>netnet_deposit</code>, <code>netnet_withdraw</code>).</p>
+<p>Measured nnUSDG ERC-4626 vault, plus NET staking and wsNET wrapping for the Loopback borrow branch (<code>netnet_list</code>, <code>netnet_deposit</code>, <code>netnet_withdraw</code>, <code>netnet_stake</code>, <code>netnet_wrap</code>, <code>netnet_unwrap</code>, <code>netnet_unstake</code>).</p>
 </article>
 <article class="docs-mod">
 <h4>Longbow</h4>
@@ -415,8 +520,11 @@
 <code>longbow_list</code>
 <code>longbow_deposit</code>
 <code>longbow_withdraw</code>
+<code>longbow_stake</code>
+<code>longbow_unstake</code>
+<code>longbow_claim_rewards</code>
 </div>
-<p>Core and Frontier USDG and ETH/WETH ERC-4626 vaults (<code>longbow_list</code>, <code>longbow_deposit</code>, <code>longbow_withdraw</code>).</p>
+<p>Core and Frontier USDG and ETH/WETH ERC-4626 vaults, withdraw-only V1 exits, and optional BOW staking for USDG rewards (<code>longbow_list</code>, <code>longbow_deposit</code>, <code>longbow_withdraw</code>, <code>longbow_stake</code>, <code>longbow_unstake</code>, <code>longbow_claim_rewards</code>). Longbow's markets use the Morpho tools.</p>
 </article>
 <article class="docs-mod">
 <h4>Grove</h4>
@@ -424,8 +532,13 @@
 <code>grove_list</code>
 <code>grove_deposit</code>
 <code>grove_withdraw</code>
+<code>grove_details</code>
+<code>grove_analytics</code>
+<code>grove_manage</code>
+<code>grove_mint</code>
+<code>grove_withdraw_assets</code>
 </div>
-<p>Grove x Steakhouse USDG public ERC-4626 vault (<code>grove_list</code>, <code>grove_deposit</code>, <code>grove_withdraw</code>).</p>
+<p>Grove x Steakhouse USDG public ERC-4626 vault (<code>grove_list</code>, <code>grove_deposit</code>, <code>grove_withdraw</code>), plus exact-share mint, exact-asset withdrawal, details and analytics reads, and role-gated management (<code>grove_mint</code>, <code>grove_withdraw_assets</code>, <code>grove_details</code>, <code>grove_analytics</code>, <code>grove_manage</code>).</p>
 </article>
 <article class="docs-mod">
 <h4>Beefy</h4>
@@ -433,16 +546,37 @@
 <code>beefy_list</code>
 <code>beefy_deposit</code>
 <code>beefy_withdraw</code>
+<code>beefy_vault_info</code>
+<code>beefy_lp</code>
+<code>beefy_swap</code>
+<code>beefy_add_liquidity</code>
+<code>beefy_remove_liquidity</code>
+<code>beefy_boosts</code>
+<code>beefy_boost</code>
+<code>beefy_boost_manage</code>
+<code>beefy_vault_admin</code>
+<code>beefy_vault_manage</code>
 </div>
-<p>UP–WETH vault adapter (<code>beefy_list</code>, <code>beefy_deposit</code>, <code>beefy_withdraw</code>).</p>
+<p>UP–WETH vault adapter (<code>beefy_list</code>, <code>beefy_deposit</code>, <code>beefy_withdraw</code>), plus vault and LP-pool reads, LP swaps and liquidity changes, boost pools, and role-gated vault and boost management (<code>beefy_vault_info</code>, <code>beefy_lp</code>, <code>beefy_add_liquidity</code>, <code>beefy_boost</code>, <code>beefy_vault_manage</code>).</p>
 </article>
 <article class="docs-mod">
 <h4>Merkl</h4>
 <div class="docs-chips">
 <code>merkl_rewards</code>
 <code>merkl_claim</code>
+<code>merkl_opportunities</code>
+<code>merkl_campaigns</code>
+<code>merkl_earning_status</code>
+<code>merkl_claim_config</code>
+<code>merkl_set_operator</code>
+<code>merkl_set_recipient</code>
+<code>merkl_claim_to</code>
+<code>merkl_claim_for</code>
+<code>merkl_distributor_status</code>
+<code>merkl_dispute</code>
+<code>merkl_distributor_admin</code>
 </div>
-<p>Campaign reward discovery and Distributor claims (<code>merkl_rewards</code>, <code>merkl_claim</code>). Powered by Merkl — <a href="https://app.merkl.xyz">https://app.merkl.xyz</a>
+<p>Campaign reward discovery and Distributor claims (<code>merkl_rewards</code>, <code>merkl_claim</code>), plus opportunity and campaign reads, claim recipients and operators, claims for another user, and Distributor status, dispute and admin tools (<code>merkl_opportunities</code>, <code>merkl_campaigns</code>, <code>merkl_set_recipient</code>, <code>merkl_claim_for</code>, <code>merkl_dispute</code>). Powered by Merkl — <a href="https://app.merkl.xyz">https://app.merkl.xyz</a>
 </p>
 </article>
 </div>
@@ -459,9 +593,11 @@
 <code>morpho_withdraw_collateral</code>
 <code>morpho_borrow</code>
 <code>morpho_repay</code>
+<code>morpho_supply</code>
+<code>morpho_withdraw</code>
 <code>morpho_status</code>
 </div>
-<p>Collateral supply/withdrawal, borrowing, repayment, and position status (<code>morpho_supply_collateral</code>, <code>morpho_withdraw_collateral</code>, <code>morpho_borrow</code>, <code>morpho_repay</code>, <code>morpho_status</code>).</p>
+<p>Collateral supply/withdrawal, borrowing, repayment, direct lending, market discovery and position status in Oak's verified market registry (<code>morpho_supply_collateral</code>, <code>morpho_withdraw_collateral</code>, <code>morpho_borrow</code>, <code>morpho_repay</code>, <code>morpho_supply</code>, <code>morpho_withdraw</code>, <code>morpho_status</code>).</p>
 </article>
 <article class="docs-mod">
 <h4>Priors</h4>
@@ -471,9 +607,205 @@
 <code>priors_borrow</code>
 <code>priors_repay</code>
 <code>priors_status</code>
+<code>priors_starter_line</code>
+<code>priors_close_line</code>
+<code>priors_release_bond</code>
+<code>priors_set_delegate</code>
+<code>priors_root_enroll</code>
+<code>priors_root_add_stake</code>
+<code>priors_root_unlock</code>
+<code>priors_root_retire</code>
+<code>priors_root_vouch</code>
+<code>priors_root_unvouch</code>
+<code>priors_root_freeze</code>
+<code>priors_root_set_premium</code>
+<code>priors_root_claim_fees</code>
+<code>priors_root_set_hook</code>
+<code>priors_root_apply_hook</code>
+<code>priors_mark_default</code>
+<code>priors_import_history</code>
+<code>priors_fund_reserve</code>
+<code>priors_root_shares</code>
+<code>priors_root_fee_locked</code>
+<code>priors_root_fees_owed</code>
+<code>priors_root_backing</code>
+<code>priors_root_free_backing</code>
+<code>priors_pool_parameters</code>
+<code>priors_bond_deposit</code>
+<code>priors_bond_release</code>
+<code>priors_bond_slash</code>
+<code>priors_bond_status</code>
+<code>priors_bond_releasable</code>
+<code>priors_bond_release_at</code>
+<code>priors_treasury_move</code>
+<code>priors_treasury_raise</code>
+<code>priors_treasury_reclaim</code>
+<code>priors_treasury_first_line</code>
+<code>priors_treasury_raise_room</code>
+<code>priors_treasury_first_lined</code>
+<code>priors_treasury_eligible_raise</code>
+<code>priors_treasury_room</code>
+<code>priors_treasury_rules</code>
+<code>priors_stock_open</code>
+<code>priors_stock_add</code>
+<code>priors_stock_close</code>
+<code>priors_stock_expire</code>
+<code>priors_stock_reconcile</code>
+<code>priors_stock_settle</code>
+<code>priors_stock_record_feed</code>
+<code>priors_stock_reclaim</code>
+<code>priors_stock_state</code>
+<code>priors_stock_borrow_room</code>
+<code>priors_stock_asset_state</code>
+<code>priors_stock_lending_status</code>
+<code>priors_stock_value</code>
+<code>priors_stock_ltv</code>
+<code>priors_backing_open</code>
+<code>priors_backing_open_with_usdg</code>
+<code>priors_backing_add</code>
+<code>priors_backing_add_with_usdg</code>
+<code>priors_backing_leave</code>
+<code>priors_backing_close</code>
+<code>priors_backing_refresh</code>
+<code>priors_backing_promote</code>
+<code>priors_backing_expire</code>
+<code>priors_backing_sync</code>
+<code>priors_backing_poke_fees</code>
+<code>priors_backing_record_repay</code>
+<code>priors_backing_note_delegate</code>
+<code>priors_backing_set_auto_add</code>
+<code>priors_backing_set_protocol_backing</code>
+<code>priors_backing_set_others_backing</code>
+<code>priors_backing_reconsent</code>
+<code>priors_backing_release</code>
+<code>priors_backing_release_for</code>
+<code>priors_backing_finish_close</code>
+<code>priors_backing_claim_settled</code>
+<code>priors_backing_claim_record</code>
+<code>priors_backing_queue_exit</code>
+<code>priors_backing_settle</code>
+<code>priors_backing_record_loan</code>
+<code>priors_backing_record_default</code>
+<code>priors_backing_collect</code>
+<code>priors_backing_fund</code>
+<code>priors_backing_book</code>
+<code>priors_backing_generation</code>
+<code>priors_backing_line</code>
+<code>priors_backing_quote</code>
+<code>priors_backing_position</code>
+<code>priors_backing_record</code>
+<code>priors_backing_bucket</code>
+<code>priors_backing_settings</code>
+<code>priors_backing_reopen_at</code>
+<code>priors_backing_sync_prices</code>
+<code>priors_backing_exit_service_open</code>
+<code>priors_backing_usdg_path</code>
+<code>priors_backing_entry_rule</code>
+<code>priors_backing_target_premium</code>
+<code>priors_backing_price_cache</code>
+<code>priors_backing_pending_bucket</code>
+<code>priors_backing_exit_head</code>
+<code>priors_backing_exit_entry</code>
+<code>priors_backing_flush</code>
+<code>priors_backing_claimable</code>
+<code>priors_autopay_hold</code>
+<code>priors_autopay_max_cap</code>
+<code>priors_autopay_window</code>
+<code>priors_autopay_paused_until</code>
+<code>priors_autopay_plan</code>
+<code>priors_autopay_check</code>
+<code>priors_autopay_epoch</code>
+<code>priors_autopay_held</code>
+<code>priors_savings_deposit</code>
+<code>priors_savings_withdraw</code>
+<code>priors_savings_redeem</code>
+<code>priors_savings_balance</code>
+<code>priors_savings_value</code>
+<code>priors_market_v2_listing</code>
+<code>priors_market_v2_record_hash</code>
+<code>priors_market_v2_list</code>
+<code>priors_market_v2_cancel</code>
+<code>priors_market_v2_buy</code>
+<code>priors_market_v1_listing</code>
+<code>priors_market_v1_record_hash</code>
+<code>priors_market_v1_list</code>
+<code>priors_market_v1_cancel</code>
+<code>priors_market_v1_buy</code>
+<code>priors_market_bid</code>
+<code>priors_market_bid_any</code>
+<code>priors_market_cancel_bid</code>
+<code>priors_market_accept_bid</code>
+<code>priors_market_bid_state</code>
+<code>priors_market_builder</code>
+<code>priors_market_set_builder</code>
+<code>priors_market_change_builder</code>
+<code>priors_market_sale_split</code>
+<code>priors_legacy_v3_close</code>
+<code>priors_legacy_v3_withdraw_offer</code>
+<code>priors_legacy_v3_expire</code>
+<code>priors_legacy_v3_settle</code>
+<code>priors_legacy_v3_claim</code>
+<code>priors_legacy_v3_seat</code>
+<code>priors_legacy_v3_pending_fees</code>
+<code>priors_legacy_v3_fees</code>
+<code>priors_legacy_v3_offer</code>
+<code>priors_legacy_v4_close</code>
+<code>priors_legacy_v4_withdraw_offer</code>
+<code>priors_legacy_v4_expire</code>
+<code>priors_legacy_v4_settle</code>
+<code>priors_legacy_v4_claim</code>
+<code>priors_legacy_v4_seat</code>
+<code>priors_legacy_v4_pending_fees</code>
+<code>priors_legacy_v4_fees</code>
+<code>priors_legacy_v4_offer</code>
+<code>priors_sign_consent</code>
+<code>priors_root_offer</code>
+<code>priors_autopay_on</code>
+<code>priors_autopay_off</code>
+<code>priors_agent_record</code>
+<code>priors_score_of</code>
+<code>priors_credit_history</code>
+<code>priors_pool_stats</code>
+<code>priors_stock_assets</code>
+<code>priors_stock_position</code>
+<code>priors_recent_activity</code>
+<code>priors_desk_record</code>
+<code>priors_find_services</code>
+<code>priors_facilitator_info</code>
+<code>priors_agents_for_hire</code>
+<code>priors_find_jobs</code>
+<code>priors_job_brief</code>
+<code>priors_find_sellers</code>
+<code>priors_agent_page</code>
+<code>priors_find_agents</code>
+<code>priors_line_options</code>
+<code>priors_find_line_requests</code>
+<code>priors_line_request</code>
+<code>priors_find_agent_by_x</code>
+<code>priors_how_to_connect</code>
+<code>priors_ethos_status</code>
+<code>priors_request_borrow</code>
+<code>priors_request_repay</code>
+<code>priors_request_stock</code>
+<code>priors_request_backing</code>
+<code>priors_pt_quote</code>
+<code>priors_pt_position</code>
+<code>priors_pt_buy</code>
+<code>priors_pt_sell</code>
+<code>priors_pt_redeem</code>
+<code>priors_savings_liquidity</code>
+<code>priors_savings_force_withdraw</code>
+<code>priors_stock_quote</code>
+<code>priors_stock_swap</code>
+<code>priors_market_origin</code>
+<code>priors_market_pins</code>
+<code>priors_market_clear_bid_budget</code>
+<code>priors_market_revoke_nft</code>
+<code>priors_x_link</code>
+<code>priors_capabilities</code>
 </div>
 <p>
-<code>CreditPoolV2</code> lending and withdrawal for all wallets, plus borrowing and repayment for funded ERC-8004 credit lines (<code>priors_lend</code>, <code>priors_withdraw</code>, <code>priors_borrow</code>, <code>priors_repay</code>, <code>priors_status</code>).</p>
+<code>CreditPoolV2</code> lending and withdrawal for all wallets, plus borrowing and repayment for funded ERC-8004 credit lines (<code>priors_lend</code>, <code>priors_withdraw</code>, <code>priors_borrow</code>, <code>priors_repay</code>, <code>priors_status</code>, <code>priors_starter_line</code>, <code>priors_close_line</code>, <code>priors_release_bond</code>), plus a new agent's 5 USDG starter line from Priors' treasury, and sponsor, backing, treasury, stock-collateral, autopay, savings, market and legacy-seat tools with Priors token (PT) trades and reads (<code>priors_root_vouch</code>, <code>priors_backing_open</code>, <code>priors_stock_open</code>, <code>priors_autopay_on</code>, <code>priors_savings_deposit</code>, <code>priors_market_v2_list</code>, <code>priors_pt_buy</code>).</p>
 </article>
 </div>
 <h3>Move Money</h3>
@@ -488,16 +820,43 @@
 <code>relay_bridge_in</code>
 <code>relay_bridge_out</code>
 <code>relay_status</code>
+<code>relay_quote</code>
+<code>relay_chains</code>
+<code>relay_currencies</code>
+<code>relay_requests</code>
+<code>relay_vault_status</code>
+<code>relay_vault_withdraw</code>
 </div>
-<p>Cross-chain bridging into and out of chain <code>4663</code> with live status tracking (<code>relay_bridge_in</code>, <code>relay_bridge_out</code>, <code>relay_status</code>).</p>
+<p>Cross-chain bridging into and out of chain <code>4663</code> with live status tracking, read-only quotes and a chain directory (<code>relay_bridge_in</code>, <code>relay_bridge_out</code>, <code>relay_status</code>, <code>relay_quote</code>, <code>relay_chains</code>). A fresh wallet may bridge ETH or USDG to itself before setup or subscription; every other bridge shape still needs both.</p>
 </article>
 <article class="docs-mod">
 <h4>Orbio</h4>
 <div class="docs-chips">
 <code>orbio_buy_credit</code>
 <code>orbio_credit_status</code>
+<code>orbio_buy_held_credit</code>
+<code>orbio_activate_credit</code>
+<code>orbio_transfer_credit</code>
+<code>orbio_tx_status</code>
+<code>orbio_catalog</code>
+<code>orbio_staking_status</code>
+<code>orbio_stake</code>
+<code>orbio_unstake</code>
+<code>orbio_claim_staking</code>
+<code>orbio_agent_status</code>
+<code>orbio_agent_launch</code>
+<code>orbio_agent_harvest</code>
+<code>orbio_agent_claim_credit</code>
+<code>orbio_agent_withdraw_principal</code>
+<code>orbio_agent_set_wallet</code>
+<code>orbio_account</code>
+<code>orbio_rotate_key</code>
+<code>orbio_chat</code>
+<code>orbio_call_tool</code>
+<code>orbio_infra_call</code>
+<code>orbio_swap_quote</code>
 </div>
-<p>AI credit purchases and balance checks (<code>orbio_buy_credit</code>, <code>orbio_credit_status</code>).</p>
+<p>AI credit purchases and balance checks (<code>orbio_buy_credit</code>, <code>orbio_credit_status</code>), plus held-credit, staking and agent-launch tools and local gateway tools for model chat, metered tools and infrastructure (<code>orbio_buy_held_credit</code>, <code>orbio_stake</code>, <code>orbio_agent_launch</code>, <code>orbio_chat</code>, <code>orbio_call_tool</code>).</p>
 </article>
 </div>
 <h3>Markets and Data</h3>
@@ -516,7 +875,7 @@
 <code>meridian_settle</code>
 <code>meridian_redeem</code>
 </div>
-<p>Prediction market browsing, positions, settlement/redemption, and multi-turn WebSocket RFQ auctions (<code>meridian_browse</code>, <code>meridian_positions</code>, <code>meridian_buy</code>, <code>meridian_sell</code>, <code>meridian_settle</code>, <code>meridian_redeem</code>).</p>
+<p>Robinhood Chain Predict search, paginated holdings, secondary RFQ sales and settlement/redemption using USDe (<code>meridian_browse</code>, <code>meridian_positions</code>, <code>meridian_buy</code>, <code>meridian_sell</code>, <code>meridian_settle</code>, <code>meridian_redeem</code>). Buys are paused; position-token bridging, Arbitrum trading and perps are unsupported.</p>
 </article>
 <article class="docs-mod">
 <h4>Lighter</h4>
@@ -530,8 +889,11 @@
 <div class="docs-chips">
 <code>heyresearch_research_project</code>
 <code>heyresearch_chain_activity</code>
+<code>heyresearch_read</code>
+<code>heyresearch_bulk</code>
+<code>heyresearch_validate_receipt</code>
 </div>
-<p>Read-only project research and chain activity (<code>heyresearch_research_project</code>, <code>heyresearch_chain_activity</code>), preserving HeyResearch attribution links and status wording.</p>
+<p>Read-only project research and chain activity (<code>heyresearch_research_project</code>, <code>heyresearch_chain_activity</code>), preserving HeyResearch attribution links and status wording, plus any public HeyResearch operation by name, bulk reads and receipt validation (<code>heyresearch_read</code>, <code>heyresearch_bulk</code>, <code>heyresearch_validate_receipt</code>).</p>
 </article>
 </div>
 <h3>Identity and Tools</h3>
@@ -546,8 +908,24 @@
 <code>erc8004_register</code>
 <code>erc8004_update</code>
 <code>erc8004_identity</code>
+<code>erc8004_wallet_proof</code>
+<code>erc8004_set_wallet</code>
+<code>erc8004_unset_wallet</code>
+<code>erc8004_transfer</code>
+<code>erc8004_approve</code>
+<code>erc8004_set_operator</code>
+<code>erc8004_set_metadata</code>
+<code>erc8004_owned</code>
+<code>erc8004_give_feedback</code>
+<code>erc8004_revoke_feedback</code>
+<code>erc8004_append_response</code>
+<code>erc8004_reputation</code>
+<code>erc8004_validation_request</code>
+<code>erc8004_validation_response</code>
+<code>erc8004_validation</code>
+<code>erc8004_verify_domain</code>
 </div>
-<p>On-chain agent identity registration, gasless owner linking (<code>oak setup</code>), unlinking (<code>oak identity unlink</code>), and metadata updates on <code>IdentityRegistry</code> (<code>erc8004_register</code>, <code>erc8004_update</code>, <code>erc8004_identity</code>), with the default <code>oak.registrar</code> marker.</p>
+<p>On-chain agent identity registration, gasless owner linking (<code>oak setup</code>), unlinking (<code>oak identity unlink</code>), and metadata updates on <code>IdentityRegistry</code> (<code>erc8004_register</code>, <code>erc8004_update</code>, <code>erc8004_identity</code>), with the default <code>oak.registrar</code> marker, plus agent wallet proofs, identity NFT transfers and approvals, reputation feedback and validation (<code>erc8004_set_wallet</code>, <code>erc8004_transfer</code>, <code>erc8004_give_feedback</code>, <code>erc8004_validation_request</code>).</p>
 </article>
 <article class="docs-mod">
 <h4>hood.ag</h4>
@@ -555,9 +933,33 @@
 <code>hoodag_register</code>
 <code>hoodag_resolve</code>
 <code>hoodag_name_info</code>
+<code>hoodag_renew</code>
+<code>hoodag_text</code>
+<code>hoodag_set_address</code>
+<code>hoodag_set_text</code>
+<code>hoodag_contenthash</code>
+<code>hoodag_set_contenthash</code>
+<code>hoodag_set_primary</code>
+<code>hoodag_clear_primary</code>
+<code>hoodag_reclaim</code>
+<code>hoodag_transfer</code>
+<code>hoodag_approve_transfer</code>
+<code>hoodag_market_listing</code>
+<code>hoodag_market_list</code>
+<code>hoodag_market_set_price</code>
+<code>hoodag_market_unlist</code>
+<code>hoodag_market_buy</code>
+<code>hoodag_commit</code>
+<code>hoodag_register_eth</code>
+<code>hoodag_register_many</code>
+<code>hoodag_referral_info</code>
+<code>hoodag_browse</code>
+<code>hoodag_owned_names</code>
+<code>hoodag_registration_quote</code>
+<code>hoodag_social_read</code>
 </div>
 <p>
-<code>.hood</code> domain registration via USDG, reverse record configuration, and resolution (<code>hoodag_register</code>, <code>hoodag_resolve</code>, <code>hoodag_name_info</code>).</p>
+<code>.hood</code> domain registration via USDG, reverse record configuration, and resolution (<code>hoodag_register</code>, <code>hoodag_resolve</code>, <code>hoodag_name_info</code>), plus renewals, records, transfers, marketplace listings and purchases, batch and native-ETH registration, and index reads (<code>hoodag_renew</code>, <code>hoodag_set_text</code>, <code>hoodag_transfer</code>, <code>hoodag_market_list</code>, <code>hoodag_market_buy</code>, <code>hoodag_register_many</code>, <code>hoodag_browse</code>).</p>
 </article>
 <article class="docs-mod">
 <h4>HoodLock</h4>
@@ -567,8 +969,23 @@
 <code>hoodlock_airdrop_create</code>
 <code>hoodlock_airdrop_claim</code>
 <code>hoodlock_list_locks</code>
+<code>hoodlock_vesting_create</code>
+<code>hoodlock_vesting_status</code>
+<code>hoodlock_vesting_claim</code>
+<code>hoodlock_vesting_transfer</code>
+<code>hoodlock_withdraw</code>
+<code>hoodlock_extend</code>
+<code>hoodlock_transfer_lock</code>
+<code>hoodlock_set_fee_recipient</code>
+<code>hoodlock_collect</code>
+<code>hoodlock_airdrop_sweep</code>
+<code>hoodlock_record</code>
+<code>hoodlock_read</code>
+<code>hoodlock_recover</code>
+<code>hoodlock_admin</code>
+<code>hoodlock_public</code>
 </div>
-<p>Token, v2 LP, and v3 position locks, token burns, and airdrop create, airdrop claim, and airdrop recipient lists (<code>hoodlock_lock</code>, <code>hoodlock_burn</code>, <code>hoodlock_airdrop_create</code>, <code>hoodlock_airdrop_claim</code>, <code>hoodlock_list_locks</code>; omit <code>id</code> on <code>hoodlock_airdrop_claim</code> to query eligible airdrops).</p>
+<p>Token, v2 LP, and v3 position locks, token burns, and airdrop create, airdrop claim, and airdrop recipient lists (<code>hoodlock_lock</code>, <code>hoodlock_burn</code>, <code>hoodlock_airdrop_create</code>, <code>hoodlock_airdrop_claim</code>, <code>hoodlock_list_locks</code>; omit <code>id</code> on <code>hoodlock_airdrop_claim</code> to query eligible airdrops), plus vesting schedules and lock withdraw, extend, transfer and fee collection (<code>hoodlock_vesting_create</code>, <code>hoodlock_withdraw</code>, <code>hoodlock_extend</code>, <code>hoodlock_collect</code>).</p>
 </article>
 </div>
 </details>
@@ -627,7 +1044,7 @@ oak call &lt;tool&gt; &lt;json&gt;</code></pre>
 <details class="reference-detail">
 <summary>Read details</summary>
 <div class="docs-narrow">
-<p>AI agents should start with <code>AGENTS.md</code>, the operating guide that lists every tool, convention and custody rule. A plain-text summary for agents is in <code>llms.txt</code>.</p>
+<p>AI agents should start with <code>AGENTS.md</code>, the operating guide to the tools, conventions and custody rules. A plain-text summary for agents is in <code>llms.txt</code>.</p>
 <h3>Hard Custody Boundaries for Agents</h3>
 <ol>
 <li>

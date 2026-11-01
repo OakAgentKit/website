@@ -92,13 +92,13 @@
 <div class="wrap">
 <div class="prose wide">
 <p>Oak has no third-party audit. Your wallet stays on your computer; you review what it is about to do. The details below explain custody, authority and limits.</p>
-<p>Default human confirmation describes the prepared 0.1.1 release candidate. Published 0.1.0 packages predate this change; update at launch before using actions.</p>
+<p>Version 0.1.9 includes default human confirmation and a daily auto-mode budget. Run <code>oak --version</code>; npm installs 0.1.9.</p>
 <section class="doc-part" id="disclosures">
 <h2>Disclosures</h2>
 <details class="reference-detail">
 <summary>Read details</summary>
 <ul>
-<li>Oak is access only. It uses exact approvals. Oak previews and simulates every action. Its local guard refuses unexpected token movements or approvals before anything is signed. By default you approve each transaction. Oak sets no spending caps or allowlists and does not judge whether a trade is wise. You and your agent inspect the terms and decide what to sign. Oak never promises returns, pools user money, or gives financial advice.</li>
+<li>Oak is access only. It uses exact approvals. Oak previews and simulates transactions before local signing. Signature-only typed-data actions are shown for confirmation without transaction simulation. Its local guard refuses unexpected token movements or approvals before transaction signing. By default you approve each transaction and signature-only action. Oak sets no spending caps or allowlists and does not judge whether a trade is wise. You and your agent inspect the terms and decide what to sign. Oak never promises returns, pools user money, or gives financial advice.</li>
 <li>
 <strong>Not affiliated.</strong> Oak is independent and is not affiliated with Robinhood.</li>
 <li>
@@ -372,7 +372,7 @@
 <li>
 <code>packages/contracts/test/vectors.json</code> — Shared entry-price curve, holder count, sign-up burn, and 25/75 USDG payment-split vectors verified across Solidity (<code>OakPricing.sol</code>) and TypeScript (<code>packages/core/src/pricing.ts</code>).</li>
 <li>
-<code>packages/core/src/addresses.ts</code> — Pinned Robinhood Chain (<code>4663</code>) and Testnet (<code>46630</code>) contract addresses, token metadata, and recorded call descriptors (<code>RECORDED_CALLS</code>) across all 25 modules.</li>
+<code>packages/core/src/addresses.ts</code> — Pinned Robinhood Chain (<code>4663</code>) and Testnet (<code>46630</code>) contract addresses and token metadata across all 25 modules.</li>
 <li>
 <code>packages/core/test/modules/</code> — Recorded protocol response shapes and transaction-building fixtures for KyberSwap, Velora, Steakhouse, Spark, NetNet, Longbow, Grove, Beefy, Pons, Orbio, HoodLock, Merkl, Relay, Lighter, ERC-8004, hood.ag, HeyResearch, Priors, Morpho Blue, Uniswap, Meridian, Hookr, TickerSpring, Clanker, and pools.trade.</li>
 <li>
@@ -390,9 +390,13 @@
 <h2>Releases</h2>
 <details class="reference-detail">
 <summary>Read details</summary>
-<p>This page records public releases of the Oak open-source kit (<code>@oakagentkit/addon</code>, <code>@oakagentkit/core</code>, and <code>@oakagentkit/contracts</code>). Every version entry lists changes using standard changelog categories (<code>[Added]</code>, <code>[Changed]</code>, <code>[Fixed]</code>, <code>[Removed]</code>, <code>[Deprecated]</code>, <code>[Security]</code>).</p>
-<h3 id="0-1-1-release-candidate-2026-10-30">0.1.1 release candidate — 2026-10-30</h3>
-<p>Prepared for operator publication; no 0.1.1 registry release is claimed here. Default MCP action confirmation and terminal renewal/cancellation prompts let users review before local signing. Local transaction guards validate exact approvals, destinations and post-state allowances, then re-simulate before signing. Finality defaults to 30 confirmations, confirmation validity is 300 seconds, identity registration resumes, and action results lead with status and hashes. Priors/HEY behavior, small-swap rounding, Velora fee handling and quotes without reference prices are corrected. Automatic wallet creation shipped in 0.1.0 already. See the public CHANGELOG for the full user-facing and technical list.</p>
+<p>This page records releases of the Oak add-on and core npm packages and the source-only contracts. Docs, examples and runtime contracts are MIT; the compiled npm packages use the Oak package license and their implementation source is private. Every version entry lists changes using standard changelog categories (<code>[Added]</code>, <code>[Changed]</code>, <code>[Fixed]</code>, <code>[Removed]</code>, <code>[Deprecated]</code>, <code>[Security]</code>).</p>
+<h3 id="0-1-9">0.1.9</h3>
+<p>Version 0.1.9 of <code>@oakagentkit/addon</code> and <code>@oakagentkit/core</code> is released. The npm install command installs 0.1.9. Hosted actions open with the token and subscription launch.</p>
+<p>Version 0.1.9 expands the tool catalog and incorporates fixes from live tests with real funds. It adds the owner-selected auto mode's 50 USD daily approval budget, strengthens approval and quote checks, and fixes Relay funding, Orbio status and Meridian RFQ settlement handling. See CHANGELOG.md for the release changes and the local verification report for measured coverage.</p>
+<p>The 0.1.9 CLI lists 84 mainnet tools and 19 testnet tools without imported recipes. The full catalog has 659 mainnet tools and 39 testnet tools, reachable through <code>find_tool</code> and <code>run_tool</code>. Read-only examples list 82 mainnet tools because their subscription callbacks are disabled.</p>
+<h3 id="0-1-2-published-2026-10-30">0.1.2 published — 2026-10-30</h3>
+<p>The <code>@oakagentkit/addon</code> and <code>@oakagentkit/core</code> 0.1.2 packages are published on npm. Default MCP action confirmation and terminal renewal/cancellation prompts let users review before local signing. Local transaction guards validate exact approvals, destinations and post-state allowances, then re-simulate before signing. Finality defaults to 30 confirmations, confirmation validity is 300 seconds, identity registration resumes, and action results lead with status and hashes. Priors/HEY behavior, small-swap rounding, Velora fee handling and quotes without reference prices are corrected. Automatic wallet creation shipped in 0.1.0 already. Version 0.1.2 retains confirmation and signing guards, enables Longbow deposits, hides the deferred send tool and adds MCP startup instructions and project playbooks. Meridian buys remain deferred. See CHANGELOG.md for the 0.1.2 change list.</p>
 <p>The CLI lists 102 mainnet tools without imported recipes (16 on testnet). The example bridge lists 100 because its subscription callbacks are disabled. Hosted actions remain team-only; local discovery does not grant action access. Strangers can read <code>find_token</code>; private actions receive a server allow-list denial.</p>
 <h3 id="release-table">Release Table</h3>
 <div class="table-wrap">
@@ -408,11 +412,27 @@
 <tbody>
 <tr>
 <td data-label="Version">
+<code>0.1.9</code>
+</td>
+<td data-label="Date">—</td>
+<td data-label="Status">Published npm packages; hosted actions wait for launch</td>
+<td data-label="Highlights">Expanded catalog, daily auto budget, approval and quote fixes, Relay/Orbio/Meridian fixes; hosted actions open with token and subscription launch.</td>
+</tr>
+<tr>
+<td data-label="Version">
+<code>0.1.2</code>
+</td>
+<td data-label="Date">2026-10-30</td>
+<td data-label="Status">Published npm packages; hosted actions team-only until launch</td>
+<td data-label="Highlights">Default confirmation and local signing guards retained; Longbow deposits enabled; send hidden; MCP resources included; Meridian buys deferred.</td>
+</tr>
+<tr>
+<td data-label="Version">
 <code>0.0.0</code>
 </td>
 <td data-label="Date">2026-10-29</td>
-<td data-label="Status">Pre-launch workspace</td>
-<td data-label="Highlights">Complete monorepo implementation of <code>@oakagentkit/addon</code>, <code>@oakagentkit/core</code> (basics + 25 ecosystem modules), <code>@oakagentkit/contracts</code> (<code>OakOracle</code>, <code>OakSubscription</code>, <code>OakBurner</code>), ERC-8004 identity setup (<code>oak setup</code>, gasless owner link, and <code>oak identity unlink</code>), request-bound sessions (<code>X-Oak-Session</code> + single-use <code>X-Oak-Request</code>), and public trust documentation; build from source until <code>1.0.0</code> is published.</td>
+<td data-label="Status">Historical pre-launch workspace</td>
+<td data-label="Highlights">Complete monorepo implementation of <code>@oakagentkit/addon</code>, <code>@oakagentkit/core</code> (basics + 25 ecosystem modules), <code>@oakagentkit/contracts</code> (<code>OakOracle</code>, <code>OakSubscription</code>, <code>OakBurner</code>), ERC-8004 identity setup (<code>oak setup</code>, gasless owner link, and <code>oak identity unlink</code>), request-bound sessions (<code>X-Oak-Session</code> + single-use <code>X-Oak-Request</code>), and public trust documentation; historical implementation snapshot preceding the published 0.1.2 npm packages.</td>
 </tr>
 </tbody>
 </table>
@@ -509,7 +529,7 @@
 <h4 id="out-of-scope">Out of Scope</h4>
 <ul>
 <li>
-<strong>User or agent signing choices:</strong> Signing a losing, illiquid, or malicious transaction after receiving its simulation preview, or importing and running an unreviewed third-party recipe (<code>as-is, not reviewed by Oak</code>). Oak previews and simulates every action. Its local guard refuses unexpected token movements or approvals before anything is signed. By default you approve each transaction. Oak sets no spending caps or allowlists and does not judge whether a trade is wise.</li>
+<strong>User or agent signing choices:</strong> Signing a losing, illiquid, or malicious transaction after receiving its simulation preview, signing a signature-only typed-data action after reviewing its confirmation summary (without transaction simulation), or importing and running an unreviewed third-party recipe (<code>as-is, not reviewed by Oak</code>). Oak previews and simulates transactions before local signing. Signature-only typed-data actions are shown for confirmation without transaction simulation. Its local guard refuses unexpected token movements or approvals before transaction signing. By default you approve each transaction and signature-only action. Oak sets no spending caps or allowlists and does not judge whether a trade is wise.</li>
 <li>
 <strong>Automatic subscription renewals:</strong> Automatic local signing and broadcast of subscription renewals when <code>&lt;= 3 days</code> remain (<code>oak renew</code> and the background check while <code>oak mcp</code> is running), which is documented behavior until cancelled with <code>oak cancel</code>.</li>
 <li>

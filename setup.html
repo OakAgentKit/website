@@ -95,7 +95,7 @@
 <p class="chapter">Before you start</p>
 <h2>Prepare now. Use hosted tools at launch.</h2>
  <p>Packages are published. Hosted actions open with the token and subscription launch; until then, actions are limited to the Oak team. Read calls such as find_token remain available.</p>
- <p>Default human confirmation is part of the prepared 0.1.1 release candidate. The currently published 0.1.0 packages predate that change. Update at launch before funding a wallet or enabling actions.</p>
+ <p>Version 0.1.9 includes default human confirmation and a daily auto-mode budget. Run <code>oak --version</code>; npm installs 0.1.9.</p>
  <p>Keep your assistant open on your computer. A website visit does not connect a wallet.</p>
 </section>
  <nav class="setup-contents" aria-label="Setup steps">
@@ -202,22 +202,22 @@ args = ["mcp"]</code></pre>
  <p>More first prompts to paste:</p>
  <ul class="prompt-list">
 <li>
-<p class="copy-prompt copyable" data-copy="What can you do with Oak? Group the tools by project.">What can you do with Oak? Group the tools by project.</p>
+<p class="copy-prompt copyable" tabindex="0" role="region" aria-label="Prompt to copy" data-copy="What can you do with Oak? Group the tools by project.">What can you do with Oak? Group the tools by project.</p>
 </li>
 <li>
-<p class="copy-prompt copyable" data-copy="Show my Oak wallet address and balances. Do not send anything.">Show my Oak wallet address and balances. Do not send anything.</p>
+<p class="copy-prompt copyable" tabindex="0" role="region" aria-label="Prompt to copy" data-copy="Show my Oak wallet address and balances. Do not send anything.">Show my Oak wallet address and balances. Do not send anything.</p>
 </li>
 <li>
-<p class="copy-prompt copyable" data-copy="Quote a swap of 5 USDG to ETH with the best route. Show the preview and do not swap yet.">Quote a swap of 5 USDG to ETH with the best route. Show the preview and do not swap yet.</p>
+<p class="copy-prompt copyable" tabindex="0" role="region" aria-label="Prompt to copy" data-copy="Quote a swap of 5 USDG to ETH with the best route. Show the preview and do not swap yet.">Quote a swap of 5 USDG to ETH with the best route. Show the preview and do not swap yet.</p>
 </li>
 <li>
-<p class="copy-prompt copyable" data-copy="Lend 10 USDG on Priors. Show me the preview before anything is signed.">Lend 10 USDG on Priors. Show me the preview before anything is signed.</p>
+<p class="copy-prompt copyable" tabindex="0" role="region" aria-label="Prompt to copy" data-copy="Lend 10 USDG on Priors. Show me the preview before anything is signed.">Lend 10 USDG on Priors. Show me the preview before anything is signed.</p>
 </li>
 <li>
-<p class="copy-prompt copyable" data-copy="Deposit 10 USDG into a Steakhouse vault. Show me the preview first.">Deposit 10 USDG into a Steakhouse vault. Show me the preview first.</p>
+<p class="copy-prompt copyable" tabindex="0" role="region" aria-label="Prompt to copy" data-copy="Deposit 10 USDG into a Steakhouse vault. Show me the preview first.">Deposit 10 USDG into a Steakhouse vault. Show me the preview first.</p>
 </li>
 <li>
-<p class="copy-prompt copyable" data-copy="Show my open positions across every project.">Show my open positions across every project.</p>
+<p class="copy-prompt copyable" tabindex="0" role="region" aria-label="Prompt to copy" data-copy="Show my open positions across every project.">Show my open positions across every project.</p>
 </li>
 </ul>
  <p class="copy-hint">One click selects a whole command or prompt. Then copy it: Cmd or Ctrl + C, or long-press on a phone.</p>
@@ -425,6 +425,8 @@ args = ["mcp"]</code></pre>
 <p>Mainnet uses <code>https://api.oakagentkit.org</code> by default. Override it with <code>oak config set OAK_SERVER_URL &lt;https-url&gt;</code> or <code>OAK_SERVER_URL</code>; testnet requires an explicit matching service URL. Configure the published deployment addresses and your RPC before starting MCP.</p>
 <p>Transactions reported as “awaiting finality” keep their signed journal evidence until final. New actions wait for reconciliation; a removed receipt is recovered at the same nonce, or an expired call has its nonce replaced with a zero-value self-transfer. Do not delete journal files to force a retry. If a sequence stops after approval, the error lists token, spender, base-unit amount and chain. The next action previews and revokes the remaining allowance before new work; keep ETH available for cleanup. You can also call <code>approve(spender, 0)</code> on that token in your own wallet on the named chain.</p>
 <p>Price notes require an ETH/USD pool observation no older than 30 minutes and a current 30-minute OAK trade window. Missing, future-dated or stale sources refuse note issuance with a retry explanation; an old Uniswap observation extrapolated by <code>observe(0)</code> does not qualify.</p>
+<p>Adding your own Robinhood Chain RPC URL, such as a free or paid Alchemy key that permits full-history log queries, can make Oak's one-time approval check take seconds (14 requests in 2.003 seconds in the recorded check). Set OAK_CENSUS_RPC_URL locally for the history check, or OAK_RPC_URL for all chain calls, then restart Oak; never paste a keyed URL into chat. Range-limited plans take longer. Generic swaps use direct Uniswap routes during catch-up; aggregator routes unlock when coverage is complete and still require a tracing RPC.</p>
+<p>Automatic approval budget: In owner-selected auto mode, automatic approvals default to a 50 USD budget per local calendar day. Actions above the remaining budget, without a fresh USD value, or with unavailable usage records require human approval. Ask mode requires confirmation. This budget does not cap spending that a person explicitly approves.</p>
 </details>
 </section>
  </div>

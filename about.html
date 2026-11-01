@@ -99,6 +99,7 @@
 <p>Every project on <strong>Robinhood Chain</strong> (chain ID <code>4663</code>) has its own contracts, its own API or subgraph, its own decimal and approval rules, and its own failure modes. Nobody wants to install and maintain 25 separate MCP servers or give 25 tools access to a wallet.</p>
 <p>
 <strong>One MCP for the whole chain.</strong> Oak is one downloadable tool (<code>@oakagentkit/addon</code>) that connects an AI agent (Claude Code, Codex, Gemini, Cursor, or Grok) to <strong>25 ecosystem projects</strong> behind one local wallet, one <code>&lt;module&gt;_&lt;verb&gt;</code> naming convention, one decimal base-unit amount format, pre-sign simulation previews (<code>eth_simulateV1</code>), and plain-sentence error messages.</p>
+<p>Your agent's tool list shows the everyday tools, such as status, swap, deposit and borrow. For anything not listed, it calls <code>find_tool</code> with what it wants to do, then <code>run_tool</code> with the tool's name and arguments. Every tool stays reachable, and <code>run_tool</code> applies the same access checks, local guard, preview and confirmation as a direct call.</p>
 <p>Oak is built around four principles:</p>
 <ol>
 <li>
@@ -106,9 +107,9 @@
 <li>
 <strong>Normalised modules, not thin wrappers.</strong> Each project module absorbs protocol-specific quirks (Uniswap v4 <code>Permit2</code> expirations, Meridian multi-turn WebSocket RFQ auctions and USDe collateral swaps, TickerSpring unopened-market <code>startingPrice</code> bundles, Clanker MEV-window fee syncs, HoodLock proof lookups, and Merkl cumulative claim construction) so the agent interacts with clean, uniform verbs.</li>
 <li>
-<strong>Access only, no hidden middlemen.</strong> Oak charges a flat monthly subscription in USDG (<code>9 USDG per 30 days</code> on the holder plan, or <code>9 USDG plus one sixth of the entry price</code> on the no-hold plan, with a <code>12.333333 USDG</code> floor) and takes <strong>0%</strong> of your trades or protocol interactions. Oak previews and simulates every action. Its local guard refuses unexpected token movements or approvals before anything is signed. By default you approve each transaction. Oak sets no spending caps or allowlists and does not judge whether a trade is wise.</li>
+<strong>Access only, no hidden middlemen.</strong> Oak charges a flat monthly subscription in USDG (<code>9 USDG per 30 days</code> on the holder plan, or <code>9 USDG plus one sixth of the entry price</code> on the no-hold plan, with a <code>12.333333 USDG</code> floor) and takes <strong>0%</strong> of your trades or protocol interactions. Oak previews and simulates transactions before local signing. Signature-only typed-data actions are shown for confirmation without transaction simulation. Its local guard refuses unexpected token movements or approvals before transaction signing. By default you approve each transaction and signature-only action. Oak sets no spending caps or allowlists and does not judge whether a trade is wise.</li>
 <li>
-<strong>Public docs and contracts.</strong> Docs, examples and contracts are MIT. The compiled npm packages are Free-to-Use, No Copying; their source and the hosted Oak service are private.</li>
+<strong>Package and source licenses.</strong> Docs, examples and runtime contracts are MIT; the legacy Uniswap differential test is GPL-2.0-or-later. The compiled add-on and core npm packages use the Oak package license (free to use, no copying); their implementation source and the hosted Oak service are private. The hosted Oak server (<code>packages/server</code>) reads chain and project APIs, verifies ERC-8004 identities and subscription access, and runs the price-note issuer in the same process.</li>
 </ol>
 <hr>
 </details>

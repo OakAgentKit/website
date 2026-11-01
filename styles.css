@@ -444,7 +444,7 @@ body { margin: 0; background: var(--forest); color: var(--paper); font-family: M
 * { box-sizing: border-box; }
 a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: .25em; }
 a:hover { color: var(--lime); }
-a:focus-visible, button:focus-visible, summary:focus-visible, pre:focus-visible { outline: 2px solid var(--lime); outline-offset: 4px; }
+a:focus-visible, button:focus-visible, summary:focus-visible, pre:focus-visible, .copy-prompt:focus-visible { outline: 2px solid var(--lime); outline-offset: 4px; }
 p { margin: 0 0 16px; }
 code { font-size: max(.92em, 14px); }
 
@@ -616,6 +616,8 @@ h3 { font-size: 24px; line-height: 30px; margin: 0 0 8px; }
 /* Below 360px the skies shrink with the art while the pill keeps its 148px minimum, so it would reach home's
    branch, about's canopy and the docs village (measured at 320). Every page keeps the group under the title. */
 @media (max-width:359px) {
+ .scene-header .scene-brand .brand-word { width: 108px; height: 17px; }
+ .scene-header-inner { gap: 8px; }
  .scene-hero.scene-hero { --px: var(--tl); --py: var(--tb); --pyo: 24px; --cw: initial; }
  .scene-hero .hero-actions { align-items: flex-start; text-align: left; translate: none; }
 }
@@ -839,7 +841,7 @@ pre code, .code-block code { font-size: 14px; background: none; padding: 0; }
  .scene-footer { padding: 24px 0 32px; }
  .scene-footer-top { flex-direction: column; align-items: flex-start; gap: 4px; }
  .scene-footer nav ul { display: grid; grid-template-columns: repeat(3, minmax(0, max-content)); gap: 0 20px; }
- .scene-footer nav a { min-height: 40px; }
+ .scene-footer nav a { min-height: 44px; }
  .scene-brand .brand-mark { width: 40px; height: 40px; }
  .scene-brand .brand-word { width: 151px; height: 24px; }
  .start-grid, .quiet-band, .token-utility .utility-grid { grid-template-columns: minmax(0, 1fr); }

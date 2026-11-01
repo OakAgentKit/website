@@ -142,22 +142,22 @@ args = ["mcp"]</code></pre>
  <p>Paste a first prompt:</p>
  <ul class="prompt-list">
 <li>
-<p class="copy-prompt copyable" data-copy="What can you do with Oak? Group the tools by project.">What can you do with Oak? Group the tools by project.</p>
+<p class="copy-prompt copyable" tabindex="0" role="region" aria-label="Prompt to copy" data-copy="What can you do with Oak? Group the tools by project.">What can you do with Oak? Group the tools by project.</p>
 </li>
 <li>
-<p class="copy-prompt copyable" data-copy="Show my Oak wallet address and balances. Do not send anything.">Show my Oak wallet address and balances. Do not send anything.</p>
+<p class="copy-prompt copyable" tabindex="0" role="region" aria-label="Prompt to copy" data-copy="Show my Oak wallet address and balances. Do not send anything.">Show my Oak wallet address and balances. Do not send anything.</p>
 </li>
 <li>
-<p class="copy-prompt copyable" data-copy="Quote a swap of 5 USDG to ETH with the best route. Show the preview and do not swap yet.">Quote a swap of 5 USDG to ETH with the best route. Show the preview and do not swap yet.</p>
+<p class="copy-prompt copyable" tabindex="0" role="region" aria-label="Prompt to copy" data-copy="Quote a swap of 5 USDG to ETH with the best route. Show the preview and do not swap yet.">Quote a swap of 5 USDG to ETH with the best route. Show the preview and do not swap yet.</p>
 </li>
 <li>
-<p class="copy-prompt copyable" data-copy="Lend 10 USDG on Priors. Show me the preview before anything is signed.">Lend 10 USDG on Priors. Show me the preview before anything is signed.</p>
+<p class="copy-prompt copyable" tabindex="0" role="region" aria-label="Prompt to copy" data-copy="Lend 10 USDG on Priors. Show me the preview before anything is signed.">Lend 10 USDG on Priors. Show me the preview before anything is signed.</p>
 </li>
 <li>
-<p class="copy-prompt copyable" data-copy="Deposit 10 USDG into a Steakhouse vault. Show me the preview first.">Deposit 10 USDG into a Steakhouse vault. Show me the preview first.</p>
+<p class="copy-prompt copyable" tabindex="0" role="region" aria-label="Prompt to copy" data-copy="Deposit 10 USDG into a Steakhouse vault. Show me the preview first.">Deposit 10 USDG into a Steakhouse vault. Show me the preview first.</p>
 </li>
 <li>
-<p class="copy-prompt copyable" data-copy="Show my open positions across every project.">Show my open positions across every project.</p>
+<p class="copy-prompt copyable" tabindex="0" role="region" aria-label="Prompt to copy" data-copy="Show my open positions across every project.">Show my open positions across every project.</p>
 </li>
 </ul>
  <p class="fine">Every action shows a preview first. Swaps, lending and deposits open with the token and subscription launch.</p>
@@ -168,7 +168,8 @@ args = ["mcp"]</code></pre>
  <section class="quiet-section builder-section" id="projects">
 <p class="chapter">For builders</p>
 <h2>One MCP for the whole chain.</h2>
- <p>MCP (Model Context Protocol) is a connection for AI tools. One local connection gives your agent 25 projects and 102 tools on Robinhood Chain: project information, balances, swaps, bridges, lending and identity.</p>
+ <p>MCP (Model Context Protocol) is a connection for AI tools. One local connection gives your agent 25 projects and 659 tools on Robinhood Chain: project information, balances, swaps, bridges, lending and identity.</p>
+ <p>Your agent's tool list shows the everyday tools. For anything not listed, it calls <code>find_tool</code> with what it wants to do, then <code>run_tool</code> with the tool's name and arguments. Tools run this way get the same access checks, local guard, preview and confirmation as a direct call.</p>
  <p>Connect Claude Code, Codex, Gemini, Cursor or another compatible host. Build your own workflows and experiment with autonomous agents. Pons token launches and curve buys are one example among the project tools.</p>
  <p>Packages are published. Hosted actions open with the token and subscription launch; until then, actions are limited to the Oak team. Read calls such as find_token remain available.</p>
  <p>

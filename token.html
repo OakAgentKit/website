@@ -265,14 +265,16 @@
 </ul>
 <hr>
 </details>
-<h2 id="oak-trading-fees-to-the-single-owner-treasury-wallet">5. <code>$OAK</code> Trading Fees to the Single-Owner Treasury Wallet</h2>
+<h2 id="oak-trading-fees-to-the-launch-wallet">5. <code>$OAK</code> Trading Fees to the Launch Wallet</h2>
 <details class="reference-detail">
 <summary>Read token mechanics</summary>
 <ul>
 <li>Every <code>$OAK</code> trade on Pons V2 pays a <code>2%</code> fee: <code>0.3%</code> to Pons and <strong>1.7%</strong> creator fee (<code>0.7%</code> standard creator share + <code>1%</code> creator tax set at launch; venue buybacks are off).</li>
-<li>All <strong>1.7%</strong> goes to the <strong>single-owner treasury wallet</strong>, which is the Pons creator-fee recipient and claims positive ETH balances from the Pons fee escrow (<code>0xd3AFEB2a57f70eF218Aa82451c51B2fb0416Ac9e</code>) by owner-signed transaction.</li>
+<li>All <strong>1.7%</strong> goes to the <strong>launch wallet</strong> (<code>0x84b1B9e5D1cAfD9543E684BB39E9cbD478189EE2</code>), which is the Pons creator-fee recipient and manually claims positive ETH balances from the Pons fee escrow (<code>0xd3AFEB2a57f70eF218Aa82451c51B2fb0416Ac9e</code>) by owner-signed transaction.</li>
 <li>
-<strong>Pons keeper dependency:</strong> On graduated pools, launch-<strong>token-side fees</strong> reach the fee escrow only after <strong>Pons's own conversion keeper</strong> converts them to ETH (until then, <code>sweepPoolFees</code> reverts <code>InternalSwapRequiresOperator()</code>, so the treasury wallet skips the hook sweep and claims already-credited escrow balances).</li>
+<strong>Pons keeper dependency:</strong> On graduated pools, launch-<strong>token-side fees</strong> reach the fee escrow only after <strong>Pons's own conversion keeper</strong> converts them to ETH (until then, <code>sweepPoolFees</code> reverts <code>InternalSwapRequiresOperator()</code>, so the launch wallet skips the hook sweep and claims already-credited escrow balances).</li>
+<li>
+<strong>Product revenue is separate:</strong> subscription payments keep their 25% <code>OakBurner</code> / 75% treasury split, with treasury <code>0x856bb126188bDB5e425D3ac9D59E9ffBD12e6ECf</code>. Trading fees do not go to that treasury at launch.</li>
 <li>
 <strong>External Pons owner override:</strong> The external <strong>Pons owner</strong> (<code>0x263ed295dAFaE1d9AAdD6E56c4B6F9f38eE019Dd</code>) can propose replacing the creator-fee recipient subject to a <strong>3-day</strong> public timelock that Oak cannot cancel.</li>
 </ul>
