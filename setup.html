@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Set up Oak: install, connect and ask | Oak Agent Kit</title>
-<meta name="description" content="Install Oak, connect your AI assistant and get an automatic local wallet. Copy the setup prompts and learn what needs funding and approval at launch.">
+<meta name="description" content="Install Oak, connect your AI assistant and get an automatic local wallet. Copy the setup prompts and learn what will need funding and approval with Oak 0.2.0.">
 <meta name="theme-color" content="#062F27">
 <link rel="canonical" href="https://oakagentkit.org/setup.html">
 <meta property="og:url" content="https://oakagentkit.org/setup.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Oak Agent Kit">
 <meta property="og:title" content="Set up Oak: install, connect and ask | Oak Agent Kit">
-<meta property="og:description" content="Install Oak, connect your AI assistant and get an automatic local wallet. Copy the setup prompts and learn what needs funding and approval at launch.">
+<meta property="og:description" content="Install Oak, connect your AI assistant and get an automatic local wallet. Copy the setup prompts and learn what will need funding and approval with Oak 0.2.0.">
 <meta property="og:image" content="https://oakagentkit.org/03-og-card-1200x630.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -87,7 +87,7 @@
  <img src="scene-setup-desktop.webp" width="1440" height="810" alt="" fetchpriority="high" decoding="async">
  </picture>
  <div class="hero-actions">
-<a class="glass-pill" href="setup.html#install">Prepare for launch<svg class="pill-arrow" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true" focusable="false">
+<a class="glass-pill" href="setup.html#install">Start setup<svg class="pill-arrow" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true" focusable="false">
 <path d="M3.5 8.5l5-5M4.5 3.5h4v4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
 </a>
@@ -99,9 +99,9 @@
 <div class="prose setup-guide">
  <section class="setup-opening" id="availability">
 <p class="chapter">Before you start</p>
-<h2>Prepare now. Use hosted tools at launch.</h2>
- <p>Packages are published. Hosted actions open with the token and subscription launch; until then, actions are limited to the Oak team. Read calls such as find_token remain available.</p>
- <p>Version 0.1.9 includes default human confirmation and a daily auto-mode budget. Run <code>oak --version</code>; npm installs 0.1.9.</p>
+<h2>Install now. Paid access with Oak 0.2.0.</h2>
+ <p>$OAK is live. Hosted actions and paid access open with Oak 0.2.0. No date is promised; there is no public beta. Packages are published; read calls such as find_token remain available. Official $OAK address: <code class="token-address">0x6511c233790Ec10f7d673c64DC82C3F941D57828</code>. Pons page: <a href="https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828">https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828</a>. Subscriptions, sign-up burns, the oracle, the burner and fee utility are planned for Oak 0.2.0 and are not live. Subscription mechanics on this site describe that planned release, subject to its release checks.</p>
+ <p>The current package is version 0.1.9; check with <code>oak --version</code>. It includes default human confirmation. Update to Oak 0.2.0 when paid access opens before funding for a subscription or enabling hosted actions.</p>
  <p>Keep your assistant open on your computer. A website visit does not connect a wallet.</p>
 </section>
  <nav class="setup-contents" aria-label="Setup steps">
@@ -118,11 +118,11 @@
 <pre tabindex="0" role="region" aria-label="Install command" class="copyable" data-copy="npm install -g @oakagentkit/addon">
 <code>npm install -g @oakagentkit/addon</code></pre>
 </div>
- <p>The add-on includes the core package. Both are published; installing does not unlock hosted access before launch.</p>
+ <p>The add-on includes the core package. Both are published; installing 0.1.9 does not unlock hosted actions or paid access. Those open with Oak 0.2.0.</p>
  <details class="reference-detail">
 <summary>Prefer to ask your agent? Copy this prompt</summary>
 <blockquote class="agent-prompt" aria-label="Setup prompt">
-<p class="copyable" data-copy="Set up Oak for this AI agent using Node.js 22. Install @oakagentkit/addon and connect the local MCP command oak mcp. Call account and tell me the public wallet address and network. When hosted access opens, ask me to fund ETH for network fees and USDG, then re-check balances. Do not run oak init or oak export, read wallet/key files, or ask for keys or recovery words. Explain public identity registration and recurring subscription costs; get my approval before either.">Set up Oak for this AI agent using Node.js 22. Install @oakagentkit/addon and connect the local MCP command oak mcp. Call account and tell me the public wallet address and network. When hosted access opens, ask me to fund ETH for network fees and USDG, then re-check balances. Do not run oak init or oak export, read wallet/key files, or ask for keys or recovery words. Explain public identity registration and recurring subscription costs; get my approval before either.</p>
+<p class="copyable" data-copy="Set up Oak for this AI agent using Node.js 22. Install @oakagentkit/addon and connect the local MCP command oak mcp. Call account and tell me the public wallet address and network. When Oak 0.2.0 opens paid access, ask me to fund ETH for network fees and USDG, then re-check balances. Do not run oak init or oak export, read wallet/key files, or ask for keys or recovery words. Explain public identity registration and recurring subscription costs; get my approval before either.">Set up Oak for this AI agent using Node.js 22. Install @oakagentkit/addon and connect the local MCP command oak mcp. Call account and tell me the public wallet address and network. When Oak 0.2.0 opens paid access, ask me to fund ETH for network fees and USDG, then re-check balances. Do not run oak init or oak export, read wallet/key files, or ask for keys or recovery words. Explain public identity registration and recurring subscription costs; get my approval before either.</p>
 </blockquote>
 </details>
 </section>
@@ -172,32 +172,33 @@ args = ["mcp"]</code></pre>
  <blockquote class="agent-prompt" aria-label="Wallet prompt">
 <p class="copyable" data-copy="Call account. Show only my public wallet address and network. Do not send a transaction.">Call account. Show only my public wallet address and network. Do not send a transaction.</p>
 </blockquote>
- <p>Before hosted access opens, you can display the local public address in your terminal:</p>
+ <p>You can also display the public address in your terminal:</p>
  <pre tabindex="0" role="region" aria-label="Local address command" class="copyable" data-copy="oak address">
 <code>oak address</code></pre>
  <p>Your private key never leaves your computer. Oak cannot recover a lost key. Backups are optional: <code>oak backup</code> gives guidance. Run <code>oak init</code> or <code>oak export</code> only in your own terminal, never through the agent. Never paste a key or recovery words into chat.</p>
  </section>
  <section class="doc-part" id="fund">
-<h2>4. Fund when access opens</h2>
- <p>After updating to the launch release, send ETH for network fees and USDG for subscription payments to the public wallet address. Use the network it reports: Robinhood Chain mainnet is <code>4663</code>. Then ask:</p>
+<h2>4. Fund for paid access with Oak 0.2.0</h2>
+ <p>After updating to Oak 0.2.0 when paid access opens, send ETH for network fees and USDG for subscription payments to the public wallet address. Use the network it reports: Robinhood Chain mainnet is <code>4663</code>. Then ask:</p>
  <blockquote class="agent-prompt" aria-label="Funding check prompt">
 <p class="copyable" data-copy="Re-check balances and show the ETH and USDG amounts on my selected network. Do not register or subscribe yet.">Re-check balances and show the ETH and USDG amounts on my selected network. Do not register or subscribe yet.</p>
 </blockquote>
- <p>Read tools need no identity or subscription once hosted access opens. Paid actions need both a public agent identity and an active subscription.</p>
+ <p>Read tools need no identity or subscription. Paid actions need both a public agent identity and an active subscription.</p>
  <details class="reference-detail" id="configure">
-<summary>Approve identity and subscription separately</summary>
+<summary>With Oak 0.2.0: approve identity and subscription separately</summary>
+<p>Subscriptions, sign-up burns, the oracle, the burner and fee utility are planned for Oak 0.2.0 and are not live. Subscription mechanics on this site describe that planned release, subject to its release checks.</p>
  <p>ERC-8004 is a public agent identity. Registration publishes a profile and costs ETH for gas. Linking an existing identity needs no gas; an external owner signs in their own terminal.</p>
  <blockquote class="agent-prompt" aria-label="Identity and subscription prompt">
-<p class="copyable" data-copy="Explain oak_setup registration or linking and its cost. Ask for my approval before proceeding. Then call account, explain the available plan and recurring cost, and ask separately before oak_subscribe.">Explain oak_setup registration or linking and its cost. Ask for my approval before proceeding. Then call account, explain the available plan and recurring cost, and ask separately before oak_subscribe.</p>
+<p class="copyable" data-copy="When Oak 0.2.0 opens paid access, explain oak_setup registration or linking and its cost. Ask for my approval before proceeding. Then call account, explain the available plan and recurring cost, and ask separately before oak_subscribe.">When Oak 0.2.0 opens paid access, explain oak_setup registration or linking and its cost. Ask for my approval before proceeding. Then call account, explain the available plan and recurring cost, and ask separately before oak_subscribe.</p>
 </blockquote>
- <p>At launch, the curve phase offers only no-hold at 12.333333 USDG per 30 days. After graduation, both plans wait through warmup. When ready, the holder plan costs 9 USDG per 30 days plus the required $OAK holding and one-time sign-up burn.</p>
- <p>While <code>oak mcp</code> runs, active subscriptions auto-renew when three days or fewer remain. Prepay is capped at 90 days ahead. Cancelling with <code>oak cancel</code> ends access immediately and forfeits remaining paid days.</p>
+ <p>With Oak 0.2.0, if the token is still on its curve, only no-hold will be offered, at 12.333333 USDG per 30 days. After graduation, both plans wait through warmup. When ready, the holder plan costs 9 USDG per 30 days plus the required $OAK holding and one-time sign-up burn.</p>
+ <p>With Oak 0.2.0, while <code>oak mcp</code> runs, active subscriptions will auto-renew when three days or fewer remain. Prepay is capped at 90 days ahead. Cancelling with <code>oak cancel</code> ends access immediately and forfeits remaining paid days.</p>
  <a href="pricing.html">Read the complete pricing terms</a>
 </details>
 </section>
  <section class="doc-part" id="first-commands">
 <h2>5. Make your first request</h2>
- <p>Start with a read after hosted access opens:</p>
+ <p>Start with a read:</p>
  <blockquote class="agent-prompt" aria-label="First read prompt">
 <p class="copyable" data-copy="Call account, balances and positions. Show my network, balances and subscription status in plain English. Do not send any transactions.">Call account, balances and positions. Show my network, balances and subscription status in plain English. Do not send any transactions.</p>
 </blockquote>
@@ -205,7 +206,7 @@ args = ["mcp"]</code></pre>
  <blockquote class="agent-prompt" aria-label="First quote prompt">
 <p class="copyable" data-copy="Find USDG and ETH with find_token. Quote 10 USDG (10000000 base units) to ETH with slippageBps 50. Explain the expected and minimum output. Do not swap.">Find USDG and ETH with find_token. Quote 10 USDG (10000000 base units) to ETH with slippageBps 50. Explain the expected and minimum output. Do not swap.</p>
 </blockquote>
- <p>More first prompts to paste:</p>
+ <p>More prompts to paste; action prompts are for Oak 0.2.0:</p>
  <ul class="prompt-list">
 <li>
 <p class="copy-prompt copyable" tabindex="0" role="region" aria-label="Prompt to copy" data-copy="What can you do with Oak? Group the tools by project.">What can you do with Oak? Group the tools by project.</p>
@@ -217,10 +218,10 @@ args = ["mcp"]</code></pre>
 <p class="copy-prompt copyable" tabindex="0" role="region" aria-label="Prompt to copy" data-copy="Quote a swap of 5 USDG to ETH with the best route. Show the preview and do not swap yet.">Quote a swap of 5 USDG to ETH with the best route. Show the preview and do not swap yet.</p>
 </li>
 <li>
-<p class="copy-prompt copyable" tabindex="0" role="region" aria-label="Prompt to copy" data-copy="Lend 10 USDG on Priors. Show me the preview before anything is signed.">Lend 10 USDG on Priors. Show me the preview before anything is signed.</p>
+<p class="copy-prompt copyable" tabindex="0" role="region" aria-label="Prompt to copy" data-copy="When Oak 0.2.0 opens paid access, lend 10 USDG on Priors. Show me the preview before anything is signed.">When Oak 0.2.0 opens paid access, lend 10 USDG on Priors. Show me the preview before anything is signed.</p>
 </li>
 <li>
-<p class="copy-prompt copyable" tabindex="0" role="region" aria-label="Prompt to copy" data-copy="Deposit 10 USDG into a Steakhouse vault. Show me the preview first.">Deposit 10 USDG into a Steakhouse vault. Show me the preview first.</p>
+<p class="copy-prompt copyable" tabindex="0" role="region" aria-label="Prompt to copy" data-copy="When Oak 0.2.0 opens paid access, deposit 10 USDG into a Steakhouse vault. Show me the preview first.">When Oak 0.2.0 opens paid access, deposit 10 USDG into a Steakhouse vault. Show me the preview first.</p>
 </li>
 <li>
 <p class="copy-prompt copyable" tabindex="0" role="region" aria-label="Prompt to copy" data-copy="Show my open positions across every project.">Show my open positions across every project.</p>
@@ -234,9 +235,10 @@ args = ["mcp"]</code></pre>
 </section>
  <section class="doc-part" id="troubleshooting">
 <h2>Need a hand?</h2>
- <p>If hosted tools are unavailable before launch, that is expected. Check your client connection and the public launch notice. Do not change networks or fund another address to work around it.</p>
+ <p>Hosted actions and paid access are unavailable until Oak 0.2.0. For read-tool connection problems, check your client connection and service notices from @OakAgentKit on X. Do not change networks or fund another address to work around it.</p>
  <details class="reference-detail">
 <summary>Error messages and fixes</summary>
+<p>Subscription and price-note messages below are reference material for Oak 0.2.0; paid access is not open.</p>
 <p>Every error message in Oak is a plain sentence naming the state and the exact command to fix it:</p>
 <div class="table-wrap">
 <table class="md-table">
@@ -482,11 +484,14 @@ args = ["mcp"]</code></pre>
 <li>
 <a href="https://x.com/OakAgentKit">@OakAgentKit on X</a>
 </li>
+<li>
+<a href="https://x.com/OakAgentKit/status/2116286790059671939">Launch film on X</a>
+</li>
 </ul>
 </nav>
 </div>
- <p class="footer-status">Public access coming soon · Packages available now.</p>
- <p>Pre-launch. Packages are published. Hosted actions open with the token and subscription launch; until then, actions are limited to the Oak team. Read calls such as find_token remain available. Holding $OAK buys access and nothing else.</p>
+ <p class="footer-status">$OAK is live. Paid access opens with Oak 0.2.0.</p>
+ <p>$OAK is live. Hosted actions and paid access open with Oak 0.2.0. No date is promised; there is no public beta. Packages are published; read calls such as find_token remain available. Official $OAK address: <code class="token-address">0x6511c233790Ec10f7d673c64DC82C3F941D57828</code>. Pons page: <a href="https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828">https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828</a>. Subscriptions, sign-up burns, the oracle, the burner and fee utility are planned for Oak 0.2.0 and are not live. Subscription mechanics on this site describe that planned release, subject to its release checks. Holding $OAK buys access and nothing else.</p>
  <p>Independent software, not affiliated with Robinhood. Not financial advice. Oak never promises returns.</p>
  <p>Region notice: project and asset availability varies by jurisdiction. You are responsible for local compliance.</p>
  <p class="fine">Docs, examples and contracts are MIT. The compiled npm packages are Free-to-Use, No Copying; their source and the hosted Oak service are private. Manrope is self-hosted under the SIL Open Font Licence.</p>

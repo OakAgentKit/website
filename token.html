@@ -98,14 +98,87 @@
 <div class="wrap">
 <div class="prose">
 <section class="token-overview">
-<div class="token-lead">
-<h2>Access, and nothing else.</h2>
-<p>$OAK is the token used for Oak’s holder subscription. It has not launched. The official address will be published at launch; unrelated OAK tokens already exist.</p>
-<p>
-<a href="pricing.html">Start with plans and launch timing</a>, then explore the full mechanics below.</p>
+<div class="token-lead token-utility">
+<h2>$OAK is live. Paid access follows.</h2>
+<p class="section-intro">$OAK is live on Pons. Hosted actions and paid access open with Oak 0.2.0; no date is promised and there is no public beta. Holding $OAK buys access and nothing else; holding it today does not unlock hosted actions.</p>
+<div class="utility-grid">
+<div class="utility-card">
+<h3>Planned holder access</h3>
+<p>With Oak 0.2.0, the holder plan will cost 9 USDG per 30 days, where no-hold will cost 9 USDG plus one sixth of the entry price. Your $OAK stays in your wallet, never locked inside a contract, and access holds while your balance stays at least your recorded post-burn <code>signupOakCount</code>.</p>
+</div>
+<div class="utility-card">
+<h3>Plans with Oak 0.2.0</h3>
+<dl class="rate-lines">
+<div>
+<dt>Holder</dt>
+<dd>9 USDG / 30 days</dd>
+</div>
+<div>
+<dt>No-hold</dt>
+<dd>12.333333 USDG / 30 days at the $20 entry floor</dd>
+</div>
+</dl>
+<p class="fine">With Oak 0.2.0, the holder plan’s one-time sign-up burn will burn 5% of the entry amount. Renewals burn nothing. Network and project fees are additional.</p>
+</div>
+<div class="utility-card">
+<h3>Planned subscription fee split</h3>
+<p>With Oak 0.2.0, 25% of each subscription payment will go to the burn contract, whose burns permanently reduce the $OAK total supply. 75% will go to the single-owner treasury wallet. Oak takes 0% of your swaps and charges no per-call fees.</p>
+</div>
+<div class="utility-card">
+<h3>Actions with Oak 0.2.0</h3>
+<p>Read tools need no identity or subscription. With Oak 0.2.0, actions across the 25 projects, from swaps and limit orders to lending, vaults, bridges and Pons launches, will need a public agent identity (ERC-8004) and an active subscription.</p>
+</div>
+</div>
+<h3>Live token and planned access phases</h3>
+<p>Subscriptions, sign-up burns, the oracle, the burner and fee utility are not live. Creator fees at launch go to the launch wallet for development operations; the later fee split is not live.</p>
+<dl class="phase-list token-facts">
+<div>
+<dt>Address</dt>
+<dd>
+<code class="token-address">0x6511c233790Ec10f7d673c64DC82C3F941D57828</code> on Robinhood Chain (4663). Unrelated OAK tokens with the same ticker exist, so always check the address.</dd>
+</div>
+<div>
+<dt>Venue</dt>
+<dd>A standard Pons V2 coin paired with native ETH, graduating at 4.2 ETH into a locked Uniswap v4 pool. Pons page: <a href="https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828">https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828</a>.</dd>
+</div>
+<div>
+<dt>Curve</dt>
+<dd>With Oak 0.2.0, if $OAK is still on its launch curve, only the no-hold plan will be open.</dd>
+</div>
+<div>
+<dt>Warmup</dt>
+<dd>After graduation, both plans wait for 30 minutes of pool history.</dd>
+</div>
+<div>
+<dt>Ready</dt>
+<dd>Planned for Oak 0.2.0: Planned for Oak 0.2.0: After 30 minutes of pool history, the holder plan is open. A sign-up still needs a valid price note: the issuer requires at least 10 trades in that window, at least $5,000 of two-sided depth, and a price within the guard band.</dd>
+</div>
+</dl>
+<h3>How to get $OAK</h3>
+<p>Use the official Pons page above and verify the address. Oak read tools can look up the token and quote a route; hosted swaps wait for Oak 0.2.0.</p>
+<ul class="prompt-list">
+<li>
+<p class="copy-prompt copyable" tabindex="0" role="region" aria-label="Prompt to copy" data-copy="Find $OAK at 0x6511c233790Ec10f7d673c64DC82C3F941D57828 with find_token, then quote 0.01 ETH to OAK with the best route. Show the preview and do not swap yet.">Find $OAK at 0x6511c233790Ec10f7d673c64DC82C3F941D57828 with find_token, then quote 0.01 ETH to OAK with the best route. Show the preview and do not swap yet.</p>
+</li>
+</ul>
+<h3>Using the planned holder plan with Oak 0.2.0</h3>
+<p>Wait for paid access to open before subscribing. The steps below describe the planned release.</p>
+<ol class="token-steps">
+<li>With Oak 0.2.0, at sign-up, hold the entry amount of $OAK in the wallet your agent uses. The entry price runs from $20 to $300 by market cap. For example, hold 20,000 $OAK: 1,000 $OAK burns at sign-up, then keep at least the remaining 19,000 $OAK, your recorded post-burn <code>signupOakCount</code>, to retain access.</li>
+<li>Ask your agent to explain the plan before it subscribes:<ul class="prompt-list">
+<li>
+<p class="copy-prompt copyable" tabindex="0" role="region" aria-label="Prompt to copy" data-copy="When Oak 0.2.0 opens paid access, call account and explain the holder plan: the recurring cost, the entry amount and the one-time sign-up burn. Ask for my approval before oak_subscribe with the holder plan.">When Oak 0.2.0 opens paid access, call account and explain the holder plan: the recurring cost, the entry amount and the one-time sign-up burn. Ask for my approval before oak_subscribe with the holder plan.</p>
+</li>
+</ul>
+</li>
+<li>With Oak 0.2.0, while <code>oak mcp</code> runs, the subscription will renew when three days or fewer remain. Prepay is capped at 90 days ahead. <code>oak cancel</code> ends access immediately and forfeits remaining paid days.</li>
+</ol>
+<p class="copy-hint">One click selects a whole prompt. Then copy it: Cmd or Ctrl + C, or long-press on a phone.</p>
+<p class="fine">Oak never promises returns, never pays holders from protocol fees, and never distributes fee payouts or rewards to token holders. The live Pons terms and planned subscription mechanics follow.</p>
 </div>
 <details class="reference-detail">
 <summary>Who controls the treasury</summary>
+<p>Subscriptions, sign-up burns, the oracle, the burner and fee utility are planned for Oak 0.2.0 and are not live. Subscription mechanics on this site describe that planned release, subject to its release checks.</p>
 <p>The treasury and contract admin is the single-owner wallet <code>0x856bb126188bDB5e425D3ac9D59E9ffBD12e6ECf</code>. One owner key can spend treasury funds, redirect future subscription payments, replace the price signer and retire subscriptions. There is no second-signature requirement. Key compromise exposes these powers; key loss can make treasury funds and administration inaccessible. It cannot spend user wallet balances. Safe support is an optional deployment profile, not the launch setup.</p>
 <p>
 <strong>Holding <code>$OAK</code> buys access and nothing else.</strong> Oak never promises returns, never pays holders from protocol fees, and never distributes fee payouts or rewards to token holders.</p>
@@ -116,6 +189,7 @@
 <h2 id="oak-token-facts">1. <code>$OAK</code> Token Facts</h2>
 <details class="reference-detail">
 <summary>Read token mechanics</summary>
+<p>Subscriptions, sign-up burns, the oracle, the burner and fee utility are planned for Oak 0.2.0 and are not live. Subscription mechanics on this site describe that planned release, subject to its release checks. The Pons trading-fee terms describe the live token.</p>
 <ul>
 <li>
 <strong>Name:</strong> Oak</li>
@@ -132,9 +206,10 @@
 <strong>Supply rule:</strong> Net supply is <code>totalSupply()</code>. Both the 5% holder sign-up burn (<code>burnFrom</code>) and <code>OakBurner</code> (<code>burn</code>) execute true token burns that permanently reduce <code>totalSupply()</code>. Tokens sent to dead addresses do not reduce <code>totalSupply()</code>, and liquidity locked by Pons at graduation remains part of <code>totalSupply()</code>.</li>
 </ul>
 <div data-slot="token-address">
-<h3 id="canonical-oak-contract-address">Canonical <code>$OAK</code> Contract Address</h3>
-<p>
-<strong>Not yet published (pre-launch).</strong> The one official <code>$OAK</code> contract address will be published in this slot and announced on <a href="https://x.com/OakAgentKit">@OakAgentKit</a> at launch. Trust no other address.</p>
+<h3>Canonical $OAK Contract Address</h3>
+<p><code class="token-address">0x6511c233790Ec10f7d673c64DC82C3F941D57828</code></p>
+<p>The one official $OAK address on chain 4663. Trust no other address. Pons page: <a href="https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828">https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828</a>.</p>
+<p>Launch receipt: <a href="https://github.com/OakAgentKit/oak/blob/main/contracts/deployments/4663.json">verified deployment manifest</a>.</p>
 <p>
 <strong>Known ticker clash:</strong> Other small, <strong>dormant</strong> tokens named <code>OAK</code> already exist on Robinhood Chain — for example <code>0x38fE199550E677Fa9caC196495460dfF97BCe28F</code>. They are unrelated to Oak. Always verify the exact contract address posted here and on <code>@OakAgentKit</code>.</p>
 </div>
@@ -143,6 +218,7 @@
 <h2 id="subscription-plans-and-the-entry-curve">2. Subscription Plans and the Entry Curve</h2>
 <details class="reference-detail">
 <summary>Read token mechanics</summary>
+<p>Subscriptions, sign-up burns, the oracle, the burner and fee utility are planned for Oak 0.2.0 and are not live. Subscription mechanics on this site describe that planned release, subject to its release checks. The Pons trading-fee terms describe the live token.</p>
 <p>Oak charges zero per-call fees and 0% on your swaps and module actions. Access to action tools is paid on a 30-day cycle in <strong>USDG</strong> (<code>0x5fc5360d0400a0fd4f2af552add042d716f1d168</code>, 6 decimals).</p>
 <h3 id="two-ways-to-subscribe">Two ways to subscribe</h3>
 <ol>
@@ -226,14 +302,15 @@
 <h2 id="launch-phases-and-price-source">3. Launch Phases and Price Source</h2>
 <details class="reference-detail">
 <summary>Read token mechanics</summary>
+<p>Subscriptions, sign-up burns, the oracle, the burner and fee utility are planned for Oak 0.2.0 and are not live. Subscription mechanics on this site describe that planned release, subject to its release checks. The Pons trading-fee terms describe the live token.</p>
 <h3 id="launch-phases">Launch phases</h3>
 <ol>
 <li>
-<strong>Curve (<code>phase != 2</code> on Pons factory):</strong> <code>$OAK</code> is still on its bonding curve. Only the <strong>no-hold plan</strong> is open at the flat floor of <strong>12.333333 USDG</strong>, with no price note required, and the <strong>holder plan is closed</strong> (<code>HolderClosed()</code>).</li>
+<strong>Curve (<code>phase != 2</code> on Pons factory):</strong> <code>$OAK</code> is still on its bonding curve. With Oak 0.2.0, only the <strong>no-hold plan</strong> will be open at the flat floor of <strong>12.333333 USDG</strong>, with no price note required, and the <strong>holder plan is closed</strong> (<code>HolderClosed()</code>).</li>
 <li>
 <strong>Warmup (first 30 minutes after graduation):</strong> <code>$OAK</code> has graduated into its Uniswap v4 pool (<code>phase == 2</code>), but the pool has less than 30 minutes (<code>1,800</code> seconds) of trade history. The note issuer refuses to sign (<code>history_too_thin</code>), and <strong>both plans wait</strong> (the curve floor is never used after graduation).</li>
 <li>
-<strong>Ready (graduated and <code>&gt;= 30</code> minutes old):</strong> The note issuer signs price notes, the <strong>holder plan is open</strong>, and no-hold sign-ups and renewals follow the oracle. In <code>Ready</code>, if the oracle or price note fails, sign-ups and no-hold renewals fail closed and revert without consuming a nonce.</li>
+<strong>Ready (graduated and <code>&gt;= 30</code> minutes old):</strong> The note issuer signs price notes, with Oak 0.2.0, the <strong>holder plan will be open</strong>, and no-hold sign-ups and renewals follow the oracle. In <code>Ready</code>, if the oracle or price note fails, sign-ups and no-hold renewals fail closed and revert without consuming a nonce.</li>
 </ol>
 <h3 id="two-leg-price-calculation-and-the-50-guard">Two-leg price calculation and the 50% guard</h3>
 <ul>
@@ -252,6 +329,7 @@
 </h2>
 <details class="reference-detail">
 <summary>Read token mechanics</summary>
+<p>Subscriptions, sign-up burns, the oracle, the burner and fee utility are planned for Oak 0.2.0 and are not live. Subscription mechanics on this site describe that planned release, subject to its release checks. The Pons trading-fee terms describe the live token.</p>
 <p>Every subscription payment splits in the same transaction on the full amount:</p>
 <ul>
 <li>
@@ -274,13 +352,14 @@
 <h2 id="oak-trading-fees-to-the-launch-wallet">5. <code>$OAK</code> Trading Fees to the Launch Wallet</h2>
 <details class="reference-detail">
 <summary>Read token mechanics</summary>
+<p>Subscriptions, sign-up burns, the oracle, the burner and fee utility are planned for Oak 0.2.0 and are not live. Subscription mechanics on this site describe that planned release, subject to its release checks. The Pons trading-fee terms describe the live token.</p>
 <ul>
 <li>Every <code>$OAK</code> trade on Pons V2 pays a <code>2%</code> fee: <code>0.3%</code> to Pons and <strong>1.7%</strong> creator fee (<code>0.7%</code> standard creator share + <code>1%</code> creator tax set at launch; venue buybacks are off).</li>
 <li>All <strong>1.7%</strong> goes to the <strong>launch wallet</strong> (<code>0x84b1B9e5D1cAfD9543E684BB39E9cbD478189EE2</code>), which is the Pons creator-fee recipient and manually claims positive ETH balances from the Pons fee escrow (<code>0xd3AFEB2a57f70eF218Aa82451c51B2fb0416Ac9e</code>) by owner-signed transaction.</li>
 <li>
 <strong>Pons keeper dependency:</strong> On graduated pools, launch-<strong>token-side fees</strong> reach the fee escrow only after <strong>Pons's own conversion keeper</strong> converts them to ETH (until then, <code>sweepPoolFees</code> reverts <code>InternalSwapRequiresOperator()</code>, so the launch wallet skips the hook sweep and claims already-credited escrow balances).</li>
 <li>
-<strong>Product revenue is separate:</strong> subscription payments keep their 25% <code>OakBurner</code> / 75% treasury split, with treasury <code>0x856bb126188bDB5e425D3ac9D59E9ffBD12e6ECf</code>. Trading fees do not go to that treasury at launch.</li>
+<strong>Product revenue is separate:</strong> with Oak 0.2.0, subscription payments will use their planned 25% <code>OakBurner</code> / 75% treasury split, with treasury <code>0x856bb126188bDB5e425D3ac9D59E9ffBD12e6ECf</code>. Trading fees do not go to that treasury at launch.</li>
 <li>
 <strong>External Pons owner override:</strong> The external <strong>Pons owner</strong> (<code>0x263ed295dAFaE1d9AAdD6E56c4B6F9f38eE019Dd</code>) can propose replacing the creator-fee recipient subject to a <strong>3-day</strong> public timelock that Oak cannot cancel.</li>
 </ul>
@@ -289,6 +368,7 @@
 <h2 id="contract-lineage-and-source-bound-grandfathering">6. Contract Lineage and Source-Bound Grandfathering</h2>
 <details class="reference-detail">
 <summary>Read token mechanics</summary>
+<p>Subscriptions, sign-up burns, the oracle, the burner and fee utility are planned for Oak 0.2.0 and are not live. Subscription mechanics on this site describe that planned release, subject to its release checks. The Pons trading-fee terms describe the live token.</p>
 <p>Oak contracts are non-upgradeable. If <code>OakSubscription</code> ever needs a fix:</p>
 <ol>
 <li>The treasury wallet flips the one-way <code>retire()</code> switch on the old contract (stopping new sign-ups and renewals while preserving reads and <code>cancel()</code>) and deploys a successor whose immutable <code>previous()</code> points to the retired contract.</li>
@@ -345,11 +425,14 @@
 <li>
 <a href="https://x.com/OakAgentKit">@OakAgentKit on X</a>
 </li>
+<li>
+<a href="https://x.com/OakAgentKit/status/2116286790059671939">Launch film on X</a>
+</li>
 </ul>
 </nav>
 </div>
- <p class="footer-status">Public access coming soon · Packages available now.</p>
- <p>Pre-launch. Packages are published. Hosted actions open with the token and subscription launch; until then, actions are limited to the Oak team. Read calls such as find_token remain available. Holding $OAK buys access and nothing else.</p>
+ <p class="footer-status">$OAK is live. Paid access opens with Oak 0.2.0.</p>
+ <p>$OAK is live. Hosted actions and paid access open with Oak 0.2.0. No date is promised; there is no public beta. Packages are published; read calls such as find_token remain available. Official $OAK address: <code class="token-address">0x6511c233790Ec10f7d673c64DC82C3F941D57828</code>. Pons page: <a href="https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828">https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828</a>. Subscriptions, sign-up burns, the oracle, the burner and fee utility are planned for Oak 0.2.0 and are not live. Subscription mechanics on this site describe that planned release, subject to its release checks. Holding $OAK buys access and nothing else.</p>
  <p>Independent software, not affiliated with Robinhood. Not financial advice. Oak never promises returns.</p>
  <p>Region notice: project and asset availability varies by jurisdiction. You are responsible for local compliance.</p>
  <p class="fine">Docs, examples and contracts are MIT. The compiled npm packages are Free-to-Use, No Copying; their source and the hosted Oak service are private. Manrope is self-hosted under the SIL Open Font Licence.</p>

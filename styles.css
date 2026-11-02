@@ -910,3 +910,23 @@ pre code, .code-block code { font-size: 14px; background: none; padding: 0; }
 /* No heights or phone layout override: long copy grows the shared stage and stacks below its square plate. */
 /* No copy backing, border, corner radius or card surface is introduced here. */
 /* Hero title, caption, action, menu and footer all inherit the shared scene system. */
+
+/* Launch edition only: site/launch/launch.css */
+/* Home hero: the install and connect lines sit under the pill, on a solid ground so they read over any art. */
+.hero-install { display: flex; flex-direction: column; gap: 8px; max-width: min(460px, calc(100vw - 40px)); }
+.hero-install pre { margin: 0; padding: 12px 16px; border-radius: 12px; background: rgba(4,34,28,.86); border-color: rgba(240,247,234,.22); overflow-x: auto; }
+.hero-install pre code { color: var(--lime); white-space: pre; }
+.scene-home .hero-install .hero-status { max-width: 100%; }
+/* The phone sky beside the canopy is 140px wide, too narrow for a command line, so on phones the home group
+   takes the fallback the other plates already use: 24px under the carved title. */
+@media (max-width:700px) {
+ .scene-home { --py: var(--tb); --pyo: 24px; --cw: initial; }
+ .hero-install pre code { font-size: 13px; }
+}
+.tool-soon { margin: 8px 0 0; color: var(--muted); font-size: 14px; line-height: 20px; }
+.token-address { overflow-wrap: anywhere; }
+.placeholder { padding: 0 .3em; border: 1px dashed var(--lime); border-radius: 4px; color: var(--lime); font-family: var(--mono); }
+.section-action .text-link + .text-link { margin-left: 20px; }
+/* Tablet: the sky over home's carved title is too short for the install group (it overlapped the title at 768),
+   so between phone and wide desktop the group sits 24px under the title, as on phones. */
+@media (min-width:701px) and (max-width:1199px) { .scene-home { --py: var(--tb); --pyo: 24px; } }
