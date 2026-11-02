@@ -279,8 +279,8 @@
 <code data-lang="bash">oak call quote '{&quot;from&quot;:&quot;USDG&quot;,&quot;to&quot;:&quot;TSLA&quot;,&quot;amountIn&quot;:&quot;10000000&quot;,&quot;slippageBps&quot;:50}'</code></pre>
 </li>
 <li>
-<strong>Preview the simulation (<code>preview</code>):</strong> Simulate an unsigned transaction sequence via <code>eth_simulateV1</code> to inspect exact token balance deltas (when you call <code>swap</code>, the local bridge also runs <code>preview</code> automatically before signing and sending):<pre tabindex="0" role="region" aria-label="Command example" class="code-block">
-<code data-lang="bash">oak call preview '{&quot;txs&quot;:[...]}'</code></pre>
+<strong>Preview the simulation (<code>preview</code>):</strong> Simulate an unsigned transaction sequence via <code>eth_simulateV1</code> to inspect exact token balance deltas (when you call <code>swap</code>, the local bridge also runs <code>preview</code> automatically before signing and sending): <strong>Template only — not runnable as shown.</strong> Replace <code>...</code> with a complete unsigned transaction array from a transaction builder. A <code>quoteId</code> is not a transaction array. The local swap bridge runs the preview automatically before signing.<pre tabindex="0" role="region" aria-label="Command example" class="code-block">
+<code data-lang="text">oak call preview '{&quot;txs&quot;:[...]}'</code></pre>
 </li>
 <li>
 <strong>Execute the swap (<code>swap</code>):</strong> Build, preview, sign locally, and broadcast the quoted swap using its 60-second <code>quoteId</code>:<pre tabindex="0" role="region" aria-label="Command example" class="code-block">

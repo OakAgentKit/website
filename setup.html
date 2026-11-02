@@ -129,6 +129,19 @@
  <section class="doc-part" id="connect">
 <h2>2. Connect your assistant</h2>
  <p>Choose your client, add Oak, then start a fresh session. MCP is a connection for AI tools; the local command is <code>oak mcp</code>.</p>
+ <div class="install-shortcuts">
+ <p>Connect directly with Node.js 22 (22.12 or later within version 22) and npm on your PATH. These shortcuts run <code>npx -y @oakagentkit/addon@0.2.0 mcp</code>; no global Oak install is needed.</p>
+ <p class="btn-row" aria-label="Install Oak in your editor">
+<a class="btn" href="cursor://anysphere.cursor-deeplink/mcp/install?name=oak&amp;config=eyJjb21tYW5kIjoibnB4IiwiYXJncyI6WyIteSIsIkBvYWthZ2VudGtpdC9hZGRvbkAwLjIuMCIsIm1jcCJdfQ%3D%3D">Add to Cursor</a>
+<a class="btn ghost" href="vscode:mcp/install?%7B%22name%22%3A%22oak%22%2C%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22-y%22%2C%22%40oakagentkit%2Faddon%400.2.0%22%2C%22mcp%22%5D%7D">Install in VS Code</a>
+</p>
+ <p>For Claude Code, run these two commands inside Claude:</p>
+ <pre tabindex="0" role="region" aria-label="Claude Code plugin install commands" class="copyable" data-copy="/plugin marketplace add OakAgentKit/oak
+/plugin install oak@oak-agent-kit">
+<code>/plugin marketplace add OakAgentKit/oak
+/plugin install oak@oak-agent-kit</code></pre>
+ <p>Approve your app’s install prompt and start a fresh session. If you already added Oak manually, use that connection or remove the duplicate before installing. Registration and paid subscriptions still need separate approval.</p>
+ </div>
  <div class="client-configs">
 <details class="reference-detail">
 <summary>Claude Code</summary>

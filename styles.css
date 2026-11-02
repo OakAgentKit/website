@@ -700,6 +700,7 @@ pre.copyable:hover, .copy-prompt:hover { border-color: rgba(195,245,107,.45); }
 .utility-card p { margin-bottom: 8px; }
 .utility-card .rate-lines { margin-top: 8px; }
 .token-utility > h3 { margin-top: 40px; }
+.token-facts dt, .token-facts dd { min-width: 0; overflow-wrap: anywhere; }
 .token-facts > div { grid-template-columns: 112px 1fr; padding: 16px 0; }
 .token-steps { padding-left: 20px; max-width: 70ch; }
 .token-steps li { margin-bottom: 12px; }

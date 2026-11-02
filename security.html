@@ -301,7 +301,7 @@
 <summary>Read details</summary>
 <p>This directory holds the security review reports and release-gate evidence for Oak's open-source kit (<code>packages/addon</code>, <code>packages/core</code>) and smart contracts (<code>packages/contracts</code>).</p>
 <h3 id="release-gate-status">Release Gate Status</h3>
-<p>This repository includes unit, fuzz, and recorded-fixture verification for the public kit (<code>0.0.0</code>). Unit tests and recorded fixtures do not by themselves prove live network behavior or external venue settlement; independent review and live verification are tracked across the seven release gates below.</p>
+<p>This repository includes unit, fuzz, and recorded-fixture verification for the public kit (<code>0.2.0</code>). Unit tests and recorded fixtures do not by themselves prove live network behavior or external venue settlement; independent review and live verification are tracked across the seven release gates below.</p>
 <div class="table-wrap">
 <table class="md-table">
 <thead>
@@ -320,7 +320,7 @@
 <td data-label="Expected Evidence Path">
 <code>docs/trust/audits/&lt;contract&gt;-&lt;review&gt;.md</code>
 </td>
-<td data-label="Status">Unit &amp; fuzz suite implemented (<code>packages/contracts/test/</code>); independent audit reports queued for release</td>
+<td data-label="Status">Unit &amp; fuzz suite implemented (<code>packages/contracts/test/</code>); internal test evidence; Oak has no third-party audit</td>
 </tr>
 <tr>
 <td data-label="Gate">2. Custody, identity &amp; recipes</td>
@@ -568,6 +568,10 @@
 </div>
 </div>
 </div>
+<div class="quiet-section"><div class="prose"><details class="reference-detail"><summary>Creator-fee recipient verification</summary>
+<p>At block 104031947 on Robinhood Chain (4663), checked 2026-11-02T07:09:58Z, the Pons factory returned launch wallet <code>0x84b1B9e5D1cAfD9543E684BB39E9cbD478189EE2</code> as the current creator-fee recipient for $OAK. The recipient can change; this is a dated chain observation.</p>
+<p>Read-only call: <code>eth_call</code> to factory <code>0x7eD598BcEf8bd9Edd8C97A195C6d13f40801EC7e</code>, function <code>getLaunchedToken(0x6511c233790Ec10f7d673c64DC82C3F941D57828)</code>, at block <code>0x63366cb</code>, using the public Robinhood Chain mainnet RPC. The fourth returned tuple field is <code>creatorFeeRecipient</code>.</p>
+</details></div></div>
 </main>
 <footer class="scene-footer">
 <div class="scene-footer-inner">
