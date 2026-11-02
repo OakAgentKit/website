@@ -97,9 +97,9 @@
 <div class="page-body">
 <div class="wrap">
 <div class="prose wide">
-<p>Subscriptions are open in Oak 0.2.0. Read tools need no identity or subscription; hosted actions require a verified ERC-8004 identity and an active subscription. Plan availability follows account.phase: no-hold on the curve, neither plan during warmup, and both plans when ready with a valid price note.</p>
+<p>Subscriptions are open in Oak 0.2.1. Read tools need no identity or subscription; hosted actions require a verified ERC-8004 identity and an active subscription. Plan availability follows account.phase: no-hold on the curve, neither plan during warmup, and both plans when ready with a valid price note.</p>
 <p>Oak has no third-party audit. Your wallet stays on your computer; you review what it is about to do. The details below explain custody, authority and limits.</p>
-<p>Use Oak 0.2.0 with default human confirmation. Run <code>oak --version</code> and install <code>@oakagentkit/addon@0.2.0</code> before subscribing.</p>
+<p>Use Oak 0.2.1 with default human confirmation. Run <code>oak --version</code> and install <code>@oakagentkit/addon@0.2.1</code> before subscribing.</p>
 <section class="doc-part" id="disclosures">
 <h2>Disclosures</h2>
 <details class="reference-detail">
@@ -301,7 +301,7 @@
 <summary>Read details</summary>
 <p>This directory holds the security review reports and release-gate evidence for Oak's open-source kit (<code>packages/addon</code>, <code>packages/core</code>) and smart contracts (<code>packages/contracts</code>).</p>
 <h3 id="release-gate-status">Release Gate Status</h3>
-<p>This repository includes unit, fuzz, and recorded-fixture verification for the public kit (<code>0.2.0</code>). Unit tests and recorded fixtures do not by themselves prove live network behavior or external venue settlement; independent review and live verification are tracked across the seven release gates below.</p>
+<p>This repository includes unit, fuzz, and recorded-fixture verification for the public kit (<code>0.2.1</code>). Unit tests and recorded fixtures do not by themselves prove live network behavior or external venue settlement; independent review and live verification are tracked across the seven release gates below.</p>
 <div class="table-wrap">
 <table class="md-table">
 <thead>
@@ -398,10 +398,17 @@
 <details class="reference-detail">
 <summary>Read details</summary>
 <p>This page records releases of the Oak add-on and core npm packages and the source-only contracts. Docs, examples and runtime contracts are MIT; the compiled npm packages use the Oak package license and their implementation source is private. Every version entry lists changes using standard changelog categories (<code>[Added]</code>, <code>[Changed]</code>, <code>[Fixed]</code>, <code>[Removed]</code>, <code>[Deprecated]</code>, <code>[Security]</code>).</p>
-<h3 id="0-1-9">0.1.9</h3>
-<ul class="release-notes"><li>Flag token-level default approvals separately, so Oak does not mistake them for approvals you made or recommend revoking them.</li><li>Show Orbio CREDIT remaining after a tool call without subtracting its charge twice.</li><li>Explain that Orbio tool payloads belong in <code>args</code>; keep <code>arguments</code> as the outer <code>run_tool</code> wrapper.</li><li>Internal cleanup, no behaviour change.</li><li>Fix KyberSwap previews that rejected valid swaps because a pool emitted an anonymous log; keep rejecting malformed transfers involving your wallet.</li><li>Expand the project tools and guided workflows, with a short everyday tool list and <code>find_tool</code> / <code>run_tool</code> access to the full catalog.</li><li>Incorporate fixes from live tests with real funds across swaps, lending, deposits, liquidity, bridges and identity. These tests cover recorded journeys, not every tool or future execution.</li><li>Default automatic signing to a 50 USD budget per local calendar day when the owner selects auto mode. Spending above the remaining budget, missing fresh USD values or unavailable usage records requires human approval; explicitly approved spending is not capped by this budget.</li><li>Strengthen exact approval checks, delegate allowance discovery and cleanup, launch recipient checks, receipt minimums and confirmation binding. Reuse finalized approval discovery so ordinary swaps stay usable while older history catches up.</li><li>Fix slow swap confirmations and quote expiry handling, preserve quoted minimum outputs and improve reference-price and fee guidance.</li><li>Keep the reviewed aggregator swap through its approval: the swap you review is the swap that is sent. Fast and slow answers no longer waste approvals because of changed gas estimates or cached quote expiry; changed execution terms still need review.</li><li>Retain journal entries for unconfigured chains while allowing other configured chains to proceed. Signing on the unconfigured chain stays paused until its RPC is configured.</li><li>Make Orbio credit status a read without creating a credential. Explicit account authentication explains that its credential can spend activated CREDIT; status reuses the cached local credential and labels CREDIT correctly.</li><li>Show Relay's provider-selected slippage and the minimum returned in its quote; Oak does not send a slippage parameter for that quote.</li><li>Improve Relay funding setup, ERC-20 bridge flows and pending status; correct Orbio credit and gateway status and minimum-output checks.</li><li>Restore Meridian buy and sell journeys, accept settlement acknowledgements, bind RFQ terms and preserve sale floors. External settlement still needs its own status check.</li><li>Improve Beefy, HoodLock, Uniswap, NetNet, Longbow, Morpho, Priors, hood.ag and research workflows, error messages and agent playbooks.</li><li>Clarify local wallet key protection and keep recovery words and private-key export in the owner's terminal.</li></ul>
+<h3 id="0-2-1-published-2026-11-02">0.2.1 published — 2026-11-02</h3>
+<ul class="release-notes"><li>[Changed] Published core and add-on 0.2.1; registry bytes verified at 15:56Z against frozen archives (SHA-256 core <code>b920b73f…</code>, add-on <code>9b2166da…</code>). No contract redeployment.</li><li>[Added] Catalog totals: 660 mainnet / 40 testnet callable tools, 85 / 20 listed tools, and 10 local lifecycle tools; read-only examples list 83.</li><li>[Changed] Accept private keys without a <code>0x</code> prefix when the owner restores a wallet in their own terminal; explain 12-word recovery without echoing recovery words.</li><li>[Changed] Let prepared actions reach confirmation after slow access checks. Rebuild expired actions before simulation and approval while keeping the 12-second preview reuse limit.</li><li>[Changed] Start approval discovery from the recorded creation point for a new Oak wallet, and retry interrupted discovery automatically.</li><li>[Changed] Resolve official stock tickers to the issuer's listed token across quotes, prices and Priors stock tools. Refuse look-alike tickers; during a stock-list outage, keep unrelated address-based quotes available and pause stock identities that cannot be checked.</li><li>[Changed] Keep a local approval receipt log for transaction, typed-data and gateway decisions. Add the read-only <code>oak_receipts</code> tool and <code>oak receipts</code> list, verify and JSON/CSV export commands.</li><li>[Changed] Put the exact decision first in confirmation forms, with amounts, recipients, minimum received and bounded permissions where available; label official stock tokens clearly.</li><li>[Changed] Add the MCP Registry identity <code>io.github.OakAgentKit/oak</code>, its registry descriptor, the Claude Code plugin marketplace and editor install links. Install shortcuts pin the verified published 0.2.1 archives; the official MCP Registry listing is pending.</li><li>[Changed] License the plugin files and recipe format/schema under MIT; the core and add-on implementation license remains “Free to use, no copying.”</li><li>[Changed] Allow Node.js 22.12.0 or newer in the published package manifests; contributor and release builds remain on Node 22. Installation, MCP startup and the add-on suite pass on Node 22.23.4, 24.22.2 and 25.9.0; workspace builds remain on Node 22.</li></ul>
 
-<p>Version 0.1.9 of <code>@oakagentkit/addon</code> and <code>@oakagentkit/core</code> preceded the subscription release. Install Oak 0.2.0 for paid actions, which require a verified public agent identity and an active subscription.</p>
+<p>Core and add-on 0.2.1 are published on npm. Registry bytes were verified at 15:56Z against the frozen archives: core SHA-256 <code>b920b73fce260a15a9190320a6bd31733e9206a321da5b0ca33342c39535b3d5</code>; add-on <code>9b2166da7037fd0ee21c676697eb596d4bc078329a890bad8de1e3674f40c82b</code>.</p>
+<p>[Changed] Install commands, plugin pins and editor links use 0.2.1. Mainnet paid access remains on the 0.2.0 contracts. The official MCP Registry listing is pending.</p>
+<p>[Added] The catalog has 660 mainnet / 40 testnet callable tools, 85 / 20 listed tools, and 10 local lifecycle tools including <code>oak_receipts</code>. Read-only examples list 83 tools.</p>
+<p>[Changed] Package engines allow Node.js &gt;=22.12.0; installation, MCP startup and the add-on suite pass on Node 22.23.4, 24.22.2 and 25.9.0. Contributor/server/example tooling remains on Node 22.</p>
+<h3 id="0-2-0-published-2026-11-02">0.2.0 published — 2026-11-02</h3>
+<p>[Added] Mainnet identity and subscription lifecycle for paid actions. The 0.2.1 package release keeps this deployment unchanged. Reads require neither identity nor subscription; actions require both. Call <code>account</code> for phase and available plans.</p>
+<h3 id="0-1-9">0.1.9</h3>
+<p>Version 0.1.9 of <code>@oakagentkit/addon</code> and <code>@oakagentkit/core</code> preceded the subscription release. Install Oak 0.2.1 for paid actions, which require a verified public agent identity and an active subscription.</p>
 <p>Version 0.1.9 expands the tool catalog and incorporates fixes from live tests with real funds. It adds the owner-selected auto mode's 50 USD daily approval budget, strengthens approval and quote checks, and fixes Relay funding, Orbio status and Meridian RFQ settlement handling. See CHANGELOG.md for the release changes and the local verification report for measured coverage.</p>
 <p>The 0.1.9 CLI lists 84 mainnet tools and 19 testnet tools without imported recipes. The full catalog has 659 mainnet tools and 39 testnet tools, reachable through <code>find_tool</code> and <code>run_tool</code>. Read-only examples list 82 mainnet tools because their subscription callbacks are disabled.</p>
 <h3 id="0-1-2-published-2026-10-30">0.1.2 published — 2026-10-30</h3>
@@ -421,10 +428,26 @@
 <tbody>
 <tr>
 <td data-label="Version">
+<code>0.2.1</code>
+</td>
+<td data-label="Date">2026-11-02</td>
+<td data-label="Status">Published npm packages</td>
+<td data-label="Highlights">Current install/plugin pins, approval receipts, decision-first confirmation, Node &gt;=22.12.0; official MCP Registry listing pending.</td>
+</tr>
+<tr>
+<td data-label="Version">
+<code>0.2.0</code>
+</td>
+<td data-label="Date">2026-11-02</td>
+<td data-label="Status">Historical package release; live mainnet contracts</td>
+<td data-label="Highlights">Identity and subscription lifecycle; deployment retained by 0.2.1.</td>
+</tr>
+<tr>
+<td data-label="Version">
 <code>0.1.9</code>
 </td>
 <td data-label="Date">—</td>
-<td data-label="Status">Historical package release; use Oak 0.2.0 for paid actions</td>
+<td data-label="Status">Historical package release; use Oak 0.2.1 for paid actions</td>
 <td data-label="Highlights">Expanded catalog, daily auto budget, approval and quote fixes, Relay/Orbio/Meridian fixes; preceded the Oak 0.2.0 subscription release.</td>
 </tr>
 <tr>
@@ -432,7 +455,7 @@
 <code>0.1.2</code>
 </td>
 <td data-label="Date">2026-10-30</td>
-<td data-label="Status">Historical package release; use Oak 0.2.0 for paid actions</td>
+<td data-label="Status">Historical package release; use Oak 0.2.1 for paid actions</td>
 <td data-label="Highlights">Default confirmation and local signing guards retained; Longbow deposits enabled; send hidden; MCP resources included; Meridian buys deferred.</td>
 </tr>
 <tr>
@@ -621,8 +644,8 @@
 </ul>
 </nav>
 </div>
- <p class="footer-status">$OAK is live. Oak 0.2.0 subscriptions are open.</p>
- <p>Subscriptions are open in Oak 0.2.0. Read tools need no identity or subscription; hosted actions require a verified ERC-8004 identity and an active subscription. Official $OAK address: <code class="token-address">0x6511c233790Ec10f7d673c64DC82C3F941D57828</code>. Pons page: <a href="https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828">https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828</a>. Plan availability follows account.phase: no-hold on the curve, neither plan during warmup, and both plans when ready with a valid price note. Holding $OAK buys access and nothing else.</p>
+ <p class="footer-status">$OAK is live. Oak 0.2.1 subscriptions are open.</p>
+ <p>Subscriptions are open in Oak 0.2.1. Read tools need no identity or subscription; hosted actions require a verified ERC-8004 identity and an active subscription. Official $OAK address: <code class="token-address">0x6511c233790Ec10f7d673c64DC82C3F941D57828</code>. Pons page: <a href="https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828">https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828</a>. Plan availability follows account.phase: no-hold on the curve, neither plan during warmup, and both plans when ready with a valid price note. Holding $OAK buys access and nothing else.</p>
  <p>Independent software, not affiliated with Robinhood. Not financial advice. Oak never promises returns.</p>
  <p>Region notice: project and asset availability varies by jurisdiction. You are responsible for local compliance.</p>
  <p class="fine">Docs, examples and contracts are MIT. The compiled npm packages are Free-to-Use, No Copying; their source and the hosted Oak service are private. Manrope is self-hosted under the SIL Open Font Licence.</p>
