@@ -97,9 +97,9 @@
 <div class="page-body">
 <div class="wrap">
 <div class="prose wide">
-<p>$OAK is live. Hosted actions and paid access open with Oak 0.2.0. No date is promised; there is no public beta. Packages are published; read calls such as find_token remain available. Subscriptions, sign-up burns, the oracle, the burner and fee utility are planned for Oak 0.2.0 and are not live. Subscription mechanics on this site describe that planned release, subject to its release checks.</p>
+<p>Subscriptions are open in Oak 0.2.0. Read tools need no identity or subscription; hosted actions require a verified ERC-8004 identity and an active subscription. Plan availability follows account.phase: no-hold on the curve, neither plan during warmup, and both plans when ready with a valid price note.</p>
 <p>Oak has no third-party audit. Your wallet stays on your computer; you review what it is about to do. The details below explain custody, authority and limits.</p>
-<p>Version 0.1.9 includes default human confirmation. Run <code>oak --version</code> and update before using actions if it shows an older version.</p>
+<p>Use Oak 0.2.0 with default human confirmation. Run <code>oak --version</code> and install <code>@oakagentkit/addon@0.2.0</code> before subscribing.</p>
 <section class="doc-part" id="disclosures">
 <h2>Disclosures</h2>
 <details class="reference-detail">
@@ -185,7 +185,7 @@
 <h3 id="creator-fees-the-single-owner-treasury-wallet-and-the-burner-sweep-rule">3. Creator Fees, the Single-Owner Treasury Wallet, and the Burner Sweep Rule</h3>
 <ul>
 <li>
-<strong>25% / 75% subscription split:</strong> With Oak 0.2.0, every subscription payment will split in the same transaction: <strong>25% goes to the burn</strong> contract (<code>OakBurner</code>) and <strong>75% goes to the single-owner treasury wallet</strong>.</li>
+<strong>25% / 75% subscription split:</strong> Every subscription payment splits in the same transaction: <strong>25% goes to the burn</strong> contract (<code>OakBurner</code>) and <strong>75% goes to the single-owner treasury wallet</strong>.</li>
 <li>
 <strong>All 1.7% creator fees go to the launch wallet for development operations:</strong> <code>$OAK</code> is a standard Pons V2 coin paired with native ETH. Every trade pays 2% total: <code>0.3%</code> to Pons and <strong>1.7%</strong> creator fee (<code>0.7%</code> creator share + <code>1%</code> creator tax, venue buybacks off). All <strong>1.7%</strong> goes to the <strong>launch wallet</strong> (<code>0x84b1B9e5D1cAfD9543E684BB39E9cbD478189EE2</code>), which is the Pons creator-fee recipient and claims positive balances from the Pons fee escrow (<code>0xd3AFEB2a57f70eF218Aa82451c51B2fb0416Ac9e</code>) via owner-signed transactions. <strong>Holding $OAK buys access and nothing else.</strong>
 </li>
@@ -207,7 +207,7 @@
 </section>
 <section class="doc-part" id="authority">
 <h2>Keys and authority</h2>
-<p>Subscription, oracle and burner permissions below describe the planned Oak 0.2.0 contracts. The live Pons creator-fee recipient is the launch wallet.</p>
+<p>Subscription, oracle and burner permissions below describe the Oak 0.2.0 contracts. The live Pons creator-fee recipient is the launch wallet.</p>
 <details class="reference-detail">
 <summary>Read details</summary>
 <p>The treasury and contract admin is the single-owner wallet <code>0x856bb126188bDB5e425D3ac9D59E9ffBD12e6ECf</code>. One owner key can spend treasury funds, redirect future subscription payments, replace the price signer and retire subscriptions. There is no second-signature requirement. Key compromise exposes these powers; key loss can make treasury funds and administration inaccessible. It cannot spend user wallet balances. Safe support is an optional deployment profile, not the launch setup.</p>
@@ -234,7 +234,7 @@
 <td data-label="Worst case if compromised">one compromised key controls treasury funds and all listed admin powers</td>
 </tr>
 <tr>
-<td data-label="Party">The single-owner treasury wallet (planned Oak 0.2.0 admin and treasury)</td>
+<td data-label="Party">The single-owner treasury wallet (Oak 0.2.0 admin and treasury)</td>
 <td data-label="Holds">treasury ETH and USDG already paid to it; subscription payments split on the way in; the $OAK creator fees it has claimed</td>
 <td data-label="Can">subscription: <code>setPayees</code>, <code>retire</code>, <code>setGrandfatherRoot</code>; oracle: <code>setPriceSigner</code> (any address, including one it controls, which lets it sign notes inside the same 50% guard; zero pauses pricing); burner: <code>armSweep</code>, <code>sweepStuck</code>. Redirect all future subscription payments via <code>setPayees</code> to any address</td>
 <td data-label="Cannot">change wallet paid time or counts; spend wallet balances; reverse payments already made; act for a wallet; re-point the pools, factory or token the oracle reads; widen the 50% guard or the 5-minute note life</td>
@@ -273,7 +273,7 @@
 <td data-label="Party">Launch wallet (<code>0x84b1B9e5D1cAfD9543E684BB39E9cbD478189EE2</code>), live Pons creator-fee recipient</td>
 <td data-label="Holds">$OAK creator fees claimed for development operations</td>
 <td data-label="Can">Claim credited Pons escrow balances; transfer the creator-fee recipient</td>
-<td data-label="Cannot">Spend user wallet balances; administer the planned Oak subscription contracts</td>
+<td data-label="Cannot">Spend user wallet balances; administer the Oak subscription contracts</td>
 <td data-label="Worst case if compromised">One owner key controls claimed creator fees and their future recipient; external Pons owner override remains subject to a 3-day timelock</td>
 </tr>
 <tr>
@@ -401,12 +401,12 @@
 <h3 id="0-1-9">0.1.9</h3>
 <ul class="release-notes"><li>Flag token-level default approvals separately, so Oak does not mistake them for approvals you made or recommend revoking them.</li><li>Show Orbio CREDIT remaining after a tool call without subtracting its charge twice.</li><li>Explain that Orbio tool payloads belong in <code>args</code>; keep <code>arguments</code> as the outer <code>run_tool</code> wrapper.</li><li>Internal cleanup, no behaviour change.</li><li>Fix KyberSwap previews that rejected valid swaps because a pool emitted an anonymous log; keep rejecting malformed transfers involving your wallet.</li><li>Expand the project tools and guided workflows, with a short everyday tool list and <code>find_tool</code> / <code>run_tool</code> access to the full catalog.</li><li>Incorporate fixes from live tests with real funds across swaps, lending, deposits, liquidity, bridges and identity. These tests cover recorded journeys, not every tool or future execution.</li><li>Default automatic signing to a 50 USD budget per local calendar day when the owner selects auto mode. Spending above the remaining budget, missing fresh USD values or unavailable usage records requires human approval; explicitly approved spending is not capped by this budget.</li><li>Strengthen exact approval checks, delegate allowance discovery and cleanup, launch recipient checks, receipt minimums and confirmation binding. Reuse finalized approval discovery so ordinary swaps stay usable while older history catches up.</li><li>Fix slow swap confirmations and quote expiry handling, preserve quoted minimum outputs and improve reference-price and fee guidance.</li><li>Keep the reviewed aggregator swap through its approval: the swap you review is the swap that is sent. Fast and slow answers no longer waste approvals because of changed gas estimates or cached quote expiry; changed execution terms still need review.</li><li>Retain journal entries for unconfigured chains while allowing other configured chains to proceed. Signing on the unconfigured chain stays paused until its RPC is configured.</li><li>Make Orbio credit status a read without creating a credential. Explicit account authentication explains that its credential can spend activated CREDIT; status reuses the cached local credential and labels CREDIT correctly.</li><li>Show Relay's provider-selected slippage and the minimum returned in its quote; Oak does not send a slippage parameter for that quote.</li><li>Improve Relay funding setup, ERC-20 bridge flows and pending status; correct Orbio credit and gateway status and minimum-output checks.</li><li>Restore Meridian buy and sell journeys, accept settlement acknowledgements, bind RFQ terms and preserve sale floors. External settlement still needs its own status check.</li><li>Improve Beefy, HoodLock, Uniswap, NetNet, Longbow, Morpho, Priors, hood.ag and research workflows, error messages and agent playbooks.</li><li>Clarify local wallet key protection and keep recovery words and private-key export in the owner's terminal.</li></ul>
 
-<p>Version 0.1.9 of <code>@oakagentkit/addon</code> and <code>@oakagentkit/core</code> is released. The npm install command installs 0.1.9. Hosted actions and paid access open with Oak 0.2.0; actions will require a public agent identity and an active subscription.</p>
+<p>Version 0.1.9 of <code>@oakagentkit/addon</code> and <code>@oakagentkit/core</code> preceded the subscription release. Install Oak 0.2.0 for paid actions, which require a verified public agent identity and an active subscription.</p>
 <p>Version 0.1.9 expands the tool catalog and incorporates fixes from live tests with real funds. It adds the owner-selected auto mode's 50 USD daily approval budget, strengthens approval and quote checks, and fixes Relay funding, Orbio status and Meridian RFQ settlement handling. See CHANGELOG.md for the release changes and the local verification report for measured coverage.</p>
 <p>The 0.1.9 CLI lists 84 mainnet tools and 19 testnet tools without imported recipes. The full catalog has 659 mainnet tools and 39 testnet tools, reachable through <code>find_tool</code> and <code>run_tool</code>. Read-only examples list 82 mainnet tools because their subscription callbacks are disabled.</p>
 <h3 id="0-1-2-published-2026-10-30">0.1.2 published — 2026-10-30</h3>
 <p>The <code>@oakagentkit/addon</code> and <code>@oakagentkit/core</code> 0.1.2 packages are published on npm. Default MCP action confirmation and terminal renewal/cancellation prompts let users review before local signing. Local transaction guards validate exact approvals, destinations and post-state allowances, then re-simulate before signing. Finality defaults to 30 confirmations, confirmation validity is 300 seconds, identity registration resumes, and action results lead with status and hashes. Priors/HEY behavior, small-swap rounding, Velora fee handling and quotes without reference prices are corrected. Automatic wallet creation shipped in 0.1.0 already. Version 0.1.2 retains confirmation and signing guards, enables Longbow deposits, hides the deferred send tool and adds MCP startup instructions and project playbooks. Meridian buys remain deferred. See CHANGELOG.md for the 0.1.2 change list.</p>
-<p>The CLI lists 102 mainnet tools without imported recipes (16 on testnet). The example bridge lists 100 because its subscription callbacks are disabled. Hosted actions remain limited to the Oak team until Oak 0.2.0; there is no public beta. Read tools remain available; hosted actions and paid access open with Oak 0.2.0.</p>
+<p>The CLI lists 102 mainnet tools without imported recipes (16 on testnet). The example bridge lists 100 because its subscription callbacks are disabled. These are historical 0.1.2 tool counts. In Oak 0.2.0, read tools need no identity or subscription; hosted actions require both.</p>
 <h3 id="release-table">Release Table</h3>
 <div class="table-wrap">
 <table class="md-table">
@@ -424,15 +424,15 @@
 <code>0.1.9</code>
 </td>
 <td data-label="Date">—</td>
-<td data-label="Status">Published npm packages; hosted actions wait for Oak 0.2.0</td>
-<td data-label="Highlights">Expanded catalog, daily auto budget, approval and quote fixes, Relay/Orbio/Meridian fixes; hosted actions and paid access wait for Oak 0.2.0.</td>
+<td data-label="Status">Historical package release; use Oak 0.2.0 for paid actions</td>
+<td data-label="Highlights">Expanded catalog, daily auto budget, approval and quote fixes, Relay/Orbio/Meridian fixes; preceded the Oak 0.2.0 subscription release.</td>
 </tr>
 <tr>
 <td data-label="Version">
 <code>0.1.2</code>
 </td>
 <td data-label="Date">2026-10-30</td>
-<td data-label="Status">Published npm packages; hosted actions wait for Oak 0.2.0</td>
+<td data-label="Status">Historical package release; use Oak 0.2.0 for paid actions</td>
 <td data-label="Highlights">Default confirmation and local signing guards retained; Longbow deposits enabled; send hidden; MCP resources included; Meridian buys deferred.</td>
 </tr>
 <tr>
@@ -617,8 +617,8 @@
 </ul>
 </nav>
 </div>
- <p class="footer-status">$OAK is live. Paid access opens with Oak 0.2.0.</p>
- <p>$OAK is live. Hosted actions and paid access open with Oak 0.2.0. No date is promised; there is no public beta. Packages are published; read calls such as find_token remain available. Official $OAK address: <code class="token-address">0x6511c233790Ec10f7d673c64DC82C3F941D57828</code>. Pons page: <a href="https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828">https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828</a>. Subscriptions, sign-up burns, the oracle, the burner and fee utility are planned for Oak 0.2.0 and are not live. Subscription mechanics on this site describe that planned release, subject to its release checks. Holding $OAK buys access and nothing else.</p>
+ <p class="footer-status">$OAK is live. Oak 0.2.0 subscriptions are open.</p>
+ <p>Subscriptions are open in Oak 0.2.0. Read tools need no identity or subscription; hosted actions require a verified ERC-8004 identity and an active subscription. Official $OAK address: <code class="token-address">0x6511c233790Ec10f7d673c64DC82C3F941D57828</code>. Pons page: <a href="https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828">https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828</a>. Plan availability follows account.phase: no-hold on the curve, neither plan during warmup, and both plans when ready with a valid price note. Holding $OAK buys access and nothing else.</p>
  <p>Independent software, not affiliated with Robinhood. Not financial advice. Oak never promises returns.</p>
  <p>Region notice: project and asset availability varies by jurisdiction. You are responsible for local compliance.</p>
  <p class="fine">Docs, examples and contracts are MIT. The compiled npm packages are Free-to-Use, No Copying; their source and the hosted Oak service are private. Manrope is self-hosted under the SIL Open Font Licence.</p>
