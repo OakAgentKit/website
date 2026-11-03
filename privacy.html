@@ -51,6 +51,9 @@
 <li>
 <a href="setup.html">Set up</a>
 </li>
+<li>
+<a href="partnerships.html">Partnerships</a>
+</li>
 </ul>
 </nav>
  <button class="menu-button" type="button" popovertarget="site-menu">Menu</button>
@@ -73,6 +76,9 @@
 </li>
 <li>
 <a href="setup.html">Set up</a>
+</li>
+<li>
+<a href="partnerships.html">Partnerships</a>
 </li>
 </ul>
 </nav>
@@ -97,7 +103,7 @@
 <div class="page-body" id="policy">
 <div class="wrap">
 <div class="prose wide">
-<p>Subscriptions are open in Oak 0.2.1. Read tools need no identity or subscription; hosted actions require a verified ERC-8004 identity and an active subscription. Plan availability follows account.phase: no-hold on the curve, neither plan during warmup, and both plans when ready with a valid price note. Subscription and price-note data handling below applies to Oak 0.2.1.</p>
+<p>Subscriptions are open in Oak 0.2.2. Read tools need no identity or subscription; hosted actions require a verified ERC-8004 identity and an active subscription. Plan availability follows account.phase: no-hold on the curve, neither plan during warmup, and both plans when ready with a valid price note. Subscription and price-note data handling below applies to Oak 0.2.2.</p>
 <p>This page explains in plain words what data stays on your computer, what the Oak server sees, what your RPC and ecosystem project services see, how long data is kept, and how to ask questions. The compiled add-on and hosted service have private source; their data practices are described below.</p>
 <hr>
 <h2 id="zero-website-trackers">1. Zero Website Trackers</h2>
@@ -167,9 +173,20 @@
 </td>
 <td data-label="What It Holds">Declarative <code>oak-recipe/v1</code> JSON files you explicitly imported with <code>oak recipes add</code>.</td>
 </tr>
+<tr>
+<td data-label="Local Store">
+<code>~/.oak/hey-follow.json</code>
+</td>
+<td data-label="Code Reference">
+<code>packages/addon/src/hey-follow-store.ts</code>
+</td>
+<td data-label="What It Holds">Created only when you ask your agent to follow a token for HEY Research Lab builder updates (<code>heyresearch_follow</code>). Holds, for up to 20 tokens, the token address, the HEY Research Lab project slug you paired with it and the time of your last completed feed check. Nothing reads it in the background, Oak never uploads the file, and it stays until you unfollow a token (<code>heyresearch_unfollow</code>) or delete it yourself. A file Oak cannot read is left untouched, never reset.</td>
+</tr>
 </tbody>
 </table>
 </div>
+<p>
+<strong>HEY Research Lab on your computer.</strong> An answer you asked HEY Research Lab for is remembered in memory for the running Oak session only, so the approval form can repeat it with the time it was checked; it is never written to disk and is gone when the session ends. The builder feed keeps your follow list and last-checked times in <code>~/.oak/hey-follow.json</code> on your computer (see the table above). Oak never uploads that file or the checked times. When you ask for your feed, only the token addresses and project slugs on the list are used to ask HEY Research Lab for updates (see &quot;What each other HEY Research Lab tool sends&quot; below). Following or unfollowing a token contacts no one.</p>
 <p>
 <strong>What never leaves your computer:</strong>
 </p>
@@ -218,8 +235,10 @@
 </li>
 <li>
 <strong>Health checks (<code>GET /v1/health</code>):</strong> Responds with <code>{&quot;ok&quot;:true,&quot;data&quot;:{&quot;status&quot;:&quot;ok&quot;}}</code> when the service is healthy.</li>
+<li>
+<strong>Builder code redemption (<code>oak redeem &lt;code&gt;</code>, or asking your agent to redeem a code):</strong> Only if you hold an Oak builder code from the HEY Research Lab Verified Builder offer. The server receives the code and your wallet address (with the session headers above) so it can check that the code is unused, start your 30 days and tell you the exact end time. The server keeps a ledger of these codes; see &quot;Builder code ledger&quot; in section 5.</li>
 </ol>
-<p>The Oak server <strong>never sees your private key</strong>, <strong>never signs or sends a blockchain transaction</strong>, and <strong>has no user account database, email list, or telemetry SDK</strong>.</p>
+<p>The Oak server <strong>never sees your private key</strong>, <strong>never signs or sends a blockchain transaction</strong>, and has <strong>no general user account database, email list, or telemetry SDK</strong>. The one exception is the builder code ledger described in section 5, which exists only for Oak builder codes and holds no account, email or usage data.</p>
 <hr>
 </details>
 <h2 id="what-chain-rpcs-and-ecosystem-project-services-see">4. What Chain RPCs and Ecosystem Project Services See</h2>
@@ -291,12 +310,23 @@
 </tr>
 <tr>
 <td data-label="Service">
-<strong>HeyResearch REST API</strong>
-</td>
+<strong>HEY Research Lab token scan</strong> (<code>heyresearch.xyz</code>)</td>
+<td data-label="When Contacted">Only when you ask HEY Research Lab about a token (your agent runs the scan through the Oak server), or on every token buy if you turn on <code>OAK_HEY_AUTO_CONTEXT=true</code> (off by default; the automatic check then runs from your computer before the approval form). With the setting off, no buy contacts HEY Research Lab.</td>
+<td data-label="What It Receives">The chain, the token address, and an Oak version header (<code>x-hey-integration</code>). HEY Research Lab also sees the sender's IP address and the time: the Oak server's for a scan you ask for, your computer's for the automatic check. Never your wallet address or the amount.</td>
+</tr>
+<tr>
+<td data-label="Service">
+<strong>Other HEY Research Lab tools</strong> (<code>heyresearch.xyz</code>)</td>
 <td data-label="When Contacted">
-<code>heyresearch_research_project</code>, <code>heyresearch_chain_activity</code>
-</td>
-<td data-label="What It Receives">Anonymous read-only project or chain activity query.</td>
+<code>heyresearch_research_project</code>, <code>heyresearch_chain_activity</code>, <code>heyresearch_read</code> (including its two proof-of-ship reads), <code>heyresearch_bulk</code>, <code>heyresearch_validate_receipt</code>. Only when you ask for them; they are sent through the Oak server, so HEY Research Lab sees the Oak server's address, not yours.</td>
+<td data-label="What It Receives">Only the fields listed under the table.</td>
+</tr>
+<tr>
+<td data-label="Service">
+<strong>HEY Research Lab exclusives</strong> (<code>heyresearch.xyz</code>, with Oak's own reads)</td>
+<td data-label="When Contacted">
+<code>heyresearch_token_facts</code>, <code>heyresearch_feed</code> and <code>heyresearch_position_context</code>, which your computer assembles from a short list of read-only requests. Only when you ask for them. Each request travels over Oak's existing read path to the Oak server, which asks HEY Research Lab, so HEY Research Lab sees the Oak server's address, not yours. The Oak server sees these requests as it sees any tool call, including your wallet address in the session headers. <code>heyresearch_follow</code> and <code>heyresearch_unfollow</code> make no request at all. Nothing runs at startup, on a schedule or on a default buy.</td>
+<td data-label="What It Receives">Only the selectors listed under the table. Never your wallet address, a position amount or a position ID.</td>
 </tr>
 <tr>
 <td data-label="Service">
@@ -341,6 +371,27 @@
 </tbody>
 </table>
 </div>
+<p>
+<strong>What each other HEY Research Lab tool sends.</strong> None of these sends HEY Research Lab your wallet address, a transaction, a position amount or your key, with one exception you control: <code>heyresearch_validate_receipt</code> forwards whatever receipt you give it. The no-wallet, no-amount promise made for the token scan above is not a promise about the contents of a receipt you supply.</p>
+<ul>
+<li>
+<code>heyresearch_research_project</code>: the project slug, name, ticker or token contract address you give it, and (for a token) the chain and token address.</li>
+<li>
+<code>heyresearch_chain_activity</code>: the number of days you choose (1 to 30).</li>
+<li>
+<code>heyresearch_read</code>: the name of one published read and its documented parameters only, for example a project slug, a token contract address, an evidence ID, a date or a pagination cursor. The two proof-of-ship reads take the same kind of parameters.</li>
+<li>
+<code>heyresearch_bulk</code>: the operation you choose and up to 10 project slugs, or up to 30 token addresses. It uses a HEY Research Lab key that is held only on the Oak server.</li>
+<li>
+<code>heyresearch_validate_receipt</code>: the receipt you supply, forwarded to HEY Research Lab unchanged for validation (up to 64 KiB). Oak does not cache it and rejects a receipt that contains a wallet credential, but anything else you put in the receipt is sent.</li>
+<li>
+<code>heyresearch_token_facts</code>: the token address you ask about and, from HEY Research Lab's own answer, its project slug, alongside Oak's own reads of that token (Pons status, holders and launch record, which carry only the token address). The result is assembled on your computer.</li>
+<li>
+<code>heyresearch_feed</code> (with follow and unfollow): when you ask for your feed, the token addresses and project slugs on your follow list, one HEY Research Lab request per followed project; for the browse view, no personal input at all. The follow list and last-checked times stay in a local file on your computer and are never sent. Following and unfollowing change only that file.</li>
+<li>
+<code>heyresearch_position_context</code>: only the project slugs or token contracts you select, never wallet addresses, amounts or position IDs. To find your positions, Oak makes its usual wallet-authenticated <code>positions</code> request to the Oak server (and, for a Uniswap or Pons position you select, a read of that position from the Oak server, which does carry its ID); the Oak server sees your wallet there, exactly as for the <code>positions</code> tool. None of those reads is sent to HEY Research Lab. Your computer joins the HEY Research Lab answer to the positions you selected; unsupported or unselected positions cause no HEY Research Lab request, and nothing is guessed.</li>
+</ul>
+<p>Every HEY Research Lab tool runs only when you ask: there is no background monitoring and no automatic request unless you turn on <code>OAK_HEY_AUTO_CONTEXT=true</code>. HEY Research Lab tracks builder activity only; its answers are not an endorsement, audit, rating or buy-or-sell recommendation.</p>
 <hr>
 </details>
 <h2 id="retention-and-deletion">5. Retention and Deletion</h2>
@@ -385,7 +436,9 @@
 <strong>Aggregate health metrics (<code>/var/lib/oak/metrics.json</code>, file mode <code>0600</code>):</strong> Rolling 5-minute aggregate counters (<code>requests</code>, <code>serverErrors</code>, <code>clientErrors</code>, process <code>rss</code> memory, and timestamp <code>at</code>) with no IPs, wallets, headers, or request bodies; overwritten every <strong>
 <code>60</code> seconds</strong> for local service health checks.</li>
 <li>
-<strong>Encrypted state backups (<code>/var/lib/oak/backups/</code>):</strong> Hourly encrypted off-host snapshots (<code>restic</code>) of <code>/var/lib/oak/identity.json</code> and <code>/var/lib/oak/nonces.jsonl</code> so active identity links and issued price-note nonces survive a host failure without resetting replay fences.</li>
+<strong>Encrypted state backups (<code>/var/lib/oak/backups/</code>):</strong> Hourly encrypted off-host snapshots (<code>restic</code>) of <code>/var/lib/oak/identity.json</code>, <code>/var/lib/oak/nonces.jsonl</code> and the builder code ledger so active identity links, issued price-note nonces and redeemed builder codes survive a host failure without resetting replay fences.</li>
+<li>
+<strong>Builder code ledger (private file on the server's state volume):</strong> Used only for Oak builder codes. For each code it holds the project, its official X handle, the checker's name, the check date, the code digest (a one-way hash; never the raw code), and once redeemed the redemption wallet and the start and expiry times. The server never logs a raw code. It is kept so a code works once, so one wallet holds one grant, and so a grant survives a restart or redeploy; it is included in the encrypted off-host backups above. <strong>Retention:</strong> kept until 2027-03-01, after the last possible grant ends, then deleted by hand, keeping only issued and redeemed counts.</li>
 <li>
 <strong>System logs (<code>systemd-journald</code>, <code>/etc/systemd/journald.conf.d/oak.conf</code>):</strong> Operational service and reverse-proxy logs (capped at <code>100</code> MB on disk and <code>32</code> MB in runtime memory, with no HTTP request header or body access logs) are kept for at most <strong>
 <code>7</code> days (<code>MaxRetentionSec=7day</code>)</strong> for service troubleshooting and then rotated out automatically.</li>
@@ -442,6 +495,9 @@
 <a href="roadmap.html">Roadmap</a>
 </li>
 <li>
+<a href="partnerships.html">Partnerships</a>
+</li>
+<li>
 <a href="setup.html">Set up</a>
 </li>
 <li>
@@ -462,8 +518,8 @@
 </ul>
 </nav>
 </div>
- <p class="footer-status">$OAK is live. Oak 0.2.1 subscriptions are open.</p>
- <p>Subscriptions are open in Oak 0.2.1. Read tools need no identity or subscription; hosted actions require a verified ERC-8004 identity and an active subscription. Official $OAK address: <code class="token-address">0x6511c233790Ec10f7d673c64DC82C3F941D57828</code>. Pons page: <a href="https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828">https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828</a>. Plan availability follows account.phase: no-hold on the curve, neither plan during warmup, and both plans when ready with a valid price note. Holding $OAK buys access and nothing else.</p>
+ <p class="footer-status">$OAK is live. Oak 0.2.2 subscriptions are open.</p>
+ <p>Subscriptions are open in Oak 0.2.2. Read tools need no identity or subscription; hosted actions require a verified ERC-8004 identity and an active subscription. Official $OAK address: <code class="token-address">0x6511c233790Ec10f7d673c64DC82C3F941D57828</code>. Pons page: <a href="https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828">https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828</a>. Plan availability follows account.phase: no-hold on the curve, neither plan during warmup, and both plans when ready with a valid price note. Holding $OAK buys access and nothing else.</p>
  <p>Independent software, not affiliated with Robinhood. Not financial advice. Oak never promises returns.</p>
  <p>Region notice: project and asset availability varies by jurisdiction. You are responsible for local compliance.</p>
  <p class="fine">Docs, examples and contracts are MIT. The compiled npm packages are Free-to-Use, No Copying; their source and the hosted Oak service are private. Manrope is self-hosted under the SIL Open Font Licence.</p>

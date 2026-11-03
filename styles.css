@@ -855,6 +855,99 @@ pre code, .code-block code { font-size: 14px; background: none; padding: 0; }
  .start-col pre { padding: 12px 16px; }
 }
 
+/* Partnerships: full-bleed supplied scenes, local glass and an unboxed partner lockup. */
+.scene-partnerships { --tl: 7.5; --tb: 50; }
+.partner-directory { position: relative; isolation: isolate; min-height: clamp(700px, 55.84vw, 900px); display: grid; align-items: center; }
+.partner-directory-art { position: absolute; inset: 0; z-index: -2; }
+.partner-directory-art img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.partner-directory::before { content: ''; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, rgba(4,25,20,.78), rgba(4,25,20,.45) 40%, transparent 70%); }
+.partner-directory-copy { width: calc(100% - 2 * var(--gutter)); max-width: 1200px; margin-inline: auto; padding-block: 72px; }
+.partner-directory-copy > p { max-width: 36ch; }
+.partner-directory h2 { margin: 0 0 16px; }
+.partner-list { list-style: none; margin: 32px 0 0; padding: 0; }
+.partner-list > li { max-width: 560px; min-width: 0; }
+.partner-entry { display: flex; flex-direction: column; align-items: flex-start; gap: 24px; min-height: 44px; padding: 32px; border: 1px solid rgba(240,247,234,.24); border-radius: 24px; background: rgba(4,25,20,.78); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); color: var(--paper); text-decoration: none; overflow-wrap: anywhere; }
+.partner-entry:hover { background: rgba(4,25,20,.86); color: var(--paper); }
+.partner-entry:focus-visible { outline: 2px solid var(--lime); outline-offset: 4px; }
+.partner-description { line-height: 26px; }
+.partner-list > li > p { margin: 12px 0 0; }
+.partner-list > li > p > a { padding-inline: 16px; margin-inline: 0; border-radius: 12px; background: rgba(4,25,20,.78); }
+.partner-entry .text-link { display: block; min-height: 0; margin: 0; padding: 0; line-height: 24px; }
+.partner-entry img { display: block; width: 320px; max-width: 100%; height: auto; }
+/* The lockup names the partner; its alt text supplies the same name to assistive technology. */
+.partner-entry .text-link { text-decoration: underline; }
+.partner-inquiry { position: relative; isolation: isolate; display: grid; align-items: center; min-height: clamp(540px, 56.25vw, 810px); }
+.partner-inquiry-art { position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; object-fit: cover; }
+.partner-inquiry::before { content: ''; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, rgba(4,25,20,.78), rgba(4,25,20,.78) 32%, transparent 55%); }
+.partner-inquiry-copy { width: min(460px, calc(40% - 40px)); margin-left: max(20px, calc((100% - 1080px) / 2)); padding-block: 80px; overflow-wrap: anywhere; }
+
+.partner-inquiry-copy a { display: inline-flex; align-items: center; min-height: 44px; }
+
+/* A fragment-driven reading region, with real links for entry and exit. It deliberately has no
+   aria-modal claim: native fragment navigation supplies focus, and CSS hides the background controls. */
+.partner-popup { display: none; position: fixed; inset: 0; z-index: 100; overflow-y: auto; overscroll-behavior: contain; padding: 24px; background: rgba(2,18,14,.48); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); scroll-behavior: auto; }
+#hey-research-lab:target { display: block; }
+.partner-popup:focus { outline: none; }
+.partner-popup-sheet { position: relative; max-width: 1000px; margin: 0 auto; background: var(--forest); color: var(--paper); border: 1px solid rgba(240,247,234,.24); border-radius: 24px; overflow: clip; overflow-wrap: anywhere; box-shadow: 0 24px 80px rgba(0,0,0,.32); }
+/* The same scene-opening/picture as Docs supplies the carved title and the moss-to-forest fade.
+   Keep the glass lockup over its sky; the offer heading stays readable below the art. */
+.partner-popup-close { position: sticky; top: 0; z-index: 4; display: flex; align-items: center; justify-content: space-between; gap: 24px; min-height: 80px; margin-bottom: -80px; padding: 12px 24px; background: rgba(4,34,28,.88); border-bottom: 1px solid var(--hairline); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); }
+.partner-popup-close > .text-link { flex: none; margin: 0; }
+.partner-popup-lockup { display: flex; align-items: center; gap: 16px; min-width: 0; }
+.partner-popup-mark { flex: none; width: 44px; height: 44px; }
+.partner-popup-logo { width: 320px; min-width: 0; height: auto; }
+.partner-popup-content { max-width: 760px; padding-bottom: 48px; }
+.partner-popup-content > h2 { font-size: 32px; line-height: 40px; text-wrap: balance; }
+.partner-popup .lede { font-size: 18px; line-height: 28px; }
+.partner-popup .offer-terms { display: grid; gap: 24px; margin: 32px 0 24px; }
+.partner-popup .doc-part { min-width: 0; margin: 0; padding: 32px; border: 1px solid var(--hairline); border-radius: var(--radius); background: var(--moss); }
+.partner-popup .doc-part h3 { font-size: 26px; line-height: 32px; }
+.partner-popup .doc-part li { margin-block: 8px; }
+.partner-popup .doc-part > :last-child { margin-bottom: 0; }
+.partner-popup .glass-pill { margin-block: 8px; color: var(--lime); }
+.partner-popup .cmd { display: block; max-width: 100%; margin: 16px 0 24px; padding: 20px 24px; border: 1px solid var(--hairline); border-radius: var(--radius); background: var(--ink); overflow-wrap: anywhere; }
+.partner-popup .cmd code { white-space: pre-wrap; }
+.partner-popup .doc-part { scroll-margin-top: 96px; }
+body:has(.partner-popup:target) { overflow: hidden; }
+body:has(.partner-popup:target) > .scene-header,
+body:has(.partner-popup:target) > .scene-footer,
+body:has(.partner-popup:target) > .skip { visibility: hidden; }
+/* Leave the underlying plates painted, while removing their links from keyboard navigation. */
+.scene-opening:has(> .partner-popup:target) > .scene-hero .hero-actions,
+.scene-opening:has(> .partner-popup:target) > .partnership-content a { visibility: hidden; }
+@media (max-width: 700px) {
+ .scene-partnerships { --tl: 3.2; --tb: 119; --ground: 12,26,16; }
+ .partner-directory { min-height: 0; }
+ .partner-directory-art img { object-position: 50% 0; }
+ .partner-directory::before { background: linear-gradient(transparent 160px, rgba(4,25,20,.72) 340px, rgba(4,25,20,.45)); }
+ .partner-directory-copy { padding: 240px 0 48px; }
+ .partner-entry { padding: 24px; gap: 20px; }
+ .partner-inquiry { display: block; min-height: 0; }
+ .partner-inquiry-art { position: static; display: block; height: auto; }
+ .partner-inquiry::before { display: none; }
+ .partner-inquiry-copy { width: auto; margin: 0; padding: 32px 20px 48px; }
+ .partner-popup { padding: 12px; }
+ .partner-popup-sheet { border-radius: 20px; }
+ .partner-popup-close { gap: 8px; min-height: 72px; margin-bottom: -72px; padding: 8px 12px; }
+ .partner-popup-close > .text-link { padding-inline: 8px; }
+ .partner-popup-lockup { gap: 8px; }
+ .partner-popup-mark { width: 36px; height: 36px; }
+ .partner-popup-logo { width: 180px; }
+ .partner-popup-content { padding-bottom: 32px; }
+ .partner-popup-content > h2 { font-size: 28px; line-height: 34px; }
+ .partner-popup .offer-terms { gap: 16px; }
+ .partner-popup .doc-part { padding: 20px; }
+ .partner-popup .doc-part h3 { font-size: 24px; line-height: 30px; }
+ .partner-popup ol, .partner-popup ul { padding-left: 24px; }
+ .partner-popup .cmd { padding: 16px; }
+}
+@media (forced-colors: active) {
+ .partner-popup, .partner-popup-sheet, .partner-popup-close, .partner-popup .doc-part, .partner-popup .cmd { background: Canvas; color: CanvasText; -webkit-backdrop-filter: none; backdrop-filter: none; }
+ .partner-popup .glass-pill, .partner-popup .cmd code { color: LinkText; }
+}
+/* Outrank the shared normal-flow continuation rule for this fixed reading region. */
+.scene-opening > .partner-popup { position: fixed; z-index: 100; }
+
 /* Extended plates (lib/plates.mjs): the hero keeps the original plate's geometry, and the outpainted floor
    continues behind the page's first sections. Home was the proof of concept; every page wrapped in
    .scene-opening.is-extended now takes the same treatment. The art reaches forest at its foot, and further

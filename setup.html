@@ -51,6 +51,9 @@
 <li>
 <a href="setup.html" aria-current="page">Set up</a>
 </li>
+<li>
+<a href="partnerships.html">Partnerships</a>
+</li>
 </ul>
 </nav>
  <button class="menu-button" type="button" popovertarget="site-menu">Menu</button>
@@ -73,6 +76,9 @@
 </li>
 <li>
 <a href="setup.html" aria-current="page">Set up</a>
+</li>
+<li>
+<a href="partnerships.html">Partnerships</a>
 </li>
 </ul>
 </nav>
@@ -99,9 +105,9 @@
 <div class="prose setup-guide">
  <section class="setup-opening" id="availability">
 <p class="chapter">Before you start</p>
-<h2>Install Oak 0.2.1 and subscribe.</h2>
- <p>Subscriptions are open in Oak 0.2.1. Read tools need no identity or subscription; hosted actions require a verified ERC-8004 identity and an active subscription. Official $OAK address: <code class="token-address">0x6511c233790Ec10f7d673c64DC82C3F941D57828</code>. Pons page: <a href="https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828">https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828</a>. Plan availability follows account.phase: no-hold on the curve, neither plan during warmup, and both plans when ready with a valid price note.</p>
- <p>Install version 0.2.1; check with <code>oak --version</code>. Human confirmation is on by default. Approve identity setup and the recurring subscription cost separately.</p>
+<h2>Install Oak 0.2.2 and subscribe.</h2>
+ <p>Subscriptions are open in Oak 0.2.2. Read tools need no identity or subscription; hosted actions require a verified ERC-8004 identity and an active subscription. Official $OAK address: <code class="token-address">0x6511c233790Ec10f7d673c64DC82C3F941D57828</code>. Pons page: <a href="https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828">https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828</a>. Plan availability follows account.phase: no-hold on the curve, neither plan during warmup, and both plans when ready with a valid price note.</p>
+ <p>Install version 0.2.2; check with <code>oak --version</code>. Human confirmation is on by default. Approve identity setup and the recurring subscription cost separately.</p>
  <p>Keep your assistant open on your computer. A website visit does not connect a wallet.</p>
 </section>
  <nav class="setup-contents" aria-label="Setup steps">
@@ -115,14 +121,14 @@
 <h2>1. Install Oak</h2>
  <p>Use Node.js 22.12.0 or newer. In your terminal:</p>
  <div data-slot="install">
-<pre tabindex="0" role="region" aria-label="Install command" class="copyable" data-copy="npm install -g @oakagentkit/addon@0.2.1">
-<code>npm install -g @oakagentkit/addon@0.2.1</code></pre>
+<pre tabindex="0" role="region" aria-label="Install command" class="copyable" data-copy="npm install -g @oakagentkit/addon@0.2.2">
+<code>npm install -g @oakagentkit/addon@0.2.2</code></pre>
 </div>
- <p>The add-on includes the core package. Both are published. Installing 0.2.1 connects the tools; actions also need a verified identity and an active subscription.</p>
+ <p>The add-on includes the core package. Both are published. Installing 0.2.2 connects the tools; actions also need a verified identity and an active subscription.</p>
  <details class="reference-detail">
 <summary>Prefer to ask your agent? Copy this prompt</summary>
 <blockquote class="agent-prompt" aria-label="Setup prompt">
-<p class="copyable" data-copy="Set up Oak for this AI agent using Node.js 22.12.0 or newer. Install @oakagentkit/addon@0.2.1 and connect the local MCP command oak mcp. Call account and tell me the public wallet address and network. Ask me to fund ETH for network fees and USDG, then re-check balances. Do not run oak init or oak export, read wallet/key files, or ask for keys or recovery words. Explain public identity registration and recurring subscription costs; get my approval before either.">Set up Oak for this AI agent using Node.js 22.12.0 or newer. Install @oakagentkit/addon@0.2.1 and connect the local MCP command oak mcp. Call account and tell me the public wallet address and network. Ask me to fund ETH for network fees and USDG, then re-check balances. Do not run oak init or oak export, read wallet/key files, or ask for keys or recovery words. Explain public identity registration and recurring subscription costs; get my approval before either.</p>
+<p class="copyable" data-copy="Set up Oak for this AI agent using Node.js 22.12.0 or newer. Install @oakagentkit/addon@0.2.2 and connect the local MCP command oak mcp. Call account and tell me the public wallet address and network. Ask me to fund ETH for network fees and USDG, then re-check balances. Do not run oak init or oak export, read wallet/key files, or ask for keys or recovery words. Explain public identity registration and recurring subscription costs; get my approval before either.">Set up Oak for this AI agent using Node.js 22.12.0 or newer. Install @oakagentkit/addon@0.2.2 and connect the local MCP command oak mcp. Call account and tell me the public wallet address and network. Ask me to fund ETH for network fees and USDG, then re-check balances. Do not run oak init or oak export, read wallet/key files, or ask for keys or recovery words. Explain public identity registration and recurring subscription costs; get my approval before either.</p>
 </blockquote>
 </details>
 </section>
@@ -130,10 +136,10 @@
 <h2>2. Connect your assistant</h2>
  <p>Choose your client, add Oak, then start a fresh session. MCP is a connection for AI tools; the local command is <code>oak mcp</code>.</p>
  <div class="install-shortcuts">
- <p>Connect directly with Node.js 22.12.0 or newer and npm on your PATH. These shortcuts run <code>npx -y @oakagentkit/addon@0.2.1 mcp</code>; no global Oak install is needed.</p>
+ <p>Connect directly with Node.js 22.12.0 or newer and npm on your PATH. These shortcuts run <code>npx -y @oakagentkit/addon@0.2.2 mcp</code>; no global Oak install is needed.</p>
  <p class="btn-row" aria-label="Install Oak in your editor">
-<a class="btn" href="https://cursor.com/install-mcp?name=oak&amp;config=eyJjb21tYW5kIjoibnB4IiwiYXJncyI6WyIteSIsIkBvYWthZ2VudGtpdC9hZGRvbkAwLjIuMSIsIm1jcCJdfQ%3D%3D">Add to Cursor</a>
-<a class="btn ghost" href="https://vscode.dev/redirect?url=vscode%3Amcp%2Finstall%3F%257B%2522name%2522%253A%2522oak%2522%252C%2522command%2522%253A%2522npx%2522%252C%2522args%2522%253A%255B%2522-y%2522%252C%2522%2540oakagentkit%252Faddon%25400.2.1%2522%252C%2522mcp%2522%255D%257D">Install in VS Code</a>
+<a class="btn" href="https://cursor.com/install-mcp?name=oak&amp;config=eyJjb21tYW5kIjoibnB4IiwiYXJncyI6WyIteSIsIkBvYWthZ2VudGtpdC9hZGRvbkAwLjIuMiIsIm1jcCJdfQ%3D%3D">Add to Cursor</a>
+<a class="btn ghost" href="https://vscode.dev/redirect?url=vscode%3Amcp%2Finstall%3F%257B%2522name%2522%253A%2522oak%2522%252C%2522command%2522%253A%2522npx%2522%252C%2522args%2522%253A%255B%2522-y%2522%252C%2522%2540oakagentkit%252Faddon%25400.2.2%2522%252C%2522mcp%2522%255D%257D">Install in VS Code</a>
 </p>
  <p>For Claude Code, run these two commands inside Claude:</p>
  <pre tabindex="0" role="region" aria-label="Claude Code plugin install commands" class="copyable" data-copy="/plugin marketplace add OakAgentKit/oak
@@ -192,7 +198,7 @@ args = ["mcp"]</code></pre>
  </section>
  <section class="doc-part" id="fund">
 <h2>4. Fund and subscribe through Oak</h2>
- <p>After installing Oak 0.2.1, send ETH for network fees and USDG for subscription payments to the public wallet address. Use the network it reports: Robinhood Chain mainnet is <code>4663</code>. Then ask:</p>
+ <p>After installing Oak 0.2.2, send ETH for network fees and USDG for subscription payments to the public wallet address. Use the network it reports: Robinhood Chain mainnet is <code>4663</code>. Then ask:</p>
  <blockquote class="agent-prompt" aria-label="Funding check prompt">
 <p class="copyable" data-copy="Re-check balances and show the ETH and USDG amounts on my selected network. Do not register or subscribe yet.">Re-check balances and show the ETH and USDG amounts on my selected network. Do not register or subscribe yet.</p>
 </blockquote>
@@ -455,7 +461,7 @@ args = ["mcp"]</code></pre>
 </div>
 </div>
 <section class="quiet-section" id="subscribe"><h2>Subscribe through Oak</h2>
-<p>Install Oak 0.2.1 and connect your assistant. Call <code>account</code>, fund the reported wallet with ETH for gas and USDG for payments, then re-check <code>balances</code>. Approve <code>oak_setup</code> registration or linking separately; registration is public and costs gas, while linking needs no gas and an external owner signs in their own terminal.</p>
+<p>Install Oak 0.2.2 and connect your assistant. Call <code>account</code>, fund the reported wallet with ETH for gas and USDG for payments, then re-check <code>balances</code>. Approve <code>oak_setup</code> registration or linking separately; registration is public and costs gas, while linking needs no gas and an external owner signs in their own terminal.</p>
 <p>Choose the plan available in <code>account.phase</code>. The holder plan needs the full entry amount of $OAK before its one-time 5% burn; keep the recorded post-burn holding afterward. No-hold needs no $OAK. Ask your agent:</p>
 <ul class="prompt-list"><li><p class="copy-prompt copyable" tabindex="0" role="region" aria-label="Prompt to copy" data-copy="Call account and explain account.phase, the available plans, the recurring USDG cost, and any required OAK holding and one-time sign-up burn. Do not subscribe until I choose holder or nohold and approve the cost. Then call oak_subscribe with my chosen plan and show the preview before local signing.">Call account and explain account.phase, the available plans, the recurring USDG cost, and any required OAK holding and one-time sign-up burn. Do not subscribe until I choose holder or nohold and approve the cost. Then call oak_subscribe with my chosen plan and show the preview before local signing.</p></li></ul>
 <p>After you approve the plan and price, your agent calls <code>oak_subscribe</code> with <code>{&quot;plan&quot;:&quot;holder&quot;}</code> or <code>{&quot;plan&quot;:&quot;nohold&quot;}</code>. Inspect the preview before local signing, then call <code>account</code> to confirm the plan and paid-through date. You can also run <code>oak subscribe --plan holder</code> or <code>oak subscribe --plan nohold</code> in your terminal.</p>
@@ -489,6 +495,9 @@ args = ["mcp"]</code></pre>
 <a href="roadmap.html">Roadmap</a>
 </li>
 <li>
+<a href="partnerships.html">Partnerships</a>
+</li>
+<li>
 <a href="setup.html">Set up</a>
 </li>
 <li>
@@ -509,8 +518,8 @@ args = ["mcp"]</code></pre>
 </ul>
 </nav>
 </div>
- <p class="footer-status">$OAK is live. Oak 0.2.1 subscriptions are open.</p>
- <p>Subscriptions are open in Oak 0.2.1. Read tools need no identity or subscription; hosted actions require a verified ERC-8004 identity and an active subscription. Official $OAK address: <code class="token-address">0x6511c233790Ec10f7d673c64DC82C3F941D57828</code>. Pons page: <a href="https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828">https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828</a>. Plan availability follows account.phase: no-hold on the curve, neither plan during warmup, and both plans when ready with a valid price note. Holding $OAK buys access and nothing else.</p>
+ <p class="footer-status">$OAK is live. Oak 0.2.2 subscriptions are open.</p>
+ <p>Subscriptions are open in Oak 0.2.2. Read tools need no identity or subscription; hosted actions require a verified ERC-8004 identity and an active subscription. Official $OAK address: <code class="token-address">0x6511c233790Ec10f7d673c64DC82C3F941D57828</code>. Pons page: <a href="https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828">https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828</a>. Plan availability follows account.phase: no-hold on the curve, neither plan during warmup, and both plans when ready with a valid price note. Holding $OAK buys access and nothing else.</p>
  <p>Independent software, not affiliated with Robinhood. Not financial advice. Oak never promises returns.</p>
  <p>Region notice: project and asset availability varies by jurisdiction. You are responsible for local compliance.</p>
  <p class="fine">Docs, examples and contracts are MIT. The compiled npm packages are Free-to-Use, No Copying; their source and the hosted Oak service are private. Manrope is self-hosted under the SIL Open Font Licence.</p>
