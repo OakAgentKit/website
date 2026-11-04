@@ -103,7 +103,7 @@
 <div class="page-body" id="policy">
 <div class="wrap">
 <div class="prose wide">
-<p>Subscriptions are open in Oak 0.2.3. Read tools need no identity or subscription; hosted actions require a verified ERC-8004 identity and an active subscription. Plan availability follows account.phase: no-hold on the curve, neither plan during warmup, and both plans when ready with a valid price note. Subscription and price-note data handling below applies to Oak 0.2.3.</p>
+<p>Subscriptions are open in Oak 0.2.4. Read tools need no identity or subscription; hosted actions require a verified ERC-8004 identity and an active subscription. Plan availability follows account.phase: no-hold on the curve, neither plan during warmup, and both plans when ready with a valid price note. Subscription and price-note data handling below applies to Oak 0.2.4.</p>
 <p>This page explains in plain words what data stays on your computer, what the Oak server sees, what your RPC and ecosystem project services see, how long data is kept, and how to ask questions. The compiled add-on and hosted service have private source; their data practices are described below.</p>
 <hr>
 <h2 id="zero-website-trackers">1. Zero Website Trackers</h2>
@@ -182,6 +182,51 @@
 </td>
 <td data-label="What It Holds">Created only when you ask your agent to follow a token for HEY Research Lab builder updates (<code>heyresearch_follow</code>). Holds, for up to 20 tokens, the token address, the HEY Research Lab project slug you paired with it and the time of your last completed feed check. Nothing reads it in the background, Oak never uploads the file, and it stays until you unfollow a token (<code>heyresearch_unfollow</code>) or delete it yourself. A file Oak cannot read is left untouched, never reset.</td>
 </tr>
+<tr>
+<td data-label="Local Store">
+<code>~/.oak/&lt;address&gt;.approval-census.json</code>
+</td>
+<td data-label="Code Reference">
+<code>packages/addon/src/approval-census-store.ts</code>
+</td>
+<td data-label="What It Holds">The one-time approval-history check for that wallet: the token and spender addresses and block numbers of the approvals it found, how far it has scanned, and what it learned about your RPC provider's log-query limits. Never uploaded.</td>
+</tr>
+<tr>
+<td data-label="Local Store">
+<code>~/.oak/approval-receipts.jsonl</code> and <code>~/.oak/receipt-locks/</code>
+</td>
+<td data-label="Code Reference">
+<code>packages/addon/src/receipts.ts</code>
+</td>
+<td data-label="What It Holds">A local, hash-chained log of each approval decision: public addresses, base-unit amounts, USD values and fixed reason text, later linked to the signed transaction hash. It holds no prompts, calldata, signatures or keys. It stays until you archive it and is never uploaded or deleted automatically. <code>receipt-locks/</code> holds the lock files used while it is written.</td>
+</tr>
+<tr>
+<td data-label="Local Store">
+<code>~/.oak/&lt;address&gt;.auto-approvals.json</code>
+</td>
+<td data-label="Code Reference">
+<code>packages/addon/src/auto-daily-cap.ts</code>
+</td>
+<td data-label="What It Holds">Used by auto-confirm mode: the transaction hash, USD value and time of each action approved automatically on the current local calendar day, so the daily cap can be enforced. Never uploaded.</td>
+</tr>
+<tr>
+<td data-label="Local Store">
+<code>~/.oak/&lt;address&gt;.signatures.json</code>
+</td>
+<td data-label="Code Reference">
+<code>packages/addon/src/signature-journal.ts</code>
+</td>
+<td data-label="What It Holds">A journal of the off-chain signatures you gave: the message digest, tool, signer, terms such as amount, token and recipient, expiry, status and how to revoke it. It refuses to store the signature bytes themselves. Never uploaded.</td>
+</tr>
+<tr>
+<td data-label="Local Store">
+<code>~/.oak/first-start-shown</code>
+</td>
+<td data-label="Code Reference">
+<code>packages/addon/src/onboarding.ts</code>
+</td>
+<td data-label="What It Holds">A marker so the first-start notice is shown once.</td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -192,7 +237,7 @@
 </p>
 <ul>
 <li>Your 24 recovery words (displayed once on your terminal during <code>oak init</code> and wiped from memory).</li>
-<li>Your private key and passphrase (wiped from memory buffers with <code>.fill(0)</code> after unlocking or signing), and any external NFT owner key used to sign an <code>OakIdentityLink</code> challenge in your terminal during <code>oak setup link &lt;agentId&gt;</code> or <code>oak identity unlink --owner &lt;linkId&gt;</code>.</li>
+<li>Your private key and passphrase (wiped from memory buffers with <code>.fill(0)</code> after unlocking or signing). Oak never asks for the private key of an external NFT owner. That owner signs an <code>OakIdentityLink</code> challenge in your terminal during <code>oak setup link &lt;agentId&gt;</code> or <code>oak identity unlink --owner &lt;linkId&gt;</code>, and only the signature is sent to the Oak server (section 3). Never paste a key or recovery words at that prompt.</li>
 <li>Both the local bridge (<code>packages/addon/src/bridge.ts</code>) and the Oak server reject any tool argument containing <code>private_key</code>, <code>secret_key</code>, <code>wallet_key</code>, <code>mnemonic</code>, <code>seed</code>, <code>seed_phrase</code>, or <code>recovery_phrase</code>.</li>
 </ul>
 <hr>
@@ -237,6 +282,8 @@
 <strong>Health checks (<code>GET /v1/health</code>):</strong> Responds with <code>{&quot;ok&quot;:true,&quot;data&quot;:{&quot;status&quot;:&quot;ok&quot;}}</code> when the service is healthy.</li>
 <li>
 <strong>Builder code redemption (<code>oak redeem &lt;code&gt;</code>, or asking your agent to redeem a code):</strong> Only if you hold an Oak builder code from the HEY Research Lab Verified Builder offer. The server receives the code and your wallet address (with the session headers above) so it can check that the code is unused, start your 30 days and tell you the exact end time. The server keeps a ledger of these codes; see &quot;Builder code ledger&quot; in section 5.</li>
+<li>
+<strong>Deployment settings (<code>GET /v1/config</code>):</strong> When the add-on starts, and again on its hourly check, it asks the Oak server for the public deployment addresses so it can compare them with the addresses pinned in the add-on. This request carries no wallet address, session header or tool data.</li>
 </ol>
 <p>The Oak server <strong>never sees your private key</strong>, <strong>never signs or sends a blockchain transaction</strong>, and has <strong>no general user account database, email list, or telemetry SDK</strong>. The one exception is the builder code ledger described in section 5, which exists only for Oak builder codes and holds no account, email or usage data.</p>
 <hr>
@@ -253,7 +300,7 @@
 <li>Any RPC provider you configure can see the IP address making those RPC requests, the wallet address queried, and any signed transaction broadcast through it. Once a transaction is broadcast to Robinhood Chain (<code>4663</code>) or a Relay origin chain, its sender, calldata, and events are <strong>public and permanent on the blockchain</strong>.</li>
 </ul>
 <h3 id="third-party-ecosystem-project-services">Third-Party Ecosystem Project Services</h3>
-<p>Many modules interact purely through RPC contract reads and calldata construction (such as Steakhouse, Spark, NetNet, Longbow, Grove, Beefy, Pons, Orbio, Priors, Morpho Blue, Uniswap liquidity, ERC-8004, hood.ag, Hookr, and pools.trade). When you invoke a module that uses a project's off-chain API, that project service receives the request parameters from the Oak server (or, for recipe imports, from your computer):</p>
+<p>Many modules interact mostly through RPC contract reads and calldata construction (such as Steakhouse, Spark, NetNet, Grove, Priors, Morpho Blue, Uniswap liquidity, ERC-8004, hood.ag, Hookr, and pools.trade). Several of them, and others you might expect to be RPC-only, also call off-chain hosts; the rows below name each host. When you invoke a module that uses a project's off-chain API, that project service receives the request parameters from the Oak server (or, where a row below says so, from your computer):</p>
 <div class="table-wrap">
 <table class="md-table">
 <thead>
@@ -275,12 +322,17 @@
 </tr>
 <tr>
 <td data-label="Service">
-<strong>HoodLock Proof API</strong>
-</td>
+<strong>HoodLock Proof API</strong> (<code>hoodlock.tech</code>)</td>
 <td data-label="When Contacted">
-<code>hoodlock_airdrop_claim</code>
-</td>
+<code>hoodlock_airdrop_claim</code>. The Oak server looks up the proof, and your add-on repeats the lookup from your computer while it prepares the approval form, so HoodLock then also sees your computer's address.</td>
 <td data-label="What It Receives">Merkle claim contract/campaign identifier (or omitted <code>id</code> to query eligible airdrops) and wallet address to look up Merkle claim proofs. (<code>hoodlock_airdrop_create</code> outputs the airdrop recipient list to you locally by default rather than uploading it.)</td>
+</tr>
+<tr>
+<td data-label="Service">
+<strong>HoodLock commerce</strong> (<code>hoodlock.tech</code>)</td>
+<td data-label="When Contacted">
+<code>hoodlock_feature_buy</code>, <code>hoodlock_feature_claim</code>, <code>hoodlock_referral_register</code>. Sent straight from your computer; they do not pass through the Oak server, so the Oak server is not told about them.</td>
+<td data-label="What It Receives">The listing kind, ID and tier, quote and payment hash, and the label you chose; for a referral code, your wallet address, a timestamp and a wallet signature of a timestamped HoodLock message. HoodLock also sees your computer's IP address and the time of the request.</td>
 </tr>
 <tr>
 <td data-label="Service">
@@ -293,11 +345,39 @@
 </tr>
 <tr>
 <td data-label="Service">
+<strong>Merkl API, LayerBank bonus read</strong> (<code>api.merkl.xyz</code>)</td>
+<td data-label="When Contacted">
+<code>layerbank_list</code> and <code>earn_options</code>, only when you ask for them. The Oak server sends it, so Merkl sees the Oak server's address, not yours. Your computer does not send it: when your add-on checks a LayerBank deposit or withdrawal before you approve it, that read is switched off, and the bonus simply shows as unavailable.</td>
+<td data-label="What It Receives">One fixed, read-only request for the LayerBank reward campaigns on Robinhood Chain (<code>4663</code>): the chain, the project name <code>layerbank</code>, and a page size. It is the same request for everyone. Merkl also sees the sender's IP address, the time of the request, and an Oak product header (<code>User-Agent: oak-core/layerbank</code>). No wallet address, no amount.</td>
+</tr>
+<tr>
+<td data-label="Service">
+<strong>Pendle market list</strong> (<code>api-v2.pendle.finance</code>)</td>
+<td data-label="When Contacted">
+<code>pendle_list</code>, <code>earn_options</code> and <code>positions</code>, only when you ask for them, plus once each time a Pendle buy, sell or cash-out is prepared (Oak checks the market against the list). The Oak server sends it, so Pendle sees the Oak server's address. It is sent a second time from your computer: before you approve a Pendle buy, sell or cash-out, your add-on repeats the check itself, so Pendle then sees your computer's address. LayerBank actions never contact Pendle. If Pendle's service does not answer, Oak reads what a cash-out needs from the chain instead.</td>
+<td data-label="What It Receives">One fixed, read-only request for the list of Pendle markets on Robinhood Chain (<code>4663</code>, limit 100). It is the same request for everyone. Pendle also sees the sender's IP address, the time of the request, and an Oak product header (<code>User-Agent: oak-core/pendle</code>). No wallet address, no amount.</td>
+</tr>
+<tr>
+<td data-label="Service">
+<strong>Pendle quotes</strong> (<code>api-v2.pendle.finance</code>)</td>
+<td data-label="When Contacted">
+<code>pendle_buy</code>, <code>pendle_sell</code> and <code>pendle_redeem</code> (cash-out), only when you ask for them. The Oak server asks for the quote, so Pendle sees the Oak server's address. The same quote is asked for again from your computer when your add-on checks the transaction before you approve it, so Pendle then sees your computer's address. A cash-out asks for a quote only as an optional cross-check of its estimate; it waits at most 1.5 seconds, the transaction is built from chain reads either way, and the answer can only add a note. <code>earn_options</code> (and the add-on check for a Pendle buy) also asks for a cost estimate before you commit.</td>
+<td data-label="What It Receives">The token being spent, the amount, the token wanted, the price-move limit you allow, a setting that keeps Pendle's outside swap routing off, and <strong>your wallet address as the receiver</strong>, which is the address that Pendle's transaction pays out to. For a cash-out or a sale of everything you hold, the amount is your whole balance of that Pendle token. The cost estimate is the exception: it names Pendle's public router address as the receiver instead of you, and its amount is the one you asked about, or your whole USDG balance if you gave none. Pendle also sees the sender's IP address, the time of the request, and an Oak product header (<code>User-Agent: oak-core/pendle</code>). Never your private key.</td>
+</tr>
+<tr>
+<td data-label="Service">
 <strong>Relay API</strong> (<code>api.relay.link</code>)</td>
 <td data-label="When Contacted">
 <code>relay_bridge_in</code>, <code>relay_bridge_out</code>, <code>relay_status</code>
 </td>
 <td data-label="What It Receives">Origin/destination chain IDs, token addresses, amounts, wallet address, and request ID (authenticated using the service's Relay credential).</td>
+</tr>
+<tr>
+<td data-label="Service">
+<strong>Orbio gateway</strong> (<code>api.orbio.so</code>)</td>
+<td data-label="When Contacted">
+<code>orbio_chat</code>, <code>orbio_swap_quote</code> and the other Orbio tools that call the gateway. Sent straight from your computer; they do not pass through the Oak server, so the Oak server is not told about them.</td>
+<td data-label="What It Receives">For <code>orbio_chat</code>, the full text of the conversation you send (up to about 400 KB per request). For <code>orbio_swap_quote</code>, your wallet address and the amount. Each authenticated call carries an <code>Authorization: Bearer</code> credential made from a wallet signature you approve in the signing prompt (it begins <code>sk-orb-</code>); it can spend your activated Orbio CREDIT but cannot move tokens or sign transactions. Orbio also sees your computer's IP address and the time of the request.</td>
 </tr>
 <tr>
 <td data-label="Service">
@@ -311,14 +391,14 @@
 <tr>
 <td data-label="Service">
 <strong>HEY Research Lab token scan</strong> (<code>heyresearch.xyz</code>)</td>
-<td data-label="When Contacted">Only when you ask HEY Research Lab about a token (your agent runs the scan through the Oak server), or on every token buy if you turn on <code>OAK_HEY_AUTO_CONTEXT=true</code> (off by default; the automatic check then runs from your computer before the approval form). With the setting off, no buy contacts HEY Research Lab.</td>
-<td data-label="What It Receives">The chain, the token address, and an Oak version header (<code>x-hey-integration</code>). HEY Research Lab also sees the sender's IP address and the time: the Oak server's for a scan you ask for, your computer's for the automatic check. Never your wallet address or the amount.</td>
+<td data-label="When Contacted">Only when you ask HEY Research Lab about one token (<code>heyresearch_read</code> with <code>getPartnerScanCard</code>), or on every token buy if you turn on <code>OAK_HEY_AUTO_CONTEXT=true</code> (off by default; the automatic check then runs before the approval form). With the setting off, no buy contacts HEY Research Lab. Both kinds of scan run from your computer and go straight to HEY Research Lab. They do not pass through the Oak server, so the Oak server is not told about them. The token facts, builder feed and position context tools also read this scan, but through the Oak server; see their row below.</td>
+<td data-label="What It Receives">The chain, the token address, and an Oak version header (<code>x-hey-integration</code>). HEY Research Lab also sees your computer's IP address and the time of the request. Never your wallet address or the amount.</td>
 </tr>
 <tr>
 <td data-label="Service">
 <strong>Other HEY Research Lab tools</strong> (<code>heyresearch.xyz</code>)</td>
 <td data-label="When Contacted">
-<code>heyresearch_research_project</code>, <code>heyresearch_chain_activity</code>, <code>heyresearch_read</code> (including its two proof-of-ship reads), <code>heyresearch_bulk</code>, <code>heyresearch_validate_receipt</code>. Only when you ask for them; they are sent through the Oak server, so HEY Research Lab sees the Oak server's address, not yours.</td>
+<code>heyresearch_research_project</code>, <code>heyresearch_chain_activity</code>, <code>heyresearch_read</code> for every operation except <code>getPartnerScanCard</code> (including its two proof-of-ship reads), <code>heyresearch_bulk</code>, <code>heyresearch_validate_receipt</code>. Only when you ask for them; they are sent through the Oak server, so HEY Research Lab sees the Oak server's address, not yours. The one direct call is <code>heyresearch_read</code> with <code>getPartnerScanCard</code>, which runs from your computer (see the token scan row above).</td>
 <td data-label="What It Receives">Only the fields listed under the table.</td>
 </tr>
 <tr>
@@ -327,6 +407,13 @@
 <td data-label="When Contacted">
 <code>heyresearch_token_facts</code>, <code>heyresearch_feed</code> and <code>heyresearch_position_context</code>, which your computer assembles from a short list of read-only requests. Only when you ask for them. Each request travels over Oak's existing read path to the Oak server, which asks HEY Research Lab, so HEY Research Lab sees the Oak server's address, not yours. The Oak server sees these requests as it sees any tool call, including your wallet address in the session headers. <code>heyresearch_follow</code> and <code>heyresearch_unfollow</code> make no request at all. Nothing runs at startup, on a schedule or on a default buy.</td>
 <td data-label="What It Receives">Only the selectors listed under the table. Never your wallet address, a position amount or a position ID.</td>
+</tr>
+<tr>
+<td data-label="Service">
+<strong>Meridian perps API</strong> (<code>api.meridian.xyz</code>)</td>
+<td data-label="When Contacted">
+<code>meridian_perps_*</code> tools. Sent straight from your computer; they do not pass through the Oak server, so the Oak server is not told about them.</td>
+<td data-label="What It Receives">Your wallet address in an <code>X-Meridian-Sender</code> header, and the intents you sign locally. Meridian also sees your computer's IP address and the time of the request.</td>
 </tr>
 <tr>
 <td data-label="Service">
@@ -344,6 +431,27 @@
 <code>tickerspring_create</code>, <code>tickerspring_cancel</code>, <code>tickerspring_claim</code>, <code>tickerspring_orders</code>
 </td>
 <td data-label="What It Receives">Wallet address (<code>owner</code>), token address, order side/price/amount, or order ID.</td>
+</tr>
+<tr>
+<td data-label="Service">
+<strong>Longbow indexer</strong> (<code>longbow.credit</code>)</td>
+<td data-label="When Contacted">
+<code>longbow_*</code> tools, including NFT loans and referral stats. The Oak server sends the request, so Longbow sees the Oak server's address.</td>
+<td data-label="What It Receives">Market, listing or loan identifiers and, for wallet-specific reads, your wallet address in the URL path.</td>
+</tr>
+<tr>
+<td data-label="Service">
+<strong>Pons app API</strong> (<code>ponsfamily.com</code>, <code>balancesapi.ponsfamily.com</code>)</td>
+<td data-label="When Contacted">
+<code>pons_*</code> tools and the Pons holdings in <code>positions</code>. The Oak server sends the request, so Pons sees the Oak server's address.</td>
+<td data-label="What It Receives">Token addresses and, for profile, activity and holdings reads, your wallet address in the URL path.</td>
+</tr>
+<tr>
+<td data-label="Service">
+<strong>Beefy API</strong> (<code>api.beefy.finance</code>)</td>
+<td data-label="When Contacted">
+<code>beefy_*</code> tools. The Oak server reads the vault list, and your add-on also fetches <code>api.beefy.finance/vaults</code> itself from your computer while it rebuilds a deposit before you approve it, so Beefy then sees your computer's address.</td>
+<td data-label="What It Receives">A fixed read-only request for the vault list, the same for everyone. No wallet address, no amount.</td>
 </tr>
 <tr>
 <td data-label="Service">
@@ -379,7 +487,7 @@
 <li>
 <code>heyresearch_chain_activity</code>: the number of days you choose (1 to 30).</li>
 <li>
-<code>heyresearch_read</code>: the name of one published read and its documented parameters only, for example a project slug, a token contract address, an evidence ID, a date or a pagination cursor. The two proof-of-ship reads take the same kind of parameters.</li>
+<code>heyresearch_read</code>: the name of one published read and its documented parameters only, for example a project slug, a token contract address, an evidence ID, a date or a pagination cursor. The two proof-of-ship reads take the same kind of parameters. Every operation goes through the Oak server except <code>getPartnerScanCard</code>, which sends the chain and token address straight from your computer.</li>
 <li>
 <code>heyresearch_bulk</code>: the operation you choose and up to 10 project slugs, or up to 30 token addresses. It uses a HEY Research Lab key that is held only on the Oak server.</li>
 <li>
@@ -518,8 +626,8 @@
 </ul>
 </nav>
 </div>
- <p class="footer-status">$OAK is live. Oak 0.2.3 subscriptions are open.</p>
- <p>Subscriptions are open in Oak 0.2.3. Read tools need no identity or subscription; hosted actions require a verified ERC-8004 identity and an active subscription. Official $OAK address: <code class="token-address">0x6511c233790Ec10f7d673c64DC82C3F941D57828</code>. Pons page: <a href="https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828">https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828</a>. Plan availability follows account.phase: no-hold on the curve, neither plan during warmup, and both plans when ready with a valid price note. Holding $OAK buys access and nothing else.</p>
+ <p class="footer-status">$OAK is live. Oak 0.2.4 subscriptions are open.</p>
+ <p>Subscriptions are open in Oak 0.2.4. Read tools need no identity or subscription; hosted actions require a verified ERC-8004 identity and an active subscription. Official $OAK address: <code class="token-address">0x6511c233790Ec10f7d673c64DC82C3F941D57828</code>. Pons page: <a href="https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828">https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828</a>. Plan availability follows account.phase: no-hold on the curve, neither plan during warmup, and both plans when ready with a valid price note. Holding $OAK buys access and nothing else.</p>
  <p>Independent software, not affiliated with Robinhood. Not financial advice. Oak never promises returns.</p>
  <p>Region notice: project and asset availability varies by jurisdiction. You are responsible for local compliance.</p>
  <p class="fine">Docs, examples and contracts are MIT. The compiled npm packages are Free-to-Use, No Copying; their source and the hosted Oak service are private. Manrope is self-hosted under the SIL Open Font Licence.</p>

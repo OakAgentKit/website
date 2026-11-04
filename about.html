@@ -103,15 +103,15 @@
 <div class="page-body">
 <div class="wrap">
 <div class="prose">
-<p>Subscriptions are open in Oak 0.2.3. Read tools need no identity or subscription; hosted actions require a verified ERC-8004 identity and an active subscription. Plan availability follows account.phase: no-hold on the curve, neither plan during warmup, and both plans when ready with a valid price note.</p>
+<p>Subscriptions are open in Oak 0.2.4. Read tools need no identity or subscription; hosted actions require a verified ERC-8004 identity and an active subscription. Plan availability follows account.phase: no-hold on the curve, neither plan during warmup, and both plans when ready with a valid price note.</p>
 <p>Oak simplifies access to Robinhood Chain for people and builders. Connect one assistant to the projects, tools and information you want to use.</p>
 <section class="doc-part" id="why">
 <h2>What Oak Is, and Why</h2>
 <details class="reference-detail">
 <summary>Read details</summary>
-<p>Every project on <strong>Robinhood Chain</strong> (chain ID <code>4663</code>) has its own contracts, its own API or subgraph, its own decimal and approval rules, and its own failure modes. Nobody wants to install and maintain 26 separate MCP servers or give 26 tools access to a wallet.</p>
+<p>Every project on <strong>Robinhood Chain</strong> (chain ID <code>4663</code>) has its own contracts, its own API or subgraph, its own decimal and approval rules, and its own failure modes. Nobody wants to install and maintain 28 separate MCP servers or give 28 tools access to a wallet.</p>
 <p>
-<strong>One MCP for the whole chain.</strong> Oak is one downloadable tool (<code>@oakagentkit/addon</code>) that connects an AI agent (Claude Code, Codex, Gemini, Cursor, or Grok) to <strong>26 ecosystem projects</strong> behind one local wallet, one <code>&lt;module&gt;_&lt;verb&gt;</code> naming convention, one decimal base-unit amount format, pre-sign simulation previews (<code>eth_simulateV1</code>), and plain-sentence error messages.</p>
+<strong>One MCP for the whole chain.</strong> Oak is one downloadable tool (<code>@oakagentkit/addon</code>) that connects an AI agent (Claude Code, Codex, Gemini, Cursor, or Grok) to <strong>28 ecosystem projects</strong> behind one local wallet, one <code>&lt;module&gt;_&lt;verb&gt;</code> naming convention, one decimal base-unit amount format, pre-sign simulation previews (<code>eth_simulateV1</code>), and plain-sentence error messages.</p>
 <p>Your agent's tool list shows the everyday tools, such as status, swap, deposit and borrow. For anything not listed, it calls <code>find_tool</code> with what it wants to do, then <code>run_tool</code> with the tool's name and arguments. Every tool stays reachable, and <code>run_tool</code> applies the same access checks, local guard, preview and confirmation as a direct call.</p>
 <p>Oak is built around four principles:</p>
 <ol>
@@ -161,7 +161,7 @@
 <p>The treasury and contract admin is the single-owner wallet <code>0x856bb126188bDB5e425D3ac9D59E9ffBD12e6ECf</code>. One owner key can spend treasury funds, redirect future subscription payments, replace the price signer and retire subscriptions. There is no second-signature requirement. Key compromise exposes these powers; key loss can make treasury funds and administration inaccessible. It cannot spend user wallet balances. Safe support is an optional deployment profile, not the launch setup.</p>
 </details>
 </section>
-<p class="note">Looking for the 26 projects? See the <a href="docs.html#modules">tool reference</a>. Want the simple walkthrough? See <a href="how-it-works.html">How it works</a>.</p>
+<p class="note">Looking for the 28 projects? See the <a href="docs.html#modules">tool reference</a>. Want the simple walkthrough? See <a href="how-it-works.html">How it works</a>.</p>
 </div>
 </div>
 </div>
@@ -218,8 +218,8 @@
 </ul>
 </nav>
 </div>
- <p class="footer-status">$OAK is live. Oak 0.2.3 subscriptions are open.</p>
- <p>Subscriptions are open in Oak 0.2.3. Read tools need no identity or subscription; hosted actions require a verified ERC-8004 identity and an active subscription. Official $OAK address: <code class="token-address">0x6511c233790Ec10f7d673c64DC82C3F941D57828</code>. Pons page: <a href="https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828">https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828</a>. Plan availability follows account.phase: no-hold on the curve, neither plan during warmup, and both plans when ready with a valid price note. Holding $OAK buys access and nothing else.</p>
+ <p class="footer-status">$OAK is live. Oak 0.2.4 subscriptions are open.</p>
+ <p>Subscriptions are open in Oak 0.2.4. Read tools need no identity or subscription; hosted actions require a verified ERC-8004 identity and an active subscription. Official $OAK address: <code class="token-address">0x6511c233790Ec10f7d673c64DC82C3F941D57828</code>. Pons page: <a href="https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828">https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828</a>. Plan availability follows account.phase: no-hold on the curve, neither plan during warmup, and both plans when ready with a valid price note. Holding $OAK buys access and nothing else.</p>
  <p>Independent software, not affiliated with Robinhood. Not financial advice. Oak never promises returns.</p>
  <p>Region notice: project and asset availability varies by jurisdiction. You are responsible for local compliance.</p>
  <p class="fine">Docs, examples and contracts are MIT. The compiled npm packages are Free-to-Use, No Copying; their source and the hosted Oak service are private. Manrope is self-hosted under the SIL Open Font Licence.</p>

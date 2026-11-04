@@ -106,7 +106,7 @@
 <section class="token-overview">
 <div class="token-lead token-utility">
 <h2>$OAK is live. Subscriptions are open.</h2>
-<p class="section-intro">$OAK is live on Pons. Subscriptions are open in Oak 0.2.3. Holding $OAK buys access and nothing else; hosted actions also require a verified identity and an active subscription.</p>
+<p class="section-intro">$OAK is live on Pons. Subscriptions are open in Oak 0.2.4. Holding $OAK buys access and nothing else; hosted actions also require a verified identity and an active subscription.</p>
 <div class="utility-grid">
 <div class="utility-card">
 <h3>Holder access</h3>
@@ -132,7 +132,7 @@
 </div>
 <div class="utility-card">
 <h3>Actions through Oak</h3>
-<p>Read tools need no identity or subscription. Actions across the 26 projects, from swaps and limit orders to lending, vaults, bridges and Pons launches, require a verified public agent identity (ERC-8004) and an active subscription.</p>
+<p>Read tools need no identity or subscription. Actions across the 28 projects, from swaps and limit orders to lending, vaults, bridges and Pons launches, require a verified public agent identity (ERC-8004) and an active subscription.</p>
 </div>
 </div>
 <h3>Token and subscription phases</h3>
@@ -168,7 +168,7 @@
 </li>
 </ul>
 <h3>Subscribe to the holder plan through Oak</h3>
-<p>Install Oak 0.2.3, fund the local wallet and verify or register an ERC-8004 identity. Call account to check the phase and current price before choosing a plan.</p>
+<p>Install Oak 0.2.4, fund the local wallet and verify or register an ERC-8004 identity. Call account to check the phase and current price before choosing a plan.</p>
 <ol class="token-steps">
 <li>At sign-up, hold the entry amount of $OAK in the wallet your agent uses. The entry price runs from $20 to $300 by market cap. For example, hold 20,000 $OAK: 1,000 $OAK burns at sign-up, then keep at least the remaining 19,000 $OAK, your recorded post-burn <code>signupOakCount</code>, to retain access.</li>
 <li>Ask your agent to explain the plan before it subscribes:<ul class="prompt-list">
@@ -214,8 +214,8 @@
 <div data-slot="token-address">
 <h3 id="canonical-oak-contract-address">Canonical <code>$OAK</code> Contract Address</h3>
 <p>
-<code class="token-address">0x6511c233790Ec10f7d673c64DC82C3F941D57828</code></p>
-<p>This is the one official <code>$OAK</code> contract address, also announced on <a href="https://x.com/OakAgentKit">@OakAgentKit</a>. Trust no other address. Pons page: <a href="https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828">https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828</a>.</p>
+<strong>
+<code>$OAK</code> is live on Robinhood Chain.</strong> The official contract address is <code class="token-address">0x6511c233790Ec10f7d673c64DC82C3F941D57828</code>. Verify this exact address here and on <a href="https://x.com/OakAgentKit">@OakAgentKit</a>. Trust no other address. Pons page: <a href="https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828">https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828</a>.</p>
 <p>
 <strong>Known ticker clash:</strong> Other small, <strong>dormant</strong> tokens named <code>OAK</code> already exist on Robinhood Chain — for example <code>0x38fE199550E677Fa9caC196495460dfF97BCe28F</code>. They are unrelated to Oak. Always verify the exact contract address posted here and on <code>@OakAgentKit</code>.</p>
 </div>
@@ -351,7 +351,7 @@
 <li>Each chunk spends at most <strong>0.5% of live pool liquidity</strong> along the fixed route <code>USDG -&gt; ETH -&gt; $OAK</code> and requires <code>minOakOut</code> at a price limit of at most <code>note * 1.02</code> (never the live spot price).</li>
 <li>Purchased <code>$OAK</code> is destroyed in the same transaction via <code>burn(uint256)</code>, reducing <code>totalSupply()</code>.</li>
 <li>
-<strong>Armed 90-day sweep timer:</strong> The single-owner treasury wallet can sweep stuck USDG from <code>OakBurner</code> to the treasury only after a <strong>90-day timer</strong> started by a public transaction (<code>armSweep</code>, which records <code>armedAt</code> and <code>armedBalance</code>). <strong>Any successful burn cancels</strong> the timer. Calling <code>sweepStuck()</code> after 90 days moves <strong>at most the balance recorded when</strong> the timer was armed (<code>min(balance, armedBalance)</code>), so later deposits require a fresh 90-day timer.</li>
+<strong>Armed 90-day sweep timer:</strong> The single-owner treasury wallet can sweep stuck USDG from <code>OakBurner</code> to the treasury only after a <strong>90-day timer</strong> started by a public transaction (<code>armSweep</code>, which records <code>armedAt</code> and <code>armedBalance</code>). This power is not limited to a broken burner. A successful burn cancels the timer only when its USDG input is at least the smaller of 1% of the armed balance (rounded up) and the most one burn call may take; a smaller burn succeeds but leaves the timer running. Calling <code>sweepStuck()</code> after 90 days moves <strong>at most the balance recorded when</strong> the timer was armed (<code>min(balance, armedBalance)</code>), so later deposits require a fresh 90-day timer.</li>
 </ul>
 <hr>
 </details>
@@ -382,6 +382,22 @@
 <strong>One record per wallet across the lineage:</strong> A wallet's authoritative record is on the newest contract in the lineage where <code>hasRecord(wallet)</code> is <code>true</code>.</li>
 <li>
 <strong>Grandfather Merkle tree (<code>OakGrandfather/v1</code>):</strong> The treasury wallet posts a one-time grandfather root (default deadline: <code>120 days</code>) built from finalized history, binding each eligible holder's <code>(wallet, signupOakCount, sourceContract)</code> using the wallet's recorded post-burn <code>signupOakCount</code> (for example, <code>19,000</code> after a <code>20,000</code> entry and <code>1,000</code> burn). When renewal is due, <code>oak renew</code> calls <code>subscribeGrandfatheredWithAuthorization</code> on the successor, carrying over live remaining paid time (<code>paidUntil = max(now, source.paidUntil) + 30 days</code>, within the 90-day cap) at that recorded <code>signupOakCount</code> with <strong>zero <code>$OAK</code> burn</strong> and no price note.</li>
+</ol>
+<hr>
+</details>
+<h2 id="proof">Proof</h2>
+<details class="reference-detail">
+<summary>Read token mechanics</summary>
+<p>Plan availability follows account.phase: no-hold on the curve, neither plan during warmup, and both plans when ready with a valid price note. The Pons trading-fee terms describe the live token.</p>
+<ol>
+<li>
+<strong>Team lock.</strong> OakTeamVesting <code>0xbDB50e1aB95516D4f1CfCbB8eE704dc1e65f9b91</code> holds <strong>29,989,491.55 OAK</strong>, about <strong>3%</strong> of supply. Nothing is released before <strong>2027-02-01</strong>; it releases evenly until <strong>2028-02-01</strong>. <code>start = cliff = 1801440000</code>, <code>end = 1832976000</code>, <code>released() = 0</code>.</li>
+<li>
+<strong>Tokens sent to the dead address.</strong> About <strong>0.30%</strong> of total supply (<strong>1,000,000,000 OAK</strong>) has been sent to the dead address, <code>0x000000000000000000000000000000000000dEaD</code>, where nobody holds a key. Two team transactions sent <strong>1,500,000 OAK</strong> each: <code>0x5a3b985829bfff02f56f7f939b5fe5388bf042d01d9fffcb6485cc72e23d1fa6</code> (block <strong>104776543</strong>) and <code>0x6d1de35916a023cc7440f378113bd205c0e47cd072192ee0178c93c30cb7fcd9</code> (block <strong>105510516</strong>).</li>
+<li>
+<strong>Every Oak contract.</strong> Five contracts have code: token <code>0x6511c233790Ec10f7d673c64DC82C3F941D57828</code>, oracle <code>0x9d3Ae2a760B6266F8A92240a59e5006D1AADBD30</code>, burner <code>0x0704AE41934EE9b71A85cBd308786CfE503108f4</code>, subscription <code>0x5e0d93D4bad53388839Ac5A53dB716b70d8606A8</code>, team lock <code>0xbDB50e1aB95516D4f1CfCbB8eE704dc1e65f9b91</code>.</li>
+<li>
+<strong>npm downloads.</strong> <strong>1,000+ downloads on npm</strong> of <code>@oakagentkit/core</code> plus <code>@oakagentkit/addon</code>.</li>
 </ol>
 </details>
 </div>
@@ -444,8 +460,8 @@
 </ul>
 </nav>
 </div>
- <p class="footer-status">$OAK is live. Oak 0.2.3 subscriptions are open.</p>
- <p>Subscriptions are open in Oak 0.2.3. Read tools need no identity or subscription; hosted actions require a verified ERC-8004 identity and an active subscription. Official $OAK address: <code class="token-address">0x6511c233790Ec10f7d673c64DC82C3F941D57828</code>. Pons page: <a href="https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828">https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828</a>. Plan availability follows account.phase: no-hold on the curve, neither plan during warmup, and both plans when ready with a valid price note. Holding $OAK buys access and nothing else.</p>
+ <p class="footer-status">$OAK is live. Oak 0.2.4 subscriptions are open.</p>
+ <p>Subscriptions are open in Oak 0.2.4. Read tools need no identity or subscription; hosted actions require a verified ERC-8004 identity and an active subscription. Official $OAK address: <code class="token-address">0x6511c233790Ec10f7d673c64DC82C3F941D57828</code>. Pons page: <a href="https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828">https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828</a>. Plan availability follows account.phase: no-hold on the curve, neither plan during warmup, and both plans when ready with a valid price note. Holding $OAK buys access and nothing else.</p>
  <p>Independent software, not affiliated with Robinhood. Not financial advice. Oak never promises returns.</p>
  <p>Region notice: project and asset availability varies by jurisdiction. You are responsible for local compliance.</p>
  <p class="fine">Docs, examples and contracts are MIT. The compiled npm packages are Free-to-Use, No Copying; their source and the hosted Oak service are private. Manrope is self-hosted under the SIL Open Font Licence.</p>
