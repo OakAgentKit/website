@@ -328,6 +328,13 @@ args = ["mcp"]</code></pre>
 </tr>
 <tr>
 <td data-label="State / Message">
+<code>This swap route goes through KyberSwap or Velora, and Oak can only approve it on a connection that can trace transactions step by step. Your current connection can't. …Nothing was signed.</code>
+</td>
+<td data-label="Cause">Your RPC (the default public Robinhood Chain RPC, or a custom one) does not support <code>debug_traceCall</code> with <code>callTracer</code> (<code>execution-trace.ts</code>, <code>approval-census.ts</code>). Oak refuses KyberSwap and Velora routes before signing; other routes are unaffected.</td>
+<td data-label="Exact Action to Fix">Swap through Uniswap now, or run <code>oak config set OAK_RPC_URL &lt;tracing-rpc-url&gt;</code> with a Robinhood Chain (<code>4663</code>) endpoint that supports <code>callTracer</code> (and <code>prestateTracer</code> for swaps that need an approval first), then restart Oak.</td>
+</tr>
+<tr>
+<td data-label="State / Message">
 <code>needs ETH for network fees: need at least &lt;needed&gt; wei including transaction value; held &lt;held&gt; wei. Send ETH to &lt;address&gt; on chain &lt;chainId&gt;. Approximately &lt;needed in ETH&gt; ETH needed; &lt;held in ETH&gt; ETH held.</code> / <code>Needs ETH for network fees: send ETH to &lt;address&gt; on chain &lt;chainId&gt;.</code>
 </td>
 <td data-label="Cause">Wallet ETH balance cannot cover <code>value + gas * maxFeePerGas</code> (including 25% gas headroom) in <code>sender.ts</code>, or is <code>0</code> in <code>subscribe.ts</code>.</td>
