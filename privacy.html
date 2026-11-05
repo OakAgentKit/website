@@ -103,7 +103,7 @@
 <div class="page-body" id="policy">
 <div class="wrap">
 <div class="prose wide">
-<p>Subscriptions are open in Oak 0.2.5. Read tools need no identity or subscription; hosted actions require a verified ERC-8004 identity and an active subscription. Plan availability follows account.phase: no-hold on the curve, neither plan during warmup, and both plans when ready with a valid price note. Subscription and price-note data handling below applies to Oak 0.2.5.</p>
+<p>Subscriptions are open in Oak 0.2.6. Read tools need no identity or subscription; hosted actions require a verified ERC-8004 identity and an active subscription. Plan availability follows account.phase: no-hold on the curve, neither plan during warmup, and both plans when ready with a valid price note. Subscription and price-note data handling below applies to Oak 0.2.6.</p>
 <p>This page explains in plain words what data stays on your computer, what the Oak server sees, what your RPC and ecosystem project services see, how long data is kept, and how to ask questions. The compiled add-on and hosted service have private source; their data practices are described below.</p>
 <hr>
 <h2 id="zero-website-trackers">1. Zero Website Trackers</h2>
@@ -129,6 +129,33 @@
 </tr>
 </thead>
 <tbody>
+<tr>
+<td data-label="Local Store">
+<code>~/.oak/&lt;address&gt;.gloam.enc</code>
+</td>
+<td data-label="Code Reference">
+<code>packages/addon/src/gloam/store.ts</code>
+</td>
+<td data-label="What It Holds">Gloam note secrets, amounts, commitments, nullifiers, states, receive private key and memo cursor. AES-256-GCM with a wallet-derived HKDF-SHA256 key (<code>oak/gloam-store/v1</code>); atomic writes precede sending. Spent notes remain as history until the owner removes the store. Never uploaded. Owner-terminal <code>oak export</code> includes existing unspent, pending and sent-unclaimed notes and the receive key; later notes require a new backup.</td>
+</tr>
+<tr>
+<td data-label="Local Store">
+<code>~/.oak/gloam-tree-4663.json</code>
+</td>
+<td data-label="Code Reference">
+<code>packages/addon/src/gloam/tree.ts</code>
+</td>
+<td data-label="What It Holds">Public pool leaves and last synced block. Unencrypted, rebuildable cache; updated only on request. Kept until removed by the owner.</td>
+</tr>
+<tr>
+<td data-label="Local Store">
+<code>~/.oak/gloam-circuits/&lt;sha256&gt;</code>
+</td>
+<td data-label="Code Reference">
+<code>packages/addon/src/gloam/circuits.ts</code>
+</td>
+<td data-label="What It Holds">Proving files downloaded on demand and SHA-256 checked against pinned hashes before use. Rebuildable files kept until removed by the owner.</td>
+</tr>
 <tr>
 <td data-label="Local Store">
 <code>~/.oak/wallet.enc</code>
@@ -233,6 +260,11 @@
 <p>
 <strong>HEY Research Lab on your computer.</strong> An answer you asked HEY Research Lab for is remembered in memory for the running Oak session only, so the approval form can repeat it with the time it was checked; it is never written to disk and is gone when the session ends. The builder feed keeps your follow list and last-checked times in <code>~/.oak/hey-follow.json</code> on your computer (see the table above). Oak never uploads that file or the checked times. When you ask for your feed, only the token addresses and project slugs on the list are used to ask HEY Research Lab for updates (see &quot;What each other HEY Research Lab tool sends&quot; below). Following or unfollowing a token contacts no one.</p>
 <p>
+<strong>Agent Wormhole on your computer.</strong> Agent Wormhole is an official Oak partner. Oak didn't build and doesn't run their checks. The automatic offline text gate checks selected third-party strings in requested tool results in the local process, before agent use and approvals. It scans link text without visiting destinations. The offline gate itself uploads nothing. Its diagnostics retain field paths and hashes rather than raw excerpts; hashes can still identify known content. The bridge keeps exact diagnostic evidence objects in memory for the running session, with at most 1,000 entries and oldest-entry eviction; stopping the bridge clears them. The local <code>wormholeEvidence(id)</code> lookup gives back that same evidence by id. These objects are not added to the persistent approval-receipt file. Callers and the agent client may retain returned results under their own policies. <strong>Allow is not proof of safety.</strong>
+</p>
+<p>
+<strong>Agent Wormhole hosted checks.</strong> These are on by default during eligible requests: the selected third-party text goes to Oak's server and Agent Wormhole. Set <code>OAK_WORMHOLE_PAYER_MODE=off</code> to opt out; this keeps offline scans and free metadata snapshots available.</p>
+<p>
 <strong>What never leaves your computer:</strong>
 </p>
 <ul>
@@ -284,9 +316,25 @@
 <strong>Builder code redemption (<code>oak redeem &lt;code&gt;</code>, or asking your agent to redeem a code):</strong> Only if you hold an Oak builder code from the HEY Research Lab Verified Builder offer. The server receives the code and your wallet address (with the session headers above) so it can check that the code is unused, start your 30 days and tell you the exact end time. The server keeps a ledger of these codes; see &quot;Builder code ledger&quot; in section 5.</li>
 <li>
 <strong>Deployment settings (<code>GET /v1/config</code>):</strong> When the add-on starts, and again on its hourly check, it asks the Oak server for the public deployment addresses so it can compare them with the addresses pinned in the add-on. This request carries no wallet address, session header or tool data.</li>
+<li>
+<strong>Agent Wormhole hosted checks (<code>POST /v1/wormhole/check</code>):</strong> On by default for every user during an eligible current request in server-key mode. Set <code>OAK_WORMHOLE_PAYER_MODE=off</code> to opt out. Oak receives bounded selected third-party text and a price cap, plus the wallet session and a single-use request signature bound to the path and body. The server checks active subscription access and rate limits using trusted wallet/deployment state. Only the text is forwarded as <code>{content: text}</code> in <code>POST /api/v1/check</code> to Agent Wormhole, with Oak's prepaid <code>awk_</code> API key in the Authorization header: no wallet identity, session headers, signatures, private keys, user prompts or complete tool envelopes. A missing key, exhausted credit, HTTP 402 or other failure gives back unknown; no per-check payment is signed or retried. The price is $0.005000 USDC per metered text check (observed on the account ledger 2026-11-05); the $0.003000 headline is the verify endpoint. The default admission cap remains 5000 microusd; a lower effective cap refuses before provider contact. <code>chargedMicrousd</code> reports the stated price for a usable response, not a per-request billing receipt.</li>
 </ol>
 <p>The Oak server <strong>never sees your private key</strong>, <strong>never signs or sends a blockchain transaction</strong>, and has <strong>no general user account database, email list, or telemetry SDK</strong>. The one exception is the builder code ledger described in section 5, which exists only for Oak builder codes and holds no account, email or usage data.</p>
 <hr>
+<h3 id="gloam-relay-and-deposit-attribution">Gloam relay and deposit attribution</h3>
+<p>Gloam is an official Oak partner. Gloam's own team runs its product and contracts; Oak didn't build them and doesn't run them.</p>
+<ul>
+<li>
+<strong>Oak relay forward:</strong> <code>/v1/gloam/relay</code> receives only public proof fields, roots, nullifiers and commitments; cash-outs also name the wallet recipient and amount. The add-on sends no Oak session or request signature. The server sees the computer's IP while handling the request, forwards the public payload to <code>https://gloam.trade/api/v1/relay</code> using a server-held service key, and logs no body, recipient, nullifier, commitment or IP. It never receives note secrets or receive keys.</li>
+<li>
+<strong>Deposit attribution:</strong> After a shield is confirmed, <code>/v1/gloam/deposits</code> forwards its public transaction hash and chain ID to Gloam. That hash can be linked to the wallet on chain. Failed attribution is retried only on a later Gloam request within 24 hours, never in the background. No session is sent.</li>
+<li>
+<strong>Circuit download:</strong> The first requested Gloam action downloads pinned proving files from <code>www.gloam.trade</code>. Gloam sees the computer's internet address on download; later calls use the hash-checked cache.</li>
+<li>
+<strong>Public relay fallback:</strong> Only an unreachable Oak forward or a 5xx response permits the SDK's public relay path. Gloam then sees the computer's internet address. A 4xx refuses; Oak never broadcasts a private relay action from the wallet. The result identifies the route used. Gloam's own retention policy applies to requests it receives; Oak does not establish its deletion behavior.</li>
+<li>
+<strong>Retention:</strong> The forward keeps no payload or persistent request record. Per-IP attempt timestamps enforce a rolling 60-second window in memory; expired timestamps are removed on a later request, and process exit discards them. There is a shared 10/minute IP limit and 240/minute global ceiling. Circuit and tree caches contain no note secrets. Claim scans keep their cursor encrypted in the local store.</li>
+</ul>
 </details>
 <h2 id="what-chain-rpcs-and-ecosystem-project-services-see">4. What Chain RPCs and Ecosystem Project Services See</h2>
 <details class="reference-detail">
@@ -311,6 +359,25 @@
 </tr>
 </thead>
 <tbody>
+<tr>
+<td data-label="Service">
+<strong>Chop</strong>
+</td>
+<td data-label="When Contacted">Only on a requested <code>chop_*</code> call or requested positions read.</td>
+<td data-label="What It Receives">Oak contacts no Chop server; chain reads only through the configured RPC. The RPC sees the queried public wallet and contract addresses. A client-scoped inventory cache lasts at most 60 seconds, stores no wallet balances, and uses no timers.</td>
+</tr>
+<tr>
+<td data-label="Service">
+<strong>Agent Wormhole free metadata snapshots</strong> (<code>dashboard.agentwormhole.com</code>)</td>
+<td data-label="When Contacted">On requested <code>wormhole_token_check</code> calls through Oak's server, and from your local add-on when a swap checks the actual ERC-20 input and output tokens on chain <code>4663</code>. No startup or background scans.</td>
+<td data-label="What It Receives">The public token address and chain id in <code>GET /api/v1/token/4663/{address}</code>, plus the sending computer's or server's IP address and request time. No wallet identity, secrets or paid key is sent for these free reads. A snapshot covers signed historical metadata; it does not authenticate current display names or prove contract safety.</td>
+</tr>
+<tr>
+<td data-label="Service">
+<strong>Agent Wormhole hosted text checks</strong> (<code>dashboard.agentwormhole.com</code>)</td>
+<td data-label="When Contacted">On by default during an eligible current request, using server-key mode and an available prepaid <code>awk_</code> key. Opt out with <code>OAK_WORMHOLE_PAYER_MODE=off</code>. Oak sends <code>POST /api/v1/check</code>. No background monitoring, launch or pre-mint scan.</td>
+<td data-label="What It Receives">Only bounded selected third-party text in the JSON body as <code>{content: text}</code>, Oak's server-held API credential in the Authorization header, the server IP address and request time. No user wallet identity, session proof or wallet secrets. The offline gate never requires this upload. Redirects, HTTP 402 and failures do not trigger a payment continuation or automatic retry. Agent Wormhole's retention has not been established by Oak.</td>
+</tr>
 <tr>
 <td data-label="Service">
 <strong>KyberSwap API</strong> &amp; <strong>Velora API</strong>
@@ -518,6 +585,7 @@
 <ul>
 <li>Kept on your disk until you delete <code>~/.oak/</code> or remove individual recipe projects with <code>oak recipes remove &lt;project&gt;</code>.</li>
 <li>The saved <code>identity</code> record in <code>~/.oak/config.json</code> (<code>chainId</code>, <code>registry</code>, <code>agentId</code>, and optional <code>linkId</code>) stays in your config while your ERC-8004 identity link is valid and is cleared automatically by the add-on when you run <code>oak identity unlink</code> or when the server reports that the identity was unlinked, revoked, transferred, or burned (it is kept across temporary RPC or server outages so a retry does not drop your link).</li>
+<li>Gloam note secrets and the receive key are spend authority. Losing both the store and its backup loses the money. A backup covers only the notes present when made; never send it through an agent.</li>
 <li>Remember to back up your recovery words or run <code>oak export</code> before deleting <code>~/.oak/wallet.enc</code>, because Oak cannot recover a lost key.</li>
 </ul>
 </li>
@@ -533,6 +601,8 @@
 <li>
 <strong>Request replay records (<code>requests</code>):</strong> Stores consumed single-use <code>X-Oak-Request</code> records (<code>key</code> digest of session and request nonce, <code>expires</code>, <code>wallet</code>, <code>linkId</code>, <code>session</code> SHA-256 hash of <code>X-Oak-Session</code>, and <code>usedAt</code> timestamp). Kept until the parent session expires (<strong>up to <code>900</code> seconds / 15 minutes</strong>) to block replayed <code>X-Oak-Request</code> headers and enforce per-link and per-session request limits (<code>4</code> concurrent sessions per link, <code>180</code> requests per session, <code>60</code> requests per <code>60</code> seconds), and then pruned.</li>
 <li>
+<strong>Hosted-check replay records (<code>recoveryRequests</code>):</strong> When Agent Wormhole hosted checks run with the durable request store, this holds the session/nonce digest (<code>key</code>), expiry, public wallet, session hash and use time. These records survive restart and remain until parent session expiry (at most 15 minutes), pruned on store cleanup. The store's per-wallet and per-session quotas also apply. No submitted text, raw session header or API key is retained here.</li>
+<li>
 <strong>Consumed challenge proofs (<code>proofs</code>):</strong> Stores SHA-256 digests of consumed <code>OakIdentityLink</code> challenges (<code>chainId</code>, <code>registry</code>, <code>agentId</code>, <code>digest</code>, <code>expiresAt</code>, <code>purpose</code>, and optional <code>linkId</code>). Kept until the challenge window expires (<strong>
 <code>300</code> seconds / 5 minutes</strong>, capped at <code>32</code> link proofs per identity) so a signed owner challenge cannot be replayed, and then pruned.</li>
 </ul>
@@ -543,6 +613,8 @@
 <li>
 <strong>In-memory rate-limit counters:</strong> Price-note per-IP and global timestamps (<code>10</code>/minute per IP, <code>120</code>/minute global) and <code>/v1/identity/challenge</code> per-IP buckets (<code>10</code> per <code>60</code> seconds per IP or IPv6 <code>/64</code> prefix across up to <code>1,024</code> buckets) are held in process memory only and expire after <strong>
 <code>60</code> seconds</strong>.</li>
+<li>
+<strong>Agent Wormhole hosted checks:</strong> The adapter writes no raw-text or credential check log. Its process-local rate windows hold a derived subscription identifier, start time and attempt count, with defaults of ten attempts per 60 seconds and at most 10,000 buckets. They expire on a later request or process exit. Paid checks require the durable replay store described above (<code>ServerOptions.wormholeRequestStore</code>, defaulting to <code>identity.store</code>). Without that store, the route verifies requests with a bounded in-memory nonce fence but gives back unknown and sends no paid request. The rate windows remain local to one server process; multi-worker deployments need a shared limiter and an atomic shared replay store. Normal request authentication and the service logs above still apply. This does not establish Agent Wormhole's storage, deletion or retention policy for text, metadata or request records.</li>
 <li>
 <strong>Meridian RFQ continuation state:</strong> Held in process memory only while the short multi-turn auction handoff is active; discarded immediately when the exchange completes, expires, or disconnects.</li>
 <li>
@@ -633,8 +705,8 @@
 </ul>
 </nav>
 </div>
- <p class="footer-status">$OAK is live. Oak 0.2.5 subscriptions are open.</p>
- <p>Subscriptions are open in Oak 0.2.5. Read tools need no identity or subscription; hosted actions require a verified ERC-8004 identity and an active subscription. Official $OAK address: <code class="token-address">0x6511c233790Ec10f7d673c64DC82C3F941D57828</code>. Pons page: <a href="https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828">https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828</a>. Plan availability follows account.phase: no-hold on the curve, neither plan during warmup, and both plans when ready with a valid price note. Holding $OAK buys access and nothing else.</p>
+ <p class="footer-status">$OAK is live. Oak 0.2.6 subscriptions are open.</p>
+ <p>Subscriptions are open in Oak 0.2.6. Read tools need no identity or subscription; hosted actions require a verified ERC-8004 identity and an active subscription. Official $OAK address: <code class="token-address">0x6511c233790Ec10f7d673c64DC82C3F941D57828</code>. Pons page: <a href="https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828">https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828</a>. Plan availability follows account.phase: no-hold on the curve, neither plan during warmup, and both plans when ready with a valid price note. Holding $OAK buys access and nothing else.</p>
  <p>Independent software, not affiliated with Robinhood. Not financial advice. Oak never promises returns.</p>
  <p>Region notice: project and asset availability varies by jurisdiction. You are responsible for local compliance.</p>
  <p class="fine">Docs, examples and contracts are MIT. The compiled npm packages are Free-to-Use, No Copying; their source and the hosted Oak service are private. Manrope is self-hosted under the SIL Open Font Licence.</p>

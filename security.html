@@ -103,9 +103,9 @@
 <div class="page-body">
 <div class="wrap">
 <div class="prose wide">
-<p>Subscriptions are open in Oak 0.2.5. Read tools need no identity or subscription; hosted actions require a verified ERC-8004 identity and an active subscription. Plan availability follows account.phase: no-hold on the curve, neither plan during warmup, and both plans when ready with a valid price note.</p>
+<p>Subscriptions are open in Oak 0.2.6. Read tools need no identity or subscription; hosted actions require a verified ERC-8004 identity and an active subscription. Plan availability follows account.phase: no-hold on the curve, neither plan during warmup, and both plans when ready with a valid price note.</p>
 <p>Oak has no third-party audit. Your wallet stays on your computer; you review what it is about to do. The details below explain custody, authority and limits.</p>
-<p>Use Oak 0.2.5 with default human confirmation. Run <code>oak --version</code> and install <code>@oakagentkit/addon@0.2.5</code> before subscribing.</p>
+<p>Use Oak 0.2.6 with default human confirmation. Run <code>oak --version</code> and install <code>@oakagentkit/addon@0.2.6</code> before subscribing.</p>
 <section class="doc-part" id="disclosures">
 <h2>Disclosures</h2>
 <details class="reference-detail">
@@ -307,7 +307,7 @@
 <summary>Read details</summary>
 <p>This directory holds the security review reports and release-gate evidence for Oak's open-source kit (<code>packages/addon</code>, <code>packages/core</code>) and smart contracts (<code>packages/contracts</code>).</p>
 <h3 id="release-gate-status">Release Gate Status</h3>
-<p>This repository includes unit, fuzz, and recorded-fixture verification for the public kit (<code>0.2.5</code>). Unit tests and recorded fixtures do not by themselves prove live network behavior or external venue settlement; independent review and live verification are tracked across the seven release gates below.</p>
+<p>This repository includes unit, fuzz, and recorded-fixture verification for the public kit (<code>0.2.6</code>). Unit tests and recorded fixtures do not by themselves prove live network behavior or external venue settlement; independent review and live verification are tracked across the seven release gates below.</p>
 <div class="table-wrap">
 <table class="md-table">
 <thead>
@@ -403,14 +403,16 @@
 <h2>Releases</h2>
 <details class="reference-detail">
 <summary>Read details</summary>
-<figure class="art home-map">
-<img src="oak-025-release-1600x900.webp" width="1600" height="900" alt="Felt-and-wood village at golden hour under the carved title Oak 0.2.5. A small hooded guide with a lantern stands under the glowing oak tree, beside a wooden sign that carries Borro's logo. A line in the picture reads Not affiliated with Borro." loading="lazy" decoding="async" class="home-map">
-<figcaption>New in Oak: Borro. Borro is an independent project; Oak is not affiliated with it.</figcaption>
-</figure>
 <p>This page records releases of the Oak add-on and core npm packages and the source-only contracts. Docs, examples and runtime contracts are MIT; the compiled npm packages use the Oak package license and their implementation source is private. Every version entry lists changes using standard changelog categories (<code>[Added]</code>, <code>[Changed]</code>, <code>[Fixed]</code>, <code>[Removed]</code>, <code>[Deprecated]</code>, <code>[Security]</code>).</p>
-<h3 id="0-2-5-prepared-awaiting-publication">0.2.5 prepared — awaiting publication</h3>
-<p>Core and add-on 0.2.5 are prepared and awaiting publication on npm.</p>
-<p>[Added] Borro on Robinhood Chain (<code>borro_list</code>, <code>borro_deposit</code>, <code>borro_withdraw</code>): lend and withdraw USDG and official stock tokens on Borro's vaults. Borro is an independent project; Oak did not build it and is not affiliated with it. Oak has no list of vaults to go stale: each time you ask, it finds Borro's vaults and checks every one on the chain, and it refuses any it cannot verify. Taking money out of a vault where your wallet holds a share is never blocked. <code>positions</code> shows what your wallet has lent on Borro.</p>
+<h3 id="0-2-6-prepared-awaiting-publication">0.2.6 prepared — awaiting publication</h3>
+<p>Core, add-on and optional Gloam engine 0.2.6 are prepared and awaiting publication on npm.</p>
+<p>[Added] Gloam private USDG payments (<code>gloam_status</code>, <code>gloam_shield</code>, <code>gloam_pay</code>, <code>gloam_claim</code>, <code>gloam_cash_out</code>) and the opt-in <code>@oakagentkit/gloam@0.2.6</code> engine. Notes, receive keys and proving stay on the user's computer; shield uses exact approvals and local signing, pay/claim/cash-out use proof authorization through the relay. Claim is free; all actions require a human even in auto mode. Gloam is an official Oak partner. Gloam's own team runs its product and contracts; Oak didn't build them and doesn't run them.</p>
+<p>[Added] Chop on Robinhood Chain (<code>chop_logs</code>, <code>chop_position</code>, <code>chop_quote_unwrap</code>, <code>chop_wrap</code>, <code>chop_unwrap</code>, <code>chop_farm</code>, <code>chop_unfarm</code>, <code>chop_harvest</code>): discover verified Chop log contracts, wrap and unwrap underlying tokens, farm and unfarm two-sided 50/50 LP positions, and harvest <code>CHOP</code> rewards. Oak x Chop. Chop's own team runs its product and contracts; Oak didn't build them and doesn't run them.</p>
+<p>[Changed] Agent Wormhole adds request-time verdicts and third-party text scans alongside structural and byte checks. Agent Wormhole is an official Oak partner. Agent Wormhole's own team runs its product and contracts; Oak didn't build them and doesn't run them. The catalog has 700 mainnet / 42 testnet callable tools, 105 / 22 listed tools and 31 projects.</p>
+<p>[Fixed] Borro live-test fixes and official Oak partner disclosures across product surfaces, playbooks, documentation and website pages.</p>
+<h3 id="0-2-5-published-2026-11-05">0.2.5 published — 2026-11-05</h3>
+<p>Core and add-on 0.2.5 are published on npm.</p>
+<p>[Added] Borro on Robinhood Chain (<code>borro_list</code>, <code>borro_deposit</code>, <code>borro_withdraw</code>): lend and withdraw USDG and official stock tokens on Borro's vaults. Borro is an official Oak partner. Borro's own team runs its product and contracts; Oak didn't build them and doesn't run them. Oak has no list of vaults to go stale: each time you ask, it finds Borro's vaults and checks every one on the chain, and it refuses any it cannot verify. Taking money out of a vault where your wallet holds a share is never blocked. <code>positions</code> shows what your wallet has lent on Borro.</p>
 <p>[Added] <code>oak config check-rpc</code> checks whether your configured <code>OAK_RPC_URL</code> can trace transactions for KyberSwap and Velora swaps. It needs no wallet and does not print your RPC URL. The catalog has 687 mainnet / 42 testnet callable tools, 99 / 22 listed tools and 29 projects.</p>
 <p>[Security] <code>relay_bridge_in</code> recomputes Relay's order hash on your computer and binds it to your request before any approval.</p>
 <p>[Fixed] Twelve carry-over fixes: approval-cleanup advice, Pendle status and sell screens, Meridian perps wording, plainer confirmation and refusal messages, the re-pinned Beefy concentrated-liquidity strategy, Uniswap v3 position paging, Pons and HoodLock error handling, and reproducible release packaging.</p>
@@ -435,7 +437,7 @@
 <h3 id="0-2-0-published-2026-11-02">0.2.0 published — 2026-11-02</h3>
 <p>[Added] Mainnet identity and subscription lifecycle for paid actions. The 0.2.1 package release keeps this deployment unchanged. Reads require neither identity nor subscription; actions require both. Call <code>account</code> for phase and available plans.</p>
 <h3 id="0-1-9">0.1.9</h3>
-<p>Version 0.1.9 of <code>@oakagentkit/addon</code> and <code>@oakagentkit/core</code> preceded the subscription release. Install Oak 0.2.5 for paid actions, which require a verified public agent identity and an active subscription.</p>
+<p>Version 0.1.9 of <code>@oakagentkit/addon</code> and <code>@oakagentkit/core</code> preceded the subscription release. Install Oak 0.2.6 for paid actions, which require a verified public agent identity and an active subscription.</p>
 <p>Version 0.1.9 expands the tool catalog and incorporates fixes from live tests with real funds. It adds the owner-selected auto mode's 50 USD daily approval budget, strengthens approval and quote checks, and fixes Relay funding, Orbio status and Meridian RFQ settlement handling. See CHANGELOG.md for the release changes and the local verification report for measured coverage.</p>
 <p>The 0.1.9 CLI lists 84 mainnet tools and 19 testnet tools without imported recipes. The full catalog has 659 mainnet tools and 39 testnet tools, reachable through <code>find_tool</code> and <code>run_tool</code>. Read-only examples list 82 mainnet tools because their subscription callbacks are disabled.</p>
 <h3 id="0-1-2-published-2026-10-30">0.1.2 published — 2026-10-30</h3>
@@ -455,11 +457,19 @@
 <tbody>
 <tr>
 <td data-label="Version">
-<code>0.2.5</code>
+<code>0.2.6</code>
 </td>
 <td data-label="Date">Pending</td>
 <td data-label="Status">Prepared, awaiting publication</td>
-<td data-label="Highlights">Borro lending on Robinhood Chain (an independent project), <code>oak config check-rpc</code>, Relay order-hash binding, and twelve carry-over fixes; 29 projects.</td>
+<td data-label="Highlights">Chop LP wrapping and farming and Gloam private USDG payments on Robinhood Chain, Agent Wormhole request-time verdicts and third-party text scans, Borro live-test fixes, and official Oak partner disclosures; 31 projects.</td>
+</tr>
+<tr>
+<td data-label="Version">
+<code>0.2.5</code>
+</td>
+<td data-label="Date">2026-11-05</td>
+<td data-label="Status">Published npm packages</td>
+<td data-label="Highlights">Borro lending on Robinhood Chain (official Oak partner), <code>oak config check-rpc</code>, Relay order-hash binding, and twelve carry-over fixes; 29 projects.</td>
 </tr>
 <tr>
 <td data-label="Version">
@@ -506,7 +516,7 @@
 <code>0.1.9</code>
 </td>
 <td data-label="Date">—</td>
-<td data-label="Status">Historical package release; use Oak 0.2.5 for paid actions</td>
+<td data-label="Status">Historical package release; use Oak 0.2.6 for paid actions</td>
 <td data-label="Highlights">Expanded catalog, daily auto budget, approval and quote fixes, Relay/Orbio/Meridian fixes; preceded the Oak 0.2.0 subscription release.</td>
 </tr>
 <tr>
@@ -514,7 +524,7 @@
 <code>0.1.2</code>
 </td>
 <td data-label="Date">2026-10-30</td>
-<td data-label="Status">Historical package release; use Oak 0.2.5 for paid actions</td>
+<td data-label="Status">Historical package release; use Oak 0.2.6 for paid actions</td>
 <td data-label="Highlights">Default confirmation and local signing guards retained; Longbow deposits enabled; send hidden; MCP resources included; Meridian buys deferred.</td>
 </tr>
 <tr>
@@ -706,8 +716,8 @@
 </ul>
 </nav>
 </div>
- <p class="footer-status">$OAK is live. Oak 0.2.5 subscriptions are open.</p>
- <p>Subscriptions are open in Oak 0.2.5. Read tools need no identity or subscription; hosted actions require a verified ERC-8004 identity and an active subscription. Official $OAK address: <code class="token-address">0x6511c233790Ec10f7d673c64DC82C3F941D57828</code>. Pons page: <a href="https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828">https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828</a>. Plan availability follows account.phase: no-hold on the curve, neither plan during warmup, and both plans when ready with a valid price note. Holding $OAK buys access and nothing else.</p>
+ <p class="footer-status">$OAK is live. Oak 0.2.6 subscriptions are open.</p>
+ <p>Subscriptions are open in Oak 0.2.6. Read tools need no identity or subscription; hosted actions require a verified ERC-8004 identity and an active subscription. Official $OAK address: <code class="token-address">0x6511c233790Ec10f7d673c64DC82C3F941D57828</code>. Pons page: <a href="https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828">https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828</a>. Plan availability follows account.phase: no-hold on the curve, neither plan during warmup, and both plans when ready with a valid price note. Holding $OAK buys access and nothing else.</p>
  <p>Independent software, not affiliated with Robinhood. Not financial advice. Oak never promises returns.</p>
  <p>Region notice: project and asset availability varies by jurisdiction. You are responsible for local compliance.</p>
  <p class="fine">Docs, examples and contracts are MIT. The compiled npm packages are Free-to-Use, No Copying; their source and the hosted Oak service are private. Manrope is self-hosted under the SIL Open Font Licence.</p>

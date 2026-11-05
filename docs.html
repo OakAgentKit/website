@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Oak docs: tool reference for 9 basic tools and 29 modules</title>
+<title>Oak docs: tool reference for 9 basic tools and 31 modules</title>
 <meta name="description" content="The Oak tool reference: amount conventions, the basic tools, every Robinhood Chain project module with its tool names, the command line, project recipes and notes for AI agents.">
 <meta name="theme-color" content="#062F27">
 <link rel="canonical" href="https://oakagentkit.org/docs.html">
 <meta property="og:url" content="https://oakagentkit.org/docs.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Oak Agent Kit">
-<meta property="og:title" content="Oak docs: tool reference for 9 basic tools and 29 modules">
+<meta property="og:title" content="Oak docs: tool reference for 9 basic tools and 31 modules">
 <meta property="og:description" content="The Oak tool reference: amount conventions, the basic tools, every Robinhood Chain project module with its tool names, the command line, project recipes and notes for AI agents.">
 <meta property="og:image" content="https://oakagentkit.org/03-og-card-1200x630.jpg">
 <meta property="og:image:width" content="1200">
@@ -104,7 +104,7 @@
 <div class="wrap">
 <div class="prose wide docs-page">
 <details class="project-directory">
-<summary>All 29 projects and supported agents</summary>
+<summary>All 31 projects and supported agents</summary>
 <ul class="project-names">
 <li>
 <span class="proj">KyberSwap</span>
@@ -193,13 +193,19 @@
 <li>
 <span class="proj">Borro</span>
 </li>
+<li>
+<span class="proj">Chop</span>
+</li>
+<li>
+<span class="proj">Gloam</span>
+</li>
 </ul>
 <p class="agent-names">
 <span class="agent">Claude Code</span> · <span class="agent">Codex</span> · <span class="agent">Gemini</span> · <span class="agent">Cursor</span> · <span class="agent">Grok</span>
 </p>
 <p>Mainnet: 4663. Testnet: basic tools and ERC-8004 identity only.</p>
 </details>
-<p class="release-note">Subscriptions are open in Oak 0.2.5. Read tools need no identity or subscription; hosted actions require a verified ERC-8004 identity and an active subscription. Official $OAK address: <code class="token-address">0x6511c233790Ec10f7d673c64DC82C3F941D57828</code>. Pons page: <a href="https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828">https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828</a>. Plan availability follows account.phase: no-hold on the curve, neither plan during warmup, and both plans when ready with a valid price note.</p>
+<p class="release-note">Subscriptions are open in Oak 0.2.6. Read tools need no identity or subscription; hosted actions require a verified ERC-8004 identity and an active subscription. Official $OAK address: <code class="token-address">0x6511c233790Ec10f7d673c64DC82C3F941D57828</code>. Pons page: <a href="https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828">https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828</a>. Plan availability follows account.phase: no-hold on the curve, neither plan during warmup, and both plans when ready with a valid price note.</p>
 <p class="docs-narrow">Your agent's tool list shows the everyday tools. For anything not listed, it calls <code>find_tool</code> with what it wants to do, then <code>run_tool</code> with the tool's name and arguments. Tools run this way get the same access checks, local guard, preview and confirmation as a direct call.</p>
 <section class="doc-part" id="basics">
 <h2>Basics</h2>
@@ -272,7 +278,7 @@
 <code>positions</code>
 </td>
 <td data-label="Kind">Read</td>
-<td data-label="What it does">One-call aggregated active positions across all 29 ecosystem modules.</td>
+<td data-label="What it does">Aggregated active positions and per-program status across 31 ecosystem projects; private Gloam notes stay local in <code>gloam_status</code>.</td>
 </tr>
 <tr>
 <td data-label="Tool">
@@ -324,7 +330,7 @@ oak call run_tool '{&quot;name&quot;:&quot;history&quot;,&quot;arguments&quot;:{
 </details>
 </section>
 <section class="doc-part" id="modules">
-<h2>29 project modules</h2>
+<h2>31 project modules</h2>
 <details class="reference-detail">
 <summary>Browse projects and tools</summary>
 <h3>Swap and Trade</h3>
@@ -613,6 +619,31 @@ oak call run_tool '{&quot;name&quot;:&quot;history&quot;,&quot;arguments&quot;:{
 </div>
 <p>Principal-token discovery, purchases, sales and redemption of ended terms on Robinhood Chain (<code>pendle_list</code>, <code>pendle_buy</code>, <code>pendle_sell</code>, <code>pendle_redeem</code>). Compare it with LayerBank using the read-only <code>earn_options</code>.</p>
 </article>
+<article class="docs-mod">
+<h4>Chop</h4>
+<div class="docs-chips">
+<code>chop_logs</code>
+<code>chop_position</code>
+<code>chop_quote_unwrap</code>
+<code>chop_wrap</code>
+<code>chop_unwrap</code>
+<code>chop_farm</code>
+<code>chop_unfarm</code>
+<code>chop_harvest</code>
+</div>
+<p>Oak x Chop. Chop's own team runs its product and contracts; Oak didn't build them and doesn't run them. Verified log discovery, position and lock reads, unwrap quotes, wrapping, unwrapping, two-sided 50/50 LP farming, unfarming and <code>CHOP</code> reward harvesting on Robinhood Chain (<code>chop_logs</code>, <code>chop_position</code>, <code>chop_quote_unwrap</code>, <code>chop_wrap</code>, <code>chop_unwrap</code>, <code>chop_farm</code>, <code>chop_unfarm</code>, <code>chop_harvest</code>).</p>
+</article>
+<article class="docs-mod">
+<h4>Gloam</h4>
+<div class="docs-chips">
+<code>gloam_status</code>
+<code>gloam_shield</code>
+<code>gloam_pay</code>
+<code>gloam_claim</code>
+<code>gloam_cash_out</code>
+</div>
+<p>Gloam is an official Oak partner. Gloam's own team runs its product and contracts; Oak didn't build them and doesn't run them. Private USDG payments using local encrypted notes and receive tags. Shield deposits sign locally; pay, claim and whole-note cash-out use locally made proofs submitted by Gloam’s relay through Oak’s server. Cash-outs go only to this wallet. Claim needs no identity or plan; every action needs human confirmation. Local balances are available through <code>gloam_status</code>; hosted <code>positions</code> does not read private notes. (<code>gloam_status</code>, <code>gloam_shield</code>, <code>gloam_pay</code>, <code>gloam_claim</code>, <code>gloam_cash_out</code>).</p>
+</article>
 </div>
 <h3>Borrow and Lend</h3>
 <div class="docs-prompt">
@@ -857,7 +888,7 @@ oak call run_tool '{&quot;name&quot;:&quot;history&quot;,&quot;arguments&quot;:{
 <code>borro_deposit</code>
 <code>borro_withdraw</code>
 </div>
-<p>USDG and official stock-token lending reads, deposits and withdrawals on Robinhood Chain, verified on chain per request (<code>borro_list</code>, <code>borro_deposit</code>, <code>borro_withdraw</code>). Borro is an independent project.</p>
+<p>Borro is an official Oak partner. Borro's own team runs its product and contracts; Oak didn't build them and doesn't run them. USDG and official stock-token lending reads, deposits and withdrawals on Robinhood Chain, verified on chain per request (<code>borro_list</code>, <code>borro_deposit</code>, <code>borro_withdraw</code>).</p>
 </article>
 </div>
 <h3>Move Money</h3>
@@ -953,7 +984,7 @@ oak call run_tool '{&quot;name&quot;:&quot;history&quot;,&quot;arguments&quot;:{
 <code>wormhole_token_check</code>
 <code>wormhole_scan_text</code>
 </div>
-<p>Agent Wormhole phase A: verify signed token metadata snapshots on chain <code>4663</code> (<code>wormhole_token_check</code>) and scan supplied text offline without uploading it (<code>wormhole_scan_text</code>). Missing, stale or invalid evidence gives no current verdict; neither read proves safety or sellability.</p>
+<p>Agent Wormhole is an official Oak partner. Agent Wormhole's own team runs its product and contracts; Oak didn't build them and doesn't run them. Verify signed token metadata snapshots and request-time verdicts on chain <code>4663</code> (<code>wormhole_token_check</code>) and scan supplied text offline without uploading it (<code>wormhole_scan_text</code>). Missing, stale or invalid evidence gives no current verdict; neither read proves safety or sellability.</p>
 </article>
 </div>
 <h3>Identity and Tools</h3>
@@ -1113,7 +1144,7 @@ oak call &lt;tool&gt; &lt;json&gt;</code></pre>
 <li>
 <strong>Never ask the user for a private key, seed phrase, passphrase, or raw owner key.</strong> Both the local bridge (<code>packages/addon/src/bridge.ts</code>) and the Oak server reject any JSON argument containing <code>private_key</code>, <code>secret_key</code>, <code>wallet_key</code>, <code>mnemonic</code>, <code>seed</code>, <code>seed_phrase</code>, or <code>recovery_phrase</code>. When linking an external owner's ERC-8004 agent ID (<code>oak setup link &lt;agentId&gt;</code>) or revoking by owner (<code>oak identity unlink --owner &lt;linkId&gt;</code>), the owner signs the EIP-712 <code>OakIdentityLink</code> challenge in their own terminal (<code>Owner signing requires your terminal. Run oak setup link &lt;agentId&gt; or oak identity unlink --owner &lt;linkId&gt; there.</code>).</li>
 <li>
-<strong>All signing happens locally inside <code>@oakagentkit/addon</code>.</strong> The Oak server <strong>never sees your key</strong> and <strong>never signs or sends a transaction</strong>. <strong>Your swaps and deposits go straight from your wallet to the project; subscription payments go to the burner (<code>OakBurner</code>) and the single-owner treasury wallet.</strong> Non-read requests use a 15-minute wallet-signed <code>X-Oak-Session</code> plus a 60-second single-use <code>X-Oak-Request</code> signature from an ephemeral in-memory <code>sessionKey</code>.</li>
+<strong>All signing happens locally inside <code>@oakagentkit/addon</code>.</strong> The Oak server <strong>never sees your key</strong> and <strong>never signs or sends a transaction</strong>. <strong>Your swaps and deposits go straight from your wallet to the project; subscription payments go to the burner (<code>OakBurner</code>) and the single-owner treasury wallet.</strong> Hosted non-read tool requests use a 15-minute wallet-signed <code>X-Oak-Session</code> plus a 60-second single-use <code>X-Oak-Request</code> signature from an ephemeral in-memory <code>sessionKey</code>. Gloam relay and deposit attribution carry no session or request signatures; only public proof fields or a public shield hash reach those routes.</li>
 <li>
 <strong>Always inspect the preview.</strong> Every transaction tool call runs <code>preview</code> (<code>eth_simulateV1</code> with <code>traceTransfers: true</code>) before signing and sending, and reuses a matching preview from the same block within 12 seconds so <code>swap</code> does not re-simulate twice. Built approvals are always exact (<code>amountIn</code>), never unlimited. Note that simulation transfers exclude gas and do not prove off-chain external settlement (such as Relay destination fills or Meridian RFQ relayer execution).</li>
 </ol>
@@ -1176,8 +1207,8 @@ oak call &lt;tool&gt; &lt;json&gt;</code></pre>
 </ul>
 </nav>
 </div>
- <p class="footer-status">$OAK is live. Oak 0.2.5 subscriptions are open.</p>
- <p>Subscriptions are open in Oak 0.2.5. Read tools need no identity or subscription; hosted actions require a verified ERC-8004 identity and an active subscription. Official $OAK address: <code class="token-address">0x6511c233790Ec10f7d673c64DC82C3F941D57828</code>. Pons page: <a href="https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828">https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828</a>. Plan availability follows account.phase: no-hold on the curve, neither plan during warmup, and both plans when ready with a valid price note. Holding $OAK buys access and nothing else.</p>
+ <p class="footer-status">$OAK is live. Oak 0.2.6 subscriptions are open.</p>
+ <p>Subscriptions are open in Oak 0.2.6. Read tools need no identity or subscription; hosted actions require a verified ERC-8004 identity and an active subscription. Official $OAK address: <code class="token-address">0x6511c233790Ec10f7d673c64DC82C3F941D57828</code>. Pons page: <a href="https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828">https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828</a>. Plan availability follows account.phase: no-hold on the curve, neither plan during warmup, and both plans when ready with a valid price note. Holding $OAK buys access and nothing else.</p>
  <p>Independent software, not affiliated with Robinhood. Not financial advice. Oak never promises returns.</p>
  <p>Region notice: project and asset availability varies by jurisdiction. You are responsible for local compliance.</p>
  <p class="fine">Docs, examples and contracts are MIT. The compiled npm packages are Free-to-Use, No Copying; their source and the hosted Oak service are private. Manrope is self-hosted under the SIL Open Font Licence.</p>
