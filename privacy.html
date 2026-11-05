@@ -103,7 +103,7 @@
 <div class="page-body" id="policy">
 <div class="wrap">
 <div class="prose wide">
-<p>Subscriptions are open in Oak 0.2.4. Read tools need no identity or subscription; hosted actions require a verified ERC-8004 identity and an active subscription. Plan availability follows account.phase: no-hold on the curve, neither plan during warmup, and both plans when ready with a valid price note. Subscription and price-note data handling below applies to Oak 0.2.4.</p>
+<p>Subscriptions are open in Oak 0.2.5. Read tools need no identity or subscription; hosted actions require a verified ERC-8004 identity and an active subscription. Plan availability follows account.phase: no-hold on the curve, neither plan during warmup, and both plans when ready with a valid price note. Subscription and price-note data handling below applies to Oak 0.2.5.</p>
 <p>This page explains in plain words what data stays on your computer, what the Oak server sees, what your RPC and ecosystem project services see, how long data is kept, and how to ask questions. The compiled add-on and hosted service have private source; their data practices are described below.</p>
 <hr>
 <h2 id="zero-website-trackers">1. Zero Website Trackers</h2>
@@ -363,6 +363,13 @@
 <td data-label="When Contacted">
 <code>pendle_buy</code>, <code>pendle_sell</code> and <code>pendle_redeem</code> (cash-out), only when you ask for them. The Oak server asks for the quote, so Pendle sees the Oak server's address. The same quote is asked for again from your computer when your add-on checks the transaction before you approve it, so Pendle then sees your computer's address. A cash-out asks for a quote only as an optional cross-check of its estimate; it waits at most 1.5 seconds, the transaction is built from chain reads either way, and the answer can only add a note. <code>earn_options</code> (and the add-on check for a Pendle buy) also asks for a cost estimate before you commit.</td>
 <td data-label="What It Receives">The token being spent, the amount, the token wanted, the price-move limit you allow, a setting that keeps Pendle's outside swap routing off, and <strong>your wallet address as the receiver</strong>, which is the address that Pendle's transaction pays out to. For a cash-out or a sale of everything you hold, the amount is your whole balance of that Pendle token. The cost estimate is the exception: it names Pendle's public router address as the receiver instead of you, and its amount is the one you asked about, or your whole USDG balance if you gave none. Pendle also sees the sender's IP address, the time of the request, and an Oak product header (<code>User-Agent: oak-core/pendle</code>). Never your private key.</td>
+</tr>
+<tr>
+<td data-label="Service">
+<strong>Borro market and contract pages</strong> (<code>borro.markets</code>)</td>
+<td data-label="When Contacted">
+<code>borro_list</code>, and when the Oak server prepares <code>borro_deposit</code> or <code>borro_withdraw</code> (for candidate vault discovery by symbol and the optional display rate shown on the card and deposit screen), only when you ask for them. The Oak server sends it, so Borro sees the Oak server's address, not yours. Your computer never contacts <code>borro.markets</code>: transaction calldata is built from chain reads, and when your add-on rebuilds and checks a Borro deposit or withdrawal on your computer before you approve it, HTTP is switched off and the vault address is verified directly on chain.</td>
+<td data-label="What It Receives">Fixed, read-only <code>GET</code> requests for <code>https://borro.markets/markets.json</code> and <code>https://borro.markets/contracts.json</code>, the same for everyone. Borro also sees the Oak server's IP address, the time of the request, and an Oak product header (<code>User-Agent: oak-core/borro</code>). Never your wallet address, an amount, or a signed transaction.</td>
 </tr>
 <tr>
 <td data-label="Service">
@@ -626,8 +633,8 @@
 </ul>
 </nav>
 </div>
- <p class="footer-status">$OAK is live. Oak 0.2.4 subscriptions are open.</p>
- <p>Subscriptions are open in Oak 0.2.4. Read tools need no identity or subscription; hosted actions require a verified ERC-8004 identity and an active subscription. Official $OAK address: <code class="token-address">0x6511c233790Ec10f7d673c64DC82C3F941D57828</code>. Pons page: <a href="https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828">https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828</a>. Plan availability follows account.phase: no-hold on the curve, neither plan during warmup, and both plans when ready with a valid price note. Holding $OAK buys access and nothing else.</p>
+ <p class="footer-status">$OAK is live. Oak 0.2.5 subscriptions are open.</p>
+ <p>Subscriptions are open in Oak 0.2.5. Read tools need no identity or subscription; hosted actions require a verified ERC-8004 identity and an active subscription. Official $OAK address: <code class="token-address">0x6511c233790Ec10f7d673c64DC82C3F941D57828</code>. Pons page: <a href="https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828">https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828</a>. Plan availability follows account.phase: no-hold on the curve, neither plan during warmup, and both plans when ready with a valid price note. Holding $OAK buys access and nothing else.</p>
  <p>Independent software, not affiliated with Robinhood. Not financial advice. Oak never promises returns.</p>
  <p>Region notice: project and asset availability varies by jurisdiction. You are responsible for local compliance.</p>
  <p class="fine">Docs, examples and contracts are MIT. The compiled npm packages are Free-to-Use, No Copying; their source and the hosted Oak service are private. Manrope is self-hosted under the SIL Open Font Licence.</p>

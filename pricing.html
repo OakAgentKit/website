@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Oak pricing: two plans, zero per-call fees</title>
-<meta name="description" content="Oak 0.2.4 subscriptions are open: compare holder and no-hold subscriptions, network fees and the token launch phases.">
+<meta name="description" content="Oak 0.2.5 subscriptions are open: compare holder and no-hold subscriptions, network fees and the token launch phases.">
 <meta name="theme-color" content="#062F27">
 <link rel="canonical" href="https://oakagentkit.org/pricing.html">
 <meta property="og:url" content="https://oakagentkit.org/pricing.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Oak Agent Kit">
 <meta property="og:title" content="Oak pricing: two plans, zero per-call fees">
-<meta property="og:description" content="Oak 0.2.4 subscriptions are open: compare holder and no-hold subscriptions, network fees and the token launch phases.">
+<meta property="og:description" content="Oak 0.2.5 subscriptions are open: compare holder and no-hold subscriptions, network fees and the token launch phases.">
 <meta property="og:image" content="https://oakagentkit.org/03-og-card-1200x630.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -100,8 +100,8 @@
 </div>
  </section>
 <section class="quiet-section">
-<h2>Subscriptions are open in Oak 0.2.4</h2>
-<p>Subscriptions are open in Oak 0.2.4. Read tools need no identity or subscription; hosted actions require a verified ERC-8004 identity and an active subscription. Official $OAK address: <code class="token-address">0x6511c233790Ec10f7d673c64DC82C3F941D57828</code>. Pons page: <a href="https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828">https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828</a>. Plan availability follows account.phase: no-hold on the curve, neither plan during warmup, and both plans when ready with a valid price note.</p>
+<h2>Subscriptions are open in Oak 0.2.5</h2>
+<p>Subscriptions are open in Oak 0.2.5. Read tools need no identity or subscription; hosted actions require a verified ERC-8004 identity and an active subscription. Official $OAK address: <code class="token-address">0x6511c233790Ec10f7d673c64DC82C3F941D57828</code>. Pons page: <a href="https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828">https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828</a>. Plan availability follows account.phase: no-hold on the curve, neither plan during warmup, and both plans when ready with a valid price note.</p>
 <p>USDG is a dollar-denominated token used to pay the subscription. The entry price sets how much $OAK the holder plan requires, or the extra charge for no-hold. It is not the price of one token.</p>
 </section>
 <div class="root-thread">
@@ -221,7 +221,7 @@
 </section>
 </div>
 <section class="quiet-section" id="subscribe"><h2>Subscribe through Oak</h2>
-<p>Install Oak 0.2.4 and connect your assistant. Call <code>account</code>, fund the reported wallet with ETH for gas and USDG for payments, then re-check <code>balances</code>. Approve <code>oak_setup</code> registration or linking separately; registration is public and costs gas, while linking needs no gas and an external owner signs in their own terminal.</p>
+<p>Install Oak 0.2.5 and connect your assistant. Call <code>account</code>, fund the reported wallet with ETH for gas and USDG for payments, then re-check <code>balances</code>. Approve <code>oak_setup</code> registration or linking separately; registration is public and costs gas, while linking needs no gas and an external owner signs in their own terminal.</p>
 <p>Choose the plan available in <code>account.phase</code>. The holder plan needs the full entry amount of $OAK before its one-time 5% burn; keep the recorded post-burn holding afterward. No-hold needs no $OAK. Ask your agent:</p>
 <ul class="prompt-list"><li><p class="copy-prompt copyable" tabindex="0" role="region" aria-label="Prompt to copy" data-copy="Call account and explain account.phase, the available plans, the recurring USDG cost, and any required OAK holding and one-time sign-up burn. Do not subscribe until I choose holder or nohold and approve the cost. Then call oak_subscribe with my chosen plan and show the preview before local signing.">Call account and explain account.phase, the available plans, the recurring USDG cost, and any required OAK holding and one-time sign-up burn. Do not subscribe until I choose holder or nohold and approve the cost. Then call oak_subscribe with my chosen plan and show the preview before local signing.</p></li></ul>
 <p>After you approve the plan and price, your agent calls <code>oak_subscribe</code> with <code>{&quot;plan&quot;:&quot;holder&quot;}</code> or <code>{&quot;plan&quot;:&quot;nohold&quot;}</code>. Inspect the preview before local signing, then call <code>account</code> to confirm the plan and paid-through date. You can also run <code>oak subscribe --plan holder</code> or <code>oak subscribe --plan nohold</code> in your terminal.</p>
@@ -278,8 +278,8 @@
 </ul>
 </nav>
 </div>
- <p class="footer-status">$OAK is live. Oak 0.2.4 subscriptions are open.</p>
- <p>Subscriptions are open in Oak 0.2.4. Read tools need no identity or subscription; hosted actions require a verified ERC-8004 identity and an active subscription. Official $OAK address: <code class="token-address">0x6511c233790Ec10f7d673c64DC82C3F941D57828</code>. Pons page: <a href="https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828">https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828</a>. Plan availability follows account.phase: no-hold on the curve, neither plan during warmup, and both plans when ready with a valid price note. Holding $OAK buys access and nothing else.</p>
+ <p class="footer-status">$OAK is live. Oak 0.2.5 subscriptions are open.</p>
+ <p>Subscriptions are open in Oak 0.2.5. Read tools need no identity or subscription; hosted actions require a verified ERC-8004 identity and an active subscription. Official $OAK address: <code class="token-address">0x6511c233790Ec10f7d673c64DC82C3F941D57828</code>. Pons page: <a href="https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828">https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828</a>. Plan availability follows account.phase: no-hold on the curve, neither plan during warmup, and both plans when ready with a valid price note. Holding $OAK buys access and nothing else.</p>
  <p>Independent software, not affiliated with Robinhood. Not financial advice. Oak never promises returns.</p>
  <p>Region notice: project and asset availability varies by jurisdiction. You are responsible for local compliance.</p>
  <p class="fine">Docs, examples and contracts are MIT. The compiled npm packages are Free-to-Use, No Copying; their source and the hosted Oak service are private. Manrope is self-hosted under the SIL Open Font Licence.</p>

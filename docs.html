@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Oak docs: tool reference for 9 basic tools and 28 modules</title>
+<title>Oak docs: tool reference for 9 basic tools and 29 modules</title>
 <meta name="description" content="The Oak tool reference: amount conventions, the basic tools, every Robinhood Chain project module with its tool names, the command line, project recipes and notes for AI agents.">
 <meta name="theme-color" content="#062F27">
 <link rel="canonical" href="https://oakagentkit.org/docs.html">
 <meta property="og:url" content="https://oakagentkit.org/docs.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Oak Agent Kit">
-<meta property="og:title" content="Oak docs: tool reference for 9 basic tools and 28 modules">
+<meta property="og:title" content="Oak docs: tool reference for 9 basic tools and 29 modules">
 <meta property="og:description" content="The Oak tool reference: amount conventions, the basic tools, every Robinhood Chain project module with its tool names, the command line, project recipes and notes for AI agents.">
 <meta property="og:image" content="https://oakagentkit.org/03-og-card-1200x630.jpg">
 <meta property="og:image:width" content="1200">
@@ -104,7 +104,7 @@
 <div class="wrap">
 <div class="prose wide docs-page">
 <details class="project-directory">
-<summary>All 28 projects and supported agents</summary>
+<summary>All 29 projects and supported agents</summary>
 <ul class="project-names">
 <li>
 <span class="proj">KyberSwap</span>
@@ -190,13 +190,16 @@
 <li>
 <span class="proj">Pendle</span>
 </li>
+<li>
+<span class="proj">Borro</span>
+</li>
 </ul>
 <p class="agent-names">
 <span class="agent">Claude Code</span> · <span class="agent">Codex</span> · <span class="agent">Gemini</span> · <span class="agent">Cursor</span> · <span class="agent">Grok</span>
 </p>
 <p>Mainnet: 4663. Testnet: basic tools and ERC-8004 identity only.</p>
 </details>
-<p class="release-note">Subscriptions are open in Oak 0.2.4. Read tools need no identity or subscription; hosted actions require a verified ERC-8004 identity and an active subscription. Official $OAK address: <code class="token-address">0x6511c233790Ec10f7d673c64DC82C3F941D57828</code>. Pons page: <a href="https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828">https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828</a>. Plan availability follows account.phase: no-hold on the curve, neither plan during warmup, and both plans when ready with a valid price note.</p>
+<p class="release-note">Subscriptions are open in Oak 0.2.5. Read tools need no identity or subscription; hosted actions require a verified ERC-8004 identity and an active subscription. Official $OAK address: <code class="token-address">0x6511c233790Ec10f7d673c64DC82C3F941D57828</code>. Pons page: <a href="https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828">https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828</a>. Plan availability follows account.phase: no-hold on the curve, neither plan during warmup, and both plans when ready with a valid price note.</p>
 <p class="docs-narrow">Your agent's tool list shows the everyday tools. For anything not listed, it calls <code>find_tool</code> with what it wants to do, then <code>run_tool</code> with the tool's name and arguments. Tools run this way get the same access checks, local guard, preview and confirmation as a direct call.</p>
 <section class="doc-part" id="basics">
 <h2>Basics</h2>
@@ -269,7 +272,7 @@
 <code>positions</code>
 </td>
 <td data-label="Kind">Read</td>
-<td data-label="What it does">One-call aggregated active positions across all 28 ecosystem modules.</td>
+<td data-label="What it does">One-call aggregated active positions across all 29 ecosystem modules.</td>
 </tr>
 <tr>
 <td data-label="Tool">
@@ -321,7 +324,7 @@ oak call run_tool '{&quot;name&quot;:&quot;history&quot;,&quot;arguments&quot;:{
 </details>
 </section>
 <section class="doc-part" id="modules">
-<h2>28 project modules</h2>
+<h2>29 project modules</h2>
 <details class="reference-detail">
 <summary>Browse projects and tools</summary>
 <h3>Swap and Trade</h3>
@@ -847,6 +850,15 @@ oak call run_tool '{&quot;name&quot;:&quot;history&quot;,&quot;arguments&quot;:{
 </div>
 <p>USDG lending reads, deposits and withdrawals on Robinhood Chain (<code>layerbank_list</code>, <code>layerbank_deposit</code>, <code>layerbank_withdraw</code>). Compare it with Pendle using the read-only <code>earn_options</code>.</p>
 </article>
+<article class="docs-mod">
+<h4>Borro</h4>
+<div class="docs-chips">
+<code>borro_list</code>
+<code>borro_deposit</code>
+<code>borro_withdraw</code>
+</div>
+<p>USDG and official stock-token lending reads, deposits and withdrawals on Robinhood Chain, verified on chain per request (<code>borro_list</code>, <code>borro_deposit</code>, <code>borro_withdraw</code>). Borro is an independent project.</p>
+</article>
 </div>
 <h3>Move Money</h3>
 <div class="docs-prompt">
@@ -1059,6 +1071,7 @@ oak recipes add &lt;pkg-or-path&gt;
 oak recipes remove &lt;project&gt;
 oak recipes list [project]
 oak config set &lt;key&gt; &lt;value&gt;
+oak config check-rpc
 oak mcp
 oak call &lt;tool&gt; &lt;json&gt;</code></pre>
 <ul>
@@ -1163,8 +1176,8 @@ oak call &lt;tool&gt; &lt;json&gt;</code></pre>
 </ul>
 </nav>
 </div>
- <p class="footer-status">$OAK is live. Oak 0.2.4 subscriptions are open.</p>
- <p>Subscriptions are open in Oak 0.2.4. Read tools need no identity or subscription; hosted actions require a verified ERC-8004 identity and an active subscription. Official $OAK address: <code class="token-address">0x6511c233790Ec10f7d673c64DC82C3F941D57828</code>. Pons page: <a href="https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828">https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828</a>. Plan availability follows account.phase: no-hold on the curve, neither plan during warmup, and both plans when ready with a valid price note. Holding $OAK buys access and nothing else.</p>
+ <p class="footer-status">$OAK is live. Oak 0.2.5 subscriptions are open.</p>
+ <p>Subscriptions are open in Oak 0.2.5. Read tools need no identity or subscription; hosted actions require a verified ERC-8004 identity and an active subscription. Official $OAK address: <code class="token-address">0x6511c233790Ec10f7d673c64DC82C3F941D57828</code>. Pons page: <a href="https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828">https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828</a>. Plan availability follows account.phase: no-hold on the curve, neither plan during warmup, and both plans when ready with a valid price note. Holding $OAK buys access and nothing else.</p>
  <p>Independent software, not affiliated with Robinhood. Not financial advice. Oak never promises returns.</p>
  <p>Region notice: project and asset availability varies by jurisdiction. You are responsible for local compliance.</p>
  <p class="fine">Docs, examples and contracts are MIT. The compiled npm packages are Free-to-Use, No Copying; their source and the hosted Oak service are private. Manrope is self-hosted under the SIL Open Font Licence.</p>
