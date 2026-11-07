@@ -46,6 +46,9 @@
 <a href="roadmap.html">Roadmap</a>
 </li>
 <li>
+<a href="agents.html">Agents</a>
+</li>
+<li>
 <a href="security.html">Security</a>
 </li>
 <li>
@@ -70,6 +73,9 @@
 </li>
 <li>
 <a href="roadmap.html">Roadmap</a>
+</li>
+<li>
+<a href="agents.html">Agents</a>
 </li>
 <li>
 <a href="security.html">Security</a>
@@ -103,33 +109,32 @@
 <div class="page-body">
 <div class="wrap">
 <div class="prose">
-<p>Subscriptions are open in Oak 0.2.6. Read tools need no identity or subscription; hosted actions require a verified ERC-8004 identity and an active subscription. Plan availability follows account.phase: no-hold on the curve, neither plan during warmup, and both plans when ready with a valid price note.</p>
 <p>Oak simplifies access to Robinhood Chain for people and builders. Connect one assistant to the projects, tools and information you want to use.</p>
 <section class="doc-part" id="why">
 <h2>What Oak Is, and Why</h2>
-<details class="reference-detail">
+<details open class="reference-detail">
 <summary>Read details</summary>
-<p>Every project on <strong>Robinhood Chain</strong> (chain ID <code>4663</code>) has its own contracts, its own API or subgraph, its own decimal and approval rules, and its own failure modes. Nobody wants to install and maintain 31 separate MCP servers or give 31 tools access to a wallet.</p>
+<p>Every project on <strong>Robinhood Chain</strong> (chain ID <code>4663</code>) has its own contracts, its own API or subgraph, its own decimal and approval rules, and its own failure modes. Nobody wants to install and maintain 34 separate MCP servers or give 34 tools access to a wallet.</p>
 <p>
-<strong>One MCP for the whole chain.</strong> Oak is one downloadable tool (<code>@oakagentkit/addon</code>) that connects an AI agent (Claude Code, Codex, Gemini, Cursor, or Grok) to <strong>31 ecosystem projects</strong> behind one local wallet, one <code>&lt;module&gt;_&lt;verb&gt;</code> naming convention, one decimal base-unit amount format, pre-sign simulation previews (<code>eth_simulateV1</code>), and plain-sentence error messages.</p>
-<p>Your agent's tool list shows the everyday tools, such as status, swap, deposit and borrow. For anything not listed, it calls <code>find_tool</code> with what it wants to do, then <code>run_tool</code> with the tool's name and arguments. Every tool stays reachable, and <code>run_tool</code> applies the same access checks, local guard, preview and confirmation as a direct call.</p>
+<strong>One MCP for the whole chain.</strong> Oak is one downloadable tool (<code>@oakagentkit/addon</code>) that connects an AI agent (Claude Code, Codex, Gemini, Cursor, or Grok) to <strong>34 ecosystem projects</strong> behind one local wallet, one <code>&lt;module&gt;_&lt;verb&gt;</code> naming convention, one decimal base-unit amount format, pre-sign simulation previews (<code>eth_simulateV1</code>), and plain-sentence error messages.</p>
+<p>Your agent's tool list shows the everyday tools, such as status, swap, deposit and borrow. For anything not listed, it calls <code>find_tool</code> with what it wants to do, then <code>run_tool</code> with the tool's name and arguments. Every tool stays reachable, and <code>run_tool</code> applies the same identity check, local guard, preview, chat confirmation, and optional daily spending limit as a direct call.</p>
 <p>Oak is built around four principles:</p>
 <ol>
 <li>
-<strong>Your keys stay on your computer.</strong> The local add-on creates the wallet automatically on first use; optional recovery and export stay in your own terminal. Your private key <strong>never leaves your computer</strong>, and <strong>Oak cannot recover a lost key</strong>. The Oak server <strong>never sees your key and never signs or sends a transaction</strong>: <strong>your swaps and deposits go straight from your wallet to the project, and subscription payments go to the burner (<code>OakBurner</code>) and the single-owner treasury wallet</strong>.</li>
+<strong>Your keys stay on your computer.</strong> The local add-on creates the wallet automatically on first use; optional recovery and export stay in your own terminal. Your private key <strong>never leaves your computer</strong>, and <strong>Oak cannot recover a lost key</strong>. The Oak server <strong>never sees your key and never signs or sends a transaction</strong>: <strong>your swaps and deposits go straight from your wallet to the project</strong>.</li>
 <li>
 <strong>Normalised modules, not thin wrappers.</strong> Each project module absorbs protocol-specific quirks (Uniswap v4 <code>Permit2</code> expirations, Meridian multi-turn WebSocket RFQ auctions and USDe collateral swaps, TickerSpring unopened-market <code>startingPrice</code> bundles, Clanker MEV-window fee syncs, HoodLock proof lookups, and Merkl cumulative claim construction) so the agent interacts with clean, uniform verbs.</li>
 <li>
-<strong>Access only, no hidden middlemen.</strong> Oak charges a flat monthly subscription in USDG (<code>9 USDG per 30 days</code> on the holder plan, or <code>9 USDG plus one sixth of the entry price</code> on the no-hold plan, with a <code>12.333333 USDG</code> floor) and takes <strong>0%</strong> of your trades or protocol interactions. Oak previews and simulates transactions before local signing. Signature-only typed-data actions are shown for confirmation without transaction simulation. Its local guard refuses unexpected token movements or approvals before transaction signing. By default you approve each transaction and signature-only action. Oak sets no spending caps or allowlists and does not judge whether a trade is wise.</li>
+<strong>Free access, transparent fees, and chat confirmation.</strong> Oak is free to use. Oak takes a 0.25% fee on swaps and bridges (KyberSwap swaps, Velora swaps, and Relay bridges and swaps), plus partner referral fees (hood.ag registrations and resales, and Borro Bookrunners deposits). 25% of Oak's income buys back and burns <code>$OAK</code>. Holding <code>$OAK</code> has no access perks. Every action is prepared first via a listed action tool or <code>oak_prepare</code> (simulating the transaction without signing and returning a six-part summary, <code>actionId</code>, and UTC expiry) so your agent shows the terms in chat and asks for your yes or no before <code>oak_execute</code> re-simulates, checks your optional daily spending limit, and signs locally. Oak previews and simulates transactions before local signing. Signature-only typed-data actions are shown for confirmation without transaction simulation. Its local guard refuses unexpected token movements or approvals before transaction signing. By default you approve each transaction and signature-only action with a yes or no in chat. Oak sets no spending caps or allowlists and does not judge whether a trade is wise. You can ask for a daily spending limit of your own and change it any time by asking.</li>
 <li>
-<strong>Package and source licenses.</strong> Docs, examples and runtime contracts are MIT; the legacy Uniswap differential test is GPL-2.0-or-later. The compiled add-on and core npm packages use the Oak package license (free to use, no copying); their implementation source and the hosted Oak service are private. The hosted Oak server (<code>packages/server</code>) reads chain and project APIs, verifies ERC-8004 identities and subscription access, and runs the price-note issuer in the same process.</li>
+<strong>Package and source licenses.</strong> Docs, examples and runtime contracts are MIT; the legacy Uniswap differential test is GPL-2.0-or-later. The compiled add-on and core npm packages use the Oak package license (free to use, no copying); their implementation source and the hosted Oak service are private. The hosted Oak server (<code>packages/server</code>) reads chain and project APIs, verifies ERC-8004 identities, and runs the price-note issuer in the same process.</li>
 </ol>
 <hr>
 </details>
 </section>
 <section class="doc-part" id="links">
 <h2>Official Links and Disclosures</h2>
-<details class="reference-detail">
+<details open class="reference-detail">
 <summary>Read details</summary>
 <ul>
 <li>
@@ -149,19 +154,19 @@
 <p>
 <strong>Not affiliated.</strong> Oak is independent and is not affiliated with Robinhood. It uses none of that company's logos, wordmarks, or lookalike marks.</p>
 <p>
-<strong>Region notice.</strong> Oak displays a region notice by default. You are responsible for complying with the laws and third-party service terms in your jurisdiction. Oak never promises returns.</p>
+<strong>Region notice.</strong> Oak displays a region notice by default. You are responsible for complying with the laws and third-party service terms in your jurisdiction.</p>
 <p>
 <strong>Not financial advice.</strong> Oak provides software and information, not financial advice. Oak is not affiliated with Robinhood.</p>
 </details>
 </section>
 <section class="doc-part" id="treasury">
 <h2>Treasury authority</h2>
-<details class="reference-detail">
+<details open class="reference-detail">
 <summary>Read details</summary>
-<p>The treasury and contract admin is the single-owner wallet <code>0x856bb126188bDB5e425D3ac9D59E9ffBD12e6ECf</code>. One owner key can spend treasury funds, redirect future subscription payments, replace the price signer and retire subscriptions. There is no second-signature requirement. Key compromise exposes these powers; key loss can make treasury funds and administration inaccessible. It cannot spend user wallet balances. Safe support is an optional deployment profile, not the launch setup.</p>
+<p>The treasury and contract admin is the single-owner wallet <code>0x856bb126188bDB5e425D3ac9D59E9ffBD12e6ECf</code>. One owner key can spend treasury funds and replace the price signer. There is no second-signature requirement. Key compromise exposes these powers; key loss can make treasury funds and administration inaccessible. It cannot spend user wallet balances. Safe support is an optional deployment profile, not the launch setup.</p>
 </details>
 </section>
-<p class="note">Looking for the 31 projects? See the <a href="docs.html#modules">tool reference</a>. Want the simple walkthrough? See <a href="how-it-works.html">How it works</a>.</p>
+<p class="note">Looking for the 34 projects? See the <a href="docs.html#modules">tool reference</a>. Want the simple walkthrough? See <a href="how-it-works.html">How it works</a>.</p>
 </div>
 </div>
 </div>
@@ -195,6 +200,9 @@
 <a href="roadmap.html">Roadmap</a>
 </li>
 <li>
+<a href="agents.html">Agents</a>
+</li>
+<li>
 <a href="partnerships.html">Partnerships</a>
 </li>
 <li>
@@ -213,14 +221,14 @@
 <a href="https://x.com/OakAgentKit">@OakAgentKit on X</a>
 </li>
 <li>
-<a href="https://x.com/OakAgentKit/status/2116286790059671939">Launch film on X</a>
+<a href="https://x.com/OakAgentKit/status/2119114741234974988">Launch film on X</a>
 </li>
 </ul>
 </nav>
 </div>
- <p class="footer-status">$OAK is live. Oak 0.2.6 subscriptions are open.</p>
- <p>Subscriptions are open in Oak 0.2.6. Read tools need no identity or subscription; hosted actions require a verified ERC-8004 identity and an active subscription. Official $OAK address: <code class="token-address">0x6511c233790Ec10f7d673c64DC82C3F941D57828</code>. Pons page: <a href="https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828">https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828</a>. Plan availability follows account.phase: no-hold on the curve, neither plan during warmup, and both plans when ready with a valid price note. Holding $OAK buys access and nothing else.</p>
- <p>Independent software, not affiliated with Robinhood. Not financial advice. Oak never promises returns.</p>
+ <p class="footer-status">Oak is free. $OAK is live.</p>
+ <p>$OAK is live. Oak is free. Reads work straight away. Actions need a verified ERC-8004 agent ID and your yes or no in chat. Call account to see where your setup stands. Official $OAK address: <code class="token-address">0x6511c233790Ec10f7d673c64DC82C3F941D57828</code>. Pons page: <a href="https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828">https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828</a>. Holding $OAK has no access perks. Oak uses 25% of its income to buy back and burn $OAK.</p>
+ <p>Independent software, not affiliated with Robinhood. Not financial advice. Oak makes no promises about token prices or investment outcomes.</p>
  <p>Region notice: project and asset availability varies by jurisdiction. You are responsible for local compliance.</p>
  <p class="fine">Docs, examples and contracts are MIT. The compiled npm packages are Free-to-Use, No Copying; their source and the hosted Oak service are private. Manrope is self-hosted under the SIL Open Font Licence.</p>
 </div>

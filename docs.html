@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Oak docs: tool reference for 9 basic tools and 31 modules</title>
+<title>Oak docs: tool reference for 16 basic tools and 34 modules</title>
 <meta name="description" content="The Oak tool reference: amount conventions, the basic tools, every Robinhood Chain project module with its tool names, the command line, project recipes and notes for AI agents.">
 <meta name="theme-color" content="#062F27">
 <link rel="canonical" href="https://oakagentkit.org/docs.html">
 <meta property="og:url" content="https://oakagentkit.org/docs.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Oak Agent Kit">
-<meta property="og:title" content="Oak docs: tool reference for 9 basic tools and 31 modules">
+<meta property="og:title" content="Oak docs: tool reference for 16 basic tools and 34 modules">
 <meta property="og:description" content="The Oak tool reference: amount conventions, the basic tools, every Robinhood Chain project module with its tool names, the command line, project recipes and notes for AI agents.">
 <meta property="og:image" content="https://oakagentkit.org/03-og-card-1200x630.jpg">
 <meta property="og:image:width" content="1200">
@@ -46,6 +46,9 @@
 <a href="roadmap.html">Roadmap</a>
 </li>
 <li>
+<a href="agents.html">Agents</a>
+</li>
+<li>
 <a href="security.html">Security</a>
 </li>
 <li>
@@ -70,6 +73,9 @@
 </li>
 <li>
 <a href="roadmap.html">Roadmap</a>
+</li>
+<li>
+<a href="agents.html">Agents</a>
 </li>
 <li>
 <a href="security.html">Security</a>
@@ -104,7 +110,7 @@
 <div class="wrap">
 <div class="prose wide docs-page">
 <details class="project-directory">
-<summary>All 31 projects and supported agents</summary>
+<summary>All 34 projects and supported agents</summary>
 <ul class="project-names">
 <li>
 <span class="proj">KyberSwap</span>
@@ -199,20 +205,29 @@
 <li>
 <span class="proj">Gloam</span>
 </li>
+<li>
+<span class="proj">Factor</span>
+</li>
+<li>
+<span class="proj">Raeto</span>
+</li>
+<li>
+<span class="proj">Upoch</span>
+</li>
 </ul>
 <p class="agent-names">
-<span class="agent">Claude Code</span> · <span class="agent">Codex</span> · <span class="agent">Gemini</span> · <span class="agent">Cursor</span> · <span class="agent">Grok</span>
+<span class="agent">Claude Code</span> · <span class="agent">Codex</span> · <span class="agent">Cursor</span> · <span class="agent">Gemini</span> · <span class="agent">Grok</span>
 </p>
 <p>Mainnet: 4663. Testnet: basic tools and ERC-8004 identity only.</p>
 </details>
-<p class="release-note">Subscriptions are open in Oak 0.2.6. Read tools need no identity or subscription; hosted actions require a verified ERC-8004 identity and an active subscription. Official $OAK address: <code class="token-address">0x6511c233790Ec10f7d673c64DC82C3F941D57828</code>. Pons page: <a href="https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828">https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828</a>. Plan availability follows account.phase: no-hold on the curve, neither plan during warmup, and both plans when ready with a valid price note.</p>
-<p class="docs-narrow">Your agent's tool list shows the everyday tools. For anything not listed, it calls <code>find_tool</code> with what it wants to do, then <code>run_tool</code> with the tool's name and arguments. Tools run this way get the same access checks, local guard, preview and confirmation as a direct call.</p>
+<p class="release-note">$OAK is live. Oak is free. Reads work straight away. Actions need a verified ERC-8004 agent ID and your yes or no in chat. Call account to see where your setup stands. Official $OAK address: <code class="token-address">0x6511c233790Ec10f7d673c64DC82C3F941D57828</code>. Pons page: <a href="https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828">https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828</a>.</p>
+<p class="docs-narrow">Your agent's tool list shows the everyday tools. For anything not listed, it calls <code>find_tool</code> with what it wants to do, then <code>run_tool</code> with the tool's name and arguments. Tools run this way get the same checks, local guard, summary and yes-or-no approval as a direct call.</p>
 <section class="doc-part" id="basics">
 <h2>Basics</h2>
-<details class="reference-detail">
+<details open class="reference-detail">
 <summary>Read details</summary>
 <div class="docs-narrow">
-<p>Every amount crosses JSON boundaries as a decimal base-unit string (never a float). Every tool output identifies the token address, symbol, chain ID, and decimals. Non-read requests use request-bound sessions (<code>X-Oak-Session</code> plus a single-use <code>X-Oak-Request</code> signature signed by an ephemeral in-memory <code>sessionKey</code>). Before signing any transaction sequence, the add-on requests a <code>preview</code> (<code>eth_simulateV1</code> with <code>traceTransfers: true</code>), reuses a matching preview from the same block within 12 seconds so <code>swap</code> does not re-simulate twice, builds exact token approvals only (never unlimited), and displays the simulated token deltas.</p>
+<p>Every amount crosses JSON boundaries as a decimal base-unit string (never a float). Every tool output identifies the token address, symbol, chain ID, and decimals. Non-read requests use request-bound sessions (<code>X-Oak-Session</code> plus a single-use <code>X-Oak-Request</code> signature signed by an ephemeral in-memory <code>sessionKey</code>). When preparing an action (calling a listed action tool or <code>oak_prepare</code>), the add-on runs a simulation <code>preview</code> (<code>eth_simulateV1</code> with <code>traceTransfers: true</code>), builds exact token approvals only (never unlimited), and displays the six-part summary, <code>actionId</code>, expiry, and simulated token deltas in chat; when <code>oak_execute</code> is called with <code>actionId</code> after a yes in chat, it re-simulates, checks that terms have not worsened, checks the optional daily spending limit, and signs locally.</p>
 </div>
 <div class="table-wrap">
 <table class="md-table">
@@ -229,35 +244,35 @@
 <code>find_token</code>
 </td>
 <td data-label="Kind">Read</td>
-<td data-label="What it does">Verified token discovery by name, symbol, or address across fixed tokens (<code>ETH</code>, <code>USDG</code>, <code>WETH</code>, <code>USDe</code>, <code>$OAK</code>), official stock tokens, Clanker, and Pons (Pons and <code>pools.trade</code> require an address here; search Pons by name, symbol or address with <code>pons_browse {&quot;query&quot;: &quot;...&quot;}</code>).</td>
+<td data-label="What it does">Verified token discovery by name, symbol, or address across fixed tokens (<code>ETH</code>, <code>USDG</code>, <code>WETH</code>, <code>USDe</code>, <code>$OAK</code>), official stock tokens (carrying <code>identityNote</code> when matched to the official list), Clanker, and Pons (Pons and <code>pools.trade</code> require an address here; search Pons by name, symbol or address with <code>pons_browse {&quot;query&quot;: &quot;...&quot;}</code>).</td>
 </tr>
 <tr>
 <td data-label="Tool">
 <code>balances</code>
 </td>
 <td data-label="Kind">Read</td>
-<td data-label="What it does">One-call <code>Multicall3.aggregate3</code> read of native ETH, USDG, WETH, USDe, <code>$OAK</code>, and official stock tokens from the official list.</td>
+<td data-label="What it does">One-call <code>Multicall3.aggregate3</code> read of native ETH, USDG, WETH, USDe, <code>$OAK</code>, and official stock tokens from the official list, with <code>humanAmount</code> and a labeled <code>usdEstimate</code> (<code>&quot;estimate, not a quote&quot;</code> or <code>&quot;price unavailable&quot;</code>).</td>
 </tr>
 <tr>
 <td data-label="Tool">
 <code>price</code>
 </td>
 <td data-label="Kind">Read</td>
-<td data-label="What it does">USD price (18-decimal base units) with a <code>stale</code> flag.</td>
+<td data-label="What it does">USD price (18-decimal base units) with a <code>stale</code> flag when the pool has had a trade in the last 30 minutes, or a plain explanation pointing to <code>balances</code> and <code>positions</code> estimates when no fresh trade exists.</td>
 </tr>
 <tr>
 <td data-label="Tool">
 <code>quote</code>
 </td>
 <td data-label="Kind">Read</td>
-<td data-label="What it does">Compares KyberSwap, Velora, and Pons launch-curve routes by net output, warns when price impact exceeds 2% against reference prices, and issues a 60-second <code>quoteId</code>; <code>from</code> and <code>to</code> accept token addresses or verified symbols (<code>ETH</code>, <code>USDG</code>, <code>WETH</code>, <code>USDe</code>, <code>OAK</code>, and official stock tickers).</td>
+<td data-label="What it does">Compares KyberSwap, Velora, and Pons launch-curve routes by net output (hiding aggregator routes and falling back to pinned Uniswap routes when the local RPC lacks <code>debug_traceCall</code>), warns when price impact exceeds 2% against reference prices, and issues a 60-second <code>quoteId</code>; <code>from</code> and <code>to</code> accept token addresses or verified symbols (<code>ETH</code>, <code>USDG</code>, <code>WETH</code>, <code>USDe</code>, <code>OAK</code>, and official stock tickers).</td>
 </tr>
 <tr>
 <td data-label="Tool">
 <code>swap</code>
 </td>
 <td data-label="Kind">Action</td>
-<td data-label="What it does">Builds exact-approval (never unlimited) and swap transactions for a <code>quoteId</code>, preserving <code>minAmountOut</code> and reusing a fresh same-block preview within 12 seconds.</td>
+<td data-label="What it does">Builds exact-approval (never unlimited) and swap transactions for a <code>quoteId</code> (or swap parameters), preserving <code>minAmountOut</code>, returning a summary and <code>actionId</code>, and re-verifying simulation on <code>oak_execute</code> after chat confirmation.</td>
 </tr>
 <tr>
 <td data-label="Tool">
@@ -271,27 +286,79 @@
 <code>history</code>
 </td>
 <td data-label="Kind">Read</td>
-<td data-label="What it does">Decoded subscription and ERC-20/module event history for the wallet.</td>
+<td data-label="What it does">Decoded ERC-20 and module event history for the wallet across the last 10,000 blocks, with a coverage <code>notice</code>.</td>
 </tr>
 <tr>
 <td data-label="Tool">
 <code>positions</code>
 </td>
 <td data-label="Kind">Read</td>
-<td data-label="What it does">Aggregated active positions and per-program status across 31 ecosystem projects; private Gloam notes stay local in <code>gloam_status</code>.</td>
+<td data-label="What it does">Aggregated active positions and per-program status across 34 ecosystem projects (with <code>deepScan?: boolean</code>, labeled <code>usdEstimate</code> and <code>usdEstimateTotal</code>, and plain coverage gap lines); private Gloam notes stay local in <code>gloam_status</code>.</td>
 </tr>
 <tr>
 <td data-label="Tool">
 <code>account</code>
 </td>
 <td data-label="Kind">Read</td>
-<td data-label="What it does">Subscription status on the wallet's authoritative lineage contract.</td>
+<td data-label="What it does">Shows the wallet address, network, ERC-8004 identity, whether actions are ready, and the wallet's <code>$OAK</code> balance. Oak is free to use.</td>
+</tr>
+<tr>
+<td data-label="Tool">
+<code>oak_doctor</code>
+</td>
+<td data-label="Kind">Read</td>
+<td data-label="What it does">Read-only self-check of key protection, RPC tracing readiness, ETH/USDG prices, stock USD estimates, ERC-8004 identity, daily spending limit, hosted text checks, and open token approvals.</td>
+</tr>
+<tr>
+<td data-label="Tool">
+<code>oak_dry_run</code>
+</td>
+<td data-label="Kind">Read</td>
+<td data-label="What it does">Tests 1 to 8 transaction actions without signing to report expected outcomes, fees, and approvals.</td>
+</tr>
+<tr>
+<td data-label="Tool">
+<code>oak_whois</code>
+</td>
+<td data-label="Kind">Read</td>
+<td data-label="What it does">Identifies an address on Robinhood Chain using Oak's pinned address book and live runtime bytecode comparison.</td>
+</tr>
+<tr>
+<td data-label="Tool">
+<code>oak_portfolio</code>
+</td>
+<td data-label="Kind">Read</td>
+<td data-label="What it does">Reads wallet holdings, module positions, and claimable rewards with USD estimates and coverage gaps.</td>
+</tr>
+<tr>
+<td data-label="Tool">
+<code>oak_claimable</code>
+</td>
+<td data-label="Kind">Read</td>
+<td data-label="What it does">Reads claimable rewards across ecosystem programs and gives ordered claim steps for <code>oak_plan_run</code>.</td>
+</tr>
+<tr>
+<td data-label="Tool">
+<code>oak_plan_run</code>
+</td>
+<td data-label="Kind">Action</td>
+<td data-label="What it does">Runs 1 to 8 transaction actions with a single chat confirmation listing every step and limit.</td>
+</tr>
+<tr>
+<td data-label="Tool">
+<code>oak_receipts</code>
+</td>
+<td data-label="Kind">Read</td>
+<td data-label="What it does">Lists or exports local approval receipts as JSON or CSV and verifies their hash chain.</td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="docs-narrow">
-<h3 id="buy-a-token">Buy a token (<code>find_token</code> → <code>quote</code> → <code>preview</code> → <code>swap</code>)</h3>
+<p>
+<strong>Always prepare, ask in chat, and execute only after a yes.</strong> Call a listed common action tool (<code>swap</code>, <code>send</code>, <code>lend</code>, <code>withdraw</code>, <code>borrow</code>, <code>repay</code>, <code>bridge</code>) or <code>oak_prepare</code> with <code>{&quot;name&quot;: &quot;&lt;tool&gt;&quot;, &quot;arguments&quot;: {...}}</code> first. This builds and simulates the action (<code>eth_simulateV1</code> with <code>traceTransfers: true</code>) without signing and gives back a six-part summary (what the action does, what leaves the wallet, what comes back or minimum received, fees, who gets any token approval, and warnings), an <code>actionId</code>, and its UTC expiry. Show the summary in chat and wait for the person to say yes or no. Only after a yes, call <code>oak_execute</code> with <code>{&quot;actionId&quot;: &quot;&lt;the exact actionId&gt;&quot;}</code>. <code>oak_execute</code> re-runs the simulation and local guards, checks that the terms have not worsened, checks the optional daily spending limit, and signs locally. Built approvals are always exact (<code>amountIn</code>), never unlimited. Note that simulation transfers exclude gas and do not prove off-chain external settlement (such as Relay destination fills or Meridian RFQ relayer execution).</p>
+<p>When preparing an action (calling a listed action tool or <code>oak_prepare</code>), the add-on runs a simulation <code>preview</code> (<code>eth_simulateV1</code> with <code>traceTransfers: true</code>), builds exact token approvals only (never unlimited), and displays the six-part summary, <code>actionId</code>, expiry, and simulated token deltas in chat; when <code>oak_execute</code> is called with <code>actionId</code> after a yes in chat, it re-simulates, checks that terms have not worsened, checks the optional daily spending limit, and signs locally.</p>
+<h3 id="buy-a-token">Buy a token (<code>find_token</code> → <code>quote</code> → <code>swap</code> → chat yes → <code>oak_execute</code>)</h3>
 <p>This swap example is for mainnet (<code>4663</code>). Testnet exposes basic tools and ERC-8004 identity tools; swap routes and the other ecosystem modules are not configured there.</p>
 <ol>
 <li>
@@ -303,35 +370,40 @@
 <code data-lang="bash">oak call quote '{&quot;from&quot;:&quot;USDG&quot;,&quot;to&quot;:&quot;TSLA&quot;,&quot;amountIn&quot;:&quot;10000000&quot;,&quot;slippageBps&quot;:50}'</code></pre>
 </li>
 <li>
-<strong>Preview the simulation (<code>preview</code>):</strong> Simulate an unsigned transaction sequence via <code>eth_simulateV1</code> to inspect exact token balance deltas (when you call <code>swap</code>, the local bridge also runs <code>preview</code> automatically before signing and sending): <strong>Template only — not runnable as shown.</strong> Replace <code>...</code> with a complete unsigned transaction array from a transaction builder. A <code>quoteId</code> is not a transaction array. The local swap bridge runs the preview automatically before signing.<pre tabindex="0" role="region" aria-label="Command example" class="code-block">
-<code data-lang="text">oak call preview '{&quot;txs&quot;:[...]}'</code></pre>
-</li>
-<li>
-<strong>Execute the swap (<code>swap</code>):</strong> Build, preview, sign locally, and broadcast the quoted swap using its 60-second <code>quoteId</code>:<pre tabindex="0" role="region" aria-label="Command example" class="code-block">
+<strong>Prepare the swap (<code>swap</code> or <code>oak_prepare</code>):</strong> Build and simulate the swap via <code>eth_simulateV1</code> without signing, producing the six-part summary, <code>actionId</code>, and UTC expiry to show in chat:<pre tabindex="0" role="region" aria-label="Command example" class="code-block">
 <code data-lang="bash">oak call swap '{&quot;quoteId&quot;:&quot;&lt;quoteId&gt;&quot;}'</code></pre>
 </li>
+<li>
+<strong>Execute the swap (<code>oak_execute</code>):</strong> After the person replies yes in chat, re-verify the simulation, terms, and optional daily spending limit, sign locally, and broadcast:<pre tabindex="0" role="region" aria-label="Command example" class="code-block">
+<code data-lang="bash">oak call oak_execute '{&quot;actionId&quot;:&quot;&lt;actionId&gt;&quot;}'</code></pre>
+</li>
 </ol>
-<h3 id="find-any-other-tool">Find any other tool (<code>find_tool</code>, <code>run_tool</code>)</h3>
+<h3 id="find-any-other-tool">Find any other tool (<code>find_tool</code>, <code>run_read_tool</code>, <code>run_tool</code>, <code>oak_playbook</code>)</h3>
 <p>
-<code>tools/list</code> shows the everyday tools, such as status, swap, buy and sell, deposit and withdraw, and borrow and repay. Every other tool stays reachable by name. For anything not listed, call <code>find_tool</code> with what you want to do, then <code>run_tool</code> with the tool name and arguments.</p>
+<code>tools/list</code> shows the 23 core tools on mainnet (17 on testnet) plus installed recipes. Every other tool stays reachable by name. For anything not listed, call <code>find_tool</code> with what you want to do, then <code>run_read_tool</code> for reads or <code>run_tool</code> for actions.</p>
 <ul>
 <li>
-<code>find_tool</code> searches every Oak tool, listed or not, by what you want to do, a project name or an exact tool name (<code>query</code>, with optional <code>program</code> and <code>limit</code>). It runs locally and only reads. Each match shows its name, project, whether it is a read or an action, whether <code>tools/list</code> shows it, a one-line description and its required inputs; an exact tool name also gives the full input schema.</li>
+<code>find_tool</code> searches every Oak tool, listed or not, by what you want to do, a project name or an exact tool name (<code>query</code>, with optional <code>program</code> and <code>limit</code>). It runs locally and only reads. Its output gives <code>matches</code> (count), optional venue <code>programNotes</code>, and <code>results</code>, where each match shows its <code>name</code>, <code>program</code>, <code>kind</code> (<code>read</code>, <code>action</code>, or <code>read or action</code>), <code>listed</code> (whether <code>tools/list</code> shows it), <code>call</code> (<code>&quot;direct&quot; | &quot;run_read_tool&quot; | &quot;run_tool&quot;</code>), optional <code>status</code> (<code>&quot;blocked&quot; | &quot;needs_install&quot;</code>) and <code>statusNote</code>, a one-line description and its <code>required</code> inputs; an exact tool name also gives the full <code>inputSchema</code> and declared <code>outputSchema</code>.</li>
 <li>
-<code>run_tool</code> runs any Oak tool by name through the same code path as a direct call, so the access gate, local guard, preview, exact approvals and human confirmation are unchanged. Reads still need no identity or subscription. Put the tool's inputs inside <code>arguments</code>.</li>
-<li>An AI client that remembers &quot;always allow&quot; for <code>run_tool</code> lets it request every Oak tool. The local signing contract still requires human confirmation for value-bearing off-chain signatures. New lending actions, Hookr prepared actions, Relay vault exits and TickerSpring order accounting also require a person in auto mode.</li>
+<code>run_read_tool</code> runs an Oak read tool by name with its arguments (<code>name</code>, <code>arguments</code>), such as a read given by <code>find_tool</code> with <code>call: &quot;run_read_tool&quot;</code>. It preserves <code>readOnlyHint: true</code>, needs no identity, and refuses actions (<code>Not run. &lt;name&gt; is an action: call it with run_tool so its checks and confirmation apply.</code>).</li>
+<li>
+<code>run_tool</code> runs any Oak tool by name through the same code path as a direct call, so the identity check, local guard, simulation preview, exact approvals, chat confirmation (preparing with the action tool or <code>oak_prepare</code>, then calling <code>oak_execute</code> with <code>actionId</code>), and optional daily spending limit are unchanged. Reads still need no identity. Put the tool's inputs inside <code>arguments</code>.</li>
+<li>
+<code>oak_playbook</code> reads an Oak playbook by name (<code>name</code>, optional <code>offset</code>), such as <code>reads</code> or <code>pendle</code>, in pages of up to 20,000 characters for clients that cannot read MCP resources; omitting <code>name</code> lists available playbooks.</li>
+<li>Clients that auto-approve read-only tools can safely auto-approve <code>run_read_tool</code>. An AI client that remembers &quot;always allow&quot; for <code>run_tool</code> lets it request every Oak tool; every action still requires preparing the action (<code>oak_prepare</code> or the action tool), a yes in chat, and <code>oak_execute</code> with a valid <code>actionId</code> within the optional daily spending limit before local signing.</li>
 </ul>
 <pre tabindex="0" role="region" aria-label="Command example" class="code-block">
-<code data-lang="bash">oak call find_tool '{&quot;query&quot;:&quot;show my wallet history&quot;}'
-oak call run_tool '{&quot;name&quot;:&quot;history&quot;,&quot;arguments&quot;:{&quot;limit&quot;:5}}'</code></pre>
+<code data-lang="bash">oak call find_tool '{&quot;query&quot;:&quot;hookr pools&quot;}'
+oak call run_read_tool '{&quot;name&quot;:&quot;hookr_pools&quot;,&quot;arguments&quot;:{}}'
+oak call oak_prepare '{&quot;name&quot;:&quot;uniswap_remove&quot;,&quot;arguments&quot;:{&quot;version&quot;:&quot;v3&quot;,&quot;tokenId&quot;:&quot;1&quot;,&quot;liquidityBps&quot;:10000,&quot;amount0Min&quot;:&quot;0&quot;,&quot;amount1Min&quot;:&quot;0&quot;}}'</code></pre>
 <p>Wave-3 integration installs the shared read gates, local transaction reconstruction and RFQ wallet lock. Meridian Predict buys are enabled; the bridge owns every continuation and signature, so never supply either manually. Meridian perps public reads and guarded deposit/finalize transactions are available, but perps signatures remain disabled pending their signing-contract expiry policy and registered local submission path. A deposit alone does not enable trading in Oak.</p>
 <p>Hookr supports locally reconstructed fungible-token actions and current compounder actions. NFT/6909 grant-dependent routes remain blocked pending transfer tracing and approval journals. Signed referral registration remains blocked pending a declared relayed-signature policy; unsigned referral and other supported actions remain available. Collection-wide approvals and ERC-1155 custody are refused. Use <code>hookr_contracts</code> to fetch the exact schema before an action. Historical playbooks that say shared integration is pending should be read with these current limits.</p>
 </div>
 </details>
 </section>
 <section class="doc-part" id="modules">
-<h2>31 project modules</h2>
-<details class="reference-detail">
+<h2>34 project modules</h2>
+<details open class="reference-detail">
 <summary>Browse projects and tools</summary>
 <h3>Swap and Trade</h3>
 <div class="docs-prompt">
@@ -345,7 +417,7 @@ oak call run_tool '{&quot;name&quot;:&quot;history&quot;,&quot;arguments&quot;:{
 <code>kyberswap_quote</code>
 <code>kyberswap_swap</code>
 </div>
-<p>Route quoting, with optional source and route-shape controls, and swap building; generic <code>quote</code>/<code>swap</code> compares KyberSwap, Velora, and Pons launch curves and enforces <code>minAmountOut</code>.</p>
+<p>Route quoting, with optional source and route-shape controls, and swap building (includes Oak's 0.25% swap fee); generic <code>quote</code>/<code>swap</code> compares KyberSwap, Velora, and Pons launch curves and enforces <code>minAmountOut</code>.</p>
 </article>
 <article class="docs-mod">
 <h4>Velora</h4>
@@ -362,7 +434,7 @@ oak call run_tool '{&quot;name&quot;:&quot;history&quot;,&quot;arguments&quot;:{
 <code>velora_claim_fees</code>
 <code>velora_unwrap_deth</code>
 </div>
-<p>Route quoting and swap building with net output comparison and venue fee disclosure, plus Delta order, bridge and strategy reads, partner fee claims and dETH unwrap (<code>velora_quote</code>, <code>velora_swap</code>, <code>velora_delta_orders</code>, <code>velora_fee_balance</code>, <code>velora_claim_fees</code>, <code>velora_unwrap_deth</code>).</p>
+<p>Route quoting and swap building with net output comparison and venue and Oak 0.25% fee disclosure, plus Delta order, bridge and strategy reads, partner fee claims and dETH unwrap (<code>velora_quote</code>, <code>velora_swap</code>, <code>velora_delta_orders</code>, <code>velora_fee_balance</code>, <code>velora_claim_fees</code>, <code>velora_unwrap_deth</code>).</p>
 </article>
 <article class="docs-mod">
 <h4>Pons</h4>
@@ -642,7 +714,7 @@ oak call run_tool '{&quot;name&quot;:&quot;history&quot;,&quot;arguments&quot;:{
 <code>gloam_claim</code>
 <code>gloam_cash_out</code>
 </div>
-<p>Gloam is an official Oak partner. Gloam's own team runs its product and contracts; Oak didn't build them and doesn't run them. Private USDG payments using local encrypted notes and receive tags. Shield deposits sign locally; pay, claim and whole-note cash-out use locally made proofs submitted by Gloam’s relay through Oak’s server. Cash-outs go only to this wallet. Claim needs no identity or plan; every action needs human confirmation. Local balances are available through <code>gloam_status</code>; hosted <code>positions</code> does not read private notes. (<code>gloam_status</code>, <code>gloam_shield</code>, <code>gloam_pay</code>, <code>gloam_claim</code>, <code>gloam_cash_out</code>).</p>
+<p>Gloam is an official Oak partner. Gloam's own team runs its product and contracts; Oak didn't build them and doesn't run them. Private USDG payments using local encrypted notes and receive tags. Shield deposits sign locally; pay, claim and whole-note cash-out use locally made proofs submitted by Gloam’s relay through Oak’s server. Cash-outs go only to this wallet. Claim needs no identity; every action needs chat confirmation. Local balances are available through <code>gloam_status</code>; hosted <code>positions</code> does not read private notes. (<code>gloam_status</code>, <code>gloam_shield</code>, <code>gloam_pay</code>, <code>gloam_claim</code>, <code>gloam_cash_out</code>).</p>
 </article>
 </div>
 <h3>Borrow and Lend</h3>
@@ -672,7 +744,6 @@ oak call run_tool '{&quot;name&quot;:&quot;history&quot;,&quot;arguments&quot;:{
 <code>priors_borrow</code>
 <code>priors_repay</code>
 <code>priors_status</code>
-<code>priors_starter_line</code>
 <code>priors_close_line</code>
 <code>priors_release_bond</code>
 <code>priors_set_delegate</code>
@@ -870,7 +941,7 @@ oak call run_tool '{&quot;name&quot;:&quot;history&quot;,&quot;arguments&quot;:{
 <code>priors_capabilities</code>
 </div>
 <p>
-<code>CreditPoolV2</code> lending and withdrawal for all wallets, plus borrowing and repayment for funded ERC-8004 credit lines (<code>priors_lend</code>, <code>priors_withdraw</code>, <code>priors_borrow</code>, <code>priors_repay</code>, <code>priors_status</code>, <code>priors_starter_line</code>, <code>priors_close_line</code>, <code>priors_release_bond</code>), plus a new agent's 5 USDG starter line from Priors' treasury, and sponsor, backing, treasury, stock-collateral, autopay, savings, market and legacy-seat tools with Priors token (PT) trades and reads (<code>priors_root_vouch</code>, <code>priors_backing_open</code>, <code>priors_stock_open</code>, <code>priors_autopay_on</code>, <code>priors_savings_deposit</code>, <code>priors_market_v2_list</code>, <code>priors_pt_buy</code>).</p>
+<code>CreditPoolV2</code> lending and withdrawal for all wallets, plus borrowing and repayment for funded ERC-8004 credit lines (<code>priors_lend</code>, <code>priors_withdraw</code>, <code>priors_borrow</code>, <code>priors_repay</code>, <code>priors_status</code>, <code>priors_close_line</code>, <code>priors_release_bond</code>), plus sponsor, backing, treasury, stock-collateral, autopay, savings, market and legacy-seat tools with Priors token (PT) trades and reads (<code>priors_root_vouch</code>, <code>priors_backing_open</code>, <code>priors_stock_open</code>, <code>priors_autopay_on</code>, <code>priors_savings_deposit</code>, <code>priors_market_v2_list</code>, <code>priors_pt_buy</code>).</p>
 </article>
 <article class="docs-mod">
 <h4>LayerBank</h4>
@@ -888,7 +959,7 @@ oak call run_tool '{&quot;name&quot;:&quot;history&quot;,&quot;arguments&quot;:{
 <code>borro_deposit</code>
 <code>borro_withdraw</code>
 </div>
-<p>Borro is an official Oak partner. Borro's own team runs its product and contracts; Oak didn't build them and doesn't run them. USDG and official stock-token lending reads, deposits and withdrawals on Robinhood Chain, verified on chain per request (<code>borro_list</code>, <code>borro_deposit</code>, <code>borro_withdraw</code>).</p>
+<p>Borro is an official Oak partner. Borro's own team runs its product and contracts; Oak didn't build them and doesn't run them. USDG and official stock-token lending reads, deposits (via <code>BorroBuilders</code> with code <code>oak</code> and on-chain <code>minShares</code> when listed, or direct vault fallback) and withdrawals on Robinhood Chain, verified on chain per request (<code>borro_list</code>, <code>borro_deposit</code>, <code>borro_withdraw</code>).</p>
 </article>
 </div>
 <h3>Move Money</h3>
@@ -910,7 +981,7 @@ oak call run_tool '{&quot;name&quot;:&quot;history&quot;,&quot;arguments&quot;:{
 <code>relay_vault_status</code>
 <code>relay_vault_withdraw</code>
 </div>
-<p>Cross-chain bridging into and out of chain <code>4663</code> with live status tracking, read-only quotes and a chain directory (<code>relay_bridge_in</code>, <code>relay_bridge_out</code>, <code>relay_status</code>, <code>relay_quote</code>, <code>relay_chains</code>). A fresh wallet may bridge ETH or USDG to itself before setup or subscription; every other bridge shape still needs both.</p>
+<p>Cross-chain bridging into and out of chain <code>4663</code> with live status tracking, read-only quotes, a chain directory, and Oak's 0.25% app fee (<code>relay_bridge_in</code>, <code>relay_bridge_out</code>, <code>relay_status</code>, <code>relay_quote</code>, <code>relay_chains</code>). A fresh wallet may bridge ETH or USDG to itself before identity setup; every other bridge shape requires a verified ERC-8004 identity.</p>
 </article>
 <article class="docs-mod">
 <h4>Orbio</h4>
@@ -958,7 +1029,7 @@ oak call run_tool '{&quot;name&quot;:&quot;history&quot;,&quot;arguments&quot;:{
 <code>meridian_settle</code>
 <code>meridian_redeem</code>
 </div>
-<p>Robinhood Chain Predict search, paginated holdings, secondary RFQ sales and settlement/redemption using USDe (<code>meridian_browse</code>, <code>meridian_positions</code>, <code>meridian_buy</code>, <code>meridian_sell</code>, <code>meridian_settle</code>, <code>meridian_redeem</code>). Buys are paused; position-token bridging, Arbitrum trading and perps are unsupported.</p>
+<p>Robinhood Chain Predict search, paginated holdings, RFQ buys, secondary RFQ sales and settlement/redemption using USDe (<code>meridian_browse</code>, <code>meridian_positions</code>, <code>meridian_buy</code>, <code>meridian_sell</code>, <code>meridian_settle</code>, <code>meridian_redeem</code>). Position-token bridging, Arbitrum trading, perps orders and perps withdrawal initiation are unsupported.</p>
 </article>
 <article class="docs-mod">
 <h4>Lighter</h4>
@@ -1050,7 +1121,7 @@ oak call run_tool '{&quot;name&quot;:&quot;history&quot;,&quot;arguments&quot;:{
 <code>hoodag_social_read</code>
 </div>
 <p>
-<code>.hood</code> domain registration via USDG, reverse record configuration, and resolution (<code>hoodag_register</code>, <code>hoodag_resolve</code>, <code>hoodag_name_info</code>), plus renewals, records, transfers, marketplace listings and purchases, batch and native-ETH registration, and index reads (<code>hoodag_renew</code>, <code>hoodag_set_text</code>, <code>hoodag_transfer</code>, <code>hoodag_market_list</code>, <code>hoodag_market_buy</code>, <code>hoodag_register_many</code>, <code>hoodag_browse</code>).</p>
+<code>.hood</code> domain registration via USDG, reverse record configuration, and resolution (<code>hoodag_register</code>, <code>hoodag_resolve</code>, <code>hoodag_name_info</code>), plus renewals, records, transfers, marketplace listings and purchases, batch and native-ETH registration, and index reads (<code>hoodag_renew</code>, <code>hoodag_set_text</code>, <code>hoodag_transfer</code>, <code>hoodag_market_list</code>, <code>hoodag_market_buy</code>, <code>hoodag_register_many</code>, <code>hoodag_browse</code>). On registrations and resales, Oak passes its treasury as <code>referrer</code> (5% registration and 4% resale referral share and matching buyer discount; zero when treasury is payer or seller).</p>
 </article>
 <article class="docs-mod">
 <h4>HoodLock</h4>
@@ -1078,51 +1149,92 @@ oak call run_tool '{&quot;name&quot;:&quot;history&quot;,&quot;arguments&quot;:{
 </div>
 <p>Token, v2 LP, and v3 position locks, token burns, and airdrop create, airdrop claim, and airdrop recipient lists (<code>hoodlock_lock</code>, <code>hoodlock_burn</code>, <code>hoodlock_airdrop_create</code>, <code>hoodlock_airdrop_claim</code>, <code>hoodlock_list_locks</code>; omit <code>id</code> on <code>hoodlock_airdrop_claim</code> to query eligible airdrops), plus vesting schedules and lock withdraw, extend, transfer and fee collection (<code>hoodlock_vesting_create</code>, <code>hoodlock_withdraw</code>, <code>hoodlock_extend</code>, <code>hoodlock_collect</code>).</p>
 </article>
+<article class="docs-mod">
+<h4>Factor</h4>
+<div class="docs-chips">
+<code>factor_sign_up</code>
+<code>factor_create_pay_link</code>
+<code>factor_apply_to_job</code>
+<code>factor_draw</code>
+<code>factor_deliver</code>
+<code>factor_decline</code>
+<code>factor_job</code>
+<code>factor_can_draw</code>
+<code>factor_my_jobs</code>
+<code>factor_open_jobs</code>
+<code>factor_open_job</code>
+</div>
+<p>Factor is an official Oak partner. Factor's own team runs its product and contracts; Oak didn't build them and doesn't run them. Agent-side paid work for plain wallets: profiles, pay links, job discovery, applications, advances and delivery. Agents receive the Factor playbook as an Oak MCP resource (<code>oak://agent-playbooks/factor.md</code>).</p>
+</article>
+<article class="docs-mod">
+<h4>Upoch</h4>
+<div class="docs-chips">
+<code>upoch_agent</code>
+<code>upoch_explorer</code>
+</div>
+<p>Read workflow roles, checkpoints, recovery history and on-chain Upoch Scores with <code>upoch_agent</code> and <code>upoch_explorer</code>; browse a bounded ranked workflow list. Upoch is a project Oak reads from. The score measures recovery policy and checkpoint activity, not trading performance or safety. Both tools are mainnet-only reads.</p>
+</article>
+<article class="docs-mod">
+<h4>Raeto</h4>
+<div class="docs-chips">
+<code>raeto_status</code>
+<code>raeto_join</code>
+<code>raeto_topup</code>
+<code>raeto_ask</code>
+<code>raeto_search</code>
+<code>raeto_read_page</code>
+<code>raeto_models</code>
+<code>raeto_limits</code>
+</div>
+<p>Oak integrates with Raeto. Raeto's own team runs its product and contracts; Oak didn't build them and doesn't run them. AI model calls, web search and page reading with USDG credit top-ups and local spending limits. Record pairing remains switched off pending pinned approval details. Agents receive the Raeto playbook as an Oak MCP resource (<code>oak://agent-playbooks/raeto.md</code>).</p>
+</article>
 </div>
 </details>
 </section>
 <section class="doc-part" id="cli">
 <h2>Command line</h2>
-<details class="reference-detail">
+<details open class="reference-detail">
 <summary>Read details</summary>
 <div class="docs-narrow">
 <pre tabindex="0" role="region" aria-label="Command example" class="code-block">
 <code data-lang="text">oak init
-oak setup [register [--no-tag]|link &lt;agentId&gt;]
+oak connect &lt;claude|codex|cursor|gemini|grok&gt;
+oak setup [register|link &lt;agentId&gt;]
 oak identity unlink [--owner &lt;linkId&gt;]
 oak address
 oak status
 oak export
 oak backup
-oak subscribe --plan &lt;holder|nohold&gt;
-oak renew
-oak cancel
-oak register [--no-tag]
+oak register
 oak recipes add &lt;pkg-or-path&gt;
 oak recipes remove &lt;project&gt;
 oak recipes list [project]
 oak config set &lt;key&gt; &lt;value&gt;
 oak config check-rpc
+oak receipts [list [limit]|verify [head]|export &lt;json|csv|accounting-csv&gt;]
 oak mcp
 oak call &lt;tool&gt; &lt;json&gt;</code></pre>
+<p>Run <code>oak connect</code> in your terminal to configure your app, then restart the app. Run <code>oak connect cursor</code> from the project folder you want to connect. The other clients use your user account by default. Existing conflicting entries are reported for you to resolve.</p>
 <ul>
 <li>
 <code>oak init</code> and <code>oak export</code> require a direct owner terminal (<code>stdin.isTTY &amp;&amp; stdout.isTTY</code>).</li>
 <li>
-<code>oak setup</code> sets up the wallet's ERC-8004 identity: <code>oak setup link &lt;agentId&gt;</code> links an existing agent ID using a gasless owner EIP-712 signature in your terminal, and <code>oak setup register [--no-tag]</code> mints and verifies a new agent ID on-chain.</li>
+<code>oak receipts export accounting-csv</code> writes an 18-column accounting CSV from your local receipt log directly in your terminal without sending it into an agent chat.</li>
+<li>
+<code>oak setup</code> sets up the wallet's ERC-8004 identity: <code>oak setup link &lt;agentId&gt;</code> links an existing agent ID using a gasless owner EIP-712 signature in your terminal, and <code>oak setup register</code> mints and verifies a new agent ID on-chain with the mandatory public <code>oak.registrar = oak</code> marker in one transaction.</li>
 <li>
 <code>oak identity unlink</code> revokes the active identity link without gas (<code>--owner &lt;linkId&gt;</code> revokes by link ID using the current NFT owner's signature).</li>
 <li>
-<code>oak status</code> calls the <code>account</code> tool and outputs subscription state (<code>plan</code>, <code>contract</code>, <code>paidUntil</code>, <code>oakHeld</code>, <code>oakRequired</code>, <code>phase</code>, <code>holderOpen</code>, <code>noHoldPrice</code>, and optional <code>priceError</code>).</li>
+<code>oak status</code> calls the <code>account</code> tool and outputs the wallet address, network, ERC-8004 identity status (<code>identity</code>, <code>identitySummary</code>), action readiness (<code>actionsUnlocked</code>, <code>actionsSummary</code>), and <code>$OAK</code> held (<code>oakHeld</code>).</li>
 <li>
-<code>oak register</code> registers or updates the agent's ERC-8004 on-chain identity using the configured <code>profile</code> JSON (<code>oak config set profile '&lt;json&gt;'</code>), attaching the <code>oak.registrar</code> marker unless <code>--no-tag</code> is passed.</li>
+<code>oak register</code> registers or updates the agent's ERC-8004 on-chain identity using the configured <code>profile</code> JSON (<code>oak config set profile '&lt;json&gt;'</code>), writing up to 15 user metadata entries plus the mandatory public <code>oak.registrar = oak</code> marker in one transaction.</li>
 </ul>
 </div>
 </details>
 </section>
 <section class="doc-part" id="recipes">
 <h2>Project recipes</h2>
-<details class="reference-detail">
+<details open class="reference-detail">
 <summary>Read details</summary>
 <div class="docs-narrow">
 <p>Ecosystem builders can publish declarative JSON recipes (<code>oak-recipe/v1</code>) validated against packages/addon/schema/recipe.schema.json. Each recipe names one contract on chain <code>4663</code>, one ABI function item, typed inputs, and <code>kind: &quot;read&quot; | &quot;tx&quot;</code>. The add-on's importer (<code>oak recipes add</code>) is strictly data-only: it streams tarballs with a 4 MiB / 100-entry cap, ignores non-recipe files without writing or executing them, copies only <code>package/recipes/&lt;name&gt;.recipe.json</code> (max 64 KiB each) where <code>project</code> matches <code>package/package.json</code>'s <code>oakProject</code>, and never executes third-party code. Recipes are opt-in by name (<code>&lt;project&gt;.&lt;name&gt;</code>) and labelled <strong>
@@ -1133,7 +1245,7 @@ oak call &lt;tool&gt; &lt;json&gt;</code></pre>
 </section>
 <section class="doc-part" id="for-agents">
 <h2>For AI agents</h2>
-<details class="reference-detail">
+<details open class="reference-detail">
 <summary>Read details</summary>
 <div class="docs-narrow">
 <p>AI agents should start with <code>AGENTS.md</code>, the operating guide to the tools, conventions and custody rules. A plain-text summary for agents is in <code>llms.txt</code>.</p>
@@ -1144,9 +1256,9 @@ oak call &lt;tool&gt; &lt;json&gt;</code></pre>
 <li>
 <strong>Never ask the user for a private key, seed phrase, passphrase, or raw owner key.</strong> Both the local bridge (<code>packages/addon/src/bridge.ts</code>) and the Oak server reject any JSON argument containing <code>private_key</code>, <code>secret_key</code>, <code>wallet_key</code>, <code>mnemonic</code>, <code>seed</code>, <code>seed_phrase</code>, or <code>recovery_phrase</code>. When linking an external owner's ERC-8004 agent ID (<code>oak setup link &lt;agentId&gt;</code>) or revoking by owner (<code>oak identity unlink --owner &lt;linkId&gt;</code>), the owner signs the EIP-712 <code>OakIdentityLink</code> challenge in their own terminal (<code>Owner signing requires your terminal. Run oak setup link &lt;agentId&gt; or oak identity unlink --owner &lt;linkId&gt; there.</code>).</li>
 <li>
-<strong>All signing happens locally inside <code>@oakagentkit/addon</code>.</strong> The Oak server <strong>never sees your key</strong> and <strong>never signs or sends a transaction</strong>. <strong>Your swaps and deposits go straight from your wallet to the project; subscription payments go to the burner (<code>OakBurner</code>) and the single-owner treasury wallet.</strong> Hosted non-read tool requests use a 15-minute wallet-signed <code>X-Oak-Session</code> plus a 60-second single-use <code>X-Oak-Request</code> signature from an ephemeral in-memory <code>sessionKey</code>. Gloam relay and deposit attribution carry no session or request signatures; only public proof fields or a public shield hash reach those routes.</li>
+<strong>All signing happens locally inside <code>@oakagentkit/addon</code>.</strong> The Oak server <strong>never sees your key</strong> and <strong>never signs or sends a transaction</strong>. <strong>Your swaps and deposits go straight from your wallet to the project.</strong> Hosted non-read tool requests use a 15-minute wallet-signed <code>X-Oak-Session</code> plus a 60-second single-use <code>X-Oak-Request</code> signature from an ephemeral in-memory <code>sessionKey</code>. Gloam relay and deposit attribution carry no session or request signatures; only public proof fields or a public shield hash reach those routes.</li>
 <li>
-<strong>Always inspect the preview.</strong> Every transaction tool call runs <code>preview</code> (<code>eth_simulateV1</code> with <code>traceTransfers: true</code>) before signing and sending, and reuses a matching preview from the same block within 12 seconds so <code>swap</code> does not re-simulate twice. Built approvals are always exact (<code>amountIn</code>), never unlimited. Note that simulation transfers exclude gas and do not prove off-chain external settlement (such as Relay destination fills or Meridian RFQ relayer execution).</li>
+<strong>Always prepare, ask in chat, and execute only after a yes.</strong> Call a listed common action tool (<code>swap</code>, <code>send</code>, <code>lend</code>, <code>withdraw</code>, <code>borrow</code>, <code>repay</code>, <code>bridge</code>) or <code>oak_prepare</code> with <code>{&quot;name&quot;: &quot;&lt;tool&gt;&quot;, &quot;arguments&quot;: {...}}</code> first. This builds and simulates the action (<code>eth_simulateV1</code> with <code>traceTransfers: true</code>) without signing and gives back a six-part summary (what the action does, what leaves the wallet, what comes back or minimum received, fees, who gets any token approval, and warnings), an <code>actionId</code>, and its UTC expiry. Show the summary in chat and wait for the person to say yes or no. Only after a yes, call <code>oak_execute</code> with <code>{&quot;actionId&quot;: &quot;&lt;the exact actionId&gt;&quot;}</code>. <code>oak_execute</code> re-runs the simulation and local guards, checks that the terms have not worsened, checks the optional daily spending limit, and signs locally. Built approvals are always exact (<code>amountIn</code>), never unlimited. Note that simulation transfers exclude gas and do not prove off-chain external settlement (such as Relay destination fills or Meridian RFQ relayer execution).</li>
 </ol>
 </div>
 </details>
@@ -1184,6 +1296,9 @@ oak call &lt;tool&gt; &lt;json&gt;</code></pre>
 <a href="roadmap.html">Roadmap</a>
 </li>
 <li>
+<a href="agents.html">Agents</a>
+</li>
+<li>
 <a href="partnerships.html">Partnerships</a>
 </li>
 <li>
@@ -1202,14 +1317,14 @@ oak call &lt;tool&gt; &lt;json&gt;</code></pre>
 <a href="https://x.com/OakAgentKit">@OakAgentKit on X</a>
 </li>
 <li>
-<a href="https://x.com/OakAgentKit/status/2116286790059671939">Launch film on X</a>
+<a href="https://x.com/OakAgentKit/status/2119114741234974988">Launch film on X</a>
 </li>
 </ul>
 </nav>
 </div>
- <p class="footer-status">$OAK is live. Oak 0.2.6 subscriptions are open.</p>
- <p>Subscriptions are open in Oak 0.2.6. Read tools need no identity or subscription; hosted actions require a verified ERC-8004 identity and an active subscription. Official $OAK address: <code class="token-address">0x6511c233790Ec10f7d673c64DC82C3F941D57828</code>. Pons page: <a href="https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828">https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828</a>. Plan availability follows account.phase: no-hold on the curve, neither plan during warmup, and both plans when ready with a valid price note. Holding $OAK buys access and nothing else.</p>
- <p>Independent software, not affiliated with Robinhood. Not financial advice. Oak never promises returns.</p>
+ <p class="footer-status">Oak is free. $OAK is live.</p>
+ <p>$OAK is live. Oak is free. Reads work straight away. Actions need a verified ERC-8004 agent ID and your yes or no in chat. Call account to see where your setup stands. Official $OAK address: <code class="token-address">0x6511c233790Ec10f7d673c64DC82C3F941D57828</code>. Pons page: <a href="https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828">https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828</a>. Holding $OAK has no access perks. Oak uses 25% of its income to buy back and burn $OAK.</p>
+ <p>Independent software, not affiliated with Robinhood. Not financial advice. Oak makes no promises about token prices or investment outcomes.</p>
  <p>Region notice: project and asset availability varies by jurisdiction. You are responsible for local compliance.</p>
  <p class="fine">Docs, examples and contracts are MIT. The compiled npm packages are Free-to-Use, No Copying; their source and the hosted Oak service are private. Manrope is self-hosted under the SIL Open Font Licence.</p>
 </div>

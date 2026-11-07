@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Privacy policy: what stays on your computer and what the server sees | Oak Agent Kit</title>
-<meta name="description" content="Plain-language privacy policy: what Oak keeps on your computer, what the Oak server sees, what RPCs and ecosystem project services see, retention, and how to ask questions.">
+<meta name="description" content="Plain-language privacy policy: what Oak keeps on your computer, what the Oak server sees, what RPCs and ecosystem project services see, a where-your-data-goes table, retention, chat exports, and how to ask questions.">
 <meta name="theme-color" content="#062F27">
 <link rel="canonical" href="https://oakagentkit.org/privacy.html">
 <meta property="og:url" content="https://oakagentkit.org/privacy.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Oak Agent Kit">
 <meta property="og:title" content="Privacy policy: what stays on your computer and what the server sees | Oak Agent Kit">
-<meta property="og:description" content="Plain-language privacy policy: what Oak keeps on your computer, what the Oak server sees, what RPCs and ecosystem project services see, retention, and how to ask questions.">
+<meta property="og:description" content="Plain-language privacy policy: what Oak keeps on your computer, what the Oak server sees, what RPCs and ecosystem project services see, a where-your-data-goes table, retention, chat exports, and how to ask questions.">
 <meta property="og:image" content="https://oakagentkit.org/03-og-card-1200x630.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -46,6 +46,9 @@
 <a href="roadmap.html">Roadmap</a>
 </li>
 <li>
+<a href="agents.html">Agents</a>
+</li>
+<li>
 <a href="security.html">Security</a>
 </li>
 <li>
@@ -70,6 +73,9 @@
 </li>
 <li>
 <a href="roadmap.html">Roadmap</a>
+</li>
+<li>
+<a href="agents.html">Agents</a>
 </li>
 <li>
 <a href="security.html">Security</a>
@@ -103,20 +109,160 @@
 <div class="page-body" id="policy">
 <div class="wrap">
 <div class="prose wide">
-<p>Subscriptions are open in Oak 0.2.6. Read tools need no identity or subscription; hosted actions require a verified ERC-8004 identity and an active subscription. Plan availability follows account.phase: no-hold on the curve, neither plan during warmup, and both plans when ready with a valid price note. Subscription and price-note data handling below applies to Oak 0.2.6.</p>
-<p>This page explains in plain words what data stays on your computer, what the Oak server sees, what your RPC and ecosystem project services see, how long data is kept, and how to ask questions. The compiled add-on and hosted service have private source; their data practices are described below.</p>
+<p>This page explains in plain words what data stays on your computer, what the Oak server sees, what your RPC and ecosystem project services see, how long data is kept, and how to ask questions. The compiled add-on and core packages are free to use under the Oak package license; their implementation source and the hosted service are private. Oak is free. Every action needs your yes in chat before local signing.</p>
 <hr>
-<h2 id="zero-website-trackers">1. Zero Website Trackers</h2>
-<details class="reference-detail">
+<h2 id="where-your-data-goes">Where your data goes</h2>
+<details open class="reference-detail">
 <summary>Read policy details</summary>
-<p>Oak's public documentation and static pages use self-hosted assets only:</p>
-<ul>
-<li>They contain <strong>no <code>&lt;script&gt;</code> tags</strong>, <strong>no analytics</strong>, <strong>no cookies</strong>, <strong>no tracking pixels</strong>, <strong>no <code>&lt;form&gt;</code> or <code>&lt;iframe&gt;</code> elements</strong>, and <strong>no external asset loads</strong>.</li>
-</ul>
+<div class="table-wrap">
+<table class="md-table">
+<thead>
+<tr>
+<th scope="col">Data class</th>
+<th scope="col">Where it goes</th>
+<th scope="col">Why</th>
+<th scope="col">Stored how long</th>
+<th scope="col">Can you turn it off?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td data-label="Data class">Private key, recovery words, passphrase</td>
+<td data-label="Where it goes">Wallet signing stays on your computer: encrypted <code>wallet.enc</code>; unlock key in OS keychain or a plaintext owner-only <code>wallet-key-&lt;id&gt;</code> file for automatic fallback wallets</td>
+<td data-label="Why">Local signing</td>
+<td data-label="Stored how long">Until owner removal, including old backups and unlock keys</td>
+<td data-label="Can you turn it off?">
+<code>account</code> reports key protection; use the owner's terminal for backups</td>
+</tr>
+<tr>
+<td data-label="Data class">Wallet address</td>
+<td data-label="Where it goes">Oak server on hosted tool calls, including reads, in a signed session; RPC providers; wallet-bearing partner APIs listed in section 4; public chain</td>
+<td data-label="Why">Access checks and routing</td>
+<td data-label="Stored how long">Request replay records up to 15 min; active identity links while linked plus 24 h after revocation, pruned on cleanup; backup copies follow their own retention</td>
+<td data-label="Can you turn it off?">Avoid hosted/partner tools; local reads stay local</td>
+</tr>
+<tr>
+<td data-label="Data class">ERC-8004 identity and sessions</td>
+<td data-label="Where it goes">Public chain on registration, including profile and metadata with the mandatory Oak registrar marker; Oak link store; Raeto when paired</td>
+<td data-label="Why">Identity and access</td>
+<td data-label="Stored how long">Chain permanent; live link records while active plus 24 h; backups longer</td>
+<td data-label="Can you turn it off?">Link an existing ID instead of registering; pairing is optional</td>
+</tr>
+<tr>
+<td data-label="Data class">Balances, positions, claimables</td>
+<td data-label="Where it goes">Oak hosted RPC by default on mainnet and Base, your chosen RPC for explicit own settings, wallet-bearing partners</td>
+<td data-label="Why">Read state and rewards</td>
+<td data-label="Stored how long">No Oak portfolio database; partners' own policies</td>
+<td data-label="Can you turn it off?">Choose RPC; avoid particular partner tools</td>
+</tr>
+<tr>
+<td data-label="Data class">Receipts, journal and accounting export</td>
+<td data-label="Where it goes">Local receipt, pending, cleared, approval, token-hint, prepared-action and daily-spending records. <strong>Exports enter the chat</strong> when <code>oak_receipts export</code> gives back the full log or CSV</td>
+<td data-label="Why">Decisions and recovery</td>
+<td data-label="Stored how long">Public history until owner removal or explicit cleanup; signed fee versions only pending until settled/recovered</td>
+<td data-label="Can you turn it off?">Avoid export; manage history after resolving pending actions</td>
+</tr>
+<tr>
+<td data-label="Data class">Address book and labels</td>
+<td data-label="Where it goes">Compile-time address table; no user label store</td>
+<td data-label="Why">Identify addresses</td>
+<td data-label="Stored how long">No personal label retention</td>
+<td data-label="Can you turn it off?">Not applicable</td>
+</tr>
+<tr>
+<td data-label="Data class">Action summaries and confirmations</td>
+<td data-label="Where it goes">Six-part summaries, action IDs and expiry times go to your MCP client and AI provider so your agent can show them in chat</td>
+<td data-label="Why">Review the terms before saying yes; <code>oak_execute</code> re-checks them before local signing</td>
+<td data-label="Stored how long">Prepared actions are stored locally; chat retention follows your host and AI provider's policies</td>
+<td data-label="Can you turn it off?">Avoid preparing an action; action summaries are required for confirmation</td>
+</tr>
+<tr>
+<td data-label="Data class">Raeto prompts and replies</td>
+<td data-label="Where it goes">Computer directly to <code>api.raeto.cc</code>, tied to wallet via key and visible IP; model prompts onward to the model lab</td>
+<td data-label="Why">Paid calls</td>
+<td data-label="Stored how long">Oak stores no prompts; Raeto states none; provider policies apply; local cost history persists</td>
+<td data-label="Can you turn it off?">Avoid Raeto; <code>oak raeto forget</code> removes the local key</td>
+</tr>
+<tr>
+<td data-label="Data class">Orbio conversations and tool arguments</td>
+<td data-label="Where it goes">Computer directly to <code>api.orbio.so</code>, with wallet-derived bearer and IP; model service processes the full conversation</td>
+<td data-label="Why">Inference and metered tools</td>
+<td data-label="Stored how long">Not stored by Oak; Orbio/provider retention unverified</td>
+<td data-label="Can you turn it off?">Avoid Orbio gateway tools</td>
+</tr>
+<tr>
+<td data-label="Data class">HEY Research queries</td>
+<td data-label="Where it goes">Oak server for most tools, direct computer token scan; receipt validation forwards supplied receipt content</td>
+<td data-label="Why">Research</td>
+<td data-label="Stored how long">Session context only in Oak; follow list local until removed; partner policy unverified</td>
+<td data-label="Can you turn it off?">Automatic context is off by default</td>
+</tr>
+<tr>
+<td data-label="Data class">Raeto key and payment journal</td>
+<td data-label="Where it goes">Plaintext owner-only <code>raeto.json</code>; key sent only to Raeto; unresolved approved authorization in local payment journal and sent to Raeto on submission</td>
+<td data-label="Why">Credit and explicit recovery</td>
+<td data-label="Stored how long">Key until forget/replacement; signature removed at terminal payment settlement; local cost/payment history persists</td>
+<td data-label="Can you turn it off?">
+<code>oak raeto forget</code> removes key, not history</td>
+</tr>
+<tr>
+<td data-label="Data class">Hosted Agent Wormhole text</td>
+<td data-label="Where it goes">Selected partner-result name/symbol/description text to Oak with wallet session, then only text to Agent Wormhole using Oak's key</td>
+<td data-label="Why">Text screening during action preparation</td>
+<td data-label="Stored how long">Oak keeps no text log; replay metadata up to 15 min; provider retention unverified</td>
+<td data-label="Can you turn it off?">
+<code>OAK_WORMHOLE_PAYER_MODE=off</code>; offline scans remain</td>
+</tr>
+<tr>
+<td data-label="Data class">RPC requests</td>
+<td data-label="Where it goes">Oak sees session wallet/IP, chain, call addresses/calldata and simulated transactions on hosted requests; its selected provider sees method/params. Your direct RPC sees wallet queries, census logs and signed broadcasts</td>
+<td data-label="Why">Reads, previews, traces, census and direct broadcast</td>
+<td data-label="Stored how long">Oak replay metadata up to 15 min; shared HMAC budget counters persist; provider retention unverified</td>
+<td data-label="Can you turn it off?">Own mainnet/per-chain RPC takes priority; census and broadcast stay direct</td>
+</tr>
+<tr>
+<td data-label="Data class">Errors and logs</td>
+<td data-label="Where it goes">Redacted stderr/MCP errors and previews; receipt-verification success results can still include provider error text, and filesystem failures can expose paths</td>
+<td data-label="Why">Diagnostics</td>
+<td data-label="Stored how long">Server operational logs up to 7 days in the template; host transcripts vary</td>
+<td data-label="Can you turn it off?">Keep keyed RPC URLs and host logs private</td>
+</tr>
+<tr>
+<td data-label="Data class">Gloam notes and proof fields</td>
+<td data-label="Where it goes">Encrypted local notes; public proof fields via session-free Oak forward to Gloam; shield hash linkable to wallet; local opaque acknowledgement names keyed by note secret</td>
+<td data-label="Why">Private transfers and attribution</td>
+<td data-label="Stored how long">Notes and markers until owner removal; no persistent forward payload store; partner policy unverified</td>
+<td data-label="Can you turn it off?">Avoid Gloam; migrate legacy marker names by making a Gloam request with the original note store</td>
+</tr>
+<tr>
+<td data-label="Data class">Factor work</td>
+<td data-label="Where it goes">Local text and public on-chain hash by default; <code>show:true</code> text via Oak server to Factor for permanent public display</td>
+<td data-label="Why">Job delivery</td>
+<td data-label="Stored how long">On-chain records permanent; shown work public with no edit path</td>
+<td data-label="Can you turn it off?">Keep <code>show:false</code>
+</td>
+</tr>
+<tr>
+<td data-label="Data class">Signed broadcasts</td>
+<td data-label="Where it goes">RPC and public chain</td>
+<td data-label="Why">Execution</td>
+<td data-label="Stored how long">Public chain permanent</td>
+<td data-label="Can you turn it off?">Do not sign or broadcast unwanted data</td>
+</tr>
+</tbody>
+</table>
+</div>
+</details>
+<h2 id="website-assets-and-requests">1. Website Assets and Requests</h2>
+<details open class="reference-detail">
+<summary>Read policy details</summary>
+<p>Oak's public website uses self-hosted fonts and images. It has no analytics, advertising trackers, tracking cookies, forms or iframes.</p>
+<p>The Agents page (<code>agents.html</code>) uses a small JavaScript script to request Agent 1's public tracker from <code>https://api.oakagentkit.org/v1/agents/1/tracker</code>. The request omits credentials and sends no wallet information. Oak's API receives the visitor's IP address and normal request metadata.</p>
+<p>The other pages do not request external data.</p>
 <hr>
 </details>
 <h2 id="what-the-add-on-keeps-locally-on-your-computer">2. What the Add-On Keeps Locally on Your Computer</h2>
-<details class="reference-detail">
+<details open class="reference-detail">
 <summary>Read policy details</summary>
 <p>When you run <code>@oakagentkit/addon</code> on your machine, it stores state inside <code>~/.oak/</code> (directory mode <code>0700</code>, files mode <code>0600</code>, owned by your OS user; symlinks and hardlinks are rejected):</p>
 <div class="table-wrap">
@@ -180,7 +326,7 @@
 <td data-label="Code Reference">
 <code>packages/addon/src/cli.ts</code>, <code>packages/addon/src/identity.ts</code>
 </td>
-<td data-label="What It Holds">Your configured network and URLs (<code>OAK_NETWORK</code>, <code>OAK_CHAIN_ID</code>, <code>OAK_SERVER_URL</code>, <code>OAK_RPC_URL</code>, <code>OAK_RPC_URL_&lt;chainId&gt;</code>), contract addresses (<code>OAK_SUBSCRIPTION_ADDRESS</code>, <code>OAK_RETIRED_SUBSCRIPTION_ADDRESSES</code>, <code>OAK_TOKEN_ADDRESS</code>, <code>OAK_USDG_ADDRESS</code>, <code>OAK_ORACLE_ADDRESS</code>, <code>OAK_ETH_USDG_POOL_ADDRESS</code>, <code>OAK_FINALITY</code>), optional ERC-8004 <code>identity</code> record (<code>chainId</code>, <code>registry</code>, <code>agentId</code>, and optional <code>linkId</code>), optional <code>profile</code> JSON, and optional <code>grandfather</code> Merkle tree JSON.</td>
+<td data-label="What It Holds">Your network, RPC and service URLs, deployment addresses, optional ERC-8004 identity and registration profile, HEY Research automatic-context opt-in, and RPC fallback and approval-census settings. RPC URLs can contain provider keys. The config is plaintext, protected by file permissions, and remains until edited or removed by the owner.</td>
 </tr>
 <tr>
 <td data-label="Local Store">
@@ -189,7 +335,42 @@
 <td data-label="Code Reference">
 <code>packages/addon/src/journal.ts</code>
 </td>
-<td data-label="What It Holds">Local transaction journal used to recover or fee-bump in-flight transactions if a process crashes. Holds <code>nonce</code>, <code>hash</code>, <code>rawTx</code> (in <code>.pending.json</code> only), <code>kind</code>, <code>sentAt</code>, <code>chainId</code>, <code>blockNumber</code>, and <code>clearedAt</code>/<code>reason</code>.</td>
+<td data-label="What It Holds">Local transaction journal used to recover or fee-bump in-flight transactions if a process crashes. Holds <code>nonce</code>, <code>hash</code>, <code>rawTx</code> and earlier signed fee versions (<code>previous</code>, in <code>.pending.json</code> only), <code>kind</code>, <code>sentAt</code>, <code>chainId</code>, <code>blockNumber</code>, and <code>clearedAt</code>/<code>reason</code>. Pending entries stay until receipt finality or proven recovery; cleared public records are never pruned automatically.</td>
+</tr>
+<tr>
+<td data-label="Local Store">
+<code>~/.oak/&lt;address&gt;.approvals.json</code>
+</td>
+<td data-label="Code Reference">
+<code>packages/addon/src/journal.ts</code>, <code>packages/addon/src/sender.ts</code>
+</td>
+<td data-label="What It Holds">Public cleanup metadata only: transaction hash, chain ID, token, spender, ERC-20 amount or NFT token ID, and NFT type. No signed bytes. Legacy signed archive rows are validated and atomically migrated under the wallet lock on the next archive access. Records stay until cleanup forgets them; a live allowance read remains authoritative.</td>
+</tr>
+<tr>
+<td data-label="Local Store">
+<code>~/.oak/&lt;address&gt;.received-tokens.json</code>
+</td>
+<td data-label="Code Reference">
+<code>packages/addon/src/journal.ts</code>
+</td>
+<td data-label="What It Holds">Up to 10,000 chain/token address hints discovered in successful local receipts. No balances or signed bytes; hints remain even after the balance becomes zero, until removed by the owner.</td>
+</tr>
+<tr>
+<td data-label="Local Store">
+<code>~/.oak/wallet.enc.backup-&lt;uuid&gt;</code> and old <code>wallet-key-&lt;id&gt;</code> files</td>
+<td data-label="Code Reference">
+<code>packages/addon/src/wallet.ts</code>
+</td>
+<td data-label="What It Holds">Replaced encrypted wallets retained by <code>oak init --recover --replace</code>, and any old file-fallback unlock keys. Never pruned automatically. A reader of an old wallet and its matching file key can unlock that wallet; keep both out of shared backups.</td>
+</tr>
+<tr>
+<td data-label="Local Store">
+<code>~/.oak/gloam-attribution/&lt;opaque digest&gt;</code>
+</td>
+<td data-label="Code Reference">
+<code>packages/addon/src/gloam/handler.ts</code>
+</td>
+<td data-label="What It Holds">Empty acknowledgement markers named with HMAC-SHA256 using the encrypted note secret. Names reveal neither wallet nor shield hash without that secret. Legacy wallet/hash filenames are renamed on the next Gloam request for notes present in the encrypted store, including spent notes. Marker counts and file times remain visible; markers are not pruned automatically.</td>
 </tr>
 <tr>
 <td data-label="Local Store">
@@ -225,16 +406,25 @@
 <td data-label="Code Reference">
 <code>packages/addon/src/receipts.ts</code>
 </td>
-<td data-label="What It Holds">A local, hash-chained log of each approval decision: public addresses, base-unit amounts, USD values and fixed reason text, later linked to the signed transaction hash. It holds no prompts, calldata, signatures or keys. It stays until you archive it and is never uploaded or deleted automatically. <code>receipt-locks/</code> holds the lock files used while it is written.</td>
+<td data-label="What It Holds">A local, hash-chained log of each approval decision: public addresses, base-unit amounts, USD values and fixed reason text, later linked to the signed transaction hash. It holds no prompts, calldata, signatures or keys. It stays until you archive it and is never uploaded to Oak or deleted automatically. <strong>Exports enter the chat:</strong> <code>oak_receipts export</code> gives back the full receipt log or accounting CSV to your agent host and model provider, which may retain it under their policies. <code>receipt-locks/</code> holds the lock files used while it is written.</td>
 </tr>
 <tr>
 <td data-label="Local Store">
-<code>~/.oak/&lt;address&gt;.auto-approvals.json</code>
+<code>~/.oak/&lt;address&gt;.auto-approvals.json</code>, the same path plus <code>.cap</code>, and <code>~/.oak/auto-approval-locks/</code>
 </td>
 <td data-label="Code Reference">
 <code>packages/addon/src/auto-daily-cap.ts</code>
 </td>
-<td data-label="What It Holds">Used by auto-confirm mode: the transaction hash, USD value and time of each action approved automatically on the current local calendar day, so the daily cap can be enforced. Never uploaded.</td>
+<td data-label="What It Holds">Local records for your optional daily USD spending limit. The <code>.cap</code> file holds the limit and whether you set, skipped or removed it. Spending records hold an action hash, USD value, time and local calendar day. Reservations are written before signing; failed or interrupted attempts still count. Historical rows remain until owner removal. These files do not authorize actions without chat confirmation.</td>
+</tr>
+<tr>
+<td data-label="Local Store">
+<code>~/.oak/pending-actions/&lt;address&gt;.json</code>
+</td>
+<td data-label="Code Reference">
+<code>packages/addon/src/pending-actions.ts</code>
+</td>
+<td data-label="What It Holds">Prepared action kind, unsigned payload, six-part summary, action ID, timestamps and consumed status. Actions expire within five minutes. Consuming an action erases its payload before execution; its summary and consumed marker can remain until a later preparation removes expired records. Nothing signs merely because a record exists.</td>
 </tr>
 <tr>
 <td data-label="Local Store">
@@ -243,7 +433,7 @@
 <td data-label="Code Reference">
 <code>packages/addon/src/signature-journal.ts</code>
 </td>
-<td data-label="What It Holds">A journal of the off-chain signatures you gave: the message digest, tool, signer, terms such as amount, token and recipient, expiry, status and how to revoke it. It refuses to store the signature bytes themselves. Never uploaded.</td>
+<td data-label="What It Holds">A journal of the off-chain signatures you gave: the message digest, tool, signer, terms such as amount, token and recipient, expiry, status and how to revoke it. It refuses to store the signature bytes themselves. Entries are pruned only when a later signing request runs reconciliation; there is no scheduled deletion or dedicated deletion command. Never uploaded.</td>
 </tr>
 <tr>
 <td data-label="Local Store">
@@ -254,28 +444,66 @@
 </td>
 <td data-label="What It Holds">A marker so the first-start notice is shown once.</td>
 </tr>
+<tr>
+<td data-label="Local Store">
+<code>~/.oak/raeto.json</code>
+</td>
+<td data-label="Code Reference">
+<code>packages/addon/src/raeto/store.ts</code>
+</td>
+<td data-label="What It Holds">Your agent's <code>sk-raeto-...</code> API key for <code>api.raeto.cc</code> (<code>0600</code>, parent directory <code>0700</code>, max 64 KB). Removed with <code>oak raeto forget</code> or replaced on a subsequent sign-in during top-up. Sent only to Raeto in the authorization header; never sent to the Oak server.</td>
+</tr>
+<tr>
+<td data-label="Local Store">
+<code>~/.oak/raeto-ledger.jsonl</code>
+</td>
+<td data-label="Code Reference">
+<code>packages/addon/src/raeto/ledger.ts</code>
+</td>
+<td data-label="What It Holds">Local append/update ledger of Raeto cost reservations, settled costs, uncertain calls, and top-up transactions (<code>0600</code>, max 4 MB). Holds tool name, model, reserved and settled micro-dollar amounts, reservation state, cost evidence source, charge ID, and top-up transaction hashes. Never holds prompts, replies, or keys. Kept as history; never uploaded.</td>
+</tr>
+<tr>
+<td data-label="Local Store">
+<code>~/.oak/raeto-payments.json</code>
+</td>
+<td data-label="Code Reference">
+<code>packages/addon/src/raeto/journal.ts</code>
+</td>
+<td data-label="What It Holds">Journal of pending and settled USDG <code>TransferWithAuthorization</code> payment intents for Raeto credit top-ups (<code>0600</code>, max 1 MB). Records authorization parameters, signing block, payment state (<code>pending</code>, <code>paid</code>, <code>cancelled</code>, <code>unproven</code>, <code>expired-unused</code>), and transaction hashes. Keeps the approved payment signature while unresolved so an explicit retry can resend the same authorization and nonce; removes the signature when the payment is settled, cancelled, or confirmed expired and unused. Authorization history stays local. Only the approved signed payment is sent directly to Raeto on submission or explicit retry; no key or signature is sent to the Oak server.</td>
+</tr>
+<tr>
+<td data-label="Local Store">
+<code>~/.oak/raeto-settings.json</code> and <code>~/.oak/raeto-requests/</code>
+</td>
+<td data-label="Code Reference">
+<code>packages/addon/src/raeto/handler.ts</code>
+</td>
+<td data-label="What It Holds">Local spending limits and first-use state for Raeto (<code>0600</code>, max 4 KB). Stores per-call limit (default $0.50), daily limit (default $2.00), first-use notice marker, and last known balance. Updated with human confirmation via <code>raeto_limits</code> or on balance refresh. Never uploaded. <code>~/.oak/raeto-requests/</code> holds temporary process lock markers during Raeto requests.</td>
+</tr>
 </tbody>
 </table>
 </div>
 <p>
-<strong>HEY Research Lab on your computer.</strong> An answer you asked HEY Research Lab for is remembered in memory for the running Oak session only, so the approval form can repeat it with the time it was checked; it is never written to disk and is gone when the session ends. The builder feed keeps your follow list and last-checked times in <code>~/.oak/hey-follow.json</code> on your computer (see the table above). Oak never uploads that file or the checked times. When you ask for your feed, only the token addresses and project slugs on the list are used to ask HEY Research Lab for updates (see &quot;What each other HEY Research Lab tool sends&quot; below). Following or unfollowing a token contacts no one.</p>
+<strong>HEY Research Lab on your computer.</strong> Oak keeps a session cache of HEY Research Lab answers in memory; stopping the session clears that cache. Any answer included in an action summary follows the prepared-action and chat data flows described above. The builder feed keeps your follow list and last-checked times in <code>~/.oak/hey-follow.json</code> on your computer (see the table above). Oak never uploads that file or the checked times. When you ask for your feed, only the token addresses and project slugs on the list are used to ask HEY Research Lab for updates (see &quot;What each other HEY Research Lab tool sends&quot; below). Following or unfollowing a token contacts no one.</p>
 <p>
-<strong>Agent Wormhole on your computer.</strong> Agent Wormhole is an official Oak partner. Oak didn't build and doesn't run their checks. The automatic offline text gate checks selected third-party strings in requested tool results in the local process, before agent use and approvals. It scans link text without visiting destinations. The offline gate itself uploads nothing. Its diagnostics retain field paths and hashes rather than raw excerpts; hashes can still identify known content. The bridge keeps exact diagnostic evidence objects in memory for the running session, with at most 1,000 entries and oldest-entry eviction; stopping the bridge clears them. The local <code>wormholeEvidence(id)</code> lookup gives back that same evidence by id. These objects are not added to the persistent approval-receipt file. Callers and the agent client may retain returned results under their own policies. <strong>Allow is not proof of safety.</strong>
+<strong>Agent Wormhole on your computer.</strong> Oak integrates Agent Wormhole checks. Agent Wormhole's own team runs its product and contracts; Oak didn't build and doesn't run their checks. The automatic offline text gate checks selected third-party strings in requested tool results in the local process, before agent use and approvals. It scans link text without visiting destinations. The offline gate itself uploads nothing. Action summaries go to your MCP client and AI provider so your agent can show them in chat. Summaries can contain public addresses, token amounts, fees, approvals, warnings and selected partner context. Your private key and recovery words are not included. Diagnostic evidence is no longer echoed into the agent's tool result text; instead, tool results carry a compact one-line verdict and <code>evidenceBlockId</code> (plus up to 5 sanitized flagged field paths when not clear). The bridge keeps the full per-field diagnostic evidence objects (field paths and 64-hex input hashes rather than raw excerpts; hashes can still identify known content) in memory for the running session only, with at most 1,000 blocks and oldest-entry eviction; stopping the bridge clears them. The local read-only tool <code>oak_wormhole_evidence</code> (and <code>wormholeEvidence(id)</code> in code) retrieves that same evidence object by <code>evidenceBlockId</code> during the session. These objects are never written to disk or added to the persistent approval-receipt file. Callers and the agent client may retain returned results under their own policies. <strong>Allow is not proof of safety.</strong>
 </p>
 <p>
-<strong>Agent Wormhole hosted checks.</strong> These are on by default during eligible requests: the selected third-party text goes to Oak's server and Agent Wormhole. Set <code>OAK_WORMHOLE_PAYER_MODE=off</code> to opt out; this keeps offline scans and free metadata snapshots available.</p>
+<strong>Agent Wormhole hosted checks.</strong> These are on by default during eligible requests: the selected third-party text goes to Oak's server and Agent Wormhole. Set <code>OAK_WORMHOLE_PAYER_MODE=off</code> to opt out; this keeps offline scans and free metadata snapshots available. Free swap token metadata snapshots (<code>wormhole_token_check</code> and swap quote checks) send chain ID <code>4663</code> and the ERC-20 token address to Oak's server and Agent Wormhole (<code>dashboard.agentwormhole.com</code>), while hosted text checks run only while an action prepares its approval (never on ordinary reads).</p>
+<p>
+<strong>Portfolio, accounting exports, diagnostics, and plan execution on your computer.</strong> <code>oak_portfolio</code> and <code>oak_receipts {&quot;operation&quot;:&quot;export&quot;,&quot;format&quot;:&quot;csv&quot;,&quot;view&quot;:&quot;accounting&quot;}</code> read your local <code>0600</code> receipt and journal files along with chain and hosted position reads, and send that financial view to your MCP client and AI model provider (which leaves your computer under their retention policies). For a local 18-column accounting CSV that never enters the chat, run <code>oak receipts export accounting-csv</code> in your own terminal. <code>oak_claimable</code> reads across reward programs (<code>merkl</code>, <code>chop</code>, <code>pons</code>, <code>clanker</code>, <code>longbow</code>, <code>orbio</code>, <code>tickerspring</code>, <code>hoodlock</code>, and <code>uniswap</code>) using the normal wallet-bound read path without preparing or sending transactions. <code>oak_whois</code> and <code>oak_doctor</code> read through your configured RPC (the RPC sees the queried <code>0x</code> address and trace probe; <code>oak_doctor</code> also checks ETH and USDG prices, official stock USD estimates, and hosted <code>account</code> status, with no new third party). <code>oak_dry_run</code> builds, checks and simulates 1 to 8 transaction actions without signing or writing a receipt. <code>oak_plan_run</code> prepares 1 to 8 eligible transaction actions on Robinhood Chain (<code>4663</code>) for one chat confirmation listing every step and limit; after your yes, <code>oak_execute</code> re-checks the steps, signs locally and records decision receipts in <code>~/.oak/approval-receipts.jsonl</code>. The Merkl card reader uses Oak's hosted <code>merkl_campaigns</code> read, sending the pool's campaign query and not your wallet address.</p>
 <p>
 <strong>What never leaves your computer:</strong>
 </p>
 <ul>
-<li>Your 24 recovery words (displayed once on your terminal during <code>oak init</code> and wiped from memory).</li>
+<li>Recovery words, if you create or recover a wallet with owner-run <code>oak init</code>, stay in your own terminal. Automatic wallets have no recovery phrase. Terminal logging or screen recording can retain displayed words.</li>
 <li>Your private key and passphrase (wiped from memory buffers with <code>.fill(0)</code> after unlocking or signing). Oak never asks for the private key of an external NFT owner. That owner signs an <code>OakIdentityLink</code> challenge in your terminal during <code>oak setup link &lt;agentId&gt;</code> or <code>oak identity unlink --owner &lt;linkId&gt;</code>, and only the signature is sent to the Oak server (section 3). Never paste a key or recovery words at that prompt.</li>
-<li>Both the local bridge (<code>packages/addon/src/bridge.ts</code>) and the Oak server reject any tool argument containing <code>private_key</code>, <code>secret_key</code>, <code>wallet_key</code>, <code>mnemonic</code>, <code>seed</code>, <code>seed_phrase</code>, or <code>recovery_phrase</code>.</li>
+<li>Secret rejection checks argument field names, not all free-text values. Never paste credentials into work text, conversations or receipts: such text may be forwarded. Both the local bridge (<code>packages/addon/src/bridge.ts</code>) and the Oak server reject any tool argument containing <code>private_key</code>, <code>secret_key</code>, <code>wallet_key</code>, <code>mnemonic</code>, <code>seed</code>, <code>seed_phrase</code>, or <code>recovery_phrase</code>.</li>
 </ul>
 <hr>
 </details>
 <h2 id="what-the-oak-server-sees">3. What the Oak Server Sees</h2>
-<details class="reference-detail">
+<details open class="reference-detail">
 <summary>Read policy details</summary>
 <p>When the add-on talks to your configured Oak service URL, the server receives only:</p>
 <ol>
@@ -305,21 +533,21 @@
 <strong>Open price-note requests (<code>POST /v1/price-note</code>):</strong>
 <ul>
 <li>
-<strong>Target and wallet:</strong> <code>{&quot;for&quot;:&quot;subscription&quot;,&quot;wallet&quot;:&quot;&lt;address&gt;&quot;}</code> or <code>{&quot;for&quot;:&quot;burner&quot;}</code> (with <code>X-Oak-Session</code> on <code>burner</code> requests to authenticate the caller's wallet).</li>
+<strong>Burner target:</strong> <code>{&quot;for&quot;:&quot;burner&quot;}</code>, with <code>X-Oak-Session</code> authenticating the caller's wallet.</li>
 <li>
-<strong>Peer IP address for rate limiting:</strong> The server uses the direct connection IP address, ignoring caller-supplied forwarded-IP headers, solely to enforce the 60-second in-memory rate limit (<code>10</code> requests/minute per IP, <code>120</code> requests/minute global).</li>
+<strong>Peer IP address for rate limiting:</strong> The server uses the direct connection IP address, accepting <code>X-Oak-Client-IP</code> only from the trusted local reverse proxy (which supplies the real client address), and ignoring untrusted forwarded-IP headers, solely to enforce the 60-second in-memory rate limit (<code>10</code> requests/minute per IP, <code>120</code> requests/minute global).</li>
 </ul>
 </li>
 <li>
 <strong>Health checks (<code>GET /v1/health</code>):</strong> Responds with <code>{&quot;ok&quot;:true,&quot;data&quot;:{&quot;status&quot;:&quot;ok&quot;}}</code> when the service is healthy.</li>
 <li>
-<strong>Builder code redemption (<code>oak redeem &lt;code&gt;</code>, or asking your agent to redeem a code):</strong> Only if you hold an Oak builder code from the HEY Research Lab Verified Builder offer. The server receives the code and your wallet address (with the session headers above) so it can check that the code is unused, start your 30 days and tell you the exact end time. The server keeps a ledger of these codes; see &quot;Builder code ledger&quot; in section 5.</li>
+<strong>Free access:</strong> Oak is free. Read tools need no agent identity. Actions require an ERC-8004 identity and your yes in chat, except the free Gloam claim, which needs your yes but no identity.</li>
 <li>
 <strong>Deployment settings (<code>GET /v1/config</code>):</strong> When the add-on starts, and again on its hourly check, it asks the Oak server for the public deployment addresses so it can compare them with the addresses pinned in the add-on. This request carries no wallet address, session header or tool data.</li>
 <li>
-<strong>Agent Wormhole hosted checks (<code>POST /v1/wormhole/check</code>):</strong> On by default for every user during an eligible current request in server-key mode. Set <code>OAK_WORMHOLE_PAYER_MODE=off</code> to opt out. Oak receives bounded selected third-party text and a price cap, plus the wallet session and a single-use request signature bound to the path and body. The server checks active subscription access and rate limits using trusted wallet/deployment state. Only the text is forwarded as <code>{content: text}</code> in <code>POST /api/v1/check</code> to Agent Wormhole, with Oak's prepaid <code>awk_</code> API key in the Authorization header: no wallet identity, session headers, signatures, private keys, user prompts or complete tool envelopes. A missing key, exhausted credit, HTTP 402 or other failure gives back unknown; no per-check payment is signed or retried. The price is $0.005000 USDC per metered text check (observed on the account ledger 2026-11-05); the $0.003000 headline is the verify endpoint. The default admission cap remains 5000 microusd; a lower effective cap refuses before provider contact. <code>chargedMicrousd</code> reports the stated price for a usable response, not a per-request billing receipt.</li>
+<strong>Agent Wormhole hosted checks (<code>POST /v1/wormhole/check</code>):</strong> On by default for every user during an eligible current request in server-key mode. Set <code>OAK_WORMHOLE_PAYER_MODE=off</code> to opt out. Oak receives bounded selected third-party text and a price cap, plus the wallet session and a single-use request signature bound to the path and body. The server verifies the wallet-signed session and request proof, then applies hosted-service budgets and rate limits. Only the text is forwarded as <code>{content: text}</code> in <code>POST /api/v1/check</code> to Agent Wormhole, with Oak's prepaid <code>awk_</code> API key in the Authorization header: no wallet identity, session headers, signatures, private keys, user prompts or complete tool envelopes. A missing key, exhausted credit, HTTP 402 or other failure gives back unknown; no per-check payment is signed or retried. The price is $0.005000 USDC per metered text check (observed on the account ledger 2026-11-05); the $0.003000 headline is the verify endpoint. The default admission cap remains 5000 microusd; a lower effective cap refuses before provider contact. <code>chargedMicrousd</code> reports the stated price for a usable response, not a per-request billing receipt.</li>
 </ol>
-<p>The Oak server <strong>never sees your private key</strong>, <strong>never signs or sends a blockchain transaction</strong>, and has <strong>no general user account database, email list, or telemetry SDK</strong>. The one exception is the builder code ledger described in section 5, which exists only for Oak builder codes and holds no account, email or usage data.</p>
+<p>The Oak server <strong>never sees your private key</strong>, <strong>never signs or sends a blockchain transaction</strong>, and has <strong>no general user account database, email list, or telemetry SDK</strong>. Identity links, request replay records and operational logs have the retention described in section 5.</p>
 <hr>
 <h3 id="gloam-relay-and-deposit-attribution">Gloam relay and deposit attribution</h3>
 <p>Gloam is an official Oak partner. Gloam's own team runs its product and contracts; Oak didn't build them and doesn't run them.</p>
@@ -331,24 +559,24 @@
 <li>
 <strong>Circuit download:</strong> The first requested Gloam action downloads pinned proving files from <code>www.gloam.trade</code>. Gloam sees the computer's internet address on download; later calls use the hash-checked cache.</li>
 <li>
-<strong>Public relay fallback:</strong> Only an unreachable Oak forward or a 5xx response permits the SDK's public relay path. Gloam then sees the computer's internet address. A 4xx refuses; Oak never broadcasts a private relay action from the wallet. The result identifies the route used. Gloam's own retention policy applies to requests it receives; Oak does not establish its deletion behavior.</li>
+<strong>Public relay fallback:</strong> Before you confirm a Gloam relay action, the action summary explains: <code>If Oak's server can't be reached, Oak sends this through Gloam's public relay instead, and Gloam then sees your computer's internet address.</code> Only an unreachable Oak forward or a 5xx response permits the SDK's public relay path. Gloam then sees the computer's internet address. A 4xx refuses; Oak never broadcasts a private relay action from the wallet. The result identifies the route used. Gloam's own retention policy applies to requests it receives; Oak does not establish its deletion behavior.</li>
 <li>
 <strong>Retention:</strong> The forward keeps no payload or persistent request record. Per-IP attempt timestamps enforce a rolling 60-second window in memory; expired timestamps are removed on a later request, and process exit discards them. There is a shared 10/minute IP limit and 240/minute global ceiling. Circuit and tree caches contain no note secrets. Claim scans keep their cursor encrypted in the local store.</li>
 </ul>
 </details>
 <h2 id="what-chain-rpcs-and-ecosystem-project-services-see">4. What Chain RPCs and Ecosystem Project Services See</h2>
-<details class="reference-detail">
+<details open class="reference-detail">
 <summary>Read policy details</summary>
 <h3 id="blockchain-rpcs">Blockchain RPCs (<code>OAK_RPC_URL</code> and <code>OAK_RPC_URL_&lt;chainId&gt;</code>)</h3>
 <ul>
 <li>
-<strong>Your local add-on</strong> connects directly to your configured RPC endpoint to read balances, nonces, gas fees, subscription state, and declarative read recipes, to run <code>eth_simulateV1</code> gas checks, and to broadcast your signed transactions (<code>eth_sendRawTransaction</code>).</li>
+<strong>Your local add-on</strong> uses Oak's hosted <code>/v1/rpc</code> by default on mainnet for Robinhood Chain (<code>4663</code>) and Base (<code>8453</code>) reads, simulation and tracing. Explicit per-chain RPC settings take priority; <code>OAK_RPC_URL</code> selects a direct mainnet RPC. Signed transaction broadcasts and approval-history scans use a direct RPC. Ordinary reads may fall back to the public chain RPC under the conditions and warnings described in “Hosted RPC visibility and trust” below.</li>
 <li>
-<strong>The Oak server</strong> connects to its configured RPC endpoint to read on-chain contract state, verify ERC-8004 agent NFT ownership (<code>ownerOf</code> on <code>IdentityRegistry</code> <code>0x8004A169FB4a3325136EB29fA0ceB6D2e539a432</code>), check subscription access (<code>hasRecord</code>, <code>plan</code>, <code>paidUntil</code>, <code>signupOakCount</code>, and <code>$OAK</code> balance), read <code>OakOracle</code>, and simulate <code>preview</code> calls.</li>
+<strong>The Oak server</strong> connects to its configured RPC providers to read chain state, verify ERC-8004 ownership and identity links, read <code>OakOracle</code>, and simulate requests. Those providers see the method and parameters Oak forwards.</li>
 <li>Any RPC provider you configure can see the IP address making those RPC requests, the wallet address queried, and any signed transaction broadcast through it. Once a transaction is broadcast to Robinhood Chain (<code>4663</code>) or a Relay origin chain, its sender, calldata, and events are <strong>public and permanent on the blockchain</strong>.</li>
 </ul>
 <h3 id="third-party-ecosystem-project-services">Third-Party Ecosystem Project Services</h3>
-<p>Many modules interact mostly through RPC contract reads and calldata construction (such as Steakhouse, Spark, NetNet, Grove, Priors, Morpho Blue, Uniswap liquidity, ERC-8004, hood.ag, Hookr, and pools.trade). Several of them, and others you might expect to be RPC-only, also call off-chain hosts; the rows below name each host. When you invoke a module that uses a project's off-chain API, that project service receives the request parameters from the Oak server (or, where a row below says so, from your computer):</p>
+<p>Modules combine RPC contract reads, calldata construction and off-chain API requests. The rows below identify off-chain hosts and wallet-bearing calls, including services used by modules that also rely on RPC. When you invoke a module that uses a project's off-chain API, that project service receives the request parameters from the Oak server (or, where a row below says so, from your computer):</p>
 <div class="table-wrap">
 <table class="md-table">
 <thead>
@@ -391,7 +619,7 @@
 <td data-label="Service">
 <strong>HoodLock Proof API</strong> (<code>hoodlock.tech</code>)</td>
 <td data-label="When Contacted">
-<code>hoodlock_airdrop_claim</code>. The Oak server looks up the proof, and your add-on repeats the lookup from your computer while it prepares the approval form, so HoodLock then also sees your computer's address.</td>
+<code>hoodlock_airdrop_claim</code>. The Oak server looks up the proof, and your add-on repeats the lookup from your computer while it prepares the action summary for chat, so HoodLock then also sees your computer's address.</td>
 <td data-label="What It Receives">Merkle claim contract/campaign identifier (or omitted <code>id</code> to query eligible airdrops) and wallet address to look up Merkle claim proofs. (<code>hoodlock_airdrop_create</code> outputs the airdrop recipient list to you locally by default rather than uploading it.)</td>
 </tr>
 <tr>
@@ -434,9 +662,8 @@
 <tr>
 <td data-label="Service">
 <strong>Borro market and contract pages</strong> (<code>borro.markets</code>)</td>
-<td data-label="When Contacted">
-<code>borro_list</code>, and when the Oak server prepares <code>borro_deposit</code> or <code>borro_withdraw</code> (for candidate vault discovery by symbol and the optional display rate shown on the card and deposit screen), only when you ask for them. The Oak server sends it, so Borro sees the Oak server's address, not yours. Your computer never contacts <code>borro.markets</code>: transaction calldata is built from chain reads, and when your add-on rebuilds and checks a Borro deposit or withdrawal on your computer before you approve it, HTTP is switched off and the vault address is verified directly on chain.</td>
-<td data-label="What It Receives">Fixed, read-only <code>GET</code> requests for <code>https://borro.markets/markets.json</code> and <code>https://borro.markets/contracts.json</code>, the same for everyone. Borro also sees the Oak server's IP address, the time of the request, and an Oak product header (<code>User-Agent: oak-core/borro</code>). Never your wallet address, an amount, or a signed transaction.</td>
+<td data-label="When Contacted">Requested <code>borro_list</code>, <code>borro_deposit</code> and <code>borro_withdraw</code>. Both the Oak server and your computer can request discovery and optional display data. The strict transaction guard builds calldata from chain reads with HTTP disabled; other preparation reads still use HTTP.</td>
+<td data-label="What It Receives">Fixed public <code>markets.json</code> and <code>contracts.json</code> requests, sender IP, request time and <code>User-Agent: oak-core/borro</code>. No wallet, amount or signed transaction is sent.</td>
 </tr>
 <tr>
 <td data-label="Service">
@@ -451,7 +678,7 @@
 <strong>Orbio gateway</strong> (<code>api.orbio.so</code>)</td>
 <td data-label="When Contacted">
 <code>orbio_chat</code>, <code>orbio_swap_quote</code> and the other Orbio tools that call the gateway. Sent straight from your computer; they do not pass through the Oak server, so the Oak server is not told about them.</td>
-<td data-label="What It Receives">For <code>orbio_chat</code>, the full text of the conversation you send (up to about 400 KB per request). For <code>orbio_swap_quote</code>, your wallet address and the amount. Each authenticated call carries an <code>Authorization: Bearer</code> credential made from a wallet signature you approve in the signing prompt (it begins <code>sk-orb-</code>); it can spend your activated Orbio CREDIT but cannot move tokens or sign transactions. Orbio also sees your computer's IP address and the time of the request.</td>
+<td data-label="What It Receives">For <code>orbio_chat</code>, the full text of the conversation you send (up to about 400 KB per request). For <code>orbio_swap_quote</code>, your wallet address and the amount. Each authenticated call carries an <code>Authorization: Bearer</code> credential made from a wallet signature you approve in the action summary in chat (it begins <code>sk-orb-</code>); it can spend your activated Orbio CREDIT but cannot move tokens or sign transactions. Orbio also sees your computer's IP address and the time of the request.</td>
 </tr>
 <tr>
 <td data-label="Service">
@@ -465,7 +692,7 @@
 <tr>
 <td data-label="Service">
 <strong>HEY Research Lab token scan</strong> (<code>heyresearch.xyz</code>)</td>
-<td data-label="When Contacted">Only when you ask HEY Research Lab about one token (<code>heyresearch_read</code> with <code>getPartnerScanCard</code>), or on every token buy if you turn on <code>OAK_HEY_AUTO_CONTEXT=true</code> (off by default; the automatic check then runs before the approval form). With the setting off, no buy contacts HEY Research Lab. Both kinds of scan run from your computer and go straight to HEY Research Lab. They do not pass through the Oak server, so the Oak server is not told about them. The token facts, builder feed and position context tools also read this scan, but through the Oak server; see their row below.</td>
+<td data-label="When Contacted">Only when you ask HEY Research Lab about one token (<code>heyresearch_read</code> with <code>getPartnerScanCard</code>), or on every token buy if you turn on <code>OAK_HEY_AUTO_CONTEXT=true</code> (off by default; the automatic check then runs before the action summary for chat). With the setting off, no buy contacts HEY Research Lab. Both kinds of scan run from your computer and go straight to HEY Research Lab. They do not pass through the Oak server, so the Oak server is not told about them. The token facts, builder feed and position context tools also read this scan, but through the Oak server; see their row below.</td>
 <td data-label="What It Receives">The chain, the token address, and an Oak version header (<code>x-hey-integration</code>). HEY Research Lab also sees your computer's IP address and the time of the request. Never your wallet address or the amount.</td>
 </tr>
 <tr>
@@ -484,27 +711,23 @@
 </tr>
 <tr>
 <td data-label="Service">
-<strong>Meridian perps API</strong> (<code>api.meridian.xyz</code>)</td>
+<strong>Meridian perps APIs</strong> (<code>api.meridian.xyz</code>, <code>ws.meridian.xyz</code>, <code>archive.meridian.xyz</code>, <code>trading-view.meridian.xyz</code>)</td>
 <td data-label="When Contacted">
-<code>meridian_perps_*</code> tools. Sent straight from your computer; they do not pass through the Oak server, so the Oak server is not told about them.</td>
-<td data-label="What It Receives">Your wallet address in an <code>X-Meridian-Sender</code> header, and the intents you sign locally. Meridian also sees your computer's IP address and the time of the request.</td>
+<code>meridian_perps_read</code> and <code>meridian_perps_stream</code> use the Oak server with your wallet session. Other perps actions use the direct local client and signed intents.</td>
+<td data-label="What It Receives">Oak sees the wallet and hosted read parameters. Meridian sees the sender IP (Oak for hosted reads, your computer for direct actions), requested market/history data, wallet for subaccount reads, and sender headers and signed intents for direct actions.</td>
 </tr>
 <tr>
 <td data-label="Service">
-<strong>Meridian Predict GraphQL &amp; WebSocket RFQ Relayer</strong>
-</td>
+<strong>Meridian Predict GraphQL &amp; WebSocket RFQ Relayer</strong> (<code>api.predict.meridian.xyz</code>, <code>relayer.predict.meridian.xyz</code>)</td>
 <td data-label="When Contacted">
-<code>meridian_browse</code>, <code>meridian_positions</code>, <code>meridian_buy</code>, <code>meridian_sell</code>
-</td>
+<code>meridian_browse</code>, <code>meridian_positions</code>, <code>meridian_buy</code>, <code>meridian_sell</code>, <code>meridian_predict_read</code> (via the Oak server)</td>
 <td data-label="What It Receives">Market/position queries, wallet address, and (for <code>meridian_buy</code> / <code>meridian_sell</code>) your locally signed EIP-712 <code>MintApproval</code> or <code>TradeApproval</code> message so the relayer can submit the fill.</td>
 </tr>
 <tr>
 <td data-label="Service">
 <strong>TickerSpring Agent API</strong> (<code>api.tickerspring.com</code>)</td>
-<td data-label="When Contacted">
-<code>tickerspring_create</code>, <code>tickerspring_cancel</code>, <code>tickerspring_claim</code>, <code>tickerspring_orders</code>
-</td>
-<td data-label="What It Receives">Wallet address (<code>owner</code>), token address, order side/price/amount, or order ID.</td>
+<td data-label="When Contacted">Requested order, vault, basket, grid, ladder and strategy prepares, account reads and backtests through the Oak server.</td>
+<td data-label="What It Receives">Wallet address (<code>owner</code>, including <code>/v1/agent/accounts/{wallet}</code>), token addresses, amounts, order/position IDs, strategy parameters and research/backtest inputs.</td>
 </tr>
 <tr>
 <td data-label="Service">
@@ -518,30 +741,27 @@
 <strong>Pons app API</strong> (<code>ponsfamily.com</code>, <code>balancesapi.ponsfamily.com</code>)</td>
 <td data-label="When Contacted">
 <code>pons_*</code> tools and the Pons holdings in <code>positions</code>. The Oak server sends the request, so Pons sees the Oak server's address.</td>
-<td data-label="What It Receives">Token addresses and, for profile, activity and holdings reads, your wallet address in the URL path.</td>
+<td data-label="What It Receives">Launch image bytes uploaded to <code>/api/ipfs/image</code> (persisted by Pons); token addresses and, for profile, activity and holdings reads, your wallet address in the URL path.</td>
 </tr>
 <tr>
 <td data-label="Service">
-<strong>Beefy API</strong> (<code>api.beefy.finance</code>)</td>
+<strong>Beefy API</strong> (<code>api.beefy.finance</code>, <code>databarn.beefy.finance</code>)</td>
 <td data-label="When Contacted">
 <code>beefy_*</code> tools. The Oak server reads the vault list, and your add-on also fetches <code>api.beefy.finance/vaults</code> itself from your computer while it rebuilds a deposit before you approve it, so Beefy then sees your computer's address.</td>
-<td data-label="What It Receives">A fixed read-only request for the vault list, the same for everyone. No wallet address, no amount.</td>
+<td data-label="What It Receives">Public vault lists and analytics requests, including vault IDs and time ranges, the same for everyone. No wallet address, no amount.</td>
 </tr>
 <tr>
 <td data-label="Service">
-<strong>Clanker Indexer</strong> (<code>clanker.world/api/tokens</code>)</td>
+<strong>Clanker Indexer</strong> (<code>clanker.world</code>)</td>
 <td data-label="When Contacted">
-<code>find_token</code>, <code>clanker_browse</code>, <code>positions</code> (Clanker)</td>
-<td data-label="What It Receives">Search query, pagination cursor, or deployer wallet address on chain <code>4663</code>.</td>
+<code>find_token</code>, <code>clanker_browse</code>, <code>positions</code> (Clanker), airdrop claim discovery</td>
+<td data-label="What It Receives">Search query, pagination cursor, or deployer or airdrop claimer wallet address (<code>/api/airdrops/claim?claimerAddress=</code>) on chain <code>4663</code>.</td>
 </tr>
 <tr>
 <td data-label="Service">
-<strong>Official Stock-Token List</strong>
-</td>
-<td data-label="When Contacted">
-<code>balances</code>, <code>find_token</code>, <code>quote</code>
-</td>
-<td data-label="What It Receives">Read-only <code>GET</code> request for the list of official stock-token contract addresses and symbols on chain <code>4663</code> (<code>packages/core/src/tokens.ts</code>).</td>
+<strong>Official Stock-Token List</strong> (<code>api.robinhood.com/rhj/assets</code>)</td>
+<td data-label="When Contacted">Your computer automatically fetches the public list for <code>balances</code>, <code>find_token</code>, <code>quote</code>, ticker locking, pinned swaps, Borro discovery and action-summary token labels.</td>
+<td data-label="What It Receives">Fixed read-only GET of official stock-token addresses and symbols, computer IP and request time. No wallet or amount is sent.</td>
 </tr>
 <tr>
 <td data-label="Service">
@@ -549,6 +769,61 @@
 <td data-label="When Contacted">
 <code>oak recipes add &lt;npm-pkg&gt;</code> (run locally)</td>
 <td data-label="What It Receives">Direct HTTPS <code>GET</code> from your computer to fetch package metadata and the <code>.tgz</code> archive stream.</td>
+</tr>
+<tr>
+<td data-label="Service">
+<strong>Raeto API</strong> (<code>api.raeto.cc</code>)</td>
+<td data-label="When Contacted">On requested <code>raeto_*</code> calls (<code>raeto_join</code>, <code>raeto_topup</code>, <code>raeto_status</code>, <code>raeto_ask</code>, <code>raeto_search</code>, <code>raeto_read_page</code>, <code>raeto_models</code>). Sent straight from your computer; they do not pass through the Oak server, so the Oak server is not told about them.</td>
+<td data-label="What It Receives">Your wallet address, computer IP address, request time, prompts, search queries, and page URLs. For paid calls, your stored <code>Authorization: Bearer</code> key. When record pairing is approved, Raeto links your ERC-8004 identity and publishes a public and permanent weekly statement on Robinhood Chain. Model prompts are forwarded by Raeto to the model lab for that model. Oak's server sees none of this; it receives only the add-on's usual access check (identity and session headers) before paid actions.</td>
+</tr>
+<tr>
+<td data-label="Service">
+<strong>Raeto payment facilitator</strong> (<code>facilitator.priors.trade</code>)</td>
+<td data-label="When Contacted">During <code>raeto_join</code> or <code>raeto_topup</code> when Raeto submits the signed USDG <code>TransferWithAuthorization</code> payment to settle the top-up. The payment authorization is sent to the facilitator via Raeto; your computer does not contact the facilitator directly, and Oak's server is not involved.</td>
+<td data-label="What It Receives">The signed EIP-3009 transfer authorization (<code>from</code>, <code>to</code>, <code>value</code>, <code>validAfter</code>, <code>validBefore</code>, <code>nonce</code>, and signature) to broadcast the settlement transaction on Robinhood Chain.</td>
+</tr>
+<tr>
+<td data-label="Service">
+<strong>Factor API and engine</strong> (<code>factoragents.fun/api/v1</code>)</td>
+<td data-label="When Contacted">On requested <code>factor_*</code> tools. The Oak server queries Factor's API for open jobs, agent profiles, job details, and site state (<code>/state</code>), and passes signed continuations to Factor's engine. Your computer also fetches <code>/state</code> to cross-check signature preparation; Factor then sees your IP.</td>
+<td data-label="What It Receives">The Oak server receives Factor API data and forwards signed EIP-191 messages (<code>factor.agent-profile</code>, <code>factor.pay-link</code>, and <code>factor.open-job-apply</code>) to Factor's engine on behalf of your wallet. For <code>factor_deliver</code>, if <code>show</code> is false (the default), only a cryptographic fingerprint (<code>keccak256</code> hash) goes on chain; the work text never leaves your computer and is never sent to Oak's server or Factor. If <code>show: true</code> is explicitly chosen, the work text passes through Oak's server to Factor's engine after on-chain delivery is confirmed and becomes permanently public on Factor's job page.</td>
+</tr>
+<tr>
+<td data-label="Service">
+<strong>Priors</strong> (<code>priors.trade</code>, <code>mcp.priors.trade</code>, <code>go.priors.trade</code>)</td>
+<td data-label="When Contacted">Requested Priors tools through Oak's server.</td>
+<td data-label="What It Receives">Public queries; <code>/api/check?address=</code> receives the wallet; <code>/prove</code> receives owner wallet, agent ID and the locally approved proof signature.</td>
+</tr>
+<tr>
+<td data-label="Service">
+<strong>Morpho and Steakhouse analytics</strong> (<code>api.morpho.org</code>)</td>
+<td data-label="When Contacted">Requested Morpho wallet positions and analytics through Oak's server.</td>
+<td data-label="What It Receives">GraphQL chain ID and wallet, plus public market analytics parameters.</td>
+</tr>
+<tr>
+<td data-label="Service">
+<strong>Hookr</strong> (<code>hookr.fun</code>)</td>
+<td data-label="When Contacted">Requested public and wallet-specific reads through Oak's server.</td>
+<td data-label="What It Receives">Public pool/order selectors and <code>account</code> wallet for wallet-specific queries.</td>
+</tr>
+<tr>
+<td data-label="Service">
+<strong>Orbio agent lookup</strong> (<code>www.orbio.so</code>)</td>
+<td data-label="When Contacted">Requested protocol agent reads through Oak's server; separate from the direct gateway above.</td>
+<td data-label="What It Receives">
+<code>/api/protocol/agents?wallet=</code> carries the queried wallet.</td>
+</tr>
+<tr>
+<td data-label="Service">
+<strong>hood.ag</strong> (<code>www.hood.ag</code>, <code>agents.hood.ag</code>, <code>social.hood.ag</code>)</td>
+<td data-label="When Contacted">Requested module discovery and public reads through Oak's server.</td>
+<td data-label="What It Receives">Names and query selectors, with the server IP.</td>
+</tr>
+<tr>
+<td data-label="Service">
+<strong>ERC-8004 registered domains</strong> (profile-selected public HTTPS hosts)</td>
+<td data-label="When Contacted">Requested <code>erc8004_verify_domain</code> through Oak's server.</td>
+<td data-label="What It Receives">GET <code>https://{domain}/.well-known/agent-registration.json</code>, server IP and request time; compared with the public registry and agent ID.</td>
 </tr>
 </tbody>
 </table>
@@ -577,15 +852,16 @@
 <hr>
 </details>
 <h2 id="retention-and-deletion">5. Retention and Deletion</h2>
-<details class="reference-detail">
+<details open class="reference-detail">
 <summary>Read policy details</summary>
 <ul>
 <li>
 <strong>On your computer (<code>~/.oak/</code>):</strong>
 <ul>
-<li>Kept on your disk until you delete <code>~/.oak/</code> or remove individual recipe projects with <code>oak recipes remove &lt;project&gt;</code>.</li>
+<li>Most local files have no automatic age limit. Wallets, replaced-wallet backups, old file keys, config, recipes, received-token hints, cleared records, historical daily-spending reservations, receipt logs, Gloam notes, tree/circuit caches and opaque attribution markers remain until managed by the owner. Pending signed transactions clear only after finality or proven recovery; approval cleanup records are forgotten on revoke. Signature history is pruned only on later signing reconciliation. Never delete recovery state for unresolved transactions.</li>
 <li>The saved <code>identity</code> record in <code>~/.oak/config.json</code> (<code>chainId</code>, <code>registry</code>, <code>agentId</code>, and optional <code>linkId</code>) stays in your config while your ERC-8004 identity link is valid and is cleared automatically by the add-on when you run <code>oak identity unlink</code> or when the server reports that the identity was unlinked, revoked, transferred, or burned (it is kept across temporary RPC or server outages so a retry does not drop your link).</li>
 <li>Gloam note secrets and the receive key are spend authority. Losing both the store and its backup loses the money. A backup covers only the notes present when made; never send it through an agent.</li>
+<li>Raeto keys in <code>~/.oak/raeto.json</code> persist until removed with <code>oak raeto forget</code> in your terminal or overwritten by a new sign-in on top-up. The Raeto ledger (<code>~/.oak/raeto-ledger.jsonl</code>), payments journal (<code>~/.oak/raeto-payments.json</code>), and limits file (<code>~/.oak/raeto-settings.json</code>) remain on disk as local records until deleted by the owner.</li>
 <li>Remember to back up your recovery words or run <code>oak export</code> before deleting <code>~/.oak/wallet.enc</code>, because Oak cannot recover a lost key.</li>
 </ul>
 </li>
@@ -614,7 +890,7 @@
 <strong>In-memory rate-limit counters:</strong> Price-note per-IP and global timestamps (<code>10</code>/minute per IP, <code>120</code>/minute global) and <code>/v1/identity/challenge</code> per-IP buckets (<code>10</code> per <code>60</code> seconds per IP or IPv6 <code>/64</code> prefix across up to <code>1,024</code> buckets) are held in process memory only and expire after <strong>
 <code>60</code> seconds</strong>.</li>
 <li>
-<strong>Agent Wormhole hosted checks:</strong> The adapter writes no raw-text or credential check log. Its process-local rate windows hold a derived subscription identifier, start time and attempt count, with defaults of ten attempts per 60 seconds and at most 10,000 buckets. They expire on a later request or process exit. Paid checks require the durable replay store described above (<code>ServerOptions.wormholeRequestStore</code>, defaulting to <code>identity.store</code>). Without that store, the route verifies requests with a bounded in-memory nonce fence but gives back unknown and sends no paid request. The rate windows remain local to one server process; multi-worker deployments need a shared limiter and an atomic shared replay store. Normal request authentication and the service logs above still apply. This does not establish Agent Wormhole's storage, deletion or retention policy for text, metadata or request records.</li>
+<strong>Agent Wormhole hosted checks:</strong> The adapter writes no raw-text or credential check log. Its process-local rate windows hold the authenticated session wallet, window start and attempt count, with a default of 16 attempts per 60 seconds and at most 10,000 buckets. They expire on a later request or process exit. Paid checks require the durable replay store described above (<code>ServerOptions.wormholeRequestStore</code>, defaulting to <code>identity.store</code>). Without that store, the route verifies requests with a bounded in-memory nonce fence but gives back unknown and sends no paid request. The rate windows remain local to one server process; multi-worker deployments need a shared limiter and an atomic shared replay store. Normal request authentication and the service logs above still apply. This does not establish Agent Wormhole's storage, deletion or retention policy for text, metadata or request records.</li>
 <li>
 <strong>Meridian RFQ continuation state:</strong> Held in process memory only while the short multi-turn auction handoff is active; discarded immediately when the exchange completes, expires, or disconnects.</li>
 <li>
@@ -623,21 +899,25 @@
 <strong>Aggregate health metrics (<code>/var/lib/oak/metrics.json</code>, file mode <code>0600</code>):</strong> Rolling 5-minute aggregate counters (<code>requests</code>, <code>serverErrors</code>, <code>clientErrors</code>, process <code>rss</code> memory, and timestamp <code>at</code>) with no IPs, wallets, headers, or request bodies; overwritten every <strong>
 <code>60</code> seconds</strong> for local service health checks.</li>
 <li>
-<strong>Encrypted state backups (<code>/var/lib/oak/backups/</code>):</strong> Hourly encrypted off-host snapshots (<code>restic</code>) of <code>/var/lib/oak/identity.json</code>, <code>/var/lib/oak/nonces.jsonl</code> and the builder code ledger so active identity links, issued price-note nonces and redeemed builder codes survive a host failure without resetting replay fences.</li>
+<strong>State backups:</strong> Each hourly run creates a temporary plaintext <code>0600</code> bundle in <code>/var/lib/oak/backups/.pending.*</code>, verifies it, and uploads encrypted off-host snapshots (<code>restic</code>) of <code>/var/lib/oak/identity.json</code> and <code>/var/lib/oak/nonces.jsonl</code> so active identity links and issued price-note nonces survive a host failure without resetting replay fences. The run removes only its own plaintext staging bundle on normal success, failure or a handled signal. A forced kill or power loss can leave a bundle; older bundles from previous versions also remain for operator-approved cleanup. Encrypted remote snapshots follow operator-managed retention; expiry in the live identity store does not erase historical backups.</li>
 <li>
-<strong>Builder code ledger (private file on the server's state volume):</strong> Used only for Oak builder codes. For each code it holds the project, its official X handle, the checker's name, the check date, the code digest (a one-way hash; never the raw code), and once redeemed the redemption wallet and the start and expiry times. The server never logs a raw code. It is kept so a code works once, so one wallet holds one grant, and so a grant survives a restart or redeploy; it is included in the encrypted off-host backups above. <strong>Retention:</strong> kept until 2027-03-01, after the last possible grant ends, then deleted by hand, keeping only issued and redeemed counts.</li>
+<strong>Retired grant records:</strong> Historical grant records may remain in operator-managed backups. Current Oak does not issue or redeem access grants. Backup expiry follows operator retention.</li>
 <li>
 <strong>System logs (<code>systemd-journald</code>, <code>/etc/systemd/journald.conf.d/oak.conf</code>):</strong> Operational service and reverse-proxy logs (capped at <code>100</code> MB on disk and <code>32</code> MB in runtime memory, with no HTTP request header or body access logs) are kept for at most <strong>
-<code>7</code> days (<code>MaxRetentionSec=7day</code>)</strong> for service troubleshooting and then rotated out automatically.</li>
+<code>7</code> days (<code>MaxRetentionSec=7day</code>)</strong> for service troubleshooting and then rotated out automatically. Launch and private-test events include the event name and tool only, with no wallet address, request body or headers. These are repository template settings; live host configuration and partner retention were not inspected.</li>
 </ul>
 </li>
 <li>
-<strong>On the blockchain:</strong> Transactions, token balances, subscription records, <code>.hood</code> names, and ERC-8004 agent registrations on Robinhood Chain (<code>4663</code>) are permanent public ledger records and cannot be deleted by Oak.</li>
+<strong>On the blockchain:</strong> Transactions, token balances, <code>.hood</code> names, and ERC-8004 agent registrations on Robinhood Chain (<code>4663</code>) — including the mandatory public <code>oak.registrar = oak</code> metadata marker written in the registration transaction when you register a new identity through Oak (<code>oak setup register</code>, <code>oak register</code>, <code>oak_setup</code>, or <code>erc8004_register</code>) — are permanent public ledger records and remain in public chain history even if metadata is changed later; they cannot be deleted by Oak.<ul>
+<li>Raeto states that it does not retain prompts or model completions; requests forwarded to model labs follow each provider's policy. Raeto account balances, key records and receipts are held by Raeto under its own policies; only paired ERC-8004 weekly statements and payment transactions published on Robinhood Chain are permanent public on-chain records.</li>
+<li>Factor agent profiles, pay links (capped at 30 days), job applications, and public work texts (<code>show: true</code>) published to Factor's engine become public and cannot be edited. On-chain <code>FactorDesk</code> events, jobs, deliveries, and draw records on Robinhood Chain (<code>4663</code>) are permanent public blockchain records.</li>
+</ul>
+</li>
 </ul>
 <hr>
 </details>
 <h2 id="how-to-ask-questions">6. How to Ask Questions</h2>
-<details class="reference-detail">
+<details open class="reference-detail">
 <summary>Read policy details</summary>
 <ul>
 <li>
@@ -648,6 +928,15 @@
 </a>.</li>
 </ul>
 <p>Automatic wallets have no mnemonic and require no passphrase. File fallback keys persist beside the encrypted wallet until managed by the owner; readers of both files can unlock the wallet. Export/recovery are optional owner-terminal commands, and existing wallets are never silently migrated.</p>
+</details>
+<h2 id="hosted-rpc-visibility-and-trust">Hosted RPC visibility and trust</h2>
+<details open class="reference-detail">
+<summary>Read policy details</summary>
+<p>Hosted RPC lets Oak see your wallet and transactions being checked. Without your own RPC, guards rely on Oak's RPC answers. Keys and signing stay local; signed transactions go directly to a chain RPC.</p>
+<p>A fresh mainnet add-on uses Oak's session-budgeted <code>/v1/rpc</code> for reads, simulation and tracing on Robinhood Chain (4663) and Base (8453). An explicit <code>OAK_RPC_URL_4663</code> or <code>OAK_RPC_URL</code> selects your direct mainnet RPC; <code>OAK_RPC_URL_8453</code> selects your direct Base RPC. Per-chain settings take priority over the generic mainnet setting. These settings do not bypass Oak-hosted tools or keyed Relay/KyberSwap services. Core/server clients retain direct configuration and never recursively call the hosted default.</p>
+<p>The add-on signs a short-lived wallet session and a single-use proof of each exact RPC envelope locally. These bearer/proof headers remain in memory and go only to the selected Oak server over HTTPS (local development may use loopback HTTP). Oak forwards JSON-RPC method/params to its configured provider without forwarding Oak auth headers or caller IP. The provider key remains server-side. Oak does not persist RPC bodies in its application store; replay records retain wallet/session digests up to session expiry (15 minutes). The shared hosted budget persists HMAC wallet/IP cost buckets across restart, with previous-day entries replaced on the next admitted request after UTC midnight. Backup retention and reverse-proxy or upstream-provider logging are controlled by their operators.</p>
+<p>When hosted RPC is disabled, rate-limited, out of budget or unreachable, ordinary reads may use the public chain RPC. That provider then sees your IP and query. These reads include contract calls, code, storage, logs, nonces and balances used by later signatures. The prepared approval summary includes a public-RPC warning, retained even if a later hosted simulation succeeds. The warning is shown again before an action signature; fallback first encountered after approval stops signing and requires a fresh summary and yes. The warning conservatively remains for this running process. Public fallback is not used for simulation, gas estimation or tracing, and does not turn a failed check into a successful one. Invalid/mismatched replies and wrong chains are refused. Before any signed broadcast through the default add-on transport, the direct endpoint must answer for the selected chain. Signing, transaction journaling and broadcasting stay on your computer; the signed transaction goes directly to your own RPC or the chain's public RPC, without Oak session headers. The pre-wallet approval-history origin sample and census also use direct RPCs.</p>
+<p>For keyed Relay/KyberSwap reads Oak sees the wallet, tokens, amounts, filters and request/event queries, and the selected service receives its server-held key. KyberSwap route handles/summary state remain in bounded server memory until expiry, eviction or process exit; bodies and credentials are not stored by the shared budget. Partner retention remains unmeasured. A mainnet Oak install provides hosted tracing by default on Robinhood Chain (4663) and Base (8453); an own RPC overrides that chain's hosted connection. Other chains require OAK_RPC_URL_&lt;chainId&gt; pointing to a tracing RPC.</p>
 </details>
 </div>
 </div>
@@ -682,6 +971,9 @@
 <a href="roadmap.html">Roadmap</a>
 </li>
 <li>
+<a href="agents.html">Agents</a>
+</li>
+<li>
 <a href="partnerships.html">Partnerships</a>
 </li>
 <li>
@@ -700,14 +992,14 @@
 <a href="https://x.com/OakAgentKit">@OakAgentKit on X</a>
 </li>
 <li>
-<a href="https://x.com/OakAgentKit/status/2116286790059671939">Launch film on X</a>
+<a href="https://x.com/OakAgentKit/status/2119114741234974988">Launch film on X</a>
 </li>
 </ul>
 </nav>
 </div>
- <p class="footer-status">$OAK is live. Oak 0.2.6 subscriptions are open.</p>
- <p>Subscriptions are open in Oak 0.2.6. Read tools need no identity or subscription; hosted actions require a verified ERC-8004 identity and an active subscription. Official $OAK address: <code class="token-address">0x6511c233790Ec10f7d673c64DC82C3F941D57828</code>. Pons page: <a href="https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828">https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828</a>. Plan availability follows account.phase: no-hold on the curve, neither plan during warmup, and both plans when ready with a valid price note. Holding $OAK buys access and nothing else.</p>
- <p>Independent software, not affiliated with Robinhood. Not financial advice. Oak never promises returns.</p>
+ <p class="footer-status">Oak is free. $OAK is live.</p>
+ <p>$OAK is live. Oak is free. Reads work straight away. Actions need a verified ERC-8004 agent ID and your yes or no in chat. Call account to see where your setup stands. Official $OAK address: <code class="token-address">0x6511c233790Ec10f7d673c64DC82C3F941D57828</code>. Pons page: <a href="https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828">https://ponsfamily.com/launchpad/0x6511c233790ec10f7d673c64dc82c3f941d57828</a>. Holding $OAK has no access perks. Oak uses 25% of its income to buy back and burn $OAK.</p>
+ <p>Independent software, not affiliated with Robinhood. Not financial advice. Oak makes no promises about token prices or investment outcomes.</p>
  <p>Region notice: project and asset availability varies by jurisdiction. You are responsible for local compliance.</p>
  <p class="fine">Docs, examples and contracts are MIT. The compiled npm packages are Free-to-Use, No Copying; their source and the hosted Oak service are private. Manrope is self-hosted under the SIL Open Font Licence.</p>
 </div>

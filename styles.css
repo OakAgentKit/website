@@ -864,7 +864,7 @@ pre code, .code-block code { font-size: 14px; background: none; padding: 0; }
 .partner-directory-copy { width: calc(100% - 2 * var(--gutter)); max-width: 1200px; margin-inline: auto; padding-block: 72px; }
 .partner-directory-copy > p { max-width: 36ch; }
 .partner-directory h2 { margin: 0 0 16px; }
-.partner-list { list-style: none; margin: 32px 0 0; padding: 0; }
+.partner-list { display: grid; gap: 24px; list-style: none; margin: 32px 0 0; padding: 0; }
 .partner-list > li { max-width: 560px; min-width: 0; }
 .partner-entry { display: flex; flex-direction: column; align-items: flex-start; gap: 24px; min-height: 44px; padding: 32px; border: 1px solid rgba(240,247,234,.24); border-radius: 24px; background: rgba(4,25,20,.78); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); color: var(--paper); text-decoration: none; overflow-wrap: anywhere; }
 .partner-entry:hover { background: rgba(4,25,20,.86); color: var(--paper); }
@@ -1004,6 +1004,76 @@ body:has(.partner-popup:target) > .skip { visibility: hidden; }
 /* No heights or phone layout override: long copy grows the shared stage and stacks below its square plate. */
 /* No copy backing, border, corner radius or card surface is introduced here. */
 /* Hero title, caption, action, menu and footer all inherit the shared scene system. */
+
+/* Agents page. Current palette and type only: forest ground, paper text, lime and oak accents, Manrope and the serif already used for headings.
+   No art plate: the text hero clears the floating menu on its own. Loss and win are always spelled in words as well as colour. */
+.agents-hero, .agent-card, .tracker { width: calc(100% - 2 * var(--gutter)); max-width: 1200px; margin-inline: auto; }
+.agents-hero { padding: 144px 0 24px; }
+.agents-hero h1 { font-family: var(--serif); font-weight: 400; letter-spacing: -.025em; font-size: 56px; line-height: 62px; margin: 0 0 16px; color: var(--paper); }
+.agents-tagline { max-width: 52ch; margin: 0; color: var(--muted); font-size: 20px; line-height: 30px; }
+
+.agent-card { padding: 40px 0; border-top: 1px solid var(--hairline); }
+.agent-head { display: flex; align-items: center; gap: 24px; margin-bottom: 24px; }
+.agent-head .chapter { margin-bottom: 8px; }
+.agent-head h2 { margin: 0; }
+/* A neutral stand-in until the owner picks the avatar. */
+.agent-avatar { flex: none; display: grid; place-items: center; width: 88px; height: 88px; border: 1px solid var(--hairline); border-radius: 50%; background: var(--moss); color: var(--oak); font-family: var(--serif); font-size: 36px; line-height: 1; }
+.agent-bio { max-width: 60ch; font-size: 18px; line-height: 28px; }
+.agent-facts { margin: 24px 0 0; max-width: 760px; }
+.agent-facts > div { display: grid; grid-template-columns: 168px minmax(0, 1fr); gap: 24px; padding: 16px 0; border-bottom: 1px solid var(--hairline); }
+.agent-facts dt { color: var(--oak); font-weight: 600; }
+.agent-facts dd { margin: 0; min-width: 0; overflow-wrap: anywhere; }
+.agent-facts code, .tracker code { font-size: max(.88em, 13px); }
+
+.tracker { padding: 40px 0 64px; border-top: 1px solid var(--hairline); }
+.tracker h2 { margin-bottom: 16px; }
+.tracker-intro { max-width: 64ch; }
+.tracker-root { margin-top: 32px; min-height: 96px; }
+.tracker-status { max-width: 64ch; padding: 16px 20px; border: 1px solid var(--hairline); border-left: 3px solid var(--lime); border-radius: 12px; background: rgba(240,247,234,.035); }
+.tracker-error { border-left-color: var(--oak); }
+.trk-muted { color: var(--muted); font-size: 15px; line-height: 24px; margin: 0 0 8px; }
+.trk-link { color: var(--paper); overflow-wrap: anywhere; }
+.trk-link:hover { color: var(--lime); }
+.trk-section { margin-top: 56px; }
+.trk-section > h3 { padding-bottom: 12px; border-bottom: 1px solid var(--hairline); margin-bottom: 24px; }
+
+/* Position cards: a figure strip on top, the thesis underneath, so a long thesis never squeezes the numbers. */
+.trk-card { margin: 0 0 24px; padding: 24px; border: 1px solid var(--hairline); border-radius: 16px; background: rgba(240,247,234,.035); }
+.trk-card h4 { margin: 0 0 4px; font-family: var(--serif); font-weight: 400; font-size: 24px; line-height: 30px; color: var(--paper); letter-spacing: -.02em; }
+.trk-card code { overflow-wrap: anywhere; word-break: break-all; }
+.trk-figures { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 16px 24px; margin: 16px 0 0; }
+.trk-figures > div { min-width: 0; }
+.trk-figures dt { color: var(--oak); font-size: 14px; line-height: 20px; font-weight: 600; }
+.trk-figures dd { margin: 0; overflow-wrap: anywhere; }
+.tracker-root > .trk-figures { margin: 24px 0 0; padding: 20px 24px; border: 1px solid var(--hairline); border-radius: 16px; }
+.trk-win dd { color: var(--lime); font-weight: 600; }
+.trk-loss dd { color: var(--oak); font-weight: 600; }
+.trk-unknown dd { color: var(--muted); }
+
+.trk-thesis { margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--hairline); }
+.trk-label { margin: 0 0 8px; color: var(--oak); font-size: 14px; line-height: 20px; font-weight: 600; }
+.trk-label-inline { color: var(--oak); font-weight: 600; font-size: 14px; }
+.trk-badge { display: inline-block; margin: 0 0 12px; padding: 2px 12px; border: 1px solid var(--oak); border-radius: 999px; color: var(--oak); font-size: 13px; line-height: 20px; font-weight: 600; }
+.trk-thesis-text { margin: 0 0 12px; padding-left: 16px; border-left: 2px solid var(--hairline); max-width: 62ch; white-space: pre-wrap; overflow-wrap: anywhere; }
+.trk-hash-row { margin: 0 0 8px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; }
+.trk-hash { -webkit-user-select: all; user-select: all; overflow-wrap: anywhere; word-break: break-all; }
+.trk-copy { min-height: 44px; padding: 0 16px; border: 1px solid rgba(240,247,234,.28); border-radius: 999px; background: transparent; color: var(--paper); font: 600 14px/20px Manrope, system-ui, sans-serif; cursor: pointer; }
+.trk-copy:hover { border-color: var(--lime); color: var(--lime); }
+
+.trk-gaps { max-width: 70ch; padding-left: 20px; }
+.trk-gaps li { margin-bottom: 8px; overflow-wrap: anywhere; }
+.trk-gaps li::marker { color: var(--oak); }
+.trk-table td { overflow-wrap: anywhere; }
+
+@media (max-width: 700px) {
+ .agents-hero { padding-top: 120px; }
+ .agents-hero h1 { font-size: 40px; line-height: 46px; }
+ .agent-head { gap: 16px; }
+ .agent-avatar { width: 64px; height: 64px; font-size: 28px; }
+ .agent-facts > div { grid-template-columns: 1fr; gap: 4px; }
+ .trk-card { padding: 20px 16px; }
+ .tracker-root > .trk-figures { padding: 16px; }
+}
 
 /* Launch edition only: site/launch/launch.css */
 /* Home hero: the install and connect lines sit under the pill, on a solid ground so they read over any art. */
